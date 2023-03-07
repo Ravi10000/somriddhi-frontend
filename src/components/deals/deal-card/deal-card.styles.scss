@@ -1,0 +1,28 @@
+.deal-card {
+    padding: 30px;
+    border: 2px solid #ECECEC;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    max-width: 300px;
+
+    h4 {
+        font-size: 1.2rem;
+        width: 70%;
+        font-weight: 400;
+        color: #091431;
+    }
+    
+    button {
+        width: 100%;
+    }
+    
+    p {
+        font-weight: 500;
+        color: #3BA615;
+        width: 70%;
+    }
+}

@@ -11,22 +11,23 @@ header {
     }
 }
 
-@media (min-width: 500px) {
-    header {
-
-        .search {
-            width: 80%;
-        }
-    }
-}
+// @media (min-width: 500px) {
+//     header {
+//     }
+// }
 
 @media (min-width: 800px) {
     header {
         flex-direction: row;
         justify-content: space-between;
-        padding: 20px 10% ;
+        padding: 20px 10%;
         .search {
             width: 50%;
         }
+    }
+}
+@media (min-width: 1200px) {
+    header{
+        padding: 20px 25%;
     }
 }
