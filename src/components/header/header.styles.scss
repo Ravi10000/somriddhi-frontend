@@ -1,0 +1,32 @@
+header {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    gap: 10px;
+    align-items: center;
+
+    img {
+        height: fit-content;
+        width: fit-content;
+    }
+}
+
+@media (min-width: 500px) {
+    header {
+
+        .search {
+            width: 80%;
+        }
+    }
+}
+
+@media (min-width: 800px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 10% ;
+        .search {
+            width: 50%;
+        }
+    }
+}

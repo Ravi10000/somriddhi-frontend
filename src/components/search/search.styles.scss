@@ -1,0 +1,26 @@
+.search {
+    border: 2px solid #dedddd;
+    background: #EEEEEE;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 10px;
+    width: 100%;
+    img {
+        width: 20px;
+    }
+
+    input {
+        font-family: 'Metropolis', sans-serif;
+        width: 100%;
+        padding: 5px 10px;
+        border: none;
+        background: #EEEEEE;
+        // font-size: 1.2rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
