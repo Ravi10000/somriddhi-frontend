@@ -3,29 +3,30 @@
     flex-direction: column;
     align-items: center;
 
-    h2 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin: 50px 0;
-        position: relative;
+    // h2 {
+    //     font-size: 1.5rem;
+    //     font-weight: 600;
+    //     margin: 50px 0;
+    //     position: relative;
 
-        &:after {
-            content: '';
-            height: 5px;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 75px;
-            border-radius: 3px;
-            background: #F01C21;
-            position: absolute;
-            bottom: -10px;
-        }
-    }
+    //     &:after {
+    //         content: '';
+    //         height: 5px;
+    //         bottom: 10px;
+    //         left: 50%;
+    //         transform: translateX(-50%);
+    //         width: 75px;
+    //         border-radius: 3px;
+    //         background: #F01C21;
+    //         position: absolute;
+    //         bottom: -10px;
+    //     }
+    // }
 
     .process-cards-container {
         display: grid;
         gap: 20px;
+        padding: 20px;
 
         .process-card {
             padding: 30px;
@@ -42,8 +43,18 @@
             img.arrow {
                 position: absolute;
                 bottom: -10%;
-                right: -50%;
+                right: -100px;
+                width: 200px;
                 transform: rotatex(180deg) rotate(-90deg);
+            }
+
+            img.arrow.flip {
+                bottom: -10%;
+                left: -100px;
+                width: 200px;
+            }
+            p{
+                color: #454749;
             }
         }
 
@@ -56,29 +67,55 @@
             background-color: #FDDDDE;
             padding: 20px;
             border-radius: 15%;
+            img{
+                width: 30px;
+            }
         }
     }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 700px) {
     .process-section {
         .process-cards-container {
             grid-template-columns: repeat(3, 1fr);
 
             .process-card {
                 img.arrow {
-                    top: 0;
-                    right: -50%;
-                    transform: rotatex(180deg) scale(.75);
+                    top: 25px;
+                    width: 200px;
+                    right: -100px;
+                    transform: rotate(0deg);
                 }
-
                 img.arrow.flip {
-                    top: 0;
-                    right: -50%;
-                    transform: scale(.75);
+                    top: 25px;
+                    // width: 180px !important;
+                    left: auto;
+                    right: -100px;
+                    transform: rotate(0deg);
                 }
             }
         }
     }
 
 }
+
+// @media (min-width: 700px) {
+//     .process-section {
+//         .process-cards-container {
+//             .process-card {
+//                 img.arrow {
+//                     width: 300px;
+//                     // top: 25px;
+//                     // right: -50%;
+//                     // transform: rotatex(180deg) scale(.75);
+//                 }
+
+//                 img.arrow.flip {
+//                     // top: 25px;
+//                     // right: -50%;
+//                     // transform: scale(.75);
+//                 }
+//             }
+//         }
+//     }
+// }

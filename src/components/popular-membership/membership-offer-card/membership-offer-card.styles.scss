@@ -1,0 +1,32 @@
+.membership-offer-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    max-width: 300px;
+    background: #fff;
+
+    img {
+        width: 75px;
+    }
+
+    // .title {
+    //     font-size: .9rem;
+    //     width: 70%;
+    //     font-weight: 400;
+    //     color: #091431;
+    // }
+
+    button {
+        width: 100%;
+    }
+
+    .discount-details {
+        // font-size: .9;
+        font-weight: 500;
+        color: #3BA615;
+        width: 70%;
+    }
+}

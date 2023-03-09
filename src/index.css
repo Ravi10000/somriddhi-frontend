@@ -59,4 +59,32 @@
 
 body {
   font-family: 'Metropolis', sans-serif;
+  color: #091431;
+  background: #f8f8f8;
+}
+
+input {
+  font-family: 'Metropolis', sans-serif;
+  color: #908F8F;
+}
+
+._title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 50px 0;
+  position: relative;
+  width: fit-content;
+}
+
+._title:after {
+  content: '';
+  height: 5px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75px;
+  border-radius: 3px;
+  background: #F01C21;
+  position: absolute;
+  bottom: -10px;
 }

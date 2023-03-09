@@ -2,7 +2,6 @@ import './offers.styles.scss'
 import React from 'react'
 import OfferCard from './offer-card/offer-card'
 import offerList from './offers-list'
-console.log(offerList)
 export default function Offers() {
     return (
         <section className='offers-section'>

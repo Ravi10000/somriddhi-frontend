@@ -1,0 +1,38 @@
+.popular-membership-section {
+    display: grid;
+    place-items: center;
+
+    .offers-container {
+        display: grid;
+
+        .offer {
+            position: relative;
+            width: 100%;
+
+            .offer-cards-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 25px;
+                height: 100%;
+                width: 100%;
+                display: grid;
+                place-content: center;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1px;
+            }
+        }
+    }
+
+}
+
+@media (min-width: 800px) {
+    .popular-membership-section {
+        .offers-container {
+
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+    }
+
+}
