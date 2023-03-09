@@ -1,0 +1,42 @@
+.custom-carousel {
+  overflow: hidden;
+  .inner {
+    white-space: nowrap;
+    transition: transform 0.3s;
+  }
+  .indicators {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+    .switch {
+      height: 8px;
+      width: 20px;
+      background: #d9d9d9;
+      border-radius: 20px;
+      transform: all 0.3s;
+    }
+
+    .switch.current {
+      background: #091431;
+      width: 50px;
+    }
+  }
+}
+
+.carousel-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+//   height: 200px;
+//   background-color: green;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .custom-carousel {
+    // height: 300px;
+    width: 80%;
+    max-width: 600px;
+  }
+}

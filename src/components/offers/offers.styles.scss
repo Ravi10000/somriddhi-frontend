@@ -33,12 +33,16 @@
     }
 
 
-    .offers-container {
-        margin-top: 25px;
-        width: 80%;
-        display: grid;
-        place-items: center;
-        gap: 25px;
+    // .offers-container {
+    //     margin-top: 25px;
+    //     width: 80%;
+    //     display: grid;
+    //     place-items: center;
+    //     gap: 25px;
+    // }
+    .carousel-container{
+        width: 100%;
+        overflow: hidden;
     }
 }
 

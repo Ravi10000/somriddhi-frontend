@@ -1,24 +1,24 @@
 .offer-card {
-    padding: 30px;
-    border: 2px solid #ECECEC;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
-    max-width: 300px;
+  padding: 30px;
+  border: 2px solid #ececec;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+  max-width: 300px;
 
-    h4 {
-        color: #3BA615;
-        font-size: 1.2rem;
-        width: 70%;
-    }
-    button{
-        width: 100%;
-    }
-    p {
-        width: 70%;
-        color: #878787;
-    }
+  h4 {
+    color: #3ba615;
+    font-size: 1.2rem;
+    // width: 70;
+  }
+  button {
+    width: 100%;
+  }
+  p {
+    // width: 70%;
+    color: #878787;
+  }
 }

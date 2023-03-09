@@ -1,0 +1,28 @@
+.footer-nav-menu {
+    .nav-title {
+        color: #F01C21;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .nav-links-container {
+        display: grid;
+        gap: 10px;
+        .nav-link {
+            a {
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                img{
+                    width: 20px;
+                }
+
+                p {
+                    text-transform: capitalize;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

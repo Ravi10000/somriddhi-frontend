@@ -1,0 +1,20 @@
+.category {
+    padding: 12px;
+    display: flex;
+    gap: 6px;
+
+    img {
+        height: 15px;
+    }
+
+    p {
+        text-transform: capitalize;
+        font-weight: 500;
+    }
+}
+
+.category.selected {
+    border-radius: 8px;
+    color: #F01C21;
+    box-shadow: 4px 4px 60px rgba(205, 181, 181, 0.365);
+}

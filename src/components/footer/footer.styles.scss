@@ -1,0 +1,108 @@
+.footer-section {
+    background: #091431;
+    color: #fff;
+    margin-top: 50px;
+
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        width: 100%;
+
+        .logo-and-download-links {
+            display: grid;
+            place-items: center;
+
+            .buttons-container {
+                margin-top: 10px;
+                display: flex;
+                // flex-direction: column;
+                gap: 10px;
+
+                button {
+                    width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    // gap: 20px;
+                    background: #fff;
+                    color: #747577;
+                    border: 1px solid #E8E8E8;
+                    box-shadow: 6px 6px 60px rgba(0, 0, 0, 0.07);
+                    // padding: 15px 30px;
+
+                    img {
+                        width: 25px;
+                    }
+
+                    .store-details {
+                        display: grid;
+                        gap: 5px;
+
+                        p {
+                            text-transform: capitalize;
+                            font-size: .75rem;
+                        }
+
+                        h4 {
+                            color: #091431;
+                        }
+                    }
+                }
+            }
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+    }
+}
+
+@media (min-width: 700px) {
+    .footer-section {
+        .container {
+            .logo-and-download-links {
+                display: flex;
+                gap: 20px;
+                width: 100%;
+                justify-content: space-around;
+
+                .buttons-container {
+                    // display: flex;
+                    justify-content: space-around;
+                    flex-direction: row;
+                    gap: 20px;
+                }
+            }
+
+            .menu {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    }
+
+}
+
+@media (min-width: 1400px) {
+    .footer-section {
+        display: grid;
+        place-content: center;
+
+        .container {
+            max-width: 1000px;
+            flex-direction: row;
+
+            .logo-and-download-links {
+                width: fit-content;
+                flex-direction: column;
+
+                .buttons-container {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

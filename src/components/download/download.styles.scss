@@ -1,8 +1,9 @@
 .download-section {
     .container {
         position: relative;
-        background-color: #FCDCDD;
+        background-color: hsl(358, 84%, 93%);
         margin-top: 50px;
+
         // z-index: 3;
         // overflow: hidden;
         .left {
@@ -99,10 +100,13 @@
                     top: 10%;
 
                     &:first-child {
-                        right: 0;
+                        top: 25px;
+                        right: -120px;
                     }
 
                     &:nth-child(2) {
+                        top: -25px;
+                        right: 70px;
                         transform: scale(.75);
 
                     }
@@ -126,6 +130,7 @@
 
             .right {
                 img {
+                    right: 0;
                     &:nth-child(2) {
                         right: 100px;
                     }
