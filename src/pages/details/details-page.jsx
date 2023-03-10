@@ -1,8 +1,8 @@
 import "./details.styles.scss";
 import React from "react";
 import entertainmentCoupons from "./entertainment-coupons";
-import DealCard from "../../../components/deals/deal-card/deal-card";
-import FilterList from "../../../components/filter-list/filter-list";
+import DealCard from "../../components/deals/deal-card/deal-card";
+import FilterList from "../../components/filter-list/filter-list";
 
 export default function DetailsPage() {
   return (
