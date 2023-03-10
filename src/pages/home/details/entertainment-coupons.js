@@ -1,4 +1,19 @@
-const dealList = [
+const entertainmentCoupons = [
+    {
+        imgUrl: "/amazon.png",
+        title: "Amazon",
+        details: "Flat 30% off"
+    },
+    {
+        imgUrl: "/amazon.png",
+        title: "Amazon",
+        details: "Flat 30% off"
+    },
+    {
+        imgUrl: "/amazon.png",
+        title: "Amazon",
+        details: "Flat 30% off"
+    },
     {
         imgUrl: "/amazon.png",
         title: "Amazon",
@@ -31,4 +46,4 @@ const dealList = [
     },
 ]
 
-export default dealList;
+export default entertainmentCoupons;

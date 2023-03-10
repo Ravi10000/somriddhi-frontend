@@ -1,4 +1,4 @@
-const dealList = [
+const offers = [
     {
         imgUrl: "/amazon.png",
         title: "Amazon",
@@ -31,4 +31,4 @@ const dealList = [
     },
 ]
 
-export default dealList;
+export default offers;

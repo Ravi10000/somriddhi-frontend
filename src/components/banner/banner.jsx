@@ -1,5 +1,5 @@
 import "./banner.styles.scss";
-import Carousel from "../carousel/carousel";
+// import Carousel from "../carousel/carousel";
 import React from "react";
 import CustomCarousel, {
   CarouselItem,
