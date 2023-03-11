@@ -1,54 +1,54 @@
 @font-face {
-  font-family: 'Metropolis';
-  src: url('/fonts/metropolis.regular.otf');
+  font-family: "Metropolis";
+  src: url("/fonts/metropolis.regular.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 100;
-  src: url('/fonts/metropolis.thin.otf');
+  src: url("/fonts/metropolis.thin.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 200;
-  src: url('/fonts/metropolis.extra-light.otf');
+  src: url("/fonts/metropolis.extra-light.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 300;
-  src: url('/fonts/metropolis.light.otf');
+  src: url("/fonts/metropolis.light.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 500;
-  src: url('/fonts/metropolis.medium.otf');
+  src: url("/fonts/metropolis.medium.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 600;
-  src: url('/fonts/metropolis.semi-bold.otf');
+  src: url("/fonts/metropolis.semi-bold.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 700;
-  src: url('/fonts/metropolis.bold.otf');
+  src: url("/fonts/metropolis.bold.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 800;
-  src: url('/fonts/metropolis.extra-bold.otf');
+  src: url("/fonts/metropolis.extra-bold.otf");
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: "Metropolis";
   font-weight: 900;
-  src: url('/fonts/metropolis.black.otf');
+  src: url("/fonts/metropolis.black.otf");
 }
 
 * {
@@ -56,16 +56,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+}
 
 body {
-  font-family: 'Metropolis', sans-serif;
+  font-family: "Metropolis", sans-serif;
   color: #091431;
   background: #f8f8f8;
 }
 
 input {
-  font-family: 'Metropolis', sans-serif;
-  color: #908F8F;
+  font-family: "Metropolis", sans-serif;
+  color: #908f8f;
 }
 
 a {
@@ -82,14 +86,14 @@ a {
 }
 
 ._title:after {
-  content: '';
+  content: "";
   height: 5px;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: 75px;
   border-radius: 3px;
-  background: #F01C21;
+  background: #f01c21;
   position: absolute;
   bottom: -10px;
 }

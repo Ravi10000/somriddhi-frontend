@@ -1,7 +1,7 @@
 import "./filter.styles.scss";
 import React, { useState } from "react";
 
-export default function Filter({ title, options }) {
+export default function Filter({ title, options, selectedCategory }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,9 +16,15 @@ export default function Filter({ title, options }) {
         <div className={`toggle-icon ${!isOpen && "hide"}`}></div>
       </div>
       <div className={`options-container ${!isOpen && "hidden"}`}>
-        {options.map((option, index) => (
-          <div className="option">
-            <input type="checkbox" id={option} name={option} value={option} />
+        {options.map((option) => (
+          <div className="option" key={option}>
+            <input
+              type="checkbox"
+              id={option}
+              name={option}
+              value={option}
+              // checked={selectedCategory === option && true }
+            />
             <label htmlFor={option}>{option}</label>
           </div>
         ))}

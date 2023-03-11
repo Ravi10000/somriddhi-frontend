@@ -10,10 +10,12 @@
     "push": "git push -u origin master"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-multi-carousel": "^2.8.2",
     "react-router-dom": "^5.3.4",
+    "react-router-hash-link": "^2.4.3",
     "react-swipeable": "^7.0.0",
     "sass": "^1.58.3"
   },

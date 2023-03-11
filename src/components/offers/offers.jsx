@@ -1,14 +1,23 @@
 import "./offers.styles.scss";
+
+// packgages
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+
+// components
 import OfferCard from "./offer-card/offer-card";
-import offerList from "./offers-list";
 import Category from "./category/category";
 import CustomCarousel, {
   CarouselItem,
 } from "../custom-carousel/custom-carousel";
+
+// utils
+import offerList from "./offers-list";
 import handleResponsive from "../../utils/handle-responsive";
 
 export default function Offers() {
+  const history = useHistory();
+
   const categories = [
     {
       name: "popular coupons",
@@ -24,7 +33,7 @@ export default function Offers() {
     },
   ];
   const [deviceWidth, setDeviceWidth] = useState(null);
-  const [tabletOfferList, setTabletOfferList] = useState([]);
+  const [modifiedOfferList, setModifiedOfferList] = useState([]);
 
   useEffect(() => {
     setDeviceWidth(window.innerWidth);
@@ -34,19 +43,19 @@ export default function Offers() {
     if (deviceWidth < 800 && deviceWidth > 500) {
       handleResponsive({
         list: offerList,
-        setList: setTabletOfferList,
+        setList: setModifiedOfferList,
         itemsPerSlide: 2,
       });
     } else if (deviceWidth > 800 && deviceWidth < 1400) {
       handleResponsive({
         list: offerList,
-        setList: setTabletOfferList,
+        setList: setModifiedOfferList,
         itemsPerSlide: 3,
       });
     } else if (deviceWidth > 1400) {
       handleResponsive({
         list: offerList,
-        setList: setTabletOfferList,
+        setList: setModifiedOfferList,
         itemsPerSlide: 8,
       });
     }
@@ -56,9 +65,9 @@ export default function Offers() {
   return (
     <section className="offers-section">
       <div className="categories">
-        {categories.map(({ name, img, index }) => (
+        {categories.map(({ name, img }) => (
           <Category
-            key={index}
+            key={name}
             name={name}
             img={img}
             selected={selectedCategory === name}
@@ -68,18 +77,21 @@ export default function Offers() {
       </div>
       <div className="carousel-container">
         <CustomCarousel>
-          {tabletOfferList.length > 0
-            ? tabletOfferList.map((tableOfferListItem, index) => {
+          {modifiedOfferList.length > 0
+            ? modifiedOfferList.map((offerItem, index) => {
                 return (
-                  <CarouselItem>
+                  <CarouselItem key={index}>
                     <div className="offers-cards-container">
-                      {tableOfferListItem?.map((offer, index) => {
+                      {offerItem?.map(({ id, title, discount, imgUrl }) => {
                         return (
                           <OfferCard
-                            key={index}
-                            title={offer.title}
-                            discount={offer.discount}
-                            imgUrl={offer.imgUrl}
+                            onClick={() => {
+                              history.push(`/coupon/${id}`);
+                            }}
+                            key={id}
+                            title={title}
+                            discount={discount}
+                            imgUrl={imgUrl}
                           />
                         );
                       })}

@@ -1,13 +1,50 @@
 import "./coupon.styles.scss";
 
-import React from "react";
+// packages
+import { useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
+
+// components
 import Button from "../../components/button/button";
+
+// utils
 import couponDetails from "./coupon-details";
+import getRemaingTime from "../../utils/get-remaining-time";
+import CouponCode from "../../components/coupon-code/coupon-code";
+
 export default function CouponPage() {
+  const history = useHistory();
+  // states
+  const [hoursLeft, setHoursLeft] = useState("00");
+  const [minutesLeft, setMinutesLeft] = useState("00");
+  const [secondsLeft, setSecondsLeft] = useState("00");
+
+  // const hoursLeftRef = useRef(null);
+  // const minutesLeftRef = useRef(null);
+  // const secondsLeftRef = useRef(null);
+  useEffect(() => {
+    setInterval(() => {
+      let { hours, minutes, seconds } = getRemaingTime(
+        couponDetails.expiryDate
+      );
+      // console.log(hours, minutes, seconds);
+      setHoursLeft(hours);
+      setMinutesLeft(minutes);
+      setSecondsLeft(seconds);
+      // hoursLeftRef.current = hours;
+      // minutesLeftRef.current = minutes;
+      // secondsLeftRef.current = seconds;
+    }, 1000);
+  }, []);
   return (
     <div className="coupon-page">
       <div className="head">
-        <div className="go-back link">
+        <div
+          className="go-back link"
+          onClick={() => {
+            history.goBack();
+          }}
+        >
           <img src="/go-back.png" alt="go back" />
           <p>go back</p>
         </div>
@@ -21,27 +58,24 @@ export default function CouponPage() {
           <h3>Deal Ends In</h3>
           <div className="expires-in">
             <div className="hh time">
-              <p className="highlight">20</p>
+              <p className="highlight">{hoursLeft}</p>
               <p>HH</p>
             </div>
             <div className="mm time">
-              <p className="highlight">10</p>
+              <p className="highlight">{minutesLeft}</p>
               <p>MM</p>
             </div>
             <div className="ss time">
-              <p className="highlight">23</p>
+              <p className="highlight">{secondsLeft}</p>
               <p>SS</p>
             </div>
           </div>
-          <img src={couponDetails?.image} alt="" />
+          <img src={couponDetails?.image} alt="coupon image" />
         </div>
         <div className="right">
           <h3>Use Code</h3>
           <div className="coupon-link-container">
-            <div className="coupon-text">
-              <img src="/coupon-bg.png" alt="coupon background" />
-              <p>{couponDetails?.couponCode}</p>
-            </div>
+            <CouponCode couponCode={couponDetails?.couponCode} />
             <Button>visit site</Button>
           </div>
           <div className="info-container">

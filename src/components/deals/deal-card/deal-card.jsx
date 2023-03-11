@@ -2,10 +2,25 @@ import "./deal-card.styles.scss";
 
 import React from "react";
 import Button from "../../button/button";
-
-export default function DealCard({ imgUrl, title, details, customStyles }) {
+import { useHistory } from "react-router-dom";
+export default function DealCard({
+  id,
+  imgUrl,
+  title,
+  details,
+  customStyles,
+  ...otherProps
+}) {
+  const history = useHistory();
   return (
-    <div className="deal-card" style={customStyles}>
+    <div
+      className="deal-card"
+      style={customStyles}
+      onClick={() => {
+        history.push(`/coupon/${id}`);
+      }}
+      {...otherProps}
+    >
       <img src={imgUrl} alt="amazon" />
       <h4 className="title">{title}</h4>
       <p className="discount-details">{details}</p>

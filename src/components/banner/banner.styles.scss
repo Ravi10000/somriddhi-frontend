@@ -23,6 +23,11 @@
   }
 }
 
+@media (min-width: 500px) {
+.banner{
+  padding: 30px;
+}
+}
 @media (min-width: 800px) {
   .banner {
     display: grid;
@@ -30,7 +35,7 @@
     .carousel-container {
       // width: 70%;
       width: 80%;
-      max-width: 700px;
+      max-width: 1000px;
     }
   }
 }

@@ -4,6 +4,7 @@
   grid-template-columns: repeat(2, 1fr);
   padding: 20px;
   gap: 20px;
+  text-transform: capitalize;
 }
 
 @media (min-width: 700px) {

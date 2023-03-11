@@ -12,6 +12,7 @@
       font-weight: 500;
       text-transform: capitalize;
       color: #656565;
+      cursor: pointer;
       img {
         width: 15px;
       }
@@ -54,21 +55,6 @@
         align-items: center;
         justify-content: space-between;
         padding: 20px;
-        .coupon-text {
-          width: fit-content;
-          position: relative;
-          img {
-            width: 270px;
-          }
-          p {
-            position: absolute;
-            top: 50%;
-            left: 40%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            font-weight: 600;
-          }
-        }
       }
       .list {
         display: flex;

@@ -5,7 +5,7 @@ import categoriesList from './popular-categories-list';
 
 export default function PopulatCategories() {
     return (
-        <section className='popular-categories-section'>
+        <section className='popular-categories-section' id='popular-category'>
             <div className="container">
                 <div className="left">
                     <img src="/table-bg.png" alt="categories table background" />

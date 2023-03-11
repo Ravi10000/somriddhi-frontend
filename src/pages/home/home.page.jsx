@@ -10,10 +10,12 @@ import Offers from "../../components/offers/offers";
 import PopulatCategories from "../../components/popular-categories/popular-categories";
 import PopularMembership from "../../components/popular-membership/popular-membership";
 import Process from "../../components/process/process";
+import ScrollToTop from "../../components/scrollToTop";
 
 export default function HomePage() {
   return (
-    <div className="home-page">
+    <div className="home-page" id="home">
+      <ScrollToTop />
       <Banner />
       <Offers />
       <Deals />

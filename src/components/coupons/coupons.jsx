@@ -1,21 +1,29 @@
 import "./coupons.styles.scss";
-import React, { useState, useEffect } from "react";
-import couponsCategoryList from "./coupons-category-list";
+
+// packages
+import { useState, useEffect } from "react";
+
+// components
+import DealCard from "../deals/deal-card/deal-card";
 import CustomCarousel, {
   CarouselItem,
 } from "../custom-carousel/custom-carousel";
+
+// utils
+import couponsCategoryList from "./coupons-category-list";
 import offers from "./offers";
-import DealCard from "../deals/deal-card/deal-card";
 import handleResponsive from "../../utils/handle-responsive";
+
 export default function Coupons() {
+  // states
   const [deviceWidth, setDeviceWidth] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("fashion");
   const [selectdCategoryOffers, setSelectedCategoryOffers] = useState([]);
   const [listOfItemsToShow, setListOfItemsToShow] = useState([]);
 
   useEffect(() => {
-    setSelectedCategory(couponsCategoryList[0]?.name);
-    setDeviceWidth(window.innerWidth);
+    setSelectedCategory(couponsCategoryList[0]?.name); // selected Category
+    setDeviceWidth(window.innerWidth); // to use in responsive carousel
   }, []);
 
   useEffect(() => {
@@ -67,7 +75,7 @@ export default function Coupons() {
   }, [deviceWidth]);
 
   return (
-    <section className="coupons-section">
+    <section className="coupons-section" id="coupons">
       <div className="container">
         <h2 className="_title">Coupon By Categories</h2>
         <div className="container">
@@ -122,10 +130,11 @@ export default function Coupons() {
                         <CarouselItem key={index}>
                           <div className="menu-cards-container">
                             {offerList?.map(
-                              ({ title, imgUrl, details }, index) => {
+                              ({ title, imgUrl, details, id }) => {
                                 return (
                                   <DealCard
-                                    key={index}
+                                    id={id}
+                                    key={id}
                                     title={title}
                                     details={details}
                                     imgUrl={imgUrl}
@@ -138,11 +147,12 @@ export default function Coupons() {
                       );
                     })
                   : selectdCategoryOffers?.map(
-                      ({ title, imgUrl, details }, index) => {
+                      ({ title, imgUrl, details, id }) => {
                         return (
                           <CarouselItem>
                             <DealCard
-                              key={index}
+                              id={id}
+                              key={id}
                               title={title}
                               details={details}
                               imgUrl={imgUrl}

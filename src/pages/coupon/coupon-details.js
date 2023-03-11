@@ -1,7 +1,7 @@
 const couponDetails = {
   couponCode: "CKFLASH700",
   image: "/offer1.png",
-  expiryDate: "31st July 2024",
+  expiryDate: "12:40 03/12/2023",
   listOfInfo: [
     {
       title: "about coupon",

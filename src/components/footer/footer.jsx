@@ -11,14 +11,14 @@ export default function Footer() {
                     <img src="/logo-light.png" alt="somriddihi logo" />
                     <div className="buttons-container">
                         <button>
-                            <img src="playstore.png" alt="download from play sotre" />
+                            <img src="/playstore.png" alt="download from play sotre" />
                             <div className="store-details">
                                 <p>Download From</p>
                                 <h4>Play Store</h4>
                             </div>
                         </button>
                         <button>
-                            <img src="applestore.png" alt="download from apple sotre" />
+                            <img src="/applestore.png" alt="download from apple sotre" />
                             <div className="store-details">
                                 <p>Download From</p>
                                 <h4>Apple Store</h4>

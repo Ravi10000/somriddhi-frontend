@@ -1,4 +1,4 @@
-const offers = [
+const entertainmentCoupons = [
   {
     id: 1,
     imgUrl: "/amazon.png",
@@ -55,4 +55,4 @@ const offers = [
   },
 ];
 
-export default offers;
+export default entertainmentCoupons;
