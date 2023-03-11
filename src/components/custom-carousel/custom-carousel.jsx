@@ -2,7 +2,7 @@ import "./custom-carousel.styles.scss";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
-import React from "react";
+import React, { useEffect } from "react";
 export function CarouselItem({ children, width }) {
   return (
     <div className="carousel-item" style={{ width: width }}>
@@ -11,7 +11,19 @@ export function CarouselItem({ children, width }) {
   );
 }
 
-export default function CustomCarousel({ children }) {
+export default function CustomCarousel({
+  children,
+  HideIndicators,
+  // autoCycle,
+}) {
+  // useEffect(() => {
+  //   if (autoCycle) {
+  //     const interval = setInterval(() => {
+  //       updateIndex(activeIndex + 1);
+  //     }, 3000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, []);
   const [activeIndex, setActiveIndex] = useState(0);
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
@@ -40,10 +52,11 @@ export default function CustomCarousel({ children }) {
           return React.cloneElement(child, { width: "100%" });
         })}
       </div>
-      <div className="indicators">
+      <div className={`indicators ${HideIndicators && "hide"}`}>
         {React.Children.map(children, (child, index) => {
           return (
             <div
+              key={index}
               className={`switch ${index === activeIndex && "current"}`}
               onClick={() => {
                 updateIndex(index);

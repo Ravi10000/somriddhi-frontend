@@ -1,0 +1,23 @@
+.coupon-code {
+  width: fit-content;
+  position: relative;
+  img {
+    width: 270px;
+  }
+  .copy-code {
+    cursor: pointer;
+    width: 20px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+  }
+  p {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: 600;
+  }
+}

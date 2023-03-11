@@ -1,6 +1,7 @@
 .offer-card {
   padding: 30px;
   border: 2px solid #ececec;
+  background: #fff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -8,7 +9,8 @@
   gap: 30px;
   text-align: center;
   max-width: 300px;
-
+  white-space: normal;
+  cursor: pointer;
   h4 {
     color: #3ba615;
     font-size: 1.2rem;
