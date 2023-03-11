@@ -1,14 +1,15 @@
 import "./header.styles.scss";
-import React from "react";
+import React, { useState } from "react";
+
 import Search from "../search/search";
 import Button from "../button/button";
 
-export default function Header() {
+export default function Header({ openModal }) {
   return (
     <header>
       <img src="/logo.png" alt="logo" />
       <Search />
-      <Button>Login / Sign Up</Button>
+      <Button onClick={openModal}>Login / Sign Up</Button>
     </header>
   );
 }

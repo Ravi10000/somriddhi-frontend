@@ -1,0 +1,11 @@
+form {
+  .otp-inputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    input {
+      font-size: 2rem;
+      padding: 20px;
+      width: 50px;
+    }
+  }
+}
