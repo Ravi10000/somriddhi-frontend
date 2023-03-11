@@ -1,33 +1,22 @@
 import React from "react";
 import "./App.scss";
-import Banner from "./components/banner/banner";
-import Coupons from "./components/coupons/coupons";
-import Deals from "./components/deals/deals";
-import Download from "./components/download/download";
-import Footer from "./components/footer/footer";
-import Form from "./components/form/form";
-import Header from "./components/header/header";
-import Navbar from "./components/navbar/navbar";
-import Offers from "./components/offers/offers";
-import PopulatCategories from "./components/popular-categories/popular-categories";
-import PopularMembership from "./components/popular-membership/popular-membership";
-import Process from "./components/process/process";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from "./components/Dashboard/Dashboard";
+import Banner from "./pages/Banner/Banner";
+import Category from "./pages/Category/category";
+import Deal from "./pages/Deals/deals";
 
 export default function App() {
   return (
     <div className="App">
-      <Header />
-      <Navbar />
-      <Banner />
-      <Offers />
-      <Deals />
-      <Coupons />
-      <PopularMembership />
-      <Form />
-      <Process />
-      <Download />
-      <PopulatCategories />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Dashboard />} />
+          <Route path="/banner" element={<Banner />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/deal" element={<Deal />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,0 +1,170 @@
+.nav-mainHeading {
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+
+    position: absolute;
+    width: 79.7vw;
+    height: 90px;
+    left: 260px;
+    top: 0px;
+
+    /* White */
+
+    background: #FFFFFF;
+    /* Secondary/Secondary 09 */
+
+    border-bottom: 1px solid #E6E8EA;
+}
+
+.nav-headings {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 24px;
+    gap: 20px;
+
+    width: 79.7vw;
+    height: 82px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.nav-ta {
+    width: 770px;
+    height: 32px;
+
+    /* Heading/H4 */
+
+    // font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    /* identical to box height, or 133% */
+
+    display: flex;
+    align-items: center;
+
+    /* Gray/Gray 01 */
+
+    color: #1A232F;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+.nav-rightOptions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 19px;
+
+    width: 255px;
+    height: 44px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.nav-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+
+    width: 44px;
+    height: 44px;
+
+    /* Secondary/Secondary 10 */
+
+    background: #F3F5F7;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.nav-notifi {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 8px;
+
+    width: 44px;
+    height: 44px;
+
+    /* Secondary/Secondary 10 */
+
+    background: #F3F5F7;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.nav-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 12px 4px 6px;
+    gap: 8px;
+
+    width: 130px;
+    height: 44px;
+
+    /* Secondary/Secondary 10 */
+
+    background: #F3F5F7;
+    border-radius: 8px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.nSearch {
+    width: 24px;
+    height: 24px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
