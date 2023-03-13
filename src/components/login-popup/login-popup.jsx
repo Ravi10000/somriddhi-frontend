@@ -1,13 +1,18 @@
 import "./login-popup.styles.scss";
 
 import React, { useEffect, useState } from "react";
-import PhoneEntry from "./phone-form/phone-form";
-import VerifyOTP from "./otp-form/otp-form";
+import PhoneNumberForm from "./phone-form/phone-form";
+import OtpForm from "./otp-form/otp-form";
 import ReferralForm from "./referral-code-form/referral-code-form";
 const loginStages = ["phone-entry", "verify-otp", "referral-code"];
 
 export default function LoginPopup({ closeModal }) {
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setOtp] = useState([]);
+  const [referralCode, setReferralCode] = useState("");
+
+  console.log({ phoneNumber, otp });
   function nextStage() {
     if (currentLoginStage === loginStages.length - 1) {
       return;
@@ -34,13 +39,20 @@ export default function LoginPopup({ closeModal }) {
           <p>Back</p>
         </div>
         {loginStages[currentLoginStage] === "phone-entry" && (
-          <PhoneEntry nextStage={nextStage} />
+          <PhoneNumberForm
+            nextStage={nextStage}
+            setPhoneNumber={setPhoneNumber}
+          />
         )}
         {loginStages[currentLoginStage] === "verify-otp" && (
-          <VerifyOTP nextStage={nextStage} />
+          <OtpForm nextStage={nextStage} setOtp={setOtp} />
         )}
         {loginStages[currentLoginStage] === "referral-code" && (
-          <ReferralForm nextStage={nextStage} closeModal={closeModal} />
+          <ReferralForm
+            nextStage={nextStage}
+            closeModal={closeModal}
+            setReferralCode={setReferralCode}
+          />
         )}
       </div>
     </div>

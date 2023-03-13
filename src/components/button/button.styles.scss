@@ -1,11 +1,16 @@
-button{
-    background-color: #F01C21;
+button {
+  background-color: #f01c21;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: "Metropolis", sans-serif;
+  // width: fit-content;
+  // height: fit-content;
+  text-transform: uppercase;
+  &.disabled {
+    background-color: #df6d6f;
     color: #fff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-family: 'Metropolis', sans-serif;
-    // width: fit-content;
-    // height: fit-content;
-    text-transform: uppercase;
+    cursor: not-allowed;
+  }
 }

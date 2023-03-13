@@ -1,14 +1,47 @@
 import "./phone-form.styles.scss";
 
-import React from "react";
+// packages imports
+import React, { useEffect, useRef, useState } from "react";
+
+// components
 import Button from "../../button/button";
-export default function PhoneForm({ nextStage }) {
+
+export default function PhoneNumberForm({ nextStage, setPhoneNumber }) {
+  const [validInput, setValidInput] = useState(false);
+  const phoneNumberRef = useRef();
+  useEffect(() => {
+    phoneNumberRef.current.focus();
+  }, []);
+
+  function handleSubmit(e) {
+    console.log(e.target[0].value);
+    e.preventDefault();
+    nextStage();
+  }
+  function handleChange(e) {
+    if (e.target.value.length === 10) {
+      setValidInput(true);
+      setPhoneNumber(e.target.value);
+    } else {
+      setValidInput(false);
+    }
+  }
   return (
-    <form action="#" onSubmit={nextStage}>
+    <form action="#" onSubmit={handleSubmit}>
       <h1>Your Phone Number</h1>
       <p>Enter your 10 digit phone number</p>
-      <input type="text" />
-      <Button>Next</Button>
+      <input
+        ref={phoneNumberRef}
+        type="text"
+        name="phone-number"
+        maxLength={10}
+        inputMode="numeric"
+        onChange={handleChange}
+        onInput={(e) =>
+          (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+        }
+      />
+      <Button disabled={!validInput}>Next</Button>
     </form>
   );
 }
