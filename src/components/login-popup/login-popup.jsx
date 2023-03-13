@@ -3,16 +3,20 @@ import "./login-popup.styles.scss";
 import React, { useEffect, useState } from "react";
 import PhoneNumberForm from "./phone-form/phone-form";
 import OtpForm from "./otp-form/otp-form";
-import ReferralForm from "./referral-code-form/referral-code-form";
-const loginStages = ["phone-entry", "verify-otp", "referral-code"];
+import UserDetailsForm from "./user-details-form/user-details-form";
 
-export default function LoginPopup({ closeModal }) {
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions";
+
+const loginStages = ["phone-entry", "verify-otp", "user-details"];
+
+function LoginPopup({ closeModal }) {
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [otp, setOtp] = useState([]);
-  const [referralCode, setReferralCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  // const [referralCode, setReferralCode] = useState("");
 
-  console.log({ phoneNumber, otp });
+  // console.log({ phoneNumber, otp });
   function nextStage() {
     if (currentLoginStage === loginStages.length - 1) {
       return;
@@ -41,20 +45,31 @@ export default function LoginPopup({ closeModal }) {
         {loginStages[currentLoginStage] === "phone-entry" && (
           <PhoneNumberForm
             nextStage={nextStage}
-            setPhoneNumber={setPhoneNumber}
+            setPhone={setPhone}
+            phone={phone}
           />
         )}
         {loginStages[currentLoginStage] === "verify-otp" && (
-          <OtpForm nextStage={nextStage} setOtp={setOtp} />
+          <OtpForm
+            nextStage={nextStage}
+            phone={phone}
+            otp={otp}
+            setOtp={setOtp}
+          />
         )}
-        {loginStages[currentLoginStage] === "referral-code" && (
-          <ReferralForm
+        {loginStages[currentLoginStage] === "user-details" && (
+          <UserDetailsForm
             nextStage={nextStage}
             closeModal={closeModal}
-            setReferralCode={setReferralCode}
+            // setReferralCode={setReferralCode}
           />
         )}
       </div>
     </div>
   );
 }
+const mapDispatchToProp = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProp)(LoginPopup);

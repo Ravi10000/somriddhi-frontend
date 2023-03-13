@@ -1,9 +1,13 @@
 import "./filter.styles.scss";
 import React, { useState } from "react";
 
-export default function Filter({ title, options, selectedCategory }) {
+export default function Filter({
+  title,
+  options,
+  selectedCategories,
+  setSelectedCategories,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="filter">
       <div
@@ -23,7 +27,17 @@ export default function Filter({ title, options, selectedCategory }) {
               id={option}
               name={option}
               value={option}
-              // checked={selectedCategory === option && true }
+              checked={selectedCategories.includes(option)}
+              readOnly
+              onClick={(e) => {
+                setSelectedCategories((array) => {
+                  if (!selectedCategories.includes(option)) {
+                    return [...array, option];
+                  } else {
+                    return array.filter((item) => item !== option);
+                  }
+                });
+              }}
             />
             <label htmlFor={option}>{option}</label>
           </div>

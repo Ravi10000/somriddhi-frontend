@@ -1,16 +1,21 @@
 import "./category-page.style.scss";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+// components
 import entertainmentCoupons from "./entertainment-coupons";
 import DealCard from "../../components/deals/deal-card/deal-card";
 import FilterList from "../../components/filter-list/filter-list";
-import { useParams } from "react-router-dom";
 
 export default function CategoryPage() {
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const { category } = useParams();
-  console.log({ category });
 
-  // const history = useHistory();
-  console.log(history);
+  console.log({selectedCategories});
+  useEffect(() => {
+    setSelectedCategories([category]);
+  }, []);
+
   return (
     <div className="category-page">
       <div className="heading">
@@ -21,7 +26,11 @@ export default function CategoryPage() {
       </div>
       <section className="category-section">
         <div className="filter-container">
-          <FilterList category={category} />
+          <FilterList
+            category={category}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+          />
         </div>
         <div className="category-container">
           <div className="category-heading-container">

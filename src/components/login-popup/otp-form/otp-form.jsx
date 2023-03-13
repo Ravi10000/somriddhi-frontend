@@ -2,13 +2,17 @@ import "./otp-form.styles.scss";
 
 import React, { useEffect, useState, useRef } from "react";
 import Button from "../../button/button";
+// import { connect } from "react-redux";
+import { verifyOtp } from "../../../api";
 
-export default function OtpForm({ nextStage, setOtp }) {
+function OtpForm({ phone, nextStage, setOtp }) {
   const [validInput, setValidInput] = useState(false);
   const [digit1, setDigit1] = useState("");
   const [digit2, setDigit2] = useState("");
   const [digit3, setDigit3] = useState("");
   const [digit4, setDigit4] = useState("");
+  const [counter, setCounter] = useState(60);
+
   const digit1Ref = useRef();
   const digit2Ref = useRef();
   const digit3Ref = useRef();
@@ -16,12 +20,18 @@ export default function OtpForm({ nextStage, setOtp }) {
 
   useEffect(() => {
     digit1Ref.current.focus();
+    const counterInterval = setInterval(() => {
+      setCounter((counter) => counter - 1);
+    }, 1000);
+    return () => {
+      clearInterval(counterInterval);
+    };
   }, []);
 
-  function hanldeSubmit(e) {
-    console.log(e.target[0].value);
+  async function submitForm(e) {
+    // verify otp
     e.preventDefault();
-    setOtp(digit1 + digit2 + digit3 + digit4);
+    // const response = await verifyOtp({ phone, otp });
     nextStage();
   }
   function handleChange(e) {
@@ -48,16 +58,17 @@ export default function OtpForm({ nextStage, setOtp }) {
       digit3Ref.current.value.length === 1 &&
       digit4Ref.current.value.length === 1
     ) {
+      setOtp(digit1 + digit2 + digit3 + digit4);
       setValidInput(true);
     } else {
       setValidInput(false);
     }
   }
   return (
-    <form action="#" onSubmit={hanldeSubmit}>
+    <form action="#" onSubmit={submitForm}>
       <h1>Verify OTP</h1>
       <p>Enter OTP which you received for login</p>
-      <h5>Expires in 1 minutes</h5>
+      <h5>Expires in {counter} seconds</h5>
       <div className="otp-inputs">
         <input
           ref={digit1Ref}
@@ -111,3 +122,5 @@ export default function OtpForm({ nextStage, setOtp }) {
     </form>
   );
 }
+
+export default OtpForm;

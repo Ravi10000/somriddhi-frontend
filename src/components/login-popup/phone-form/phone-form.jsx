@@ -2,32 +2,36 @@ import "./phone-form.styles.scss";
 
 // packages imports
 import React, { useEffect, useRef, useState } from "react";
+import { sendOtp } from "../../../api";
 
 // components
 import Button from "../../button/button";
 
-export default function PhoneNumberForm({ nextStage, setPhoneNumber }) {
+export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
+  // const [phone, setPhoneNumber] = useState("");
   const [validInput, setValidInput] = useState(false);
   const phoneNumberRef = useRef();
   useEffect(() => {
     phoneNumberRef.current.focus();
   }, []);
 
-  function handleSubmit(e) {
-    console.log(e.target[0].value);
+  async function submitForm(e) {
     e.preventDefault();
+    // console.log(e.target[0].value);
+    // create otp and send it to the user
+    // const response = await sendOtp({ phone, countryCode: "+91" });
     nextStage();
   }
   function handleChange(e) {
     if (e.target.value.length === 10) {
       setValidInput(true);
-      setPhoneNumber(e.target.value);
+      setPhone(e.target.value);
     } else {
       setValidInput(false);
     }
   }
   return (
-    <form action="#" onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <h1>Your Phone Number</h1>
       <p>Enter your 10 digit phone number</p>
       <input

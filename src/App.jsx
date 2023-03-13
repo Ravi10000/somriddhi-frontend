@@ -42,6 +42,11 @@ export default function App() {
           <Route path="/banner" element={<Banner />} />
           <Route path="/coupon/:id" element={<CouponPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route
+            exact
+            path="/coupon-claimed/:id"
+            element={<CouponsClaimedPage />}
+          />
           {/* <Route path="/category" element={<Category />} /> */}
           {/* <Route path="/deal" element={<Deal />} /> */}
         </Routes>
