@@ -2,7 +2,7 @@ import "./coupon.styles.scss";
 
 // packages
 import { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 // components
 import Button from "../../components/button/button";
@@ -13,7 +13,7 @@ import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
 
 export default function CouponPage() {
-  const history = useHistory();
+  // const history = useHistory();
   // states
   const [hoursLeft, setHoursLeft] = useState("00");
   const [minutesLeft, setMinutesLeft] = useState("00");
@@ -41,9 +41,9 @@ export default function CouponPage() {
       <div className="head">
         <div
           className="go-back link"
-          onClick={() => {
-            history.goBack();
-          }}
+          // onClick={() => {
+          // history.goBack();
+          // }}
         >
           <img src="/go-back.png" alt="go back" />
           <p>go back</p>

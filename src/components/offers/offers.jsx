@@ -2,7 +2,7 @@ import "./offers.styles.scss";
 
 // packgages
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 // components
 import OfferCard from "./offer-card/offer-card";
@@ -16,7 +16,7 @@ import offerList from "./offers-list";
 import handleResponsive from "../../utils/handle-responsive";
 
 export default function Offers() {
-  const history = useHistory();
+  // const history = useHistory();
 
   const categories = [
     {
@@ -85,10 +85,11 @@ export default function Offers() {
                       {offerItem?.map(({ id, title, discount, imgUrl }) => {
                         return (
                           <OfferCard
-                            onClick={() => {
-                              history.push(`/coupon/${id}`);
-                            }}
+                            // onClick={() => {
+                            //   history.push(`/coupon/${id}`);
+                            // }}
                             key={id}
+                            id={id}
                             title={title}
                             discount={discount}
                             imgUrl={imgUrl}

@@ -3,13 +3,13 @@ import React from "react";
 import entertainmentCoupons from "./entertainment-coupons";
 import DealCard from "../../components/deals/deal-card/deal-card";
 import FilterList from "../../components/filter-list/filter-list";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function CategoryPage() {
   const { category } = useParams();
   console.log({ category });
 
-  const history = useHistory();
+  // const history = useHistory();
   console.log(history);
   return (
     <div className="category-page">
@@ -31,9 +31,6 @@ export default function CategoryPage() {
           <div className="category-cards-container">
             {entertainmentCoupons.map(({ imgUrl, title, details, id }) => (
               <DealCard
-                onClick={() => {
-                  history.push(`/coupon/${id}`);
-                }}
                 key={id}
                 customStyles={{ background: "#F8F8F8", border: "none" }}
                 imgUrl={imgUrl}

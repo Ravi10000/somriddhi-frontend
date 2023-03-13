@@ -9,6 +9,9 @@ export default function getTimeRemaining(endtime) {
   minutes = minutes.toString().length < 2 ? `0${minutes}` : minutes;
   hours = hours.toString().length < 2 ? `0${hours}` : hours;
 
+  hours = hours < 1 ? "00" : hours;
+  minutes = minutes < 1 ? "00" : minutes;
+  seconds = seconds < 1 ? "00" : seconds;
   return {
     total,
     days,

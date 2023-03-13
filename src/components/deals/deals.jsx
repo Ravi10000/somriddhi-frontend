@@ -7,10 +7,10 @@ import CustomCarousel, {
   CarouselItem,
 } from "../custom-carousel/custom-carousel";
 import handleResponsive from "../../utils/handle-responsive";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 export default function Deals() {
-  const history = useHistory();
+  // const history = useHistory();
   const [deviceWidth, setDeviceWidth] = useState(null);
   const [listOfItems, setListOFItems] = useState([]);
   useEffect(() => {
@@ -52,9 +52,6 @@ export default function Deals() {
                       {list?.map(({ id, title, details, imgUrl }) => {
                         return (
                           <DealCard
-                            onClick={() => {
-                              history.push(`/coupon/${id}`);
-                            }}
                             key={id}
                             title={title}
                             details={details}

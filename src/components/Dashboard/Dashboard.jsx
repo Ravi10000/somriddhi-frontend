@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Banner from "../banner/banner";
 import Coupons from "../coupons/coupons";
 import Deals from "../deals/deals";
@@ -26,21 +26,20 @@ import Process from "../process/process";
 // import Process from "./components/process/process";
 
 export default function Dashboard() {
-    return (
-        <div>
-            <Header />
-            <Navbar />
-            <Banner />
-            <Offers />
-            <Deals />
-            <Coupons />
-            <PopularMembership />
-            <Form />
-            <Process />
-            <Download />
-            <PopulatCategories />
-            <Footer />
-        </div>
-    )
+  return (
+    <div>
+      <Header />
+      <Navbar />
+      <Banner />
+      <Offers />
+      <Deals />
+      <Coupons />
+      <PopularMembership />
+      <Form />
+      <Process />
+      <Download />
+      <PopulatCategories />
+      <Footer />
+    </div>
+  );
 }
-
