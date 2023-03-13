@@ -3,7 +3,7 @@ import "./referral-code-form.styles.scss";
 import React from "react";
 import Button from "../../button/button";
 
-export default function ReferralForm({ nextStage }) {
+export default function ReferralForm({ nextStage, closeModal }) {
   return (
     <form action="#" onSubmit={nextStage}>
       <h1>Your Phone Number</h1>
@@ -13,7 +13,7 @@ export default function ReferralForm({ nextStage }) {
         <input type="text" placeholder="Enter" />
       </div>
       <Button>Continue</Button>
-      <p>Skip Now</p>
+      <p onClick={closeModal}>Skip Now</p>
     </form>
   );
 }

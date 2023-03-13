@@ -27,7 +27,7 @@ export default function OtpForm({ nextStage }) {
       <p>
         Didn&#39;t get otp? <span> Send Again</span>
       </p>
-      <Button>Log In / Sign Up</Button>
+      <Button>Veryfy otp</Button>
     </form>
   );
 }

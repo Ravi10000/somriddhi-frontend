@@ -40,7 +40,7 @@ export default function LoginPopup({ closeModal }) {
           <VerifyOTP nextStage={nextStage} />
         )}
         {loginStages[currentLoginStage] === "referral-code" && (
-          <ReferralForm nextStage={nextStage} />
+          <ReferralForm nextStage={nextStage} closeModal={closeModal} />
         )}
       </div>
     </div>
