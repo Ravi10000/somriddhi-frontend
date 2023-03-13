@@ -1,4 +1,4 @@
-import "./category.styles.scss";
+import "./category-page.style.scss";
 import React from "react";
 import entertainmentCoupons from "./entertainment-coupons";
 import DealCard from "../../components/deals/deal-card/deal-card";
