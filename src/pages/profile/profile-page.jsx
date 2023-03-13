@@ -2,6 +2,7 @@ import "./profile-page.styles.scss";
 import { useState } from "react";
 import MyEarnings from "./my-earnings/my-earnings";
 import PaymentHistory from "./payment-history/payment-history";
+import ReferEarn from "./refer-earn/refer-earn";
 export default function ProfilePage() {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -40,7 +41,16 @@ export default function ProfilePage() {
             <p>Payment History</p>
           </div>
           <div className="submenu">
-            <p>Missing Cashbacks</p>
+            <p
+              onClick={() => {
+                setActiveMenu("missing cashbacks");
+              }}
+              className={`submenu-item ${
+                activeMenu === "missing cashbacks" && "active"
+              }`}
+            >
+              Missing Cashbacks
+            </p>
             <p>Add New Ticket</p>
             <p>Check old Tickets</p>
           </div>
@@ -182,6 +192,23 @@ export default function ProfilePage() {
         <div className="right">
           {activeMenu == "my earnings" && <MyEarnings />}
           {activeMenu == "payment history" && <PaymentHistory />}
+          {activeMenu == "refer and earn" && <ReferEarn />}
+          {activeMenu == "missing cashbacks" && (
+            <div className="missing cashbacks">
+              <h2>Missing Cashbacks</h2>
+              <p>
+                We are here to help. Please follow these simple steps to help us
+                track your cashback (takes seconds only).
+              </p>
+              <div className="did-you-shop">
+                <h3>Did you shop?</h3>
+                <div className="buttons-container">
+                  <button>Yes</button>
+                  <button>No</button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
