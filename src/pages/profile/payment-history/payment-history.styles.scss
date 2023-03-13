@@ -1,0 +1,29 @@
+.payment-history {
+  h2 {
+    padding: 20px;
+    border-bottom: 2px solid #ececec;
+  }
+  .transactions-container {
+    .transaction {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed #ececec;
+      .company-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .name {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .price-and-status {
+        h4 {
+          color: #f01c21;
+        }
+      }
+    }
+  }
+}

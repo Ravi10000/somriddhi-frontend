@@ -97,67 +97,7 @@
     .right {
       background: #fff;
       border: 2px solid #ececec;
-      // padding: 20px;
-      h2 {
-        padding: 20px;
-        font-size: 1rem;
-      }
-      .earnings-section {
-        display: grid;
-        gap: 10px;
-        padding: 25px;
-        background: #fef2f2;
-        h3 {
-          color: #f01c21;
-        }
-        .dashed-line {
-          border: 1px dashed #f01c21;
-        }
-        p {
-          font-size: 12px;
-        }
-      }
-      .other-status {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        margin: 20px;
-        gap: 10px;
-        .status-card {
-          padding: 20px;
-          border-radius: 15px;
-          border: 2px solid #ececec;
-          // width: fit-content;
-          display: grid;
-          gap: 10px;
-          .status-data {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            p {
-              font-weight: 600;
-              color: #16d3b1;
-            }
-          }
-          h4 {
-            font-size: 1.2rem;
-            font-weight: 500;
-          }
-          .dashed-line {
-            border: 1px dashed #b6b6b6;
-          }
-          .link {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-            p {
-              font-size: 12px;
-            }
-            img {
-              width: 15px;
-            }
-          }
-        }
-      }
+      width: 900px;
     }
   }
 }

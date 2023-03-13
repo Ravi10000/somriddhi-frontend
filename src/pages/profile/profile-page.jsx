@@ -1,5 +1,7 @@
 import "./profile-page.styles.scss";
 import { useState } from "react";
+import MyEarnings from "./my-earnings/my-earnings";
+import PaymentHistory from "./payment-history/payment-history";
 export default function ProfilePage() {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -133,7 +135,7 @@ export default function ProfilePage() {
         >
           <div className={`line ${isMenuActive && "active"}`}></div>
         </div> */}
-        <div className="right">
+        {/* <div className="right">
           <h2>My Earnings</h2>
           <div className="earnings-section">
             <p>Total Earnings</p>
@@ -176,6 +178,10 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
+        </div> */}
+        <div className="right">
+          {activeMenu == "my earnings" && <MyEarnings />}
+          {activeMenu == "payment history" && <PaymentHistory />}
         </div>
       </div>
     </div>
