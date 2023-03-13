@@ -25,6 +25,7 @@ export default function CustomCarousel({
   //   }
   // }, []);
   const [activeIndex, setActiveIndex] = useState(0);
+
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
     onSwipedRight: () => updateIndex(activeIndex - 1),
@@ -44,6 +45,18 @@ export default function CustomCarousel({
 
   return (
     <div className="custom-carousel" {...handlers}>
+      {/* <div className="arrow-navigation">
+        <img
+          src="/left.png"
+          alt="left arrow"
+          onClick={() => updateIndex(activeIndex - 1)}
+        />
+        <img
+          src="/right.png"
+          alt="right arrow"
+          onClick={() => updateIndex(activeIndex + 1)}
+        />
+      </div> */}
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}

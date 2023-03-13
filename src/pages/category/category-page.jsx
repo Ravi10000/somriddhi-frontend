@@ -11,7 +11,7 @@ export default function CategoryPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { category } = useParams();
 
-  console.log({selectedCategories});
+  console.log({ selectedCategories });
   useEffect(() => {
     setSelectedCategories([category]);
   }, []);
@@ -34,7 +34,7 @@ export default function CategoryPage() {
         </div>
         <div className="category-container">
           <div className="category-heading-container">
-            <h4>Entertainment Coupons</h4>
+            <h4>Coupons</h4>
             <p>showing 1 -20 results</p>
           </div>
           <div className="category-cards-container">

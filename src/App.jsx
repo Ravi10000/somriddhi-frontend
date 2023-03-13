@@ -21,6 +21,7 @@ import HomePage from "./pages/home/home.page";
 import CouponPage from "./pages/coupon/coupon-page";
 import CategoryPage from "./pages/category/category-page";
 import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
+import ProfilePage from "./pages/profile/profile-page";
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -47,6 +48,7 @@ export default function App() {
             path="/coupon-claimed/:id"
             element={<CouponsClaimedPage />}
           />
+          <Route exact path="/profile" element={<ProfilePage />} />
           {/* <Route path="/category" element={<Category />} /> */}
           {/* <Route path="/deal" element={<Deal />} /> */}
         </Routes>
