@@ -1,10 +1,10 @@
-form {
+form.otp-form {
   .otp-inputs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    gap: 20px;
+    justify-content: center;
     input {
       font-size: 2rem;
-      padding: 20px;
       width: 50px;
     }
   }

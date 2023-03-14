@@ -15,6 +15,7 @@ import Header from "./components/header/header";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import LoginPopup from "./components/login-popup/login-popup";
+import ProtectedRoute from "./components/protected-route/protected-route";
 
 // pages
 import HomePage from "./pages/home/home.page";
@@ -49,6 +50,15 @@ export default function App() {
             element={<CouponsClaimedPage />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
+          {/* <Route
+            exact
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          /> */}
           <Route path="/cat" element={<Category />} />
           <Route path="/deal" element={<Deal />} />
         </Routes>

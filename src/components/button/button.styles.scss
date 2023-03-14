@@ -1,16 +1,33 @@
 button {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
   background-color: #f01c21;
   color: #fff;
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
   font-family: "Metropolis", sans-serif;
-  // width: fit-content;
-  // height: fit-content;
   text-transform: uppercase;
   &.disabled {
     background-color: #df6d6f;
     color: #fff;
     cursor: not-allowed;
+  }
+  .loader {
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-right: 2px solid transparent;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: spinLoader 0.5s linear infinite;
+  }
+}
+
+@keyframes spinLoader {
+  to {
+    transform: rotate(360deg);
   }
 }

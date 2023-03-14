@@ -1,0 +1,28 @@
+.missing-cashbacks {
+  padding-bottom: 20px;
+  p {
+    padding: 20px;
+    font-weight: 500;
+  }
+  .did-you-shop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    .buttons-container {
+      display: flex;
+      gap: 20px;
+      button:nth-child(2) {
+        background: #fff;
+        color: #f01c21;
+        border: 2px solid #ececec;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .missing-cashbacks {
+    padding: 0;
+  }
+}

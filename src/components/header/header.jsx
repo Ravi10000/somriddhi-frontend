@@ -16,7 +16,7 @@ function Header({ openModal, currentUser }) {
       <img src="/logo.png" alt="logo" />
       <Search />
       {/* change below to !currentUser */}
-      {currentUser ? (
+      {!currentUser ? (
         <Button onClick={openModal}>Login / Sign Up</Button>
       ) : (
         <Link to="/profile">

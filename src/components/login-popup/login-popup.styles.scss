@@ -10,7 +10,7 @@
   place-content: center;
   .login {
     width: 95vw;
-    max-width: 500px;
+    max-width: 400px;
     border-radius: 15px;
     display: grid;
     place-items: center;
@@ -26,29 +26,6 @@
       }
       p {
         font-size: 12px;
-      }
-    }
-    form {
-      text-align: center;
-      display: grid;
-      gap: 25px;
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        color: #8f8f8f;
-        font-weight: 500;
-        span {
-          color: #f01c21;
-          font-weight: 600;
-        }
-      }
-      input {
-        font-weight: 500;
-        font-size: 1.1rem;
-        padding: 10px;
-        border: 2px solid #e1e5e8;
-        border-radius: 10px;
       }
     }
   }
