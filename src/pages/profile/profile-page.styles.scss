@@ -97,11 +97,11 @@
       background: #fff;
       border: 2px solid #ececec;
       width: 900px;
+      h2 {
+        padding: 20px;
+        border-bottom: 2px solid #ececec;
+      }
       .missing-cashbacks {
-        h2 {
-          padding: 20px;
-          border-bottom: 2px solid #ececec;
-        }
         p {
           padding: 20px;
           font-weight: 500;
