@@ -35,7 +35,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
         const banner = await createNewBanner(formData);
         console.log(banner);
         closeModal();
-        if (categories == 'yes') {
+        if (categories === 'yes') {
             setCategories('no');
         }
         else {

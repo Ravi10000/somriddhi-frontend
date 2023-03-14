@@ -13,7 +13,7 @@ import { getAllDeals } from '../../api/index.js';
 
 const Category = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [categories, setCategories] = useState(true);
+    const [categories, setCategories] = useState('yes');
     const [deals, setDeals] = useState([]);
     function closeModal() {
         setModalOpen(false);
@@ -30,7 +30,7 @@ const Category = (props) => {
 
     useEffect(() => {
         allDealsData();
-    }, [])
+    }, [categories])
     return (
         <div>
             {modalOpen && <AddCategoryModal closeModal={closeModal} categories={categories} setCategories={setCategories} />}

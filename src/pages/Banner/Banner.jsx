@@ -31,7 +31,7 @@ const Banner = (props) => {
     useEffect(() => {
         allBannersData();
 
-    }, [])
+    }, [banners])
     return (
         <div>
             {modalOpen && <AddBannerModal closeModal={closeModal} categories={categories} setCategories={setCategories} />}
