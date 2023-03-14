@@ -25,6 +25,17 @@ export default function ReferEarn() {
           </div>
           <img src="/earn-coupons-bg.png" alt="earn coupons" />
         </div>
+        <div className="social-links">
+          <div className="handle">
+            <p>somriddhi/123</p>
+          </div>
+          <div className="links">
+            <img src="/share-btn.png" alt="" />
+            <img src="/fb-btn.png" alt="" />
+            <img src="/mail-btn.png" alt="" />
+            <img src="/twitter-btn.png" alt="" />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { useState } from "react";
 import MyEarnings from "./my-earnings/my-earnings";
 import PaymentHistory from "./payment-history/payment-history";
 import ReferEarn from "./refer-earn/refer-earn";
+import ReferralNetwork from "./referral-network/referral-network";
 export default function ProfilePage() {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -193,8 +194,9 @@ export default function ProfilePage() {
           {activeMenu == "my earnings" && <MyEarnings />}
           {activeMenu == "payment history" && <PaymentHistory />}
           {activeMenu == "refer and earn" && <ReferEarn />}
+          {activeMenu == "referal network" && <ReferralNetwork />}
           {activeMenu == "missing cashbacks" && (
-            <div className="missing cashbacks">
+            <div className="missing-cashbacks">
               <h2>Missing Cashbacks</h2>
               <p>
                 We are here to help. Please follow these simple steps to help us

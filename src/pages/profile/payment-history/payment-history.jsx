@@ -17,7 +17,7 @@ export default function PaymentHistory() {
           </div>
           <div className="price-and-status">
             <h4>Rs. 200</h4>
-            <p>complete</p>
+            <p>completed</p>
           </div>
         </div>
         <div className="transaction">
@@ -30,7 +30,7 @@ export default function PaymentHistory() {
           </div>
           <div className="price-and-status">
             <h4>Rs. 200</h4>
-            <p>complete</p>
+            <p>completed</p>
           </div>
         </div>
         <div className="transaction">
@@ -43,7 +43,7 @@ export default function PaymentHistory() {
           </div>
           <div className="price-and-status">
             <h4>Rs. 200</h4>
-            <p>complete</p>
+            <p>completed</p>
           </div>
         </div>
       </div>
