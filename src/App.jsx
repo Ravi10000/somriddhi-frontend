@@ -2,8 +2,8 @@ import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Banner from "./pages/Banner/Banner";
-// import Category from "./pages/Category/category";
-// import Deal from "./pages/Deals/deals";
+import Category from "./pages/Category/category";
+import Deal from "./pages/Deals/deals";
 
 // packages
 import { useState } from "react";
@@ -49,8 +49,8 @@ export default function App() {
             element={<CouponsClaimedPage />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
-          {/* <Route path="/category" element={<Category />} /> */}
-          {/* <Route path="/deal" element={<Deal />} /> */}
+          <Route path="/cat" element={<Category />} />
+          <Route path="/deal" element={<Deal />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

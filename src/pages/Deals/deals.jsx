@@ -9,7 +9,6 @@ import Add from './add.png';
 import Cloth from './cloth.png';
 import AddDealModal from './AddDealModal';
 import { data } from './Data';
-import { getAllBanners } from '../../api';
 
 const Deal = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
