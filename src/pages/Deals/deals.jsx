@@ -9,22 +9,25 @@ import Add from './add.png';
 import Cloth from './cloth.png';
 import AddDealModal from './AddDealModal';
 import { data } from './Data';
+import { getAllCategories } from '../../api/index.js';
 
 const Deal = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [categories, setCategories] = useState(true);
+    const [categoriesData, setCategoriesData] = useState([]);
     function closeModal() {
         setModalOpen(false);
     }
     function openModal() {
         setModalOpen(true);
     }
-    const allBanners = async () => {
-        const data = await allBanners();
-        console.log(data)
+    const allCategories = async () => {
+        const data = await getAllCategories();
+        console.log(data.data.data)
+        setCategoriesData(data.data.data);
     }
     useEffect(() => {
-        allBanners();
+        allCategories();
     }, [])
     return (
         <div>
@@ -47,12 +50,12 @@ const Deal = (props) => {
                 </div>
                 <div className='rOne'>
                     {
-                        data.map((item, index) => (
+                        categoriesData.map((category, index) => (
                             <div className='cat'>
                                 <div className='ic'>
-                                    <img src={Cloth} alt='' className='clothImg' />
+                                    <img src={category.description} alt='' className='clothImg' />
                                 </div>
-                                <p className='clothText'>{item} </p>
+                                <p className='clothText'>{category.name} </p>
                             </div>
                         ))
                     }

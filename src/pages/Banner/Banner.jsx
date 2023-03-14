@@ -14,15 +14,23 @@ import { getAllBanners } from '../../api/index';
 
 const Banner = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [categories, setCategories] = useState(true);
+    const [categories, setCategories] = useState('yes');
+    const [banners, setBanners] = useState([]);
     function closeModal() {
         setModalOpen(false);
     }
     function openModal() {
         setModalOpen(true);
     }
+    let data;
+    const allBannersData = async () => {
+        data = await getAllBanners();
+        console.log(data.data.data)
+        setBanners(data.data.data)
+    }
     useEffect(() => {
-        getAllBanners();
+        allBannersData();
+
     }, [])
     return (
         <div>
@@ -46,27 +54,32 @@ const Banner = (props) => {
 
 
                 <div className='bBanner'>
-                    <div className='bBanPar'>
-                        <div className='bBanChild'>
-                            <img className='bBanImgOne' src={Banner1} alt='' />
-                            <div className='bCon'>
-                                <p className='bTextTwo'>Banner 1</p>
-                                <div className='bExpOne'>
-                                    <img src={Calender} alt='' className='bBanImgThree' />
-                                    <p className='bBanTextThree'>Expire on 20 March 2023</p>
+                    {
+                        banners.map((banner, index) => (
+                            <div className='bBanPar'>
+                                <div className='bBanChild'>
+                                    <img className='bBanImgOne' src={banner.url} alt='' />
+                                    <div className='bCon'>
+                                        <p className='bTextTwo'>{banner.name}</p>
+                                        <div className='bExpOne'>
+                                            <img src={Calender} alt='' className='bBanImgThree' />
+                                            <p className='bBanTextThree'>Expire on 20 March 2023</p>
+                                        </div>
+                                        <div className='bExpTwo'>
+                                            <img src={Links} alt='' className='bBanImgThree' />
+                                            <p className='bBanTextThree'>Expire on 20 March 2023</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='bExpTwo'>
-                                    <img src={Links} alt='' className='bBanImgThree' />
-                                    <p className='bBanTextThree'>Expire on 20 March 2023</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='bDes'>
+                                <div className='bDes'>
 
-                            <p className='bDesText'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                        </div>
-                        <img src={Lock} alt='' className='bLoc' />
-                    </div>
+                                    <p className='bDesText'>{banner.description}</p>
+                                </div>
+                                <img src={Lock} alt='' className='bLoc' />
+                            </div>
+                        ))
+                    }
+
                 </div>
 
             </div>

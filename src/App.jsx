@@ -37,8 +37,8 @@ export default function App() {
       <BrowserRouter>
         <ScrollToTop />
         {modalOpen && <LoginPopup closeModal={closeModal} />}
-        <Header openModal={openModal} />
-        <Navbar />
+        {/* <Header openModal={openModal} /> */}
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
           <Route path="/banner" element={<Banner />} />
@@ -59,8 +59,8 @@ export default function App() {
               </ProtectedRoute>
             }
           /> */}
-          <Route path="/cat" element={<Category />} />
-          <Route path="/deal" element={<Deal />} />
+          <Route path="/deal" element={<Category />} />
+          <Route path="/categories" element={<Deal />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

@@ -7,6 +7,7 @@ import Arrow from './arrow.png';
 import Cross from './cross.png';
 import Upload from './upload.png';
 import { data } from './ClothData.js';
+import { createNewDeal } from '../../api/index.js';
 
 export default function AddDealModal({ closeModal, categories, setCategories }) {
     useEffect(() => {
@@ -16,19 +17,36 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
         };
     });
 
-    const [name, setName] = useState('');
+    const [file, setFile] = useState();
+    const [dealname, setDealName] = useState('');
+    const [dealUrl, setUrl] = useState('');
+    const [dealCashbackPercent, setCashbackPercent] = useState('');
+    const [dealLiveDate, setLiveDate] = useState('');
+    const [dealExpiryDate, setExpiryDate] = useState();
 
-    function addCategory(catgeoryName) {
-        data.push(name);
-        setName(' ');
+    const saveFile = (e) => {
+        setFile(e.target.files[0]);
+    };
+    const addDeal = async () => {
+
+        const formData = new FormData();
+        formData.append("dealPhoto", file);
+        formData.append("name", dealname);
+        formData.append("url", dealUrl);
+        formData.append("cashbackPercent", dealCashbackPercent);
+        formData.append("liveDate", dealLiveDate);
+        formData.append("expiryDate", dealExpiryDate);
+
+        const deal = await createNewDeal(formData);
+        console.log(deal);
         closeModal();
-        if (categories) {
-            setCategories(false);
+        if (categories == 'yes') {
+            setCategories('no');
         }
         else {
-            setCategories(true);
+            setCategories('yes');
         }
-    }
+    };
 
     return (
         <div className="backdrop">
@@ -54,7 +72,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
 
                         </div>
                         <form>
-                            <input type="file" className="fileFieldText" placeholder="Upload Image" />
+                            <input type="file" accept="image/png, image/jpeg" onChange={(e) => saveFile(e)} className="fileFieldText" placeholder="Upload Image" />
                         </form>
                     </div>
                 </div>
@@ -63,7 +81,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                         <p className="textOne"  >Name</p>
                     </div>
                     <form >
-                        <input className="fileFieldTwo" onChange={(e) => setName(e.target.value)} placeholder="Enter Banner Name" />
+                        <input className="fileFieldTwo" onChange={(e) => setDealName(e.target.value)} placeholder="Enter Deal Name" />
                     </form>
                 </div>
                 <div className="fileText">
@@ -71,7 +89,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                         <p className="textOne">URL</p>
                     </div>
                     <form >
-                        <input className="fileFieldTwo" placeholder="Paste Banner url" />
+                        <input onChange={(e) => setUrl(e.target.value)} className="fileFieldTwo" placeholder="Paste Deal url" />
                     </form>
                 </div>
                 <div className="fileText">
@@ -79,7 +97,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                         <p className="textOne">CashBack</p>
                     </div>
                     <form >
-                        <input className="fileFieldTwo" placeholder="CashBack" />
+                        <input type='number' className="fileFieldTwo" onChange={(e) => setCashbackPercent(e.target.value)} placeholder="CashBack" />
                     </form>
                 </div>
                 <div className="fileText">
@@ -87,12 +105,17 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                         <p className="textOne">Live Date</p>
                     </div>
                     <form >
-                        <select className="fileFieldTwo" placeholder="Now">
+                        <input type="Date" onChange={(e) => setLiveDate(e.target.value)} className="fileFieldTwo" placeholder="Select">
+                            {/* <option className="fileFieldTwo" placeholder="Now">Now</option> */}
+                        </input>
+                    </form>
+                    {/* <form >
+                        <select onChange={(e) => setsetLiveDateUrl(e.target.value)} className="fileFieldTwo" placeholder="Now">
                             <option className="fileFieldTwo" placeholder="Now">Now</option>
                             <option className="fileFieldTwo" placeholder="Now">Later</option>
                             <option className="fileFieldTwo" placeholder="Now">Earlier</option>
                         </select>
-                    </form>
+                    </form> */}
                 </div>
 
                 <div className="fileText">
@@ -100,19 +123,12 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                         <p className="textOne">Live Date</p>
                     </div>
                     <form >
-                        <input type="Date" className="fileFieldTwo" placeholder="Select">
+                        <input type="Date" onChange={(e) => setExpiryDate(e.target.value)} className="fileFieldTwo" placeholder="Select">
                             {/* <option className="fileFieldTwo" placeholder="Now">Now</option> */}
                         </input>
                     </form>
                 </div>
-
-                {/* <div className="textArea">
-                    <p className="textAreaText">Description</p>
-                    <form>
-                        <input className="textAreaInput" placeholder="Write Banner Description" />
-                    </form>
-                </div> */}
-                <button onClick={addCategory} className="formButton"> <span className="addBannerClass">Add Banner</span> </button>
+                <button onClick={addDeal} className="formButton"> <span className="addBannerClass">Add Banner</span> </button>
             </div>
 
 
