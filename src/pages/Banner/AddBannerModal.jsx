@@ -1,7 +1,6 @@
 import "./add-Banner-Modal.styles.scss";
 
 import React, { useEffect, useState } from "react";
-// import Button from "../../button/button";
 import Button from "../../components/button/button";
 import Arrow from './arrow.png';
 import Cross from './cross.png';
@@ -17,13 +16,10 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
         };
     });
 
-
-
     const [file, setFile] = useState();
     const [bannername, setBannerName] = useState('');
     const [bannerUrl, setUrl] = useState('');
     const [bannerDescription, setBannerDescription] = useState('');
-
 
     const saveFile = (e) => {
         setFile(e.target.files[0]);
@@ -46,32 +42,6 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
             setCategories('yes');
         }
     };
-
-    // async function addBanner() {
-    //     // console.log(file) // path of the file
-    //     // let array = file.split('\\');
-    //     // console.log(array[array.length - 1]);
-    //     // let fileName = array[array.length - 1];
-    //     console.log(file)
-    //     const newBanner = {
-    //         name: bannername,
-    //         bannerPhoto: file,
-    //         description: bannerDescription,
-    //         url: bannerUrl
-    //     }
-    //     const banner = await createNewBanner(newBanner);
-    //     console.log(banner);
-
-    //     // to update the banner ui again
-    //     data.push(bannername);
-    //     closeModal();
-    //     if (categories) {
-    //         setCategories(false);
-    //     }
-    //     else {
-    //         setCategories(true);
-    //     }
-    // }
 
     return (
         <div className="backdrop">

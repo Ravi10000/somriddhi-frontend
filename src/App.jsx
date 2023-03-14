@@ -49,8 +49,8 @@ export default function App() {
             element={<CouponsClaimedPage />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
-          <Route path="/cat" element={<Category />} />
-          <Route path="/deal" element={<Deal />} />
+          <Route path="/deal" element={<Category />} />
+          <Route path="/categories" element={<Deal />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

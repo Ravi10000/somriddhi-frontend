@@ -7,6 +7,7 @@ import Arrow from './arrow.png';
 import Cross from './cross.png';
 import Upload from './upload.png';
 import { data } from "./Data";
+import { createNewCategory } from '../../api/index.js';
 
 export default function AddDealModal({ closeModal, categories, setCategories }) {
     useEffect(() => {
@@ -16,20 +17,33 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
         };
     });
 
-    const [name, setName] = useState('');
+    const [file, setFile] = useState();
+    const [categoryname, setCategoryName] = useState('');
+    const [categoryUrl, setUrl] = useState('');
 
-    function addCategory(catgeoryName) {
-        data.push(name);
-        setName(' ');
+    const saveFile = (e) => {
+        setFile(e.target.files[0]);
+    };
+    const addCategory = async () => {
+        console.log(file)
+        console.log(categoryname)
+        console.log(categoryUrl)
+
+        const formData = new FormData();
+        formData.append("categoryPhoto", file);
+        formData.append("name", categoryname);
+        formData.append("description", categoryUrl);
+
+        const catgeory = await createNewCategory(formData);
+        console.log(catgeory);
         closeModal();
-        if (categories) {
-            setCategories(false);
+        if (categories == 'yes') {
+            setCategories('no');
         }
         else {
-            setCategories(true);
+            setCategories('yes');
         }
-    }
-
+    };
     return (
         <div className="backdrop">
             <div className="loginNew">
@@ -54,7 +68,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
 
                         </div>
                         <form>
-                            <input type="file" className="fileFieldText" placeholder="Upload Image" />
+                            <input type="file" accept="image/png, image/jpeg" onChange={(e) => saveFile(e)} className="fileFieldText" placeholder="Upload Image" />
                         </form>
                     </div>
                 </div>
@@ -63,8 +77,20 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                         <p className="textOne"  >Name</p>
                     </div>
                     <form >
-                        <input className="fileFieldTwo" onChange={(e) => setName(e.target.value)} placeholder="Enter Category Name" />
+                        <input className="fileFieldTwo" onChange={(e) => setCategoryName(e.target.value)} placeholder="Enter Category Name" />
                     </form>
+
+
+                </div>
+                <div className="fileText">
+                    <div className="fileLabel">
+                        <p className="textOne"  >URL</p>
+                    </div>
+                    <form >
+                        <input className="fileFieldTwo" onChange={(e) => setUrl(e.target.value)} placeholder="Image Category url" />
+                    </form>
+
+
                 </div>
 
                 <button onClick={addCategory} className="formButton"> <span className="addBannerClass">Add Banner</span> </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './add-category.styles.scss';
 import Topbar from '../../components/Topbar/Topbar'
 import Nav from '../../components/Nav/Nav'
@@ -9,16 +9,28 @@ import Delete from './Delete.png';
 import Edit from './edit.png';
 import { Data } from './Data.js';
 import AddCategoryModal from './AddCategoryModal';
+import { getAllDeals } from '../../api/index.js';
 
 const Category = (props) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [categories, setCategories] = useState(true);
+    const [deals, setDeals] = useState([]);
     function closeModal() {
         setModalOpen(false);
     }
     function openModal() {
         setModalOpen(true);
     }
+
+    const allDealsData = async () => {
+        const allDeals = await getAllDeals();
+        console.log(allDeals.data.data);
+        setDeals(allDeals.data.data);
+    }
+
+    useEffect(() => {
+        allDealsData();
+    }, [])
     return (
         <div>
             {modalOpen && <AddCategoryModal closeModal={closeModal} categories={categories} setCategories={setCategories} />}
@@ -66,37 +78,22 @@ const Category = (props) => {
                     </div>
                     <div className='parentDeal'>
                         <div className='childDeal'>
-                            <div className='nodeDeal'>
-                                <img src={Banner} alt='' className='dealImg' />
-                                <div className='dealDetails'>
-                                    <p className='deatilsIconsText'>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
-                                    <div className='dealsIcons'>
-                                        <img className='editDImg' src={Edit} alt='' />
-                                        <img className='deleteDImg' src={Delete} alt='' />
+                            {
+                                deals.map((deal, index) => (
+                                    <div className='nodeDeal'>
+                                        <img src={deal.url} alt='' className='dealImg' />
+                                        <div className='dealDetails'>
+                                            <p className='deatilsIconsText'>{deal.name}</p>
+                                            <div className='dealsIcons'>
+                                                <img className='editDImg' src={Edit} alt='' />
+                                                <img className='deleteDImg' src={Delete} alt='' />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className='nodeDeal'>
-                                <img src={Banner} alt='' className='dealImg' />
-                                <div className='dealDetails'>
-                                    <p className='deatilsIconsText'>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
-                                    <div className='dealsIcons'>
-                                        <img className='editDImg' src={Edit} alt='' />
-                                        <img className='deleteDImg' src={Delete} alt='' />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='nodeDeal'>
-                                <img src={Banner} alt='' className='dealImg' />
-                                <div className='dealDetails'>
-                                    <p className='deatilsIconsText'>Lorem Ipsum is simply dummy text of the printing and type setting industry.</p>
-                                    <div className='dealsIcons'>
-                                        <img className='editDImg' src={Edit} alt='' />
-                                        <img className='deleteDImg' src={Delete} alt='' />
-                                    </div>
-                                </div>
-                            </div>
+                                ))
+                            }
                         </div>
+
                     </div>
                 </div>
             </div>
