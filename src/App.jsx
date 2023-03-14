@@ -36,8 +36,8 @@ export default function App() {
       <BrowserRouter>
         <ScrollToTop />
         {modalOpen && <LoginPopup closeModal={closeModal} />}
-        <Header openModal={openModal} />
-        <Navbar />
+        {/* <Header openModal={openModal} /> */}
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
           <Route path="/banner" element={<Banner />} />
