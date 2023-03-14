@@ -7,15 +7,18 @@ import Button from "../../components/button/button";
 // utils
 import claimedCouponInfo from "./claimed-coupon-info";
 import couponDetails from "../coupon/coupon-details";
+import { useNavigate } from "react-router";
 
 export default function CouponsClaimedPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="coupons-claimed-page">
       <div className="head">
         <div
           className="go-back link"
           onClick={() => {
-            history.goBack();
+            navigate(-1);
           }}
         >
           <img src="/go-back.png" alt="go back" />

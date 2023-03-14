@@ -10,6 +10,19 @@ header {
     height: fit-content;
     width: fit-content;
   }
+  .logged-in {
+    display: flex;
+    background: #fff;
+    border: 2px solid #ebebeb;
+    color: #f01c21;
+    font-weight: 600;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    img {
+      width: 15px;
+    }
+  }
 }
 
 @media (min-width: 800px) {

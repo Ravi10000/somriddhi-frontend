@@ -1,0 +1,47 @@
+.referral-network {
+  h2 {
+    padding: 20px;
+    border-bottom: 2px solid #ececec;
+  }
+  .referral-list {
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+    .referral-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ececec;
+      padding-bottom: 10px;
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .name-and-status {
+          display: grid;
+          gap: 5px;
+          h4 {
+            font-weight: 500;
+            font-size: 1.2rem;
+          }
+          .status {
+            font-weight: 500;
+            font-size: 0.8rem;
+            &.completed {
+              color: #2aad14;
+            }
+            &.pending {
+              color: #da6c06;
+            }
+            &.cancelled {
+              color: #f01c21;
+            }
+          }
+        }
+      }
+      button {
+        height: fit-content;
+      }
+    }
+  }
+}

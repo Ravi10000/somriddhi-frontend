@@ -1,7 +1,7 @@
 const filterOptions = [
   {
     title: "Categories",
-    options: ["entertainment", "Movie", "Drama", "Skit", "Short Movie", "event"],
+    options: ["entertainment", "movie", "drama", "skit", "short movie", "event"],
   },
   {
     title: "store",

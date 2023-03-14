@@ -28,8 +28,8 @@ import Process from "../process/process";
 export default function Dashboard() {
   return (
     <div>
-      <Header />
-      <Navbar />
+      {/* <Header /> */}
+      {/* <Navbar /> */}
       <Banner />
       <Offers />
       <Deals />
@@ -39,7 +39,7 @@ export default function Dashboard() {
       <Process />
       <Download />
       <PopulatCategories />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

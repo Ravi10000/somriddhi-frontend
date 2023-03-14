@@ -1,5 +1,19 @@
 .custom-carousel {
   overflow: hidden;
+  position: relative;
+  .arrow-navigation {
+    position: absolute;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    z-index: 100;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    img {
+      width: 50px;
+    }
+  }
   .inner {
     white-space: nowrap;
     transition: transform 0.3s;
@@ -9,7 +23,7 @@
     justify-content: center;
     gap: 5px;
     margin-top: 10px;
-    &.hide{
+    &.hide {
       display: none;
     }
     .switch {

@@ -1,0 +1,46 @@
+.payment-history {
+  h2 {
+    // font-size: 1rem;
+    padding: 20px;
+    border-bottom: 2px solid #ececec;
+  }
+  .transactions-container {
+    .transaction {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed #ececec;
+      .company-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .name {
+          display: flex;
+          flex-direction: column;
+          h4 {
+            font-weight: 500;
+          }
+          p {
+            color: #8a8a8a;
+            font-weight: 500;
+            font-size: 0.8rem;
+          }
+        }
+      }
+      .price-and-status {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        h4 {
+          color: #f01c21;
+          font-weight: 500;
+        }
+        p {
+          text-transform: capitalize;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

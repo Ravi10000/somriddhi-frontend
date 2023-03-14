@@ -1,0 +1,50 @@
+.settings {
+  .view-selectors {
+    border-bottom: 2px solid #ececec;
+    display: flex;
+    // gap: 20px;
+    .selector {
+      padding: 20px;
+      position: relative;
+      cursor: pointer;
+      p {
+        text-transform: capitalize;
+        font-weight: 500;
+      }
+      &.active {
+        &::after {
+          transition: all 0.2s ease-in-out;
+          content: "";
+          width: 100%;
+          height: 3px;
+          background: #f01c21;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+      }
+      // outline: 2px solid red;
+    }
+  }
+  form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    input {
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      border: 2px solid #ececec;
+      &::placeholder {
+        color: #091431;
+      }
+    }
+    button {
+      font-weight: 600;
+      padding: 15px 30px;
+      width: fit-content;
+      background: #21aa27;
+    }
+  }
+}
