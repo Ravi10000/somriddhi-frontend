@@ -34,7 +34,8 @@
     input {
       padding: 20px;
       border-radius: 10px;
-      width: 400px;
+      width: 95%;
+      max-width: 450px;
       border: 2px solid #ececec;
       &::placeholder {
         color: #091431;
