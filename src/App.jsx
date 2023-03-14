@@ -34,9 +34,9 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         {modalOpen && <LoginPopup closeModal={closeModal} />}
-        <Header openModal={openModal} />
+        {/* <Header openModal={openModal} />
         <ScrollToTop />
-        <Navbar />
+        <Navbar /> */}
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
           <Route path="/banner" element={<Banner />} />
@@ -44,7 +44,7 @@ export default function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/deal" element={<Deal />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
 
       {/* <Switch>
