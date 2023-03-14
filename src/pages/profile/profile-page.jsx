@@ -5,6 +5,7 @@ import PaymentHistory from "./payment-history/payment-history";
 import ReferEarn from "./refer-earn/refer-earn";
 import ReferralNetwork from "./referral-network/referral-network";
 import GetHelp from "./get-help/get-help";
+import Settings from "./settings/settings";
 export default function ProfilePage() {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -139,14 +140,14 @@ export default function ProfilePage() {
             <p>Logout</p>
           </div>
         </div>
-        {/* <div
+        <div
           className="hamburger"
           onClick={() => {
             setIsMenuActive((state) => !state);
           }}
         >
           <div className={`line ${isMenuActive && "active"}`}></div>
-        </div> */}
+        </div>
         {/* <div className="right">
           <h2>My Earnings</h2>
           <div className="earnings-section">
@@ -197,6 +198,7 @@ export default function ProfilePage() {
           {activeMenu == "refer and earn" && <ReferEarn />}
           {activeMenu == "referal network" && <ReferralNetwork />}
           {activeMenu == "get help" && <GetHelp />}
+          {activeMenu == "settings" && <Settings />}
           {activeMenu == "missing cashbacks" && (
             <div className="missing-cashbacks">
               <h2>Missing Cashbacks</h2>
