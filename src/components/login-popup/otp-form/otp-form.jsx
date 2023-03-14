@@ -8,6 +8,7 @@ import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 
 function OtpForm({ phone, nextStage, setCurrentUser }) {
+  const [isOtpValid, setIsOtpValid] = useState(true);
   const [otp, setOtp] = useState("");
   const [validInput, setValidInput] = useState(false);
   // const [digit1, setDigit1] = useState("");
@@ -42,20 +43,29 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
     try {
       setIsLoading(true);
       const response = await verifyOtp({ phone, otp });
-      if (response.data.status === "success") {
+      console.log({ response });
+      if (response.data.message === "Invalid otp") {
+        setIsOtpValid(false);
+        setIsLoading(false);
+        return;
+      } else if (response.data.status === "success") {
         setCurrentUser({ phone });
         nextStage();
       }
       setIsLoading(false);
-      console.log({ response });
     } catch (err) {
       console.log(err);
     }
   }
   async function resendOtp() {
-    // const response = await sendOtp({ phone });
-    setSecondsLeft(60);
-    // console.log({ response });
+    try {
+      setIsOtpValid(true);
+      const response = await sendOtp({ phone });
+      setSecondsLeft(60);
+      console.log({ response });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleChange(e) {
@@ -102,7 +112,7 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
         <h5>Expires in {secondsLeft} seconds</h5>
       ) : (
         <h5 onClick={resendOtp}>
-          Expired <span>send again</span>
+          OTP Expired, <span>send again</span>
         </h5>
       )}
       <div className="otp-inputs">
@@ -158,6 +168,7 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
       <p onClick={resendOtp}>
         Didn&#39;t get otp? <span> Send Again</span>
       </p>
+      {!isOtpValid && <p className="invalid">invalid otp</p>}
       <Button disabled={!validInput} isLoading={isLoading}>
         Veryfy otp
       </Button>

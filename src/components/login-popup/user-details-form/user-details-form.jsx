@@ -97,6 +97,7 @@ function UserDetailsForm({
       </div>
       <p>It&#39;s okay, If you do not have any</p>
       <Button isLoading={isLoading}>Continue</Button>
+      <p onClick={closeModal}>skip now</p>
     </form>
   );
 }
