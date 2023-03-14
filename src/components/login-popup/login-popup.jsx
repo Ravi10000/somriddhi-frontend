@@ -13,7 +13,7 @@ const loginStages = ["phone-entry", "verify-otp", "user-details"];
 function LoginPopup({ closeModal }) {
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
   const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState("");
+  // const [otp, setOtp] = useState("");
   // const [referralCode, setReferralCode] = useState("");
 
   // console.log({ phoneNumber, otp });
@@ -53,14 +53,15 @@ function LoginPopup({ closeModal }) {
           <OtpForm
             nextStage={nextStage}
             phone={phone}
-            otp={otp}
-            setOtp={setOtp}
+            // otp={otp}
+            // setOtp={setOtp}
           />
         )}
         {loginStages[currentLoginStage] === "user-details" && (
           <UserDetailsForm
             nextStage={nextStage}
             closeModal={closeModal}
+            phone={phone}
             // setReferralCode={setReferralCode}
           />
         )}

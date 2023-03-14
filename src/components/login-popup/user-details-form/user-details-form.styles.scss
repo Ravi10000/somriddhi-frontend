@@ -1,16 +1,35 @@
-form {
+form.user-input {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  // outline: 2px solid red;
   .inputs-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    width: 100%;
+    // outline: 2px solid red;
     p {
       font-size: 12px;
       font-weight: 500;
       // margin-bottom: 10px;
+      &.error {
+        color: #f01c21;
+        margin: 0;
+        padding: 0px 0 0 10px;
+      }
     }
     input {
+      padding: 15px !important;
       width: 100%;
+    }
+    .input-container {
+      // outline: 2px solid red;
+      width: 100%;
+      input {
+        width: 100%;
+      }
     }
   }
 }

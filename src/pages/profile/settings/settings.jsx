@@ -11,6 +11,7 @@ export default function Settings() {
       <div className="view-selectors">
         {viewList?.map((viewItem, index) => (
           <div
+          key={index}
             className={`selector ${view === viewItem && "active"}`}
             onClick={() => {
               setView(viewItem);

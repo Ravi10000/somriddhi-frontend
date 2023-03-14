@@ -6,8 +6,8 @@ export default function ReferralNetwork() {
   const arrayOfReferrals = [
     {
       name: "John Doe",
-      status: "cancelled",
-      //   amount: "Rs.100",
+      status: "completed",
+        amount: "Rs.100",
     },
     {
       name: "John Doe",

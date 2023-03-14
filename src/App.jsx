@@ -15,6 +15,7 @@ import Header from "./components/header/header";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import LoginPopup from "./components/login-popup/login-popup";
+import ProtectedRoute from "./components/protected-route/protected-route";
 
 // pages
 import HomePage from "./pages/home/home.page";
@@ -36,8 +37,8 @@ export default function App() {
       <BrowserRouter>
         <ScrollToTop />
         {modalOpen && <LoginPopup closeModal={closeModal} />}
-        {/* <Header openModal={openModal} /> */}
-        {/* <Navbar /> */}
+        <Header openModal={openModal} />
+        <Navbar />
         <Routes>
           <Route path="/" exact element={<Dashboard />} />
           <Route path="/banner" element={<Banner />} />
@@ -49,6 +50,15 @@ export default function App() {
             element={<CouponsClaimedPage />}
           />
           <Route exact path="/profile" element={<ProfilePage />} />
+          {/* <Route
+            exact
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          /> */}
           <Route path="/deal" element={<Category />} />
           <Route path="/categories" element={<Deal />} />
         </Routes>

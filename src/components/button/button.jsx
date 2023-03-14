@@ -1,6 +1,11 @@
 import "./button.styles.scss";
 import React from "react";
-export default function Button({ children, disabled, ...otherProps }) {
+export default function Button({
+  children,
+  disabled,
+  isLoading,
+  ...otherProps
+}) {
   return (
     <button
       className={`${disabled && "disabled"}`}
@@ -8,6 +13,7 @@ export default function Button({ children, disabled, ...otherProps }) {
       {...otherProps}
     >
       {children}
+      {isLoading && <div className="loader"></div>}
     </button>
   );
 }

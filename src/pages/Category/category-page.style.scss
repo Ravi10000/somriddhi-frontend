@@ -2,9 +2,13 @@
   margin-bottom: 50px;
   .heading {
     background: #f0f0f0;
-    padding: 25px;
+    padding: 15px;
     text-align: center;
     text-transform: capitalize;
+    width: 100%;
+    display: grid;
+    gap: 0;
+    height: fit-content;
     h1 {
       font-size: 2rem;
       font-weight: 600;

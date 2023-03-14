@@ -89,6 +89,7 @@ export default function Coupons() {
                           {tableOfferListItem?.map(({ name, img }, index) => {
                             return (
                               <div
+                              key={index}
                                 onClick={() => {
                                   setSelectedCategory(name);
                                 }}
