@@ -6,46 +6,104 @@ import ReferEarn from "./refer-earn/refer-earn";
 import ReferralNetwork from "./referral-network/referral-network";
 import GetHelp from "./get-help/get-help";
 import Settings from "./settings/settings";
+import MissingCashbacks from "./missing-cashbacks/missing-cashbacks";
+const menuList = [
+  {
+    name: "my earnings",
+    img: "/profile-menu-icons/earnings.png",
+    component: <MyEarnings />,
+  },
+  {
+    name: "payment history",
+    img: "/profile-menu-icons/payment-history.png",
+    component: <PaymentHistory />,
+  },
+  {
+    name: "missing cashbacks",
+    component: <MissingCashbacks />,
+  },
+  {
+    name: "add new tickets",
+    component: <MissingCashbacks />,
+  },
+  {
+    name: "check old tickets",
+    component: <MissingCashbacks />,
+  },
+  {
+    name: "refer & earn",
+    img: "/profile-menu-icons/refer-earn.png",
+    component: <ReferEarn />,
+  },
+  {
+    name: "referral network",
+    img: "/profile-menu-icons/referral-network.png",
+    component: <ReferralNetwork />,
+  },
+  {
+    name: "get help",
+    img: "/profile-menu-icons/get-help.png",
+    component: <GetHelp />,
+  },
+  {
+    name: "testimonials",
+    img: "/profile-menu-icons/testimonials.png",
+    component: <GetHelp />,
+  },
+  {
+    name: "settings",
+    img: "/profile-menu-icons/settings.png",
+    component: <Settings />,
+  },
+  {
+    name: "logout",
+    img: "/profile-menu-icons/logout.png",
+    component: <Settings />,
+  },
+];
+
 export default function ProfilePage() {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
+  function closeMenu() {
+    setIsMenuActive(false);
+  }
+  function scrollToTop() {
+    window.scrollTo(0, 0);
+  }
   return (
     <div className="profile-page">
       <div className="profile-container">
         <div className={`left-menu ${isMenuActive && "active"}`}>
-          <div
-            className={`menu-item ${activeMenu === "my earnings" && "active"}`}
-            onClick={() => {
-              setActiveMenu("my earnings");
-            }}
-          >
-            <img
-              src={`/earnings${
-                activeMenu === "my earnings" ? "-active" : ""
-              }.png`}
-              alt="my earnings"
-            />
-            <p>My Earnings</p>
-          </div>
-          <div
-            className={`menu-item ${
-              activeMenu === "payment history" && "active"
-            }`}
-            onClick={() => {
-              setActiveMenu("payment history");
-            }}
-          >
-            <img
-              src={`/payment-history${
-                activeMenu === "payment history" ? "-active" : ""
-              }.png`}
-              alt="my earnings"
-            />
-            <p>Payment History</p>
-          </div>
-          <div className="submenu">
+          {menuList?.map(({ name, img }) => (
+            <div
+              key={name}
+              className={`menu-item ${activeMenu === name && "active"} ${
+                !img && "submenu"
+              }`}
+              onClick={() => {
+                scrollToTop();
+                closeMenu();
+                setActiveMenu(name);
+              }}
+            >
+              {img && (
+                <img
+                  src={
+                    activeMenu === name
+                      ? img.replace(".png", "-active.png")
+                      : img
+                  }
+                  alt={name}
+                />
+              )}
+              <p>{name}</p>
+            </div>
+          ))}
+          {/* <div className="submenu">
             <p
               onClick={() => {
+                closeMenu();
                 setActiveMenu("missing cashbacks");
               }}
               className={`submenu-item ${
@@ -56,89 +114,7 @@ export default function ProfilePage() {
             </p>
             <p>Add New Ticket</p>
             <p>Check old Tickets</p>
-          </div>
-          <div
-            className={`menu-item ${
-              activeMenu === "refer and earn" && "active"
-            }`}
-            onClick={() => {
-              setActiveMenu("refer and earn");
-            }}
-          >
-            <img
-              src={`/refer-earn${
-                activeMenu === "refer and earn" ? "-active" : ""
-              }.png`}
-              alt="refer and earn"
-            />
-            <p>Refer & Earn</p>
-          </div>
-          <div
-            className={`menu-item ${
-              activeMenu === "referal network" && "active"
-            }`}
-            onClick={() => {
-              setActiveMenu("referal network");
-            }}
-          >
-            <img
-              src={`/referal-network${
-                activeMenu === "referal network" ? "-active" : ""
-              }.png`}
-              alt="referal network"
-            />
-            <p>Referal Network</p>
-          </div>
-          <div
-            className={`menu-item ${activeMenu === "get help" && "active"}`}
-            onClick={() => {
-              setActiveMenu("get help");
-            }}
-          >
-            <img
-              src={`/get-help${activeMenu === "get help" ? "-active" : ""}.png`}
-              alt="get help"
-            />
-            <p>Get Help</p>
-          </div>
-          <div
-            className={`menu-item ${activeMenu === "testimonials" && "active"}`}
-            onClick={() => {
-              setActiveMenu("testimonials");
-            }}
-          >
-            <img
-              src={`/testimonials${
-                activeMenu === "testimonials" ? "-active" : ""
-              }.png`}
-              alt="testimonials"
-            />
-            <p>testimonials</p>
-          </div>
-          <div
-            className={`menu-item ${activeMenu === "settings" && "active"}`}
-            onClick={() => {
-              setActiveMenu("settings");
-            }}
-          >
-            <img
-              src={`/settings${activeMenu === "settings" ? "-active" : ""}.png`}
-              alt="settings"
-            />
-            <p>Settings</p>
-          </div>
-          <div
-            className={`menu-item ${activeMenu === "logout" && "active"}`}
-            onClick={() => {
-              setActiveMenu("logout");
-            }}
-          >
-            <img
-              src={`/logout${activeMenu === "logout" ? "-active" : ""}.png`}
-              alt="logout"
-            />
-            <p>Logout</p>
-          </div>
+          </div> */}
         </div>
         <div
           className="hamburger"
@@ -195,8 +171,8 @@ export default function ProfilePage() {
         <div className="right">
           {activeMenu == "my earnings" && <MyEarnings />}
           {activeMenu == "payment history" && <PaymentHistory />}
-          {activeMenu == "refer and earn" && <ReferEarn />}
-          {activeMenu == "referal network" && <ReferralNetwork />}
+          {activeMenu == "refer & earn" && <ReferEarn />}
+          {activeMenu == "referral network" && <ReferralNetwork />}
           {activeMenu == "get help" && <GetHelp />}
           {activeMenu == "settings" && <Settings />}
           {activeMenu == "missing cashbacks" && (
