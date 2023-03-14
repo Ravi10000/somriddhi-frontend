@@ -1,0 +1,1 @@
+export let data = ['Cloth 1', 'Cloth 2', 'Cloth 3', 'Cloth 4', 'Cloth 5'];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './category.styles.scss';
+import './add-category.styles.scss';
 import Topbar from '../../components/Topbar/Topbar'
 import Nav from '../../components/Nav/Nav'
 import Add from './add.png';
@@ -8,11 +8,21 @@ import Banner from './category.png';
 import Delete from './Delete.png';
 import Edit from './edit.png';
 import { Data } from './Data.js';
-
+import AddCategoryModal from './AddCategoryModal';
 
 const Category = (props) => {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [categories, setCategories] = useState(true);
+    function closeModal() {
+        setModalOpen(false);
+    }
+    function openModal() {
+        setModalOpen(true);
+    }
     return (
         <div>
+            {modalOpen && <AddCategoryModal closeModal={closeModal} categories={categories} setCategories={setCategories} />}
+
             <Topbar />
             <Nav />
             <div className='bMainContent'>
@@ -25,7 +35,7 @@ const Category = (props) => {
                     <div className='bAddButton'>
                         <div className='bBtnDiv'>
                             <img src={Add} alt='' />
-                            <p className='bBtnTextOne'>Add</p>
+                            <p className='bBtnTextOne' onClick={(e) => setModalOpen(true)}>Add</p>
                         </div>
                     </div>
                 </div>
