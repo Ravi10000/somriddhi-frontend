@@ -1,4 +1,4 @@
-const allMenus = [
+export const topMenuOptions = [
   "Banner",
   "Deals",
   "Categories",
@@ -10,6 +10,4 @@ const allMenus = [
   "Analytics",
 ];
 
-export default allMenus;
-
-export const allHelp = ["Feedbacks", "FAQs", "Logout"];
+export const bottomMenuOptions = ["Feedbacks", "FAQs", "Logout"];

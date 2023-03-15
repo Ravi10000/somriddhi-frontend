@@ -1,446 +1,477 @@
-.bMainContent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px;
-    gap: 24px;
+// .bMainContent {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   padding: 24px;
+//   gap: 24px;
 
-    position: absolute;
-    width: 79.7vw;
-    height: 840px;
-    left: 260px;
-    top: 90px;
+//   position: absolute;
+//   width: 79.7vw;
+//   height: 840px;
+//   left: 260px;
+//   top: 90px;
 
-    /* BG */
+//   /* BG */
 
-    background: #F8F8F8;
-}
+//   background: #f8f8f8;
+// }
 
-.bHeading {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 8px 0px;
-    gap: 8px;
+// .bHeading {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   padding: 8px 0px;
+//   gap: 8px;
 
-    width: 75.9vw;
-    height: 48px;
+//   width: 75.9vw;
+//   height: 48px;
 
+//   /* Inside auto layout */
 
-    /* Inside auto layout */
+//   flex: none;
+//   order: 0;
+//   align-self: stretch;
+//   flex-grow: 0;
+// }
 
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
-}
+// .bBanner {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   padding: 0px;
+//   gap: 16px;
 
-.bBanner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 16px;
+//   width: 652px;
+//   height: 554px;
 
-    width: 652px;
-    height: 554px;
+//   /* Inside auto layout */
 
+//   flex: none;
+//   order: 1;
+//   flex-grow: 0;
+// }
 
-    /* Inside auto layout */
+// .bTwoTab {
+//   box-sizing: border-box;
 
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
+//   /* Auto layout */
 
-.bTwoTab {
-    box-sizing: border-box;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: flex-start;
+//   padding: 0px;
+//   gap: 4px;
 
-    /* Auto layout */
+//   width: 106px;
+//   height: 30px;
 
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 4px;
+//   /* Secondary/Secondary 08 */
 
-    width: 106px;
-    height: 30px;
+//   border-bottom: 1px solid #ced0d6;
 
-    /* Secondary/Secondary 08 */
+//   /* Inside auto layout */
 
-    border-bottom: 1px solid #CED0D6;
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
 
-    /* Inside auto layout */
+// .bTextOneDiv {
+//   box-sizing: border-box;
 
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
+//   /* Auto layout */
 
-.bTextOneDiv {
-    box-sizing: border-box;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 6px 16px;
+//   gap: 10px;
 
-    /* Auto layout */
+//   width: 126px;
+//   height: 30px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 6px 16px;
-    gap: 10px;
+//   /* Primary/Primary 01 */
 
-    width: 126px;
-    height: 30px;
+//   border-bottom: 2px solid #e53b2c;
 
-    /* Primary/Primary 01 */
+//   /* Inside auto layout */
 
-    border-bottom: 2px solid #E53B2C;
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
 
-    /* Inside auto layout */
+// .bTextOne {
+//   width: 74px;
+//   height: 18px;
 
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
+//   /* Small/Small Medium */
 
-.bTextOne {
-    width: 74px;
-    height: 18px;
+//   font-family: "Pangram";
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 14px;
+//   line-height: 18px;
+//   /* identical to box height, or 129% */
 
-    /* Small/Small Medium */
+//   display: flex;
+//   align-items: center;
 
-    font-family: 'Pangram';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    /* identical to box height, or 129% */
+//   /* Primary/Primary 01 */
 
-    display: flex;
-    align-items: center;
+//   color: #e53b2c;
 
-    /* Primary/Primary 01 */
+//   /* Inside auto layout */
 
-    color: #E53B2C;
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
 
+// .mModel {
+//   // z-index: 10;
+//   flex: none;
+//   order: 10;
+//   flex-grow: 1;
+//   z-index: 10;
+// }
 
-    /* Inside auto layout */
+// .bAddButton {
+//   box-sizing: border-box;
 
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
+//   /* Auto layout */
 
-.mModel {
-    // z-index: 10;
-    flex: none;
-    order: 10;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 12px 20px;
+//   gap: 8px;
+
+//   width: 69px;
+//   padding-right: 45px;
+//   height: 32px;
+
+//   /* Primary/Primary 09 */
+
+//   background: #fceaea;
+//   /* Primary/Primary 07 */
+
+//   border: 1px solid #f5bdbc;
+//   border-radius: 8px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 1;
+//   flex-grow: 0;
+// }
+
+// .bBtnDiv {
+//   width: 14px;
+//   height: 14px;
+//   display: flex;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
+
+// .bBtnTextOne {
+//   width: 27px;
+//   height: 18px;
+
+//   /* Small/Semi Bold */
+
+//   font-family: "Manrope";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 14px;
+//   line-height: 18px;
+//   /* identical to box height, or 129% */
+
+//   /* Primary/Primary 01 */
+
+//   color: #e53b2c;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 1;
+//   flex-grow: 0;
+// }
+
+// .bBanPar {
+//   box-sizing: border-box;
+
+//   /* Auto layout */
+
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   padding: 16px;
+//   gap: 8px;
+//   isolation: isolate;
+
+//   width: 652px;
+//   height: 174px;
+
+//   /* White */
+
+//   background: #ffffff;
+//   /* Secondary/Secondary 09 */
+
+//   border: 1px solid #e6e8ea;
+//   border-radius: 8px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
+
+// .bBanChild {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   padding: 0px;
+//   gap: 16px;
+
+//   width: 620px;
+//   height: 80px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   align-self: stretch;
+//   flex-grow: 0;
+//   z-index: 0;
+// }
+
+// .bDes {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   padding: 0px 8px 0px 182px;
+//   gap: 8px;
+
+//   width: 620px;
+//   height: 54px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 1;
+//   align-self: stretch;
+//   flex-grow: 0;
+//   z-index: 1;
+// }
+
+// .bLoc {
+//   position: absolute;
+//   width: 17px;
+//   height: 16px;
+//   left: 613px;
+//   top: 125px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 2;
+//   flex-grow: 0;
+//   z-index: 2;
+// }
+
+// .bBanImgOne {
+//   width: 166.5px;
+//   height: 80px;
+
+//   border-radius: 8px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
+
+// .bCon {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   padding: 0px;
+//   gap: 8px;
+
+//   width: 183px;
+//   height: 72px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 1;
+//   flex-grow: 0;
+// }
+
+// .bTextTwo {
+//   // width: 65px;
+//   height: 20px;
+
+//   /* Normal/Semi Bold */
+
+//   font-family: "Manrope";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 16px;
+//   line-height: 20px;
+//   /* identical to box height, or 125% */
+
+//   display: flex;
+//   align-items: center;
+
+//   /* Gray/Gray 01 */
+
+//   color: #1a232f;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   flex-grow: 0;
+// }
+
+// .bExpOne {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   padding: 0px;
+//   gap: 7px;
+
+//   width: 183px;
+//   height: 18px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 1;
+//   flex-grow: 0;
+// }
+
+// .bExpTwo {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   padding: 0px;
+//   gap: 7px;
+
+//   width: 121px;
+//   height: 18px;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 2;
+//   flex-grow: 0;
+// }
+
+// .bBanTextThree {
+//   width: 160px;
+//   height: 18px;
+
+//   /* Small/Medium */
+
+//   font-family: "Manrope";
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 14px;
+//   line-height: 18px;
+//   /* identical to box height, or 129% */
+
+//   display: flex;
+//   align-items: center;
+
+//   /* Secondary/Secondary 03 */
+
+//   color: #545a6e;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 1;
+//   flex-grow: 0;
+// }
+
+// .bDesText {
+//   width: 430px;
+//   height: 54px;
+
+//   font-family: "Manrope";
+//   font-style: normal;
+//   font-weight: 400;
+//   font-size: 12px;
+//   line-height: 18px;
+//   /* or 150% */
+
+//   display: flex;
+//   align-items: center;
+
+//   /* Secondary/Secondary 05 */
+
+//   color: #858997;
+
+//   /* Inside auto layout */
+
+//   flex: none;
+//   order: 0;
+//   flex-grow: 1;
+// }
+
+.content-container {
+  display: flex;
+  .content {
     flex-grow: 1;
-    z-index: 10;
-}
-
-.bAddButton {
-    box-sizing: border-box;
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 20px;
-    gap: 8px;
-
-    width: 69px;
-    padding-right: 45px;
-    height: 32px;
-
-    /* Primary/Primary 09 */
-
-    background: #FCEAEA;
-    /* Primary/Primary 07 */
-
-    border: 1px solid #F5BDBC;
-    border-radius: 8px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.bBtnDiv {
-    width: 14px;
-    height: 14px;
-    display: flex;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.bBtnTextOne {
-    width: 27px;
-    height: 18px;
-
-    /* Small/Semi Bold */
-
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-    /* identical to box height, or 129% */
-
-
-    /* Primary/Primary 01 */
-
-    color: #E53B2C;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.bBanPar {
-    box-sizing: border-box;
-
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    gap: 8px;
-    isolation: isolate;
-
-    width: 652px;
-    height: 174px;
-
-    /* White */
-
-    background: #FFFFFF;
-    /* Secondary/Secondary 09 */
-
-    border: 1px solid #E6E8EA;
-    border-radius: 8px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.bBanChild {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 16px;
-
-    width: 620px;
-    height: 80px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
-    z-index: 0;
-}
-
-.bDes {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px 8px 0px 182px;
-    gap: 8px;
-
-    width: 620px;
-    height: 54px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    align-self: stretch;
-    flex-grow: 0;
-    z-index: 1;
-}
-
-.bLoc {
-    position: absolute;
-    width: 17px;
-    height: 16px;
-    left: 613px;
-    top: 125px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 2;
-    flex-grow: 0;
-    z-index: 2;
-}
-
-.bBanImgOne {
-    width: 166.5px;
-    height: 80px;
-
-    border-radius: 8px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.bCon {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 8px;
-
-    width: 183px;
-    height: 72px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.bTextTwo {
-    // width: 65px;
-    height: 20px;
-
-    /* Normal/Semi Bold */
-
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    /* identical to box height, or 125% */
-
-    display: flex;
-    align-items: center;
-
-    /* Gray/Gray 01 */
-
-    color: #1A232F;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.bExpOne {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 7px;
-
-    width: 183px;
-    height: 18px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.bExpTwo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 7px;
-
-    width: 121px;
-    height: 18px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 2;
-    flex-grow: 0;
-}
-
-.bBanTextThree {
-    width: 160px;
-    height: 18px;
-
-    /* Small/Medium */
-
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    /* identical to box height, or 129% */
-
-    display: flex;
-    align-items: center;
-
-    /* Secondary/Secondary 03 */
-
-    color: #545A6E;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-}
-
-.bDesText {
-    width: 430px;
-    height: 54px;
-
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    /* or 150% */
-
-    display: flex;
-    align-items: center;
-
-    /* Secondary/Secondary 05 */
-
-    color: #858997;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 1;
+    .main-content {
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        .title {
+          &.active {
+            position: relative;
+            color: #f01c21;
+            padding: 10px;
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              height: 3px;
+              width: 100%;
+              background: #f01c21;
+            }
+          }
+        }
+        .add-button {
+          border-radius: 10px;
+          font-weight: 600;
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: #fceaea;
+          color: #f01c21;
+          border: 2px solid #f5bdbc;
+          img {
+            width: 15px;
+          }
+        }
+      }
+    }
+  }
 }
