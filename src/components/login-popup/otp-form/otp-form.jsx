@@ -59,13 +59,16 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
         setIsOtpValid(false);
         // return;
       } else if (response.data.status === "success") {
-        if(Array.isArray(response.data.data)){
-          
+        if (Array.isArray(response.data.data)) {
         }
         console.log(response.data.data[0]);
         const user = response.data.data[0];
         setCurrentUser(user);
-        if (user?.name === null || user?.name === "" || user?.name === undefined) {
+        if (
+          user?.name === null ||
+          user?.name === "" ||
+          user?.name === undefined
+        ) {
           nextStage();
         }
       }

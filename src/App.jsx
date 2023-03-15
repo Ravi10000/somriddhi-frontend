@@ -49,16 +49,16 @@ export default function App() {
             path="/coupon-claimed/:id"
             element={<CouponsClaimedPage />}
           />
-          <Route exact path="/profile" element={<ProfilePage />} />
-          {/* <Route
+          {/* <Route exact path="/profile" element={<ProfilePage />} /> */}
+          <Route
             exact
             path="/profile"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute openModal={openModal}>
                 <ProfilePage />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route path="/deal" element={<Category />} />
           <Route path="/categories" element={<Deal />} />
         </Routes>
