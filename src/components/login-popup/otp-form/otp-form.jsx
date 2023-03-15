@@ -37,6 +37,16 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
     };
   }, []);
 
+  function resetOtpInputs() {
+    setValidInput(false);
+    setOtp("");
+    digit1Ref.current.value = "";
+    digit2Ref.current.value = "";
+    digit3Ref.current.value = "";
+    digit4Ref.current.value = "";
+    digit1Ref.current.focus();
+  }
+
   async function submitForm(e) {
     e.preventDefault();
     console.log({ otp });
@@ -45,12 +55,19 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
       const response = await verifyOtp({ phone, otp });
       console.log({ response });
       if (response.data.message === "Invalid otp") {
+        resetOtpInputs();
         setIsOtpValid(false);
-        setIsLoading(false);
-        return;
+        // return;
       } else if (response.data.status === "success") {
-        setCurrentUser({ phone });
-        nextStage();
+        if(Array.isArray(response.data.data)){
+          
+        }
+        console.log(response.data.data[0]);
+        const user = response.data.data[0];
+        setCurrentUser(user);
+        if (user?.name === null || user?.name === "" || user?.name === undefined) {
+          nextStage();
+        }
       }
       setIsLoading(false);
     } catch (err) {
@@ -58,6 +75,8 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
     }
   }
   async function resendOtp() {
+    // setValidInput(false);
+    resetOtpInputs();
     try {
       setIsOtpValid(true);
       const response = await sendOtp({ phone });
@@ -108,13 +127,7 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
     <form action="#" onSubmit={submitForm} className="otp-form">
       <h1>Verify OTP</h1>
       <p>Enter OTP which you received for login</p>
-      {secondsLeft > 1 ? (
-        <h5>Expires in {secondsLeft} seconds</h5>
-      ) : (
-        <h5 onClick={resendOtp}>
-          OTP Expired, <span>send again</span>
-        </h5>
-      )}
+      {secondsLeft > 1 && <h5>Expires in {secondsLeft} seconds</h5>}
       <div className="otp-inputs">
         <input
           disabled={secondsLeft < 1 ? true : false}
@@ -168,7 +181,12 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
       <p onClick={resendOtp}>
         Didn&#39;t get otp? <span> Send Again</span>
       </p>
-      {!isOtpValid && <p className="invalid">invalid otp</p>}
+      {!isOtpValid && <p className="invalid-msg">Incorrect OTP, Try Again</p>}
+      {secondsLeft < 1 && (
+        <p className="invalid-msg" onClick={resendOtp}>
+          OTP Expired, Send Again
+        </p>
+      )}
       <Button disabled={!validInput} isLoading={isLoading}>
         Veryfy otp
       </Button>

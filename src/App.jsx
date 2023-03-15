@@ -62,7 +62,7 @@ export default function App() {
           <Route path="/deal" element={<Category />} />
           <Route path="/categories" element={<Deal />} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
 
       {/* <Switch>

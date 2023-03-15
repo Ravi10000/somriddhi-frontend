@@ -8,7 +8,8 @@ form.otp-form {
       width: 50px;
     }
   }
-  .invalid {
-    color: #f2383d;
+  p.invalid-msg {
+    letter-spacing: 2px;
+    color: #f27f38f4;
   }
 }
