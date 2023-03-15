@@ -25,6 +25,10 @@
 // }
 
 .top-bar-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
   // outline: 2px solid red;
   background: #fff;
   border-bottom: 2px solid #e6e8ea;

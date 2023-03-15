@@ -23,6 +23,7 @@ export default function AdminPage() {
     setModalOpen(true);
   }
   function showMenu() {
+    window.scrollTo(0, 0);
     setIsMenuVisible(true);
   }
   function hideMenu() {
@@ -43,6 +44,7 @@ export default function AdminPage() {
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
           isMenuVisible={isMenuVisible}
+          setIsMenuVisible={setIsMenuVisible}
           hideMenu={hideMenu}
         />
         <div className="content">
@@ -51,7 +53,7 @@ export default function AdminPage() {
             showMenu={showMenu}
             isMenuVisible={isMenuVisible}
           />
-          <div className="main-content">
+          <div className="main-content-container">
             {selectedOption === "banners" && <AllBanners />}
             {selectedOption === "deals" && <AllDeals />}
             {selectedOption === "categories" && <AllCategories />}

@@ -1,0 +1,62 @@
+.all-deals {
+  .main-content {
+    .deals-container {
+      display: grid;
+      place-items: center;
+      padding: 0 20px 20px 20px;
+      gap: 20px;
+      .deal {
+        max-width: 350px;
+        background: #fff;
+        width: fit-content;
+        border-radius: 8px;
+        .deal-img {
+          width: 100%;
+        }
+        .deal-info {
+          padding: 20px;
+          .icons {
+            padding: 20px 0;
+            display: flex;
+            gap: 20px;
+            img {
+              width: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .all-deals {
+    .main-content {
+      display: grid;
+      grid-template-columns: 30% 1fr;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .all-deals {
+    .main-content {
+      grid-template-columns: 20% 1fr;
+      padding: 20px;
+      .deals-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+@media (min-width: 1400px) {
+  .all-deals {
+    .main-content {
+      grid-template-columns: 20% 1fr;
+      padding: 20px;
+      .deals-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}

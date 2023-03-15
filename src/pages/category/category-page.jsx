@@ -27,7 +27,7 @@ export default function CategoryPage() {
       <section className="category-section">
         <div className="filter-container">
           <FilterList
-            category={category}
+            // category={category}
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
           />

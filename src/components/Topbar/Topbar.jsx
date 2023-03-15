@@ -3,16 +3,22 @@ import "./topbar.styles.scss";
 import Logo from "./logo.png";
 import Dot from "./Dot.png";
 // import allMenus from "./Data.js";
-import { allHelp } from "./Data.js";
+// import { allHelp } from "./Data.js";
 import { topMenuOptions, bottomMenuOptions } from "./menu-list";
 const SideBar = ({
   isMenuVisible,
+  setIsMenuVisible,
   hideMenu,
   setSelectedOption,
   selectedOption,
 }) => {
-  const [isClicked, setIsClicked] = useState(0);
-
+  // const [isClicked, setIsClicked] = useState(0);
+  function selectOption(item) {
+    console.log(item);
+    setIsMenuVisible(false);
+    window.scrollTo(0, 0);
+    setSelectedOption(item);
+  }
   return (
     // <div className={`drawer ${isMenuVisible && "active"}`}>
     //   <div className="logo">
@@ -76,7 +82,7 @@ const SideBar = ({
               className={`option top ${selectedOption === item && "selected"}`}
               key={index}
               onClick={() => {
-                setSelectedOption(item);
+                selectOption(item);
               }}
             >
               <p>{item}</p>
@@ -91,7 +97,7 @@ const SideBar = ({
               }`}
               key={index}
               onClick={() => {
-                setSelectedOption(item);
+                selectOption(item);
               }}
             >
               <div className="dot"></div>
