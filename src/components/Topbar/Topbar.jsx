@@ -15,7 +15,7 @@ const SideBar = ({
 }) => {
   // const [isClicked, setIsClicked] = useState(0);
   function selectOption(item) {
-    console.log(item);
+    // console.log(item);
     setIsMenuVisible(false);
     window.scrollTo(0, 0);
     // setSelectedOption(item);

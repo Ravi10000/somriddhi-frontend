@@ -17,6 +17,13 @@ function LoginPopup({ closeModal }) {
   // const [referralCode, setReferralCode] = useState("");
 
   // console.log({ phoneNumber, otp });
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
   function nextStage() {
     if (currentLoginStage === loginStages.length - 1) {
       return;
@@ -29,12 +36,6 @@ function LoginPopup({ closeModal }) {
     }
     setCurrentLoginStage((prevStage) => prevStage - 1);
   }
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  });
   return (
     <Backdrop>
       <div className="login">

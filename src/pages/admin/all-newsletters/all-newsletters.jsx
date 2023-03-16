@@ -8,6 +8,7 @@ export default function AllNewsletters() {
   return (
     <div className="all-newsletters">
       <TitleSection
+        noAddButton
         title="all subscriptions"
         addFunction={() => {
           alert("add newsletters popup need to be here");
