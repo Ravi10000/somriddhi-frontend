@@ -9,6 +9,7 @@ import AllCategories from "./all-categories/all-categories";
 import AllMemberships from "./all-memberships/all-memberships";
 import AllNewsletters from "./all-newsletters/all-newsletters";
 import WebsiteContent from "./website-content/website-content";
+import AllCustomers from "./all-customers/all-customers";
 // import menuList from "../../components/Topbar/menu-list";
 
 export default function AdminPage() {
@@ -61,6 +62,7 @@ export default function AdminPage() {
             {selectedOption === "memberships" && <AllMemberships />}
             {selectedOption === "newsletters" && <AllNewsletters />}
             {selectedOption === "website content" && <WebsiteContent />}
+            {selectedOption === "customers" && <AllCustomers />}
           </div>
         </div>
       </div>

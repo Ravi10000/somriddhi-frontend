@@ -6,6 +6,7 @@
   padding: 20px;
   text-transform: capitalize;
   .title {
+    font-size: 14px;
     &.active {
       position: relative;
       color: #f01c21;
@@ -15,24 +16,34 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        height: 3px;
+        height: 2px;
         width: 100%;
         background: #f01c21;
       }
     }
   }
-  .add-button {
-    border-radius: 10px;
-    font-weight: 600;
-    padding: 10px 20px;
+  .title-buttons {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #fceaea;
-    color: #f01c21;
-    border: 2px solid #f5bdbc;
-    img {
-      width: 15px;
+    gap: 20px;
+    .button {
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fceaea;
+      color: #f01c21;
+      border: 2px solid #f5bdbc;
+      &.upload {
+        background: #e5fff2;
+        color: #41b079;
+        border-color: #c1f2d9;
+      }
+      img {
+        width: 15px;
+      }
     }
   }
 }

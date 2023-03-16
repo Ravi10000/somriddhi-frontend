@@ -2,13 +2,14 @@ import "./website-content.styles.scss";
 
 import React from "react";
 import TitleSection from "../title-section/title-section";
+import ProcessEditable from "../process-editable/process-editable";
 
 export default function WebsiteContent() {
   return (
     <div className="website-content">
       <TitleSection title="website content" noAddButton />
       {/* <div className="content-options"> */}
-        <div className="options-container">
+      {/* <div className="options-container">
           <div className="option">
             <img src="/image-icon.png" alt="add image" />
             <p>Image</p>
@@ -29,8 +30,11 @@ export default function WebsiteContent() {
             <img src="/embed-icon.png" alt="add image" />
             <p>Embed</p>
           </div>
-        </div>
+        </div> */}
       {/* </div> */}
+      <div className="process-editable-container">
+        <ProcessEditable />
+      </div>
     </div>
   );
 }
