@@ -1,5 +1,8 @@
 .all-deals {
   .main-content {
+    padding: 20px;
+    display: grid;
+    gap: 20px;
     .deals-container {
       display: grid;
       place-items: center;
@@ -42,7 +45,9 @@
   .all-deals {
     .main-content {
       grid-template-columns: 20% 1fr;
-      padding: 20px;
+      .filter-container {
+        max-width: 250px;
+      }
       .deals-container {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -53,7 +58,6 @@
   .all-deals {
     .main-content {
       grid-template-columns: 20% 1fr;
-      padding: 20px;
       .deals-container {
         grid-template-columns: repeat(3, 1fr);
       }

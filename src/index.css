@@ -67,6 +67,9 @@ body {
   background: #f8f8f8;
 }
 
+button {
+  cursor: pointer;
+}
 input {
   font-family: "Metropolis", sans-serif;
   color: #908f8f;

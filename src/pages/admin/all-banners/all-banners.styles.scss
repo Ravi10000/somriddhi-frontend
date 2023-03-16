@@ -2,10 +2,7 @@
   .banner-cards-container {
     display: flex;
     flex-direction: column;
-    // gap: 20px;
-    // align-items: center;
     width: fit-content;
-    // outline: 2px solid red;
     gap: 20px;
     .banner-card {
       margin: 0 20px;
@@ -20,6 +17,7 @@
       }
       .banner-details {
         display: grid;
+        height: fit-content;
         gap: 20px;
         .info-container {
           display: flex;
@@ -77,6 +75,16 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .all-banners {
+    .banner-cards-container {
+      .banner-card {
+        max-width: 850px;
       }
     }
   }
