@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import PhoneNumberForm from "./phone-form/phone-form";
 import OtpForm from "./otp-form/otp-form";
 import UserDetailsForm from "./user-details-form/user-details-form";
-
+import Backdrop from "../backdrop/backdrop";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
 
@@ -36,7 +36,7 @@ function LoginPopup({ closeModal }) {
     };
   });
   return (
-    <div className="backdrop">
+    <Backdrop>
       <div className="login">
         <div className="go-back" onClick={closeModal}>
           <img src="/go-back.png" alt="go back" />
@@ -66,7 +66,7 @@ function LoginPopup({ closeModal }) {
           />
         )}
       </div>
-    </div>
+    </Backdrop>
   );
 }
 const mapDispatchToProp = (dispatch) => ({

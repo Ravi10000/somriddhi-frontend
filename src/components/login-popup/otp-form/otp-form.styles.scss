@@ -1,12 +1,22 @@
 form.otp-form {
+  display: grid;
+  gap: 20px;
+  place-items: center;
   .otp-inputs {
     display: flex;
     gap: 20px;
     justify-content: center;
     input {
+      border-radius: 8px;
+      border: 2px solid #e1e5e8;
+      padding: 15px 20px;
       font-size: 2rem;
-      width: 50px;
+      max-width: 60px;
     }
+  }
+  p span {
+    color: #f01c21;
+    font-weight: 500;
   }
   p.invalid-msg {
     letter-spacing: 2px;

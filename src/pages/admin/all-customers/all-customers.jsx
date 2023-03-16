@@ -2,6 +2,8 @@ import "./all-customers.styles.scss";
 
 import React from "react";
 import TitleSection from "../title-section/title-section";
+import customers from "./customers";
+
 export default function AllCustomers() {
   return (
     <div className="all-customers">
@@ -26,24 +28,28 @@ export default function AllCustomers() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>abs@gmail.com</td>
-                <td>+91 123 456 7890</td>
-                <td>06, March 2023</td>
-                <td>Rs. 5000</td>
-                <td>Rs. 5000</td>
-                <td>Rs. 5000</td>
-              </tr>
-              {/* {subscriptionsList?.map(({ email, addedAt, total }, index) => (
-              <tr key={index}>
-                <td>{email}</td>
-                <td>{addedAt}</td>
-                <td>{total}</td>
-                <td>
-                  <img src="/check.png" alt="" />
-                </td>
-              </tr>
-            ))} */}
+              {customers?.map(
+                (
+                  {
+                    email,
+                    phone,
+                    joinedOn,
+                    totalPurchase,
+                    totalPayment,
+                    totalPayout,
+                  },
+                  index
+                ) => (
+                  <tr key={index}>
+                    <td>{email}</td>
+                    <td>{phone}</td>
+                    <td>{joinedOn}</td>
+                    <td>Rs. {totalPurchase}</td>
+                    <td>Rs. {totalPayment}</td>
+                    <td>Rs. {totalPayout}</td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
         </div>

@@ -2,6 +2,7 @@ import React, { useState, useNavigate } from "react";
 import "./topbar.styles.scss";
 import Logo from "./logo.png";
 import Dot from "./Dot.png";
+import { Link } from "react-router-dom";
 // import allMenus from "./Data.js";
 // import { allHelp } from "./Data.js";
 import { topMenuOptions, bottomMenuOptions } from "./menu-list";
@@ -17,7 +18,7 @@ const SideBar = ({
     console.log(item);
     setIsMenuVisible(false);
     window.scrollTo(0, 0);
-    setSelectedOption(item);
+    // setSelectedOption(item);
   }
   return (
     // <div className={`drawer ${isMenuVisible && "active"}`}>
@@ -78,31 +79,35 @@ const SideBar = ({
       <div className="options">
         <div className="top-menu">
           {topMenuOptions.map((item, index) => (
-            <div
-              className={`option top ${selectedOption === item && "selected"}`}
-              key={index}
-              onClick={() => {
-                selectOption(item);
-              }}
-            >
-              <p>{item}</p>
-            </div>
+            <Link to={`/admin/${item}`} key={index}>
+              <div
+                className={`option top ${
+                  selectedOption === item && "selected"
+                }`}
+                onClick={() => {
+                  selectOption(item);
+                }}
+              >
+                <p>{item}</p>
+              </div>
+            </Link>
           ))}
         </div>
         <div className="bottom-menu">
           {bottomMenuOptions.map((item, index) => (
-            <div
-              className={`option bottom ${
-                selectedOption === item && "selected"
-              }`}
-              key={index}
-              onClick={() => {
-                selectOption(item);
-              }}
-            >
-              <div className="dot"></div>
-              <p>{item}</p>
-            </div>
+            <Link to={`/admin/${item}`} key={index}>
+              <div
+                className={`option bottom ${
+                  selectedOption === item && "selected"
+                }`}
+                onClick={() => {
+                  selectOption(item);
+                }}
+              >
+                <div className="dot"></div>
+                <p>{item}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

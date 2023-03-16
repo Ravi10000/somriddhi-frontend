@@ -12,6 +12,7 @@ export default function TicketsSection() {
       <div className="select-tickets">
         {options.map((item) => (
           <h4
+            key={item}
             className={`${selectedTickets === item ? "active" : ""}`}
             onClick={() => {
               setSelectedTickets(item);

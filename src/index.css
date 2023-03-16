@@ -62,6 +62,7 @@ html {
 }
 
 body {
+  /* position: relative; */
   font-family: "Metropolis", sans-serif;
   color: #091431;
   background: #f8f8f8;

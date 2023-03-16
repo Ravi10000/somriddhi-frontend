@@ -1,5 +1,8 @@
 import "./admin.styles.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { Link, useParams, useNavigate } from "react-router-dom";
+
 import SideBar from "../../components/Topbar/Topbar";
 import Nav from "../../components/Nav/Nav";
 import AddBannerModal from "../Banner/AddBannerModal";
@@ -12,14 +15,24 @@ import WebsiteContent from "./website-content/website-content";
 import AllCustomers from "./all-customers/all-customers";
 import TicketsSection from "./tickets-section/tickets-section";
 import AllFaqs from "./all-faqs/all-faqs";
-// import menuList from "../../components/Topbar/menu-list";
+import AllFeedbacks from "./all-feedbacks/all-feedbacks";
+import menuList from "../../components/Topbar/menu-list";
 
 export default function AdminPage() {
+  const navigate = useNavigate();
+  const params = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [categories, setCategories] = useState("yes");
-  const [selectedOption, setSelectedOption] = useState("FAQs");
+  const [selectedOption, setSelectedOption] = useState();
 
+  useEffect(() => {
+    if (!menuList.includes(params.tab)) {
+      navigate("/admin/banners");
+    } else {
+      setSelectedOption(params.tab);
+    }
+  }, [params]);
   function closeModal() {
     setModalOpen(false);
   }
@@ -67,6 +80,7 @@ export default function AdminPage() {
             {selectedOption === "customers" && <AllCustomers />}
             {selectedOption === "tickets" && <TicketsSection />}
             {selectedOption === "FAQs" && <AllFaqs />}
+            {selectedOption === "feedbacks" && <AllFeedbacks />}
           </div>
         </div>
       </div>

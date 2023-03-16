@@ -2,7 +2,7 @@ import "./App.scss";
 
 // packages
 import { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Banner from "./pages/Banner/Banner";
 import Category from "./pages/Category/category";
@@ -47,7 +47,11 @@ export default function App() {
       )}
       <Routes>
         <Route path="/" exact element={<Dashboard />} />
-        <Route path="/admin" element={<AdminPage />} />
+        <Route
+          path="/admin"
+          element={<Navigate to="/admin/banners" replace />}
+        />
+        <Route path="/admin/:tab" element={<AdminPage />} />
         {/* <Route path="/admin/banner" element={<Banner />} /> */}
         <Route path="/coupon/:id" element={<CouponPage />} />
         <Route path="/category/:category" element={<CategoryPage />} />
