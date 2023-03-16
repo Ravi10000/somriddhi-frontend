@@ -4,7 +4,10 @@ import React from "react";
 import filterOptions from "./filter-options";
 import Filter from "./filter/filter";
 
-export default function FilterList({ category, selectedCategories, setSelectedCategories }) {
+export default function FilterList({
+  selectedCategories,
+  setSelectedCategories,
+}) {
   return (
     <div className="filter-list">
       {filterOptions.map(({ title, options }, index) => (
@@ -14,7 +17,6 @@ export default function FilterList({ category, selectedCategories, setSelectedCa
           title={title}
           options={options}
           key={index}
-          selectedCategory={"category" && category}
         />
       ))}
     </div>

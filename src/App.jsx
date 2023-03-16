@@ -1,13 +1,12 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// packages
+import { useState } from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Banner from "./pages/Banner/Banner";
 import Category from "./pages/Category/category";
 import Deal from "./pages/Deals/deals";
-
-// packages
-import { useState } from "react";
-// import { Switch, Route } from "react-router-dom";
 
 // components
 import ScrollToTop from "./components/scrollToTop";
@@ -23,8 +22,11 @@ import CouponPage from "./pages/coupon/coupon-page";
 import CategoryPage from "./pages/category/category-page";
 import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
+import AdminPage from "./pages/admin/admin.page";
 
 export default function App() {
+  const { pathname } = useLocation();
+  // console.log({ pathname });
   const [modalOpen, setModalOpen] = useState(false);
   function closeModal() {
     setModalOpen(false);
@@ -34,36 +36,45 @@ export default function App() {
   }
   return (
     <div className="App">
-      <BrowserRouter>
-        <ScrollToTop />
-        {modalOpen && <LoginPopup closeModal={closeModal} />}
-        <Header openModal={openModal} />
-        <Navbar />
-        <Routes>
-          <Route path="/" exact element={<Dashboard />} />
-          <Route path="/banner" element={<Banner />} />
-          <Route path="/coupon/:id" element={<CouponPage />} />
-          <Route path="/category/:category" element={<CategoryPage />} />
-          <Route
-            exact
-            path="/coupon-claimed/:id"
-            element={<CouponsClaimedPage />}
-          />
-          <Route exact path="/profile" element={<ProfilePage />} />
-          {/* <Route
-            exact
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          /> */}
-          <Route path="/deal" element={<Category />} />
-          <Route path="/categories" element={<Deal />} />
-        </Routes>
-        {/* <Footer /> */}
-      </BrowserRouter>
+      {/* <BrowserRouter> */}
+      <ScrollToTop />
+      {!pathname.includes("/admin") && (
+        <>
+          {modalOpen && <LoginPopup closeModal={closeModal} />}
+          <Header openModal={openModal} />
+          <Navbar />
+        </>
+      )}
+      <Routes>
+        <Route path="/" exact element={<Dashboard />} />
+        <Route
+          path="/admin"
+          element={<Navigate to="/admin/banners" replace />}
+        />
+        <Route path="/admin/:tab" element={<AdminPage />} />
+        {/* <Route path="/admin/banner" element={<Banner />} /> */}
+        <Route path="/coupon/:id" element={<CouponPage />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
+        <Route
+          exact
+          path="/coupon-claimed/:id"
+          element={<CouponsClaimedPage />}
+        />
+        {/* <Route exact path="/profile" element={<ProfilePage />} /> */}
+        <Route
+          exact
+          path="/profile"
+          element={
+            <ProtectedRoute openModal={openModal}>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/admin/deal" element={<Category />} />
+        <Route path="/categories" element={<Deal />} />
+      </Routes>
+      {!pathname.includes("/admin") && <Footer />}
+      {/* </BrowserRouter> */}
 
       {/* <Switch>
         <Route exact path="/" component={HomePage} />

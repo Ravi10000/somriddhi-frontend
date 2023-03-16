@@ -1,45 +1,15 @@
 const allMenus = [
-    {
-        name: "Banner"
-    },
-    {
-        name: "Deals"
-    },
-    {
-        name: "Categories"
-    },
-    {
-        name: "Memberships"
-    },
-    {
-        name: "Newsletters"
-    },
-    {
-        name: "Website Content"
-    },
-    {
-        name: "Customers"
-    },
-    {
-        name: "Banner"
-    },
-    {
-        name: "Banner"
-    },
-]
+  "Banner",
+  "Deals",
+  "Categories",
+  "Memberships",
+  "Newsletters",
+  "Website Content",
+  "Customers",
+  "Tickets",
+  "Analytics",
+];
 
 export default allMenus;
 
-
-export const allHelp = [
-    {
-        name: "Feedbacks"
-    },
-    {
-        name: "FAQs"
-    },
-    {
-        name: "Logout"
-    }
-]
-
+export const allHelp = ["Feedbacks", "FAQs", "Logout"];

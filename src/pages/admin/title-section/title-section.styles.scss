@@ -1,0 +1,49 @@
+.title-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  text-transform: capitalize;
+  .title {
+    font-size: 14px;
+    &.active {
+      position: relative;
+      color: #f01c21;
+      padding: 10px;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background: #f01c21;
+      }
+    }
+  }
+  .title-buttons {
+    display: flex;
+    gap: 10px;
+    .button {
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fceaea;
+      color: #f01c21;
+      border: 2px solid #f5bdbc;
+      &.upload {
+        background: #e5fff2;
+        color: #41b079;
+        border-color: #c1f2d9;
+      }
+      img {
+        width: 15px;
+      }
+    }
+  }
+}

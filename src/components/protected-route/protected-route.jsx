@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, redirect } from "react-router-dom";
 // const { selectCurrentUser } = require("../../redux/user/user.selectors");
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-function ProtectedRoute({ currentUser, children }) {
+function ProtectedRoute({ openModal, currentUser, children }) {
+  useEffect(() => {
+    if (!currentUser) {
+      openModal();
+    }
+  });
   if (!currentUser) {
     return <Navigate to="/" replace />;
   }
