@@ -81,7 +81,7 @@ const Category = (props) => {
                             {
                                 deals.map((deal, index) => (
                                     <div className='nodeDeal'>
-                                        <img src={deal.url} alt='' className='dealImg' />
+                                        <img src={`http://localhost:8001/uploads/${deal.image}`} alt='' className='dealImg' />
                                         <div className='dealDetails'>
                                             <p className='deatilsIconsText'>{deal.name}</p>
                                             <div className='dealsIcons'>

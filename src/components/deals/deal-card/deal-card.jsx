@@ -5,27 +5,21 @@ import Button from "../../button/button";
 // import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 export default function DealCard({
-  id,
-  imgUrl,
-  title,
-  details,
-  customStyles,
-  ...otherProps
+  _id, name, cashbackPercent, image, ...otherProps
 }) {
   // const history = useHistory();
   return (
-    <Link to={`/coupon/${id}`}>
+    <Link to={`/coupon/${_id}`}>
       <div
         className="deal-card"
-        style={customStyles}
         // onClick={() => {
         // history.push(`/coupon/${id}`);
         // }}
         {...otherProps}
       >
-        <img src={imgUrl} alt="amazon" />
-        <h4 className="title">{title}</h4>
-        <p className="discount-details">{details}</p>
+        <img className="dealsImage" src={`http://localhost:8001/uploads/${image}`} alt="amazon" />
+        <h4 className="title">{name}</h4>
+        <p className="discount-details">{cashbackPercent}</p>
         <Button>Grab Now</Button>
       </div>
     </Link>

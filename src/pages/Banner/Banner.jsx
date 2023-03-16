@@ -27,11 +27,11 @@ const Banner = (props) => {
         data = await getAllBanners();
         console.log(data.data.data)
         setBanners(data.data.data)
+
     }
     useEffect(() => {
         allBannersData();
-
-    }, [banners])
+    }, [])
     return (
         <div>
             {modalOpen && <AddBannerModal closeModal={closeModal} categories={categories} setCategories={setCategories} />}
@@ -58,7 +58,7 @@ const Banner = (props) => {
                         banners.map((banner, index) => (
                             <div className='bBanPar'>
                                 <div className='bBanChild'>
-                                    <img className='bBanImgOne' src={banner.url} alt='' />
+                                    <img className='bBanImgOne' src={`http://localhost:8001/uploads/${banner.image}`} alt='' />
                                     <div className='bCon'>
                                         <p className='bTextTwo'>{banner.name}</p>
                                         <div className='bExpOne'>

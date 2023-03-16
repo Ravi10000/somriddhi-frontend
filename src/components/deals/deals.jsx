@@ -8,11 +8,25 @@ import CustomCarousel, {
 } from "../custom-carousel/custom-carousel";
 import handleResponsive from "../../utils/handle-responsive";
 // import { useHistory } from "react-router-dom";
+import { getAllDeals } from "../../api/index.js";
 
 export default function Deals() {
   // const history = useHistory();
   const [deviceWidth, setDeviceWidth] = useState(null);
   const [listOfItems, setListOFItems] = useState([]);
+  const [deals, setDeals] = useState([]);
+
+  let dealData;
+
+  const allDealsData = async () => {
+    dealData = await getAllDeals();
+    console.log(dealData.data.data)
+    setDeals(dealData.data.data);
+  }
+  useEffect(() => {
+    allDealsData();
+  }, [])
+
   useEffect(() => {
     setDeviceWidth(window.innerWidth);
   }, []);
@@ -20,19 +34,19 @@ export default function Deals() {
   useEffect(() => {
     if (deviceWidth < 800 && deviceWidth > 500) {
       handleResponsive({
-        list: dealList,
+        list: deals,
         setList: setListOFItems,
         itemsPerSlide: 2,
       });
     } else if (deviceWidth > 800 && deviceWidth < 1400) {
       handleResponsive({
-        list: dealList,
+        list: deals,
         setList: setListOFItems,
         itemsPerSlide: 3,
       });
     } else if (deviceWidth > 1400) {
       handleResponsive({
-        list: dealList,
+        list: deals,
         setList: setListOFItems,
         itemsPerSlide: 4,
       });
@@ -44,32 +58,34 @@ export default function Deals() {
       <h2 className="_title">Deal Of The Day</h2>
       <div className="carousel-container">
         <CustomCarousel>
-          {listOfItems.length > 0
-            ? listOfItems.map((list, index) => {
-                return (
-                  <CarouselItem key={index}>
-                    <div className="deals-cards-container">
-                      {list?.map(({ id, title, details, imgUrl }) => {
-                        return (
-                          <DealCard
-                            key={id}
-                            title={title}
-                            details={details}
-                            imgUrl={imgUrl}
-                          />
-                        );
-                      })}
-                    </div>
-                  </CarouselItem>
-                );
-              })
-            : dealList?.map(({ title, details, imgUrl }, index) => {
-                return (
-                  <CarouselItem key={index}>
-                    <DealCard title={title} details={details} imgUrl={imgUrl} />
-                  </CarouselItem>
-                );
-              })}
+          {deals.length > 0
+            ? deals.map((deal, index) => {
+              return (
+                <CarouselItem key={index}>
+                  <div className="deals-cards-container">
+                    {deals?.map(({ _id, name, cashbackPercent, image, url }) => {
+                      return (
+                        <DealCard
+                          key={_id}
+                          name={name}
+                          cashbackPercent={cashbackPercent}
+                          image={image}
+                          url={url}
+                        />
+
+                      );
+                    })}
+                  </div>
+                </CarouselItem>
+              );
+            })
+            : deals?.map(({ _id, name, cashbackPercent, image, url }, index) => {
+              return (
+                <CarouselItem key={index}>
+                  <DealCard name={name} cashbackPercent={cashbackPercent} image={image} />
+                </CarouselItem>
+              );
+            })}
         </CustomCarousel>
       </div>
     </section>

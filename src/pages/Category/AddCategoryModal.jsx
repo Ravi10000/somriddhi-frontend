@@ -104,23 +104,23 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                     <div className="fileLabel">
                         <p className="textOne">Live Date</p>
                     </div>
+                    {/* <form > */}
+                    {/* <input type="Date" onChange={(e) => setLiveDate(e.target.value)} className="fileFieldTwo" placeholder="Select"> */}
+                    {/* <option className="fileFieldTwo" placeholder="Now">Now</option> */}
+                    {/* </input> */}
+                    {/* </form> */}
                     <form >
-                        <input type="Date" onChange={(e) => setLiveDate(e.target.value)} className="fileFieldTwo" placeholder="Select">
-                            {/* <option className="fileFieldTwo" placeholder="Now">Now</option> */}
-                        </input>
-                    </form>
-                    {/* <form >
-                        <select onChange={(e) => setsetLiveDateUrl(e.target.value)} className="fileFieldTwo" placeholder="Now">
-                            <option className="fileFieldTwo" placeholder="Now">Now</option>
+                        <select onChange={(e) => setLiveDate(e.target.value)} className="fileFieldTwo" placeholder="Now">
                             <option className="fileFieldTwo" placeholder="Now">Later</option>
-                            <option className="fileFieldTwo" placeholder="Now">Earlier</option>
+                            <option className="fileFieldTwo" placeholder="Now">Live</option>
+                            <option className="fileFieldTwo" placeholder="Now">Not Live</option>
                         </select>
-                    </form> */}
+                    </form>
                 </div>
 
                 <div className="fileText">
                     <div className="fileLabel">
-                        <p className="textOne">Live Date</p>
+                        <p className="textOne">Expiry Date</p>
                     </div>
                     <form >
                         <input type="Date" onChange={(e) => setExpiryDate(e.target.value)} className="fileFieldTwo" placeholder="Select">

@@ -25,7 +25,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
         setFile(e.target.files[0]);
     };
     const addBanner = async () => {
-        console.log(file)
+        // console.log(file)
         const formData = new FormData();
         formData.append("bannerPhoto", file);
         formData.append("name", bannername);

@@ -20,3 +20,12 @@ export const createNewDeal = (bodyFormData, headers) => axios.post(`${BASEURL}/a
 // Category APIs
 export const getAllCategories = (headers) => axios.get(`${BASEURL}/api/category`, headers);
 export const createNewCategory = (bodyFormData, headers) => axios.post(`${BASEURL}/api/category`, bodyFormData, { headers });
+
+
+// NewLetter APIs
+export const getAllNewLetter = (headers) => axios.get(`${BASEURL}/api/newsletter`, headers);
+export const createNewNewLetter = (data, headers) => axios.post(`${BASEURL}/api/newsletter`, data, { headers });
+
+// NewLetter APIs
+export const getAllMemberships = (headers) => axios.get(`${BASEURL}/api/membership`, headers);
+export const createNewMemberships = (bodyFormData, headers) => axios.post(`${BASEURL}/api/membership`, bodyFormData, { headers });

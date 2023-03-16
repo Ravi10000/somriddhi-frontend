@@ -11,16 +11,27 @@
   max-width: 300px;
   white-space: normal;
   cursor: pointer;
+
   h4 {
     color: #3ba615;
     font-size: 1.2rem;
     // width: 70;
   }
+
   button {
     width: 100%;
   }
+
   p {
     // width: 70%;
     color: #878787;
   }
+}
+
+.dealImage {
+  width: 120px;
+  height: 80px;
+  // width: 220px;
+  // height: 100px;
+  object-fit: contain;
 }
