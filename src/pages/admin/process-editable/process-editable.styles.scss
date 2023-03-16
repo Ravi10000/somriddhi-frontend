@@ -10,7 +10,7 @@
     padding: 20px;
     background: #fff;
     border-radius: 8px;
-
+    z-index: -2;
     .process-card {
       padding: 30px;
       border: 2px solid #ececec;
@@ -64,8 +64,8 @@
       }
       .edit-icon-container {
         position: absolute;
-        top: -7px;
-        right: -30px;
+        bottom: -7px;
+        right: -25px;
         width: 30px;
         height: 30px;
         display: grid;

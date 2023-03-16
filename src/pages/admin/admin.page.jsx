@@ -10,13 +10,15 @@ import AllMemberships from "./all-memberships/all-memberships";
 import AllNewsletters from "./all-newsletters/all-newsletters";
 import WebsiteContent from "./website-content/website-content";
 import AllCustomers from "./all-customers/all-customers";
+import TicketsSection from "./tickets-section/tickets-section";
+import AllFaqs from "./all-faqs/all-faqs";
 // import menuList from "../../components/Topbar/menu-list";
 
 export default function AdminPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [categories, setCategories] = useState("yes");
-  const [selectedOption, setSelectedOption] = useState("website content");
+  const [selectedOption, setSelectedOption] = useState("FAQs");
 
   function closeModal() {
     setModalOpen(false);
@@ -63,6 +65,8 @@ export default function AdminPage() {
             {selectedOption === "newsletters" && <AllNewsletters />}
             {selectedOption === "website content" && <WebsiteContent />}
             {selectedOption === "customers" && <AllCustomers />}
+            {selectedOption === "tickets" && <TicketsSection />}
+            {selectedOption === "FAQs" && <AllFaqs />}
           </div>
         </div>
       </div>

@@ -20,6 +20,10 @@
   //   }
   // }
   //   }
+  .process-editable-container {
+    display: grid;
+    place-items: center;
+  }
 }
 
 @media (min-width: 500px) {
@@ -41,6 +45,7 @@
 @media (min-width: 1400px) {
   .website-content {
     .process-editable-container {
+      place-items: flex-start;
       margin: 20px;
     }
   }
