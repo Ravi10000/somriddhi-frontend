@@ -8,13 +8,14 @@ import AllDeals from "./all-deals/all-deals";
 import AllCategories from "./all-categories/all-categories";
 import AllMemberships from "./all-memberships/all-memberships";
 import AllNewsletters from "./all-newsletters/all-newsletters";
+import WebsiteContent from "./website-content/website-content";
 // import menuList from "../../components/Topbar/menu-list";
 
 export default function AdminPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [categories, setCategories] = useState("yes");
-  const [selectedOption, setSelectedOption] = useState("banners");
+  const [selectedOption, setSelectedOption] = useState("website content");
 
   function closeModal() {
     setModalOpen(false);
@@ -59,6 +60,7 @@ export default function AdminPage() {
             {selectedOption === "categories" && <AllCategories />}
             {selectedOption === "memberships" && <AllMemberships />}
             {selectedOption === "newsletters" && <AllNewsletters />}
+            {selectedOption === "website content" && <WebsiteContent />}
           </div>
         </div>
       </div>
