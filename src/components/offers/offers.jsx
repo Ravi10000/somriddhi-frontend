@@ -14,10 +14,9 @@ import CustomCarousel, {
 // utils
 import offerList from "./offers-list";
 import handleResponsive from "../../utils/handle-responsive";
+import { getAllDeals } from "../../api/index.js";
 
 export default function Offers() {
-  // const history = useHistory();
-
   const categories = [
     {
       name: "popular coupons",
@@ -32,8 +31,24 @@ export default function Offers() {
       img: "/latest.png",
     },
   ];
+
   const [deviceWidth, setDeviceWidth] = useState(null);
   const [modifiedOfferList, setModifiedOfferList] = useState([]);
+  // const history = useHistory();
+  const [deals, setDeals] = useState([]);
+
+  let dealData;
+
+  const allDealsData = async () => {
+    dealData = await getAllDeals();
+    console.log(dealData.data.data)
+    setDeals(dealData.data.data);
+  }
+  useEffect(() => {
+    allDealsData();
+  }, [])
+
+
 
   useEffect(() => {
     setDeviceWidth(window.innerWidth);
@@ -42,19 +57,19 @@ export default function Offers() {
   useEffect(() => {
     if (deviceWidth < 800 && deviceWidth > 500) {
       handleResponsive({
-        list: offerList,
+        list: deals,
         setList: setModifiedOfferList,
         itemsPerSlide: 2,
       });
     } else if (deviceWidth > 800 && deviceWidth < 1400) {
       handleResponsive({
-        list: offerList,
+        list: deals,
         setList: setModifiedOfferList,
         itemsPerSlide: 3,
       });
     } else if (deviceWidth > 1400) {
       handleResponsive({
-        list: offerList,
+        list: deals,
         setList: setModifiedOfferList,
         itemsPerSlide: 8,
       });
@@ -77,40 +92,40 @@ export default function Offers() {
       </div>
       <div className="carousel-container">
         <CustomCarousel>
-          {modifiedOfferList.length > 0
-            ? modifiedOfferList.map((offerItem, index) => {
-                return (
-                  <CarouselItem key={index}>
-                    <div className="offers-cards-container">
-                      {offerItem?.map(({ id, title, discount, imgUrl }) => {
-                        return (
-                          <OfferCard
-                            // onClick={() => {
-                            //   history.push(`/coupon/${id}`);
-                            // }}
-                            key={id}
-                            id={id}
-                            title={title}
-                            discount={discount}
-                            imgUrl={imgUrl}
-                          />
-                        );
-                      })}
-                    </div>
-                  </CarouselItem>
-                );
-              })
-            : offerList?.map(({ title, discount, imgUrl }, index) => {
-                return (
-                  <CarouselItem key={index}>
-                    <OfferCard
-                      title={title}
-                      discount={discount}
-                      imgUrl={imgUrl}
-                    />
-                  </CarouselItem>
-                );
-              })}
+          {deals.length > 0
+            ? deals.map((deal, index) => {
+              return (
+                <CarouselItem key={index}>
+                  <div className="offers-cards-container">
+                    {deals?.map(({ _id, name, cashbackPercent, image }) => {
+                      return (
+                        <OfferCard
+                          // onClick={() => {
+                          //   history.push(`/coupon/${id}`);
+                          // }}
+                          key={_id}
+                          _id={_id}
+                          name={name}
+                          cashbackPercent={cashbackPercent}
+                          image={image}
+                        />
+                      );
+                    })}
+                  </div>
+                </CarouselItem>
+              );
+            })
+            : deals?.map(({ name, cashbackPercent, image }, index) => {
+              return (
+                <CarouselItem key={index}>
+                  <OfferCard
+                    name={name}
+                    cashbackPercent={cashbackPercent}
+                    image={image}
+                  />
+                </CarouselItem>
+              );
+            })}
         </CustomCarousel>
       </div>
     </section>

@@ -4,13 +4,13 @@ import React from "react";
 import Button from "../../button/button";
 import { Link } from "react-router-dom";
 
-export default function OfferCard({ id, title, discount, imgUrl, ...otherProps }) {
+export default function OfferCard({ _id, name, cashbackPercent, image, ...otherProps }) {
   return (
-    <Link to={`/coupon/${id}`}>
+    <Link to={`/coupon/${_id}`}>
       <div className="offer-card" {...otherProps}>
-        <h4 className="title">{title}</h4>
-        <img src={imgUrl} alt="" />
-        <p>{discount}</p>
+        <h4 className="title">{name}</h4>
+        <img className="dealImage" src={`http://localhost:8001/uploads/${image}`} alt="" />
+        <p>{cashbackPercent}</p>
         <Button>Grab Now</Button>
       </div>
     </Link>

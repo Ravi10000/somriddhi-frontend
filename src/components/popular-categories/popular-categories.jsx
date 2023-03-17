@@ -1,9 +1,23 @@
 import './popular-categories.styles.scss';
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import categoriesList from './popular-categories-list';
+import { getAllCategories } from '../../api/index.js';
+
+
 
 export default function PopulatCategories() {
+
+    const [categories, setCategories] = useState([]);
+
+    const getAllCategoriesData = async () => {
+        const cats = await getAllCategories();
+        setCategories(cats.data.data);
+    }
+
+    useEffect(() => {
+        getAllCategoriesData();
+    }, [])
     return (
         <section className='popular-categories-section' id='popular-category'>
             <div className="container">
@@ -14,9 +28,9 @@ export default function PopulatCategories() {
                     <h2 className='_title'>Popular Categories</h2>
                     <div className="categories-table">
                         {
-                            categoriesList.map((category, index) => (
-                                <div className="category-name" key={category}>
-                                    {category}
+                            categories.map((category, index) => (
+                                <div className="category-name" key={index}>
+                                    {category.name}
                                 </div>
 
                             ))

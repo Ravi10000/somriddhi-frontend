@@ -6,10 +6,23 @@ import { useParams } from "react-router-dom";
 import entertainmentCoupons from "./entertainment-coupons";
 import DealCard from "../../components/deals/deal-card/deal-card";
 import FilterList from "../../components/filter-list/filter-list";
+import { getAllDeals } from "../../api/index.js";
 
 export default function CategoryPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { category } = useParams();
+  const [deals, setDeals] = useState([]);
+
+  let dealData;
+
+  const allDealsData = async () => {
+    dealData = await getAllDeals();
+    console.log(dealData.data.data)
+    setDeals(dealData.data.data);
+  }
+  useEffect(() => {
+    allDealsData();
+  }, [])
 
   console.log({ selectedCategories });
   useEffect(() => {
@@ -38,13 +51,14 @@ export default function CategoryPage() {
             <p>showing 1 -20 results</p>
           </div>
           <div className="category-cards-container">
-            {entertainmentCoupons.map(({ imgUrl, title, details, id }) => (
+            {deals.map(({ _id, name, cashbackPercent, image }) => (
               <DealCard
-                key={id}
-                customStyles={{ background: "#F8F8F8", border: "none" }}
-                imgUrl={imgUrl}
-                title={title}
-                details={details}
+
+                key={_id}
+                _id={_id}
+                name={name}
+                cashbackPercent={cashbackPercent}
+                image={image}
               />
             ))}
           </div>

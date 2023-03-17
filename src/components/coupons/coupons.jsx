@@ -13,6 +13,8 @@ import CustomCarousel, {
 import couponsCategoryList from "./coupons-category-list";
 import offers from "./offers";
 import handleResponsive from "../../utils/handle-responsive";
+import { getAllDeals } from "../../api/index.js";
+
 
 export default function Coupons() {
   // states
@@ -20,6 +22,18 @@ export default function Coupons() {
   const [selectedCategory, setSelectedCategory] = useState("fashion");
   const [selectdCategoryOffers, setSelectedCategoryOffers] = useState([]);
   const [listOfItemsToShow, setListOfItemsToShow] = useState([]);
+  const [deals, setDeals] = useState([]);
+
+  let dealData;
+
+  const allDealsData = async () => {
+    dealData = await getAllDeals();
+    console.log(dealData.data.data)
+    setDeals(dealData.data.data);
+  }
+  useEffect(() => {
+    allDealsData();
+  }, [])
 
   useEffect(() => {
     setSelectedCategory(couponsCategoryList[0]?.name); // selected Category
@@ -34,7 +48,7 @@ export default function Coupons() {
         itemsPerSlide: 3,
       });
       handleResponsive({
-        list: offers,
+        list: deals,
         setList: setSelectedCategoryOffers,
         itemsPerSlide: 1,
       });
@@ -45,7 +59,7 @@ export default function Coupons() {
         itemsPerSlide: 5,
       });
       handleResponsive({
-        list: offers,
+        list: deals,
         setList: setSelectedCategoryOffers,
         itemsPerSlide: 3,
       });
@@ -56,7 +70,7 @@ export default function Coupons() {
         itemsPerSlide: 7,
       });
       handleResponsive({
-        list: offers,
+        list: deals,
         setList: setSelectedCategoryOffers,
         itemsPerSlide: 3,
       });
@@ -67,7 +81,7 @@ export default function Coupons() {
         itemsPerSlide: 9,
       });
       handleResponsive({
-        list: offers,
+        list: deals,
         setList: setSelectedCategoryOffers,
         itemsPerSlide: 4,
       });
@@ -83,85 +97,83 @@ export default function Coupons() {
             <CustomCarousel HideIndicators>
               {listOfItemsToShow.length > 0
                 ? listOfItemsToShow.map((tableOfferListItem, index) => {
-                    return (
-                      <CarouselItem key={index}>
-                        <div className="menu-cards-container">
-                          {tableOfferListItem?.map(({ name, img }, index) => {
-                            return (
-                              <div
+                  return (
+                    <CarouselItem key={index}>
+                      <div className="menu-cards-container">
+                        {tableOfferListItem?.map(({ name, img }, index) => {
+                          return (
+                            <div
                               key={index}
-                                onClick={() => {
-                                  setSelectedCategory(name);
-                                }}
-                                className={`coupon-category-card ${
-                                  name === selectedCategory && "selected"
+                              onClick={() => {
+                                setSelectedCategory(name);
+                              }}
+                              className={`coupon-category-card ${name === selectedCategory && "selected"
                                 }`}
-                              >
-                                <img src={img} alt="category" />
-                                <h5>{name}</h5>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </CarouselItem>
-                    );
-                  })
+                            >
+                              <img src={img} alt="category" />
+                              <h5>{name}</h5>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </CarouselItem>
+                  );
+                })
                 : couponsCategoryList?.map(({ name, img }, index) => {
-                    return (
-                      <CarouselItem key={index}>
-                        <div
-                          className={`coupon-category-card ${
-                            index == 0 && "selected"
+                  return (
+                    <CarouselItem key={index}>
+                      <div
+                        className={`coupon-category-card ${index == 0 && "selected"
                           }`}
-                        >
-                          <img src={img} alt="category" />
-                          <h5>{name}</h5>
-                        </div>
-                      </CarouselItem>
-                    );
-                  })}
+                      >
+                        <img src={img} alt="category" />
+                        <h5>{name}</h5>
+                      </div>
+                    </CarouselItem>
+                  );
+                })}
             </CustomCarousel>
           </div>
           <div className="options-section">
             <div className="options-carousel">
               <CustomCarousel>
-                {selectdCategoryOffers.length > 0
-                  ? selectdCategoryOffers.map((offerList, index) => {
+                {deals.length > 0
+                  ? deals.map((offerList, index) => {
+                    return (
+                      <CarouselItem key={index}>
+                        <div className="menu-cards-container">
+                          {deals?.map(
+                            ({ _id, name, cashbackPercent, image }) => {
+                              return (
+                                <DealCard
+                                  key={_id}
+                                  _id={_id}
+                                  name={name}
+                                  cashbackPercent={cashbackPercent}
+                                  image={image}
+                                />
+                              );
+                            }
+                          )}
+                        </div>
+                      </CarouselItem>
+                    );
+                  })
+                  : deals?.map(
+                    ({ _id, name, cashbackPercent, image }) => {
                       return (
-                        <CarouselItem key={index}>
-                          <div className="menu-cards-container">
-                            {offerList?.map(
-                              ({ title, imgUrl, details, id }) => {
-                                return (
-                                  <DealCard
-                                    id={id}
-                                    key={id}
-                                    title={title}
-                                    details={details}
-                                    imgUrl={imgUrl}
-                                  />
-                                );
-                              }
-                            )}
-                          </div>
+                        <CarouselItem>
+                          <DealCard
+                            key={_id}
+                            _id={_id}
+                            name={name}
+                            cashbackPercent={cashbackPercent}
+                            image={image}
+                          />
                         </CarouselItem>
                       );
-                    })
-                  : selectdCategoryOffers?.map(
-                      ({ title, imgUrl, details, id }) => {
-                        return (
-                          <CarouselItem>
-                            <DealCard
-                              id={id}
-                              key={id}
-                              title={title}
-                              details={details}
-                              imgUrl={imgUrl}
-                            />
-                          </CarouselItem>
-                        );
-                      }
-                    )}
+                    }
+                  )}
               </CustomCarousel>
             </div>
           </div>
