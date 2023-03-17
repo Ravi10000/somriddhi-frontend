@@ -57,7 +57,11 @@ export default function AddBannerPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form onSubmit={handleSubmit(submitForm)} ref={formRef}>
+        <form
+          onSubmit={handleSubmit(submitForm)}
+          ref={formRef}
+          encType="multipart/form-data"
+        >
           <div className="upload-banner-img">
             <label className="label">Banner Image</label>
             <div className="upload-input">

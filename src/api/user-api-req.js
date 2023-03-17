@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const endpoint = "http://3.108.161.80:8002/api";
-axios.defaults.baseURL = `/api`;
+axios.defaults.baseURL = `http://3.108.161.80:8002/api`;
 // user related request
 // start
 export async function sendOtp({ phone, countryCode = "+91" }) {

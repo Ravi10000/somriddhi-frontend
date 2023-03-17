@@ -1,9 +1,27 @@
 import "./add-membership-popup.styles.scss";
 
-import React from "react";
+import React, { useRef } from "react";
 import Backdrop from "../backdrop/backdrop";
+import { createNewMemberships } from "../../api";
 
 export default function AddMembershipPopup({ setShowPopup }) {
+  const formRef = useRef(null);
+  async function submitMembershipForm(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    for (let key of formData.entries()) {
+      console.log(key);
+    }
+    try {
+      const response = await createNewMemberships(formData);
+      console.log({ response });
+      if (response.data.status === "success") {
+        setShowPopup(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Backdrop>
       <div className="add-membership-popup">
@@ -21,7 +39,12 @@ export default function AddMembershipPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form action="">
+        <form
+          name="membership-form"
+          ref={formRef}
+          onSubmit={submitMembershipForm}
+          encType="multipart/form-data"
+        >
           <div className="upload-membership-img">
             <label className="label">Upload Photo</label>
             <div className="upload-input">
@@ -30,10 +53,7 @@ export default function AddMembershipPopup({ setShowPopup }) {
                 className="file-input"
                 type="file"
                 accept="image/png, image/jpeg"
-                // onChange={(e) => saveFile(e)}
-                // className="fileFieldText"
-                name="file"
-                // placeholder="Upload Image"
+                name="membershipPhoto"
               />
             </div>
           </div>
@@ -41,7 +61,7 @@ export default function AddMembershipPopup({ setShowPopup }) {
             <label htmlFor="">Name</label>
             <input
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
+              name="name"
               placeholder="Enter Membership Name"
             />
           </div>
@@ -49,7 +69,7 @@ export default function AddMembershipPopup({ setShowPopup }) {
             <label htmlFor="">Description</label>
             <textarea
               className="text-input"
-              name=""
+              name="description"
               id=""
               cols="30"
               rows="10"
@@ -59,16 +79,16 @@ export default function AddMembershipPopup({ setShowPopup }) {
           <div className="membership-cashback input-container">
             <label htmlFor="">Cashback Percentage</label>
             <input
+              name="cashbackPercent"
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Enter Cashback Percentage"
             />
           </div>
           <div className="membership-url input-container">
             <label htmlFor="">URL</label>
             <input
+              name="url"
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Paster banner URL"
             />
           </div>

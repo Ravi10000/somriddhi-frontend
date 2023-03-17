@@ -11,15 +11,17 @@ import { addNewFaq } from "../../api/index";
 export default function AddFaqPopup({ setShowPopup }) {
   const formRef = useRef(null);
 
-  async function submitForm() {
-    e.preventDeault();
-    const formData = new FormData(formRef.current);
-    const question = formData.get("question");
-    const answer = formData.get("answer");
-    console.log({ question, answer });
-    const response = await addNewFaq({ question, answer });
-    console.log({ response });
-  }
+  const faqFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    console.log("fomr");
+    try {
+      const response = await addNewFaq(formData);
+      console.log({ response });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Backdrop>
@@ -44,13 +46,10 @@ export default function AddFaqPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form onSubmit={submitForm} ref={formRef}>
+        <form onSubmit={faqFormSubmit} name="faq-form">
           <div className="faq-name input-container">
             <label>Question</label>
             <input
-              onChange={(e) => {
-                setQuestion(e.target.value);
-              }}
               required
               className="text-input"
               placeholder="Enter Question"
@@ -60,14 +59,7 @@ export default function AddFaqPopup({ setShowPopup }) {
           <div className="answer input-container">
             <label>Write Relevent Answer</label>
             <p className="textarea-msg">Write Answer</p>
-            <textarea
-              onChange={(e) => {
-                setAnswer(e.target.value);
-              }}
-              required
-              className="text-input"
-              name="answer"
-            ></textarea>
+            <textarea required className="text-input" name="answer"></textarea>
           </div>
 
           <button className="add-faq-btn">Save</button>

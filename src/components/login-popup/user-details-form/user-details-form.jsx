@@ -49,10 +49,11 @@ function UserDetailsForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(submitForm)} className="user-input" noValidate>
+    <form onSubmit={handleSubmit(submitForm)} id="user-input" noValidate>
       <h1>Your Phone Number</h1>
       <div className="inputs-container">
         <input
+          className="user-details-input"
           placeholder="First name"
           {...register("fname", {
             required: "name required",
@@ -63,6 +64,7 @@ function UserDetailsForm({
           }
         />
         <input
+          className="user-details-input"
           pattern="[A-Za-z]+"
           placeholder="Last name"
           {...register("lname", {
@@ -75,6 +77,7 @@ function UserDetailsForm({
         />
         <div className="input-container">
           <input
+            className="user-details-input"
             placeholder="Email"
             {...register("email", {
               required: "Email required",
@@ -90,13 +93,14 @@ function UserDetailsForm({
           )}
         </div>
         <input
+          className="user-details-input"
           name="referralCode"
           placeholder="Referral Code"
           {...register("referralCode")}
         />
       </div>
       <p>It&#39;s okay, If you do not have any</p>
-      <Button isLoading={isLoading}>Continue</Button>
+      <button isLoading={isLoading}>Continue</button>
       <p onClick={closeModal}>skip now</p>
     </form>
   );

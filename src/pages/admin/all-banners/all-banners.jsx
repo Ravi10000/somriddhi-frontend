@@ -50,10 +50,10 @@ export default function AllBanners() {
                   <div className="info-container">
                     <div className="banner-info">
                       <h5 className="name">{name}</h5>
-                      <div className="info expiry-date">
+                      {/* <div className="info expiry-date">
                         <img src="/date.png" alt="date" />
                         <p>{expiryDate ? expiryDate : "unavailable"}</p>
-                      </div>
+                      </div> */}
                       <div className="info banner-link">
                         <img src="/link.png" alt="banner link" />
                         <p>{url}</p>
