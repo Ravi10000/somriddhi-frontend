@@ -8,7 +8,7 @@ import TitleSection from "../title-section/title-section";
 import AddCustomerPopup from "../../../components/add-customer-popup/add-customer-popup";
 
 // utils
-import { getAllUsers } from "../../../api";
+import { getAllUsers } from "../../../api/";
 // import customers from "./customers";
 
 export default function AllCustomers() {

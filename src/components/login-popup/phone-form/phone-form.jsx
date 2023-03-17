@@ -2,7 +2,7 @@ import "./phone-form.styles.scss";
 
 // packages imports
 import React, { useEffect, useRef, useState } from "react";
-import { sendOtp } from "../../../api";
+import { sendOtp } from "../../../api/user-api-req";
 
 // components
 import Button from "../../button/button";

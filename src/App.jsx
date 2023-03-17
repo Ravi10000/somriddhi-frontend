@@ -1,7 +1,7 @@
 import "./App.scss";
 
 // react hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // packages
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
@@ -21,8 +21,15 @@ import CategoryPage from "./pages/category/category-page";
 import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
 import AdminPage from "./pages/admin/admin.page";
+import axios from "axios";
 
 export default function App() {
+  useEffect(() => {
+    (async function () {
+      const response = await axios.get("http://3.108.161.80:8002/api/faq");
+      console.log({ response });
+    })();
+  }, []);
   const { pathname } = useLocation();
   // console.log({ pathname });
   const [modalOpen, setModalOpen] = useState(false);

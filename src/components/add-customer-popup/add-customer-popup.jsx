@@ -21,7 +21,7 @@ export default function AddCustomerPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form action="">
+        <form>
           <div className="customer-name input-container">
             <label htmlFor="">Name</label>
             <input className="text-input" placeholder="Enter Customer Name" />

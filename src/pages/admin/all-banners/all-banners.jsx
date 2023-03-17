@@ -1,17 +1,36 @@
 import "./all-banners.styles.scss";
 // react hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // components
 import TitleSection from "../title-section/title-section";
 import AddBannerPopup from "../../../components/add-banner-popup/add-banner-popup";
-
+import axios from "axios";
 // utils
 import bannerList from "./banner-list";
 
+// api requests
+import { getAllBanners } from "../../../api/";
+
 export default function AllBanners() {
+  const [banners, setBanners] = useState([]);
   const [showAddBannerPopup, setShowAddBannerPopup] = useState(false);
 
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await getAllBanners();
+        // const responeFaq = await axios.post("/faq", {
+        //   question: "what is this",
+        //   answer: "this is answer",
+        // });
+        // console.log({ responeFaq });
+        setBanners(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
   return (
     <>
       {showAddBannerPopup && (
@@ -23,17 +42,17 @@ export default function AllBanners() {
           addFunction={() => setShowAddBannerPopup(true)}
         />
         <div className="banner-cards-container">
-          {bannerList?.map(
-            ({ name, url, expiryDate, bannerImg, desc }, index) => (
+          {banners?.map(
+            ({ name, url, expiryDate, image, description }, index) => (
               <div className="banner-card" key={index}>
-                <img className="banner-img" src={bannerImg} alt={name} />
+                <img className="banner-img" src={image} alt={name} />
                 <div className="banner-details">
                   <div className="info-container">
                     <div className="banner-info">
                       <h5 className="name">{name}</h5>
                       <div className="info expiry-date">
                         <img src="/date.png" alt="date" />
-                        <p>{expiryDate}</p>
+                        <p>{expiryDate ? expiryDate : "unavailable"}</p>
                       </div>
                       <div className="info banner-link">
                         <img src="/link.png" alt="banner link" />
@@ -42,7 +61,7 @@ export default function AllBanners() {
                     </div>
                     <img className="lock-icon" src="/lock.png" alt="locked" />
                   </div>
-                  <div className="banner-desc">{desc}</div>
+                  <div className="banner-desc">{description}</div>
                 </div>
               </div>
             )
