@@ -1,7 +1,9 @@
 import "./add-deal-popup.styles.scss";
-
-import React from "react";
+// components
 import Backdrop from "../backdrop/backdrop";
+
+// utils
+import { createDeal } from "../../api";
 
 export default function AddDealPopup({ setShowPopup }) {
   return (

@@ -1,12 +1,27 @@
 import "./all-customers.styles.scss";
 
-import React, { useState } from "react";
+// react hooks
+import { useState, useEffect } from "react";
+
+// components
 import TitleSection from "../title-section/title-section";
-import customers from "./customers";
 import AddCustomerPopup from "../../../components/add-customer-popup/add-customer-popup";
+
+// utils
+import { getAllUsers } from "../../../api";
+// import customers from "./customers";
 
 export default function AllCustomers() {
   const [showAddCustomerPopup, setShowAddCustomerPopup] = useState(false);
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    (async function () {
+      const response = await getAllUsers();
+      setCustomers(response.data.data);
+      console.log({ response });
+    })();
+  }, []);
   return (
     <>
       {showAddCustomerPopup && (
@@ -39,22 +54,25 @@ export default function AllCustomers() {
                     {
                       email,
                       phone,
-                      joinedOn,
+                      createdAt,
                       totalPurchase,
                       totalPayment,
                       totalPayout,
                     },
                     index
-                  ) => (
-                    <tr key={index}>
-                      <td>{email}</td>
-                      <td>{phone}</td>
-                      <td>{joinedOn}</td>
-                      <td>Rs. {totalPurchase}</td>
-                      <td>Rs. {totalPayment}</td>
-                      <td>Rs. {totalPayout}</td>
-                    </tr>
-                  )
+                  ) => {
+                    const joinedOn = new Date(createdAt).toDateString();
+                    return (
+                      <tr key={index}>
+                        <td>{email ? email : "<unavailable>"}</td>
+                        <td>{phone ? phone : "<unavailable>"}</td>
+                        <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
+                        <td>Rs. {totalPurchase ? totalPurchase : 0}</td>
+                        <td>Rs. {totalPayment ? totalPayment : 0}</td>
+                        <td>Rs. {totalPayout ? totalPayout : 0}</td>
+                      </tr>
+                    );
+                  }
                 )}
               </tbody>
             </table>

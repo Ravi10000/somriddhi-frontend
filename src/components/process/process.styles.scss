@@ -3,32 +3,13 @@
     flex-direction: column;
     align-items: center;
 
-    // h2 {
-    //     font-size: 1.5rem;
-    //     font-weight: 600;
-    //     margin: 50px 0;
-    //     position: relative;
-
-    //     &:after {
-    //         content: '';
-    //         height: 5px;
-    //         bottom: 10px;
-    //         left: 50%;
-    //         transform: translateX(-50%);
-    //         width: 75px;
-    //         border-radius: 3px;
-    //         background: #F01C21;
-    //         position: absolute;
-    //         bottom: -10px;
-    //     }
-    // }
-
     .process-cards-container {
         display: grid;
         gap: 20px;
         padding: 20px;
 
         .process-card {
+            background: #fff;
             padding: 30px;
             border: 2px solid #ECECEC;
             border-radius: 15px;

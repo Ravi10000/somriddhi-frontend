@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ProcessEditable() {
   return (
-    <section className="process-section">
+    <section className="process-editable-section">
       {/* <h2 className="_title">How It Works?</h2> */}
       <div className="process-cards-container">
         <div className="process-card">

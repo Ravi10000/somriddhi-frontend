@@ -1,9 +1,12 @@
 import "./admin.styles.scss";
-import React, { useEffect, useState } from "react";
+
+// react hooks
+import { useEffect, useState } from "react";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-import SideBar from "../../components/Topbar/Topbar";
+import SideBar from "../../components/sidebar/sidebar";
+
 import Nav from "../../components/Nav/Nav";
 import AddBannerModal from "../Banner/AddBannerModal";
 import AllBanners from "./all-banners/all-banners";
@@ -16,7 +19,7 @@ import AllCustomers from "./all-customers/all-customers";
 import TicketsSection from "./tickets-section/tickets-section";
 import AllFaqs from "./all-faqs/all-faqs";
 import AllFeedbacks from "./all-feedbacks/all-feedbacks";
-import menuList from "../../components/Topbar/menu-list";
+import menuList from "../../components/sidebar/menu-list";
 
 export default function AdminPage() {
   const navigate = useNavigate();

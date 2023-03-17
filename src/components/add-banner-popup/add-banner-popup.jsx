@@ -1,9 +1,39 @@
 import "./add-banner-popup.styles.scss";
+// packages
+import { useForm } from "react-hook-form";
+import axios from "../../api";
 
-import React from "react";
+// components
 import Backdrop from "../backdrop/backdrop";
 
+// utils
+import { createBanner } from "../../api";
+
 export default function AddBannerPopup({ setShowPopup }) {
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
+
+  console.log({ errors });
+
+  async function submitForm(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    // for (let key of formData.entries()) {
+    //   console.log(key);
+    // }
+    try {
+      const response = await createBanner(formData);
+      console.log({ response });
+      if (response.data.status === "success") {
+        setShowPopup(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Backdrop>
       <div className="add-banner-popup">
@@ -21,7 +51,7 @@ export default function AddBannerPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form action="">
+        <form onSubmit={submitForm}>
           <div className="upload-banner-img">
             <label className="label">Banner Image</label>
             <div className="upload-input">
@@ -29,12 +59,16 @@ export default function AddBannerPopup({ setShowPopup }) {
               <input
                 className="file-input"
                 type="file"
-                accept="image/png, image/jpeg"
+                accept="image/*"
+                {...register("bannerPhoto", { required: "Image is required" })}
                 // onChange={(e) => saveFile(e)}
                 // className="fileFieldText"
-                name="file"
+                // name="file"
                 // placeholder="Upload Image"
               />
+              {errors.bannerPhoto && (
+                <p className="error">{errors.bannerPhoto.message}</p>
+              )}
             </div>
           </div>
           <div className="banner-name input-container">
@@ -43,7 +77,9 @@ export default function AddBannerPopup({ setShowPopup }) {
               className="text-input"
               // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Enter Banner Name"
+              {...register("name", { required: "Name is required" })}
             />
+            {errors.name && <p className="error">{errors.name.message}</p>}
           </div>
           <div className="url input-container">
             <label htmlFor="">URL</label>
@@ -52,18 +88,23 @@ export default function AddBannerPopup({ setShowPopup }) {
               // className="fileFieldTwo"
               // onChange={(e) => setUrl(e.target.value)}
               placeholder="Paste Banner url"
+              {...register("url", { required: "URL is required" })}
             />
+            {errors.url && <p className="error">{errors.url.message}</p>}
           </div>
           <div className="description input-container">
             <label htmlFor="">Description</label>
+            <p className="textarea-msg">Enter Banner Description</p>
             <textarea
               className="text-input"
-              name=""
-              id=""
-              cols="30"
-              rows="10"
-              defaultValue="Enter Banner Description"
+              // defaultValue="Enter Banner Description"
+              {...register("description", {
+                required: "Description is required",
+              })}
             ></textarea>
+            {errors.description && (
+              <p className="error">{errors.description.message}</p>
+            )}
           </div>
           <button className="add-banner-btn">Add Banner</button>
         </form>

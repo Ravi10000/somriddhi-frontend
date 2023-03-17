@@ -1,9 +1,13 @@
 import "./all-banners.styles.scss";
+// react hooks
+import { useState } from "react";
 
-import React, { useState } from "react";
+// components
 import TitleSection from "../title-section/title-section";
-import bannerList from "./banner-list";
 import AddBannerPopup from "../../../components/add-banner-popup/add-banner-popup";
+
+// utils
+import bannerList from "./banner-list";
 
 export default function AllBanners() {
   const [showAddBannerPopup, setShowAddBannerPopup] = useState(false);
