@@ -1,12 +1,10 @@
 import "./App.scss";
 
+// react hooks
+import { useState, useEffect } from "react";
+
 // packages
-import { useState } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Banner from "./pages/Banner/Banner";
-import Category from "./pages/Category/category";
-import Deal from "./pages/Deals/deals";
 
 // components
 import ScrollToTop from "./components/scrollToTop";
@@ -23,8 +21,15 @@ import CategoryPage from "./pages/category/category-page";
 import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
 import AdminPage from "./pages/admin/admin.page";
+import axios from "axios";
 
 export default function App() {
+  useEffect(() => {
+    (async function () {
+      const response = await axios.get("http://3.108.161.80:8002/api/faq");
+      console.log({ response });
+    })();
+  }, []);
   const { pathname } = useLocation();
   // console.log({ pathname });
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,7 +41,6 @@ export default function App() {
   }
   return (
     <div className="App">
-      {/* <BrowserRouter> */}
       <ScrollToTop />
       {!pathname.includes("/admin") && (
         <>
@@ -46,7 +50,7 @@ export default function App() {
         </>
       )}
       <Routes>
-        <Route path="/" exact element={<Dashboard />} />
+        <Route path="/" exact element={<HomePage />} />
         <Route
           path="/admin"
           element={<Navigate to="/admin/banners" replace />}
@@ -60,8 +64,8 @@ export default function App() {
           path="/coupon-claimed/:id"
           element={<CouponsClaimedPage />}
         />
-        {/* <Route exact path="/profile" element={<ProfilePage />} /> */}
-        <Route
+        <Route exact path="/profile" element={<ProfilePage />} />
+        {/* <Route
           exact
           path="/profile"
           element={
@@ -69,23 +73,9 @@ export default function App() {
               <ProfilePage />
             </ProtectedRoute>
           }
-        />
-        <Route path="/admin/deal" element={<Category />} />
-        <Route path="/categories" element={<Deal />} />
+        /> */}
       </Routes>
       {!pathname.includes("/admin") && <Footer />}
-      {/* </BrowserRouter> */}
-
-      {/* <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/category/:category" component={CategoryPage} />
-        <Route exact path="/coupon/:id" component={CouponPage} />
-        <Route
-          exact
-          path="/coupon-claimed/:id"
-          component={CouponsClaimedPage}
-        />
-      </Switch> */}
     </div>
   );
 }

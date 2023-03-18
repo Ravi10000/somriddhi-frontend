@@ -48,12 +48,20 @@
         gap: 10px;
         align-items: center;
         justify-content: center;
-        input {
-          width: 190px;
+        position: relative;
+        input::-webkit-file-upload-button {
+          font-weight: 600;
+          border: none;
+          padding: 10px 20px;
+          font-family: "Metropolis", sans-serif;
+          border-radius: 8px;
         }
-        // input::-webkit-file-upload-button {
-        //   visibility: hidden;
-        // }
+        input {
+          padding: 10px;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+        }
       }
     }
     .input-container {

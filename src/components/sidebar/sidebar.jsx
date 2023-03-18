@@ -1,24 +1,20 @@
-import React, { useState, useNavigate } from "react";
-import "./topbar.styles.scss";
-import Logo from "./logo.png";
-import Dot from "./Dot.png";
+import "./sidebar.styles.scss";
+
+// packages
 import { Link } from "react-router-dom";
-// import allMenus from "./Data.js";
-// import { allHelp } from "./Data.js";
+
+// utils
 import { topMenuOptions, bottomMenuOptions } from "./menu-list";
-const SideBar = ({
+
+function SideBar({
   isMenuVisible,
   setIsMenuVisible,
   hideMenu,
-  setSelectedOption,
   selectedOption,
-}) => {
-  // const [isClicked, setIsClicked] = useState(0);
+}) {
   function selectOption(item) {
-    // console.log(item);
     setIsMenuVisible(false);
     window.scrollTo(0, 0);
-    // setSelectedOption(item);
   }
   return (
     // <div className={`drawer ${isMenuVisible && "active"}`}>
@@ -113,6 +109,6 @@ const SideBar = ({
       </div>
     </div>
   );
-};
+}
 
 export default SideBar;

@@ -1,7 +1,9 @@
 import "./add-deal-popup.styles.scss";
-
-import React from "react";
+// components
 import Backdrop from "../backdrop/backdrop";
+
+// utils
+import { createNewDeal } from "../../api/";
 
 export default function AddDealPopup({ setShowPopup }) {
   return (
@@ -25,6 +27,7 @@ export default function AddDealPopup({ setShowPopup }) {
           <div className="deal-name input-container">
             <label htmlFor="">Name</label>
             <input
+            name="name"
               className="text-input"
               // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Enter Banner Name"
