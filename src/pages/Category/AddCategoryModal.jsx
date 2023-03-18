@@ -23,6 +23,8 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
     const [dealCashbackPercent, setCashbackPercent] = useState('');
     const [dealLiveDate, setLiveDate] = useState('');
     const [dealExpiryDate, setExpiryDate] = useState();
+    const [description, setDescription] = useState('');
+    const [categoryId, setCategoryId] = useState('');
 
     const saveFile = (e) => {
         setFile(e.target.files[0]);
@@ -36,6 +38,8 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
         formData.append("cashbackPercent", dealCashbackPercent);
         formData.append("liveDate", dealLiveDate);
         formData.append("expiryDate", dealExpiryDate);
+        formData.append("description", description);
+        formData.append("categoryId", categoryId);
 
         const deal = await createNewDeal(formData);
         console.log(deal);
@@ -68,7 +72,7 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                     </div>
                     <div className="fileField">
                         <div className="fileFieldImage">
-                            <img src={Upload} alt="" />
+                            {/* <img src={Upload} alt="" /> */}
 
                         </div>
                         <form>
@@ -90,6 +94,22 @@ export default function AddDealModal({ closeModal, categories, setCategories }) 
                     </div>
                     <form >
                         <input onChange={(e) => setUrl(e.target.value)} className="fileFieldTwo" placeholder="Paste Deal url" />
+                    </form>
+                </div>
+                <div className="fileText">
+                    <div className="fileLabel">
+                        <p className="textOne">Description</p>
+                    </div>
+                    <form >
+                        <input onChange={(e) => setDescription(e.target.value)} className="fileFieldTwo" placeholder="Write Description here" />
+                    </form>
+                </div>
+                <div className="fileText">
+                    <div className="fileLabel">
+                        <p className="textOne">Catgeory Id</p>
+                    </div>
+                    <form >
+                        <input onChange={(e) => setCategoryId(e.target.value)} className="fileFieldTwo" placeholder="Write CatgeoryId here" />
                     </form>
                 </div>
                 <div className="fileText">

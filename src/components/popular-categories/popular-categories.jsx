@@ -3,6 +3,7 @@ import './popular-categories.styles.scss';
 import React, { useEffect, useState } from 'react'
 import categoriesList from './popular-categories-list';
 import { getAllCategories } from '../../api/index.js';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,6 +14,10 @@ export default function PopulatCategories() {
     const getAllCategoriesData = async () => {
         const cats = await getAllCategories();
         setCategories(cats.data.data);
+    }
+    const handleOnClick = (url) => {
+        console.log(url)
+        // window.open(url);
     }
 
     useEffect(() => {
@@ -29,7 +34,7 @@ export default function PopulatCategories() {
                     <div className="categories-table">
                         {
                             categories.map((category, index) => (
-                                <div className="category-name" key={index}>
+                                <div onClick={(e) => handleOnClick(category.url)} className="category-name" key={index}>
                                     {category.name}
                                 </div>
 

@@ -2,7 +2,7 @@ import "./coupon.styles.scss";
 
 // packages
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // components
 import Button from "../../components/button/button";
 
@@ -10,6 +10,7 @@ import Button from "../../components/button/button";
 import couponDetails from "./coupon-details";
 import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
+import { getADealData } from "../../api/index.js";
 
 export default function CouponPage() {
   const navigate = useNavigate();
@@ -17,6 +18,27 @@ export default function CouponPage() {
   const [hoursLeft, setHoursLeft] = useState("00");
   const [minutesLeft, setMinutesLeft] = useState("00");
   const [secondsLeft, setSecondsLeft] = useState("00");
+  const [dealInfo, setDealInfo] = useState([]);
+  const [render, setRender] = useState(false);
+  const info = [
+    "Click on Orange button and visit Gizmore",
+    "Shop there as you normally do",
+    "Cashback will be added to your account",
+  ]
+  const url = window.location.href;
+  const dealsId = url.split('/')[4];
+  console.log(dealsId)
+
+  const dealData = async (params) => {
+    const dealAllData = await getADealData(dealsId, params);
+    console.log(dealAllData.data.data);
+    setDealInfo(dealAllData.data.data);
+  }
+
+  useEffect(() => {
+    dealData({ dealId: dealsId });
+    setRender(true);
+  }, [])
 
   // const hoursLeftRef = useRef(null);
   // const minutesLeftRef = useRef(null);
@@ -35,6 +57,34 @@ export default function CouponPage() {
       // secondsLeftRef.current = seconds;
     }, 1000);
   }, []);
+
+  let des = dealInfo.description && dealInfo.description.split('.');
+
+  const handleClick = (url) => {
+    console.log(url)
+    window.open(url);
+  }
+  const routeToLink = dealInfo.url;
+  // String.prototype.toHHMMSS = function () {
+  //   var sec_num = parseInt(this, 10); // don't forget the second param
+  //   var hours = Math.floor(sec_num / 3600);
+  //   var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+  //   var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+  //   if (hours < 10) { hours = "0" + hours; }
+  //   if (minutes < 10) { minutes = "0" + minutes; }
+  //   if (seconds < 10) { seconds = "0" + seconds; }
+  //   return hours + ':' + minutes + ':' + seconds;
+  // }
+  // const time = dealInfo.expiryDate.toHHMMSS();
+  // const [hrs, setHrs] = useState(time.split(':')[0]);
+  // const [mins, setMins] = useState(time.split(':')[1]);
+  // const [secs, setSecs] = useState(time.split(':')[2]);
+  // useInterval(() => {
+  //   if (secs != '00') {
+  //     setSecs((Number(hrs) - 1).toString());
+  //   }
+  // }, 1000)
   return (
     <div className="coupon-page">
       <div className="head">
@@ -57,37 +107,61 @@ export default function CouponPage() {
           <h3>Deal Ends In</h3>
           <div className="expires-in">
             <div className="hh time">
-              <p className="highlight">{hoursLeft}</p>
+              <p className="highlight">00</p>
               <p>HH</p>
             </div>
             <div className="mm time">
-              <p className="highlight">{minutesLeft}</p>
+              <p className="highlight">00</p>
               <p>MM</p>
             </div>
             <div className="ss time">
-              <p className="highlight">{secondsLeft}</p>
+              <p className="highlight">00</p>
               <p>SS</p>
             </div>
           </div>
-          <img src={couponDetails?.image} alt="coupon image" />
+          {
+            dealInfo.image && <img className="dealInfoImage" src={`http://localhost:8001/uploads/${dealInfo.image}`} alt="coupon image" />
+          }
+
         </div>
         <div className="right">
           <h3>Use Code</h3>
           <div className="coupon-link-container">
             <CouponCode couponCode={couponDetails?.couponCode} />
-            <Button>visit site</Button>
+            <Button onClick={() => handleClick(routeToLink)}>visit site</Button>
           </div>
           <div className="info-container">
-            {couponDetails?.listOfInfo?.map((item, index) => (
-              <div className="list" key={index}>
-                <h3>{item?.title}</h3>
-                <ul>
-                  {item?.info?.map((message, index) => (
-                    <li key={index}>{message}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+            <div className="list" >
+              <h3>About Coupon</h3>
+              <ul>
+                {dealInfo.description && des.map((message, index) => (
+                  <li>{message}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="list" >
+              <h3>About category</h3>
+              <ul>
+                {/* {dealInfo.description && des.map((message, index) => ( */}
+                <li>Started in the year 2018, Gizmore is Smart Accessories and Audio brand in India, known for its fashionable product styling</li>
+                {/* ))} */}
+              </ul>
+            </div>
+            <div className="list" >
+              <h3>how to get this offer</h3>
+              <ul>
+                {info.map((message, index) => (
+                  <li>{message}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="list" >
+              <h3>important information</h3>
+              <ul>
+                <li>Free Shipping on all orders</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

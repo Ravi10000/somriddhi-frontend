@@ -5,7 +5,7 @@ const BASEURL = "http://localhost:8001";
 
 axios.interceptors.request.use(function (config, _onRejected) {
     // config.headers['Authorization'] = localStorage.getItem('token') || '';
-    config.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDBhZjg0Yjg1NzQzMzM0MTg4ZDIyNTMiLCJpYXQiOjE2Nzg0NDA1MjQsImV4cCI6MTY3OTA0NTMyNH0.pPlqFhHJ0KRW40xhJnMEMPczyNs789FUh9yJ3tdZ7I0';
+    config.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE0M2Y0N2M3MjM5YmEwZDJiYzhhZjIiLCJpYXQiOjE2NzkwNDg1MTksImV4cCI6MTY3OTY1MzMxOX0.qGkVMKLLDSOVahkIjhphrHd-LnprNluYtO-g4ZJocFU';
 
     return config;
 });
@@ -29,3 +29,8 @@ export const createNewNewLetter = (data, headers) => axios.post(`${BASEURL}/api/
 // NewLetter APIs
 export const getAllMemberships = (headers) => axios.get(`${BASEURL}/api/membership`, headers);
 export const createNewMemberships = (bodyFormData, headers) => axios.post(`${BASEURL}/api/membership`, bodyFormData, { headers });
+
+export const getADealData = (url, params, headers) => axios.get(`${BASEURL}/api/singledeal/${url}`, { params, headers });
+
+// process apis
+export const getAProcess = (headers) => axios.get(`${BASEURL}/api/process`, { headers });

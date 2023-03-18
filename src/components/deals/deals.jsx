@@ -9,6 +9,7 @@ import CustomCarousel, {
 import handleResponsive from "../../utils/handle-responsive";
 // import { useHistory } from "react-router-dom";
 import { getAllDeals } from "../../api/index.js";
+import OfferCard from "../offers/offer-card/offer-card";
 
 export default function Deals() {
   // const history = useHistory();
@@ -65,8 +66,9 @@ export default function Deals() {
                   <div className="deals-cards-container">
                     {deals?.map(({ _id, name, cashbackPercent, image, url }) => {
                       return (
-                        <DealCard
+                        <OfferCard
                           key={_id}
+                          _id={_id}
                           name={name}
                           cashbackPercent={cashbackPercent}
                           image={image}
@@ -82,7 +84,7 @@ export default function Deals() {
             : deals?.map(({ _id, name, cashbackPercent, image, url }, index) => {
               return (
                 <CarouselItem key={index}>
-                  <DealCard name={name} cashbackPercent={cashbackPercent} image={image} />
+                  <OfferCard name={name} cashbackPercent={cashbackPercent} image={image} />
                 </CarouselItem>
               );
             })}

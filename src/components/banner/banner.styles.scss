@@ -1,6 +1,7 @@
 .banner {
   margin-top: 50px;
   width: 100%;
+
   // height: ;
   img.container {
     display: grid;
@@ -13,9 +14,11 @@
       width: 100%;
     }
   }
+
   img {
     width: 100%;
   }
+
   .carousel-container {
     width: 100%;
     display: grid;
@@ -24,18 +27,26 @@
 }
 
 @media (min-width: 500px) {
-.banner{
-  padding: 30px;
+  .banner {
+    padding: 30px;
+  }
 }
-}
+
 @media (min-width: 800px) {
   .banner {
     display: grid;
     place-items: center;
+
     .carousel-container {
       // width: 70%;
       width: 80%;
       max-width: 1000px;
     }
   }
+}
+
+.bannerImageSet {
+  object-fit: contain;
+  width: 400px;
+  height: 400px;
 }

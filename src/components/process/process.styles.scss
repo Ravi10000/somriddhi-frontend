@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
+    // padding-lefts: 100px;
 
     // h2 {
     //     font-size: 1.5rem;
@@ -53,7 +55,8 @@
                 left: -100px;
                 width: 200px;
             }
-            p{
+
+            p {
                 color: #454749;
             }
         }
@@ -67,7 +70,8 @@
             background-color: #FDDDDE;
             padding: 20px;
             border-radius: 15%;
-            img{
+
+            img {
                 width: 30px;
             }
         }
@@ -86,6 +90,7 @@
                     right: -100px;
                     transform: rotate(0deg);
                 }
+
                 img.arrow.flip {
                     top: 25px;
                     // width: 180px !important;

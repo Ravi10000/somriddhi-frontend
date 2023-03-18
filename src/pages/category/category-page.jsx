@@ -7,18 +7,29 @@ import entertainmentCoupons from "./entertainment-coupons";
 import DealCard from "../../components/deals/deal-card/deal-card";
 import FilterList from "../../components/filter-list/filter-list";
 import { getAllDeals } from "../../api/index.js";
+import { OfferCard } from '../../components/offers/offer-card'
 
 export default function CategoryPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const { category } = useParams();
+
   const [deals, setDeals] = useState([]);
+
 
   let dealData;
 
   const allDealsData = async () => {
     dealData = await getAllDeals();
     console.log(dealData.data.data)
+    const { category } = useParams();
+    console.log(category)
     setDeals(dealData.data.data);
+    // let filterDeals = dealData.data.data.filter((deal) => deal.categoryId === '64146f847cc49d42dfe5e9b1')
+    // let filterDeals = dealData.data.data;
+
+    // // setDeals(filterDeals);
+    // console.log("Filter Data")
+    // console.log(filterDeals)
+
   }
   useEffect(() => {
     allDealsData();
@@ -28,7 +39,7 @@ export default function CategoryPage() {
   useEffect(() => {
     setSelectedCategories([category]);
   }, []);
-
+  // console.log(filterDeals)
   return (
     <div className="category-page">
       <div className="heading">
@@ -51,9 +62,8 @@ export default function CategoryPage() {
             <p>showing 1 -20 results</p>
           </div>
           <div className="category-cards-container">
-            {deals.map(({ _id, name, cashbackPercent, image }) => (
-              <DealCard
-
+            {deals && deals.map(({ _id, name, cashbackPercent, image }) => (
+              <OfferCard
                 key={_id}
                 _id={_id}
                 name={name}
