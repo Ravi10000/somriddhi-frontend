@@ -5,7 +5,7 @@ import React, { useState, useEffect, useId } from "react";
 import Backdrop from "../backdrop/backdrop";
 
 // utils
-import { createNewDeal, getAllCategories } from "../../api/";
+import { createNewDeal, getAllCategories, updateDeal } from "../../api/";
 import CustomSelect from "../custom-select/custom-select";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
@@ -13,7 +13,12 @@ import ImageInput from "../image-input/image-input";
 import NumInput from "../num-input/num-input";
 import PopupHead from "../popup-head/popup-head";
 
-export default function AddDealPopup({ setShowPopup, fetchDeals }) {
+export default function AddDealPopup({
+  setShowPopup,
+  fetchDeals,
+  dealToUpdate,
+}) {
+  console.log({ dealToUpdate });
   const id = useId();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -35,7 +40,11 @@ export default function AddDealPopup({ setShowPopup, fetchDeals }) {
     //   console.log(entry);
     // }
     try {
-      const response = await createNewDeal(formData);
+      if (!dealToUpdate) {
+        const response = await createNewDeal(formData);
+      } else {
+        const response = await updateDeal(formData);
+      }
       console.log({ response });
       setShowPopup(false);
       fetchDeals();
@@ -48,41 +57,44 @@ export default function AddDealPopup({ setShowPopup, fetchDeals }) {
     <Backdrop>
       <div className="add-deal-popup">
         <PopupHead title="Add New Deal" setShowPopup={setShowPopup} />
-        {/* <div className="head">
-          <div className="head-left">
-            <img src="/arrow-left-primary.png" alt="go back" />
-            <h3>Add Deal</h3>
-          </div>
-          <button
-            className="close-popup"
-            onClick={() => {
-              setShowPopup(false);
-            }}
-          >
-            <img src="/close.png" alt="close popup" />
-          </button>
-        </div> */}
         <form encType="multipart/form-data" onSubmit={submitAddDealForm}>
-          <TextInput label="Name" name="name" placeholder="Enter Banner Name" />
-          <TextInput label="URL" name="url" placeholder="Paster banner Url" />
+          <TextInput
+            label="Name"
+            name="name"
+            placeholder="Enter Banner Name"
+            defaultValue={dealToUpdate?.name || ""}
+          />
+          <TextInput
+            label="URL"
+            name="url"
+            placeholder="Paster banner Url"
+            defaultValue={dealToUpdate?.url || ""}
+          />
           <NumInput
             label="Cashback"
             name="cashbackPercent"
             placeholder="Cashback"
             maxLength="2"
+            defaultValue={dealToUpdate?.cashbackPercent || ""}
           />
           <LongTextInput
             label="Description"
             name="description"
             placeholder="Enter deal description"
+            defaultValue={dealToUpdate?.description || ""}
           />
           <CustomSelect
             categories={categories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            defaultValue={dealToUpdate?.categoryId || ""}
           />
 
-          <ImageInput label="Deal Image" name="dealPhoto" />
+          <ImageInput
+            label="Deal Image"
+            name="dealPhoto"
+            defaultValue={dealToUpdate?.image || ""}
+          />
           <div className="dates">
             <div className="live-date date-input">
               <label htmlFor={`${id}-liveDate`}>Live Date</label>

@@ -1,12 +1,25 @@
 import styles from "./custom-select.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CustomSelect({
   categories,
   selectedCategory,
   setSelectedCategory,
+  defaultValue,
 }) {
   const [showOptions, setShowOptions] = useState(false);
+
+  useEffect(() => {
+    console.log({ defaultValue, categories });
+    if (defaultValue) {
+      const defaultCategory = categories.filter((category) => {
+        console.log({category});
+        return category._id === defaultValue;
+      });
+      console.log({ defaultCategory });
+      setSelectedCategory(defaultCategory[0]);
+    }
+  }, [categories]);
   return (
     <div className={styles["custom-select"]}>
       {!selectedCategory ? (

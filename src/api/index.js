@@ -65,8 +65,11 @@ export async function updateUser({
 
 // Deals APIs
 export const getAllDeals = () => axios.get(`/api/deal`);
+export const deleteDeal = (_id) => axios.delete(`/api/deal`, { _id });
 export const createNewDeal = (bodyFormData) =>
   axios.post(`/api/deal`, bodyFormData);
+export const updateDeal = (bodyFormData) =>
+  axios.patch(`/api/deal`, bodyFormData);
 
 // Category APIs
 export const getAllCategories = () => axios.get(`/api/category`);
