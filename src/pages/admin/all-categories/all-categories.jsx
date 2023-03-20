@@ -9,18 +9,21 @@ import { getAllCategories } from "../../../api/index";
 export default function AllCategories() {
   const [showAddCategoryPopup, setShowAddCategoryPopup] = useState(false);
   const [categories, setCategories] = useState([]);
-
+  async function fetchCategories() {
+    const response = await getAllCategories();
+    console.log({ response });
+    setCategories(response.data.data);
+  }
   useEffect(() => {
-    (async function () {
-      const response = await getAllCategories();
-      console.log({ response });
-      setCategories(response.data.data);
-    })();
+    fetchCategories();
   }, []);
   return (
     <>
       {showAddCategoryPopup && (
-        <AddCategoryPopup setShowPopup={setShowAddCategoryPopup} />
+        <AddCategoryPopup
+          setShowPopup={setShowAddCategoryPopup}
+          fetchCategories={fetchCategories}
+        />
       )}
       <div className="all-categories">
         <TitleSection

@@ -10,21 +10,22 @@ import { getAllFaqs } from "../../../api/index";
 export default function AllFaqs() {
   const [showAddFaqPopup, setShowAddFaqPopup] = useState(false);
   const [faqs, setFaqs] = useState([]);
+  async function fetchFaqs() {
+    try {
+      const response = await getAllFaqs();
+      setFaqs(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
-    (async function () {
-      try {
-        const response = await getAllFaqs();
-        // const response = await axios.get("http://3.108.161.80:8002/api/faq");
-        // console.log({ response });
-        setFaqs(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    fetchFaqs();
   }, []);
   return (
     <>
-      {showAddFaqPopup && <AddFaqPopup setShowPopup={setShowAddFaqPopup} />}
+      {showAddFaqPopup && (
+        <AddFaqPopup setShowPopup={setShowAddFaqPopup} fetchFaqs={fetchFaqs} />
+      )}
       <div className="all-faqs">
         <TitleSection
           title="All FAQs"
@@ -33,7 +34,7 @@ export default function AllFaqs() {
           }}
         />
         <div className="queries">
-          {faqs?.map(({ question, answer }, index) => (
+          {faqs.reverse()?.map(({ question, answer }, index) => (
             <div className="query" key={index}>
               <h3 className="query-title">{question}</h3>
               <p className="query-desc">{answer}</p>

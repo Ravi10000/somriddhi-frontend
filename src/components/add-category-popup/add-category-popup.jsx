@@ -4,8 +4,9 @@ import React, { useRef, useEffect, useState } from "react";
 import Backdrop from "../backdrop/backdrop";
 import { getAllCategories, createNewCategory } from "../../api";
 
-export default function AddCategoryPopup({ setShowPopup }) {
+export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
   const [categories, setCategories] = useState([]);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -23,6 +24,10 @@ export default function AddCategoryPopup({ setShowPopup }) {
     // }
     try {
       const response = await createNewCategory(formData);
+      if ((response.data.status = "success")) {
+        fetchCategories();
+        setShowPopup(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -65,8 +70,12 @@ export default function AddCategoryPopup({ setShowPopup }) {
           <div className="upload-category-img">
             <label className="label">Icon</label>
             <div className="upload-input">
-              <img src="/upload-gray.png" alt="upload image" />
+              <img src={image || "/upload-gray.png"} alt="upload image" />
+              {!image && <p>Upload Image</p>}
               <input
+                onChange={(e) => {
+                  setImage(URL.createObjectURL(e.target.files[0]));
+                }}
                 name="categoryPhoto"
                 className="file-input"
                 type="file"

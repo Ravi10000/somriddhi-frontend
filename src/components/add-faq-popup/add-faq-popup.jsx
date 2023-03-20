@@ -8,7 +8,7 @@ import Backdrop from "../backdrop/backdrop";
 //api requests
 import { addNewFaq } from "../../api/index";
 
-export default function AddFaqPopup({ setShowPopup }) {
+export default function AddFaqPopup({ setShowPopup, fetchFaqs }) {
   const formRef = useRef(null);
 
   const faqFormSubmit = async (e) => {
@@ -18,6 +18,7 @@ export default function AddFaqPopup({ setShowPopup }) {
     try {
       const response = await addNewFaq(formData);
       setShowPopup(false);
+      fetchFaqs();
       console.log({ response });
     } catch (error) {
       console.log(error);

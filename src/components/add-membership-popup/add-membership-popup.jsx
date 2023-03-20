@@ -1,11 +1,13 @@
 import "./add-membership-popup.styles.scss";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Backdrop from "../backdrop/backdrop";
 import { createNewMemberships } from "../../api";
 
 export default function AddMembershipPopup({ setShowPopup }) {
   const formRef = useRef(null);
+  const [image, setImage] = useState(null);
+
   async function submitMembershipForm(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -48,8 +50,12 @@ export default function AddMembershipPopup({ setShowPopup }) {
           <div className="upload-membership-img">
             <label className="label">Upload Photo</label>
             <div className="upload-input">
-              <img src="/upload-gray.png" alt="upload image" />
+              <img src={image || "/upload-gray.png"} alt="upload image" />
+              {!image && <p>Upload Image</p>}
               <input
+                onChange={(e) => {
+                  setImage(URL.createObjectURL(e.target.files[0]));
+                }}
                 className="file-input"
                 type="file"
                 accept="image/png, image/jpeg"

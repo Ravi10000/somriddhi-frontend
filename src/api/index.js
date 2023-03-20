@@ -98,11 +98,11 @@ export const getActiveFeedbacks = () =>
     { header: { "Content-Type": "application/json" } }
   );
 
-export const deleteFeedback = (_id, headers) => {
-  console.log({ _id, headers });
+export const deleteFeedback = (_id) => {
+  console.log({ _id });
   return axios.delete(
     `/api/feedback`,
-    { _id: _id },
-    { headers: { ...headers, "Content-Type": "application/json" } }
+    { _id },
+    { headers: { "Content-Type": "application/json" } }
   );
 };

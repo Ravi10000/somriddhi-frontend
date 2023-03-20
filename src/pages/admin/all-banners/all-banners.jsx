@@ -14,26 +14,24 @@ import { getAllBanners } from "../../../api/index";
 export default function AllBanners() {
   const [banners, setBanners] = useState([]);
   const [showAddBannerPopup, setShowAddBannerPopup] = useState(false);
-
+  async function fetchBanners() {
+    try {
+      const response = await getAllBanners();
+      setBanners(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
-    (async function () {
-      try {
-        const response = await getAllBanners();
-        // const responeFaq = await axios.post("/faq", {
-        //   question: "what is this",
-        //   answer: "this is answer",
-        // });
-        // console.log({ responeFaq });
-        setBanners(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    fetchBanners();
   }, [showAddBannerPopup]);
   return (
     <>
       {showAddBannerPopup && (
-        <AddBannerPopup setShowPopup={setShowAddBannerPopup} />
+        <AddBannerPopup
+          setShowPopup={setShowAddBannerPopup}
+          fetchBanners={fetchBanners}
+        />
       )}
       <div className="all-banners">
         <TitleSection
@@ -41,8 +39,9 @@ export default function AllBanners() {
           addFunction={() => setShowAddBannerPopup(true)}
         />
         <div className="banner-cards-container">
-          {banners.reverse()?.map(
-            ({ name, url, expiryDate, image, description }, index) => (
+          {banners
+            .reverse()
+            ?.map(({ name, url, expiryDate, image, description }, index) => (
               <div className="banner-card" key={index}>
                 <img
                   className="banner-img"
@@ -67,8 +66,7 @@ export default function AllBanners() {
                   <div className="banner-desc">{description}</div>
                 </div>
               </div>
-            )
-          )}
+            ))}
         </div>
       </div>
     </>
