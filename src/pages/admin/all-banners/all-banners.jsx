@@ -5,12 +5,11 @@ import { useState, useEffect } from "react";
 // components
 import TitleSection from "../title-section/title-section";
 import AddBannerPopup from "../../../components/add-banner-popup/add-banner-popup";
-import axios from "axios";
 // utils
 import bannerList from "./banner-list";
 
 // api requests
-import { getAllBanners } from "../../../api/";
+import { getAllBanners } from "../../../api/index";
 
 export default function AllBanners() {
   const [banners, setBanners] = useState([]);
@@ -30,7 +29,7 @@ export default function AllBanners() {
         console.log(error);
       }
     })();
-  }, []);
+  }, [showAddBannerPopup]);
   return (
     <>
       {showAddBannerPopup && (
@@ -42,10 +41,14 @@ export default function AllBanners() {
           addFunction={() => setShowAddBannerPopup(true)}
         />
         <div className="banner-cards-container">
-          {banners?.map(
+          {banners.reverse()?.map(
             ({ name, url, expiryDate, image, description }, index) => (
               <div className="banner-card" key={index}>
-                <img className="banner-img" src={image} alt={name} />
+                <img
+                  className="banner-img"
+                  src={`http://localhost:8001/${image}`}
+                  alt={name}
+                />
                 <div className="banner-details">
                   <div className="info-container">
                     <div className="banner-info">

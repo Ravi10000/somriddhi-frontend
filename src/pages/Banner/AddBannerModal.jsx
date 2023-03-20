@@ -6,7 +6,7 @@ import Arrow from "./arrow.png";
 import Cross from "./cross.png";
 import Upload from "./upload.png";
 import { data } from "./Data";
-import { createNewBanner } from "../../api/index";
+import { createNewBanner } from "../../api";
 
 export default function AddBannerModal({
   closeModal,

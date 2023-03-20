@@ -17,6 +17,7 @@ export default function AddFaqPopup({ setShowPopup }) {
     console.log("fomr");
     try {
       const response = await addNewFaq(formData);
+      setShowPopup(false);
       console.log({ response });
     } catch (error) {
       console.log(error);

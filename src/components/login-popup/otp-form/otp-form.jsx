@@ -3,7 +3,7 @@ import "./otp-form.styles.scss";
 import React, { useEffect, useState, useRef } from "react";
 import Button from "../../button/button";
 // import { connect } from "react-redux";
-import { sendOtp, verifyOtp } from "../../../api/user-api-req";
+import { sendOtp, verifyOtp } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 

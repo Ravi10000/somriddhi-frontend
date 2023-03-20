@@ -8,7 +8,7 @@ import CustomCarousel, {
 } from "../custom-carousel/custom-carousel";
 import handleResponsive from "../../utils/handle-responsive";
 // import { useHistory } from "react-router-dom";
-import { getAllDeals } from "../../api/index.js";
+import { getAllDeals } from "../../api/index";
 
 export default function Deals() {
   // const history = useHistory();

@@ -6,7 +6,7 @@ import { useState } from "react";
 // components
 import Button from "../../button/button";
 import { useForm } from "react-hook-form";
-import { createUser } from "../../../api";
+import { createUser } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 

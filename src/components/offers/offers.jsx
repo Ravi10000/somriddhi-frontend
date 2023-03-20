@@ -14,7 +14,7 @@ import CustomCarousel, {
 // utils
 import offerList from "./offers-list";
 import handleResponsive from "../../utils/handle-responsive";
-import { getAllDeals } from "../../api/index.js";
+import { getAllDeals } from "../../api/index";
 
 export default function Offers() {
   const categories = [

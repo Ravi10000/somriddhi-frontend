@@ -3,7 +3,7 @@ import "./all-newsletters.styles.scss";
 import React, { useState, useEffect } from "react";
 import TitleSection from "../title-section/title-section";
 import subscriptionsList from "./subscriptionsList";
-import { getAllNewLetter } from "../../../api";
+import { getAllNewLetter } from "../../../api/index";
 
 export default function AllNewsletters() {
   const [subscriptions, setSubscriptions] = useState([]);

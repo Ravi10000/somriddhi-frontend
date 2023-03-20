@@ -13,7 +13,7 @@ import CustomCarousel, {
 import couponsCategoryList from "./coupons-category-list";
 import offers from "./offers";
 import handleResponsive from "../../utils/handle-responsive";
-import { getAllDeals } from "../../api/index.js";
+import { getAllDeals } from "../../api/index";
 
 
 export default function Coupons() {

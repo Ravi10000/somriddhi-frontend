@@ -8,7 +8,7 @@ import TitleSection from "../title-section/title-section";
 import AddCustomerPopup from "../../../components/add-customer-popup/add-customer-popup";
 
 // utils
-import { getAllUsers } from "../../../api/";
+import { getAllUsers } from "../../../api/index";
 // import customers from "./customers";
 
 export default function AllCustomers() {
@@ -18,7 +18,7 @@ export default function AllCustomers() {
   useEffect(() => {
     (async function () {
       const response = await getAllUsers();
-      setCustomers(response.data.data);
+      setCustomers(response.data.user);
       console.log({ response });
     })();
   }, []);

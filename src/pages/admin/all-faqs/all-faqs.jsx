@@ -6,7 +6,7 @@ import quries from "./quries";
 
 import axios from "axios";
 import AddFaqPopup from "../../../components/add-faq-popup/add-faq-popup";
-import { getAllFaqs } from "../../../api/";
+import { getAllFaqs } from "../../../api/index";
 export default function AllFaqs() {
   const [showAddFaqPopup, setShowAddFaqPopup] = useState(false);
   const [faqs, setFaqs] = useState([]);

@@ -1,7 +1,7 @@
 import MembershipOfferCard from './membership-offer-card/membership-offer-card';
 import './popular-membership.styles.scss';
 import popularOfferList from './popular-offers-list';
-import { getAllMemberships } from '../../api/index.js';
+import { getAllMemberships } from '../../api/index';
 import { useEffect, useState } from 'react';
 
 export default function PopularMembership() {

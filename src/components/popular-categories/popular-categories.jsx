@@ -2,7 +2,7 @@ import './popular-categories.styles.scss';
 
 import React, { useEffect, useState } from 'react'
 import categoriesList from './popular-categories-list';
-import { getAllCategories } from '../../api/index.js';
+import { getAllCategories } from '../../api/index';
 
 
 

@@ -1,7 +1,7 @@
 import "./form.styles.scss";
 import React, { useState } from "react";
 import Button from "../button/button";
-import { createNewNewLetter } from "../../api/index.js";
+import { createNewNewLetter } from "../../api/index";
 
 export default function Form() {
   const [email, setEmail] = useState('');

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import CustomCarousel, {
   CarouselItem,
 } from "../custom-carousel/custom-carousel";
-import { getAllBanners, getAllDeals } from "../../api/index.js";
+import { getAllBanners, getAllDeals } from "../../api/index";
 import { useNavigate } from "react-router-dom";
 
 export default function Banner() {

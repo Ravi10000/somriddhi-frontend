@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import Backdrop from "../backdrop/backdrop";
 
 // utils
-import { createNewBanner } from "../../api/";
+import { createNewBanner } from "../../api";
 
 export default function AddBannerPopup({ setShowPopup }) {
   const formRef = useRef(null);
