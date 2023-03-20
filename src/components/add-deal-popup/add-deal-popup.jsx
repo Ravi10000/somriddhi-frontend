@@ -1,11 +1,44 @@
 import "./add-deal-popup.styles.scss";
+
+import React, { useState, useEffect, useId } from "react";
 // components
 import Backdrop from "../backdrop/backdrop";
 
 // utils
-import { createNewDeal } from "../../api/";
+import { createNewDeal, getAllCategories } from "../../api/";
+import CustomSelect from "../custom-select/custom-select";
 
-export default function AddDealPopup({ setShowPopup }) {
+export default function AddDealPopup({ setShowPopup, fetchDeals }) {
+  const id = useId();
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getAllCategories();
+      console.log({ response });
+      setCategories(response.data.data);
+    })();
+  }, []);
+
+  async function submitAddDealForm(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append("categoryId", selectedCategory._id);
+    // for (let entry of formData.entries()) {
+    //   console.log(entry);
+    // }
+    try {
+      const response = await createNewDeal(formData);
+      console.log({ response });
+      setShowPopup(false);
+      fetchDeals();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Backdrop>
       <div className="add-deal-popup">
@@ -23,55 +56,82 @@ export default function AddDealPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form action="">
+        <form encType="multipart/form-data" onSubmit={submitAddDealForm}>
           <div className="deal-name input-container">
-            <label htmlFor="">Name</label>
+            <label htmlFor={`${id}-name`}>Name</label>
             <input
-            name="name"
+              id={`${id}-name`}
+              name="name"
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Enter Banner Name"
             />
           </div>
-          <div className="deal-url input-container">
-            <label htmlFor="">URL</label>
-            <input
+          <div className="description input-container">
+            <label htmlFor={`${id}-description`}>Description</label>
+            <p className="textarea-msg">Enter Deal Description</p>
+            <textarea
+              name="description"
+              id={`${id}-description`}
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="deal-url input-container">
+            <label htmlFor={`${id}-url`}>URL</label>
+            <input
+              id={`${id}-url`}
+              name="url"
+              className="text-input"
               placeholder="Paster banner URL"
             />
           </div>
           <div className="deal-cashback input-container">
-            <label htmlFor="">Cashback</label>
+            <label htmlFor={`${id}-cashback`}>Cashback Percentage</label>
             <input
+              id={`${id}-cashback`}
+              inputMode="numeric"
+              maxLength={2}
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+              }
+              name="cashbackPercent"
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Cashback"
             />
           </div>
+          <div className="input-container">
+            <CustomSelect
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          </div>
           <div className="upload-deal-img">
-            <label className="label">Banner Image</label>
+            <label className="label" htmlFor={`${id}-dealPhoto`}>
+              Banner Image
+            </label>
             <div className="upload-input">
-              <img src="/upload-gray.png" alt="upload image" />
+              <img src={image || "/upload-gray.png"} alt="upload image" />
+              {!image && <p>Upload Image</p>}
               <input
+                id={`${id}-dealPhoto`}
                 className="file-input"
+                name="dealPhoto"
                 type="file"
                 accept="image/png, image/jpeg"
-                // onChange={(e) => saveFile(e)}
-                // className="fileFieldText"
-                name="file"
-                // placeholder="Upload Image"
+                onChange={(e) => {
+                  setImage(URL.createObjectURL(e.target.files[0]));
+                }}
               />
             </div>
           </div>
           <div className="dates">
             <div className="live-date date-input">
-              <label htmlFor="">Live Date</label>
-              <input type="date" />
+              <label htmlFor={`${id}-liveDate`}>Live Date</label>
+              <input id={`${id}-liveDate`} name="liveDate" type="date" />
             </div>
             <div className="expiry-date date-input">
-              <label htmlFor="">Expiry Date</label>
-              <input type="date" />
+              <label htmlFor={`${id}-expiryDate`}>Expiry Date</label>
+              <input id={`${id}-expiryDate`} name="expiryDate" type="date" />
             </div>
           </div>
           <button className="add-deal-btn">Add Deal</button>

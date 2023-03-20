@@ -1,6 +1,6 @@
 import "./backdrop.styles.scss";
 
-// import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function Backdrop({ children }) {
   // useEffect(() => {

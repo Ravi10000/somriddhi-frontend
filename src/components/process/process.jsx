@@ -1,19 +1,19 @@
 import './process.styles.scss';
 
 import React, { useEffect, useState } from 'react'
-import { getAProcess } from '../../api/index.js';
+// import { getAProcess } from '../../api/index.js';
 
 export default function Process() {
     const [processData, setProcessData] = useState([]);
 
-    const allProcessData = async () => {
-        const data = await getAProcess();
-        console.log(data.data.data);
-        setProcessData(data.data.data);
-    }
-    useEffect(() => {
-        allProcessData();
-    }, [])
+    // const allProcessData = async () => {
+    //     const data = await getAProcess();
+    //     console.log(data.data.data);
+    //     setProcessData(data.data.data);
+    // }
+    // useEffect(() => {
+    //     allProcessData();
+    // }, [])
     return (
         <section className='process-section'>
             <h2 className='_title'>How It Works?</h2>

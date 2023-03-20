@@ -7,7 +7,9 @@ import entertainmentCoupons from "./entertainment-coupons";
 import DealCard from "../../components/deals/deal-card/deal-card";
 import FilterList from "../../components/filter-list/filter-list";
 import { getAllDeals } from "../../api/index.js";
-import { OfferCard } from '../../components/offers/offer-card'
+// import { OfferCard } from '../../components/offers/offer-card'
+import OfferCard from "../../components/offers/offer-card/offer-card";
+
 
 export default function CategoryPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);

@@ -11,16 +11,17 @@ export default function AllDeals() {
   const [deals, setDeals] = useState([]);
   const [showAddDealPopup, setShowAddDealPopup] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  async function fetchDeals() {
+    const response = await getAllDeals();
+    setDeals(response.data.data);
+    console.log({ response });
+  }
   useEffect(() => {
-    (async function () {
-      const response = await getAllDeals();
-      setDeals(response.data.data);
-      console.log({ response });
-    })();
+    fetchDeals();
   }, []);
   return (
     <>
-      {showAddDealPopup && <AddDealPopup setShowPopup={setShowAddDealPopup} />}
+      {showAddDealPopup && <AddDealPopup setShowPopup={setShowAddDealPopup} fetchDeals={fetchDeals}/>}
       <div className="all-deals">
         <TitleSection
           title="all deals"
@@ -29,20 +30,22 @@ export default function AllDeals() {
           }}
         />
         <div className="main-content">
-          {/* <div className="filter-container"> */}
           <div className="filter-container">
             <FilterList
-              // category={"entertainment"}
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
             />
           </div>
           <div className="deals-container">
-            {deals?.map(({ description: desc, image: dealImg }, index) => (
+            {deals.reverse()?.map(({ description, image }, index) => (
               <div className="deal" key={index}>
-                <img className="deal-img" src={dealImg} alt="deal banner" />
+                <img
+                  className="deal-img"
+                  src={`http://localhost:8001/${image}`}
+                  alt="deal banner"
+                />
                 <div className="deal-info">
-                  <p>{desc ? desc : "unavailable"}</p>
+                  <p>{description ? description : "unavailable"}</p>
                   <div className="icons">
                     <img src="/edit.png" alt="edit deal" />
                     <img src="/delete.png" alt="delete deal" />
@@ -51,7 +54,6 @@ export default function AllDeals() {
               </div>
             ))}
           </div>
-          {/* </div> */}
         </div>
       </div>
     </>

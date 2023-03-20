@@ -44,19 +44,32 @@
         padding: 20px;
         border: 2px solid #ced0d6;
         display: flex;
+        gap: 20px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         position: relative;
-        input::-webkit-file-upload-button {
-          font-weight: 600;
-          border: none;
-          padding: 10px 20px;
-          font-family: "Metropolis", sans-serif;
-          border-radius: 8px;
+        img {
+          width: 50px;
+        }
+        p {
+          color: #545a6e;
+          font-weight: 500;
         }
         input {
-          padding: 10px;
+          opacity: 0;
+        }
+        // input::-webkit-file-upload-button {
+        //   display: none;
+        //   font-weight: 600;
+        //   border: none;
+        //   padding: 10px 20px;
+        //   font-family: "Metropolis", sans-serif;
+        //   border-radius: 8px;
+        // }
+        input {
+          cursor: pointer;
+          // padding: 10px;
           position: absolute;
           height: 100%;
           width: 100%;
@@ -76,6 +89,20 @@
           color: #545a6e;
         }
       }
+      textarea.text-input {
+        font-family: "Metropolis", sans-serif;
+        resize: none;
+        height: 100px;
+      }
+      &.description {
+        .textarea-msg {
+          font-weight: 300;
+          letter-spacing: 1.5px;
+          color: #ced0d6;
+          padding-left: 5px;
+          margin: 0;
+        }
+      }
     }
     .dates {
       display: flex;
@@ -87,6 +114,7 @@
         gap: 5px;
       }
     }
+
     .add-deal-btn {
       width: 100%;
     }

@@ -1,9 +1,35 @@
 import "./add-category-popup.styles.scss";
 
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Backdrop from "../backdrop/backdrop";
+import { getAllCategories, createNewCategory } from "../../api";
 
 export default function AddCategoryPopup({ setShowPopup }) {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getAllCategories();
+      console.log({ response });
+      setCategories(response.data.data);
+    })();
+  }, []);
+  async function submitAddCategoryForm(e) {
+    console.log("submit");
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    // for (let key of formData.entries()) {
+    //   console.log(key);
+    // }
+    try {
+      const response = await createNewCategory(formData);
+    } catch (error) {
+      console.log(error);
+    }
+    // console.log({ response });
+  }
+
+  // const imgInputRef = useRef(null);
   return (
     <Backdrop>
       <div className="add-category-popup">
@@ -21,51 +47,41 @@ export default function AddCategoryPopup({ setShowPopup }) {
             <img src="/close.png" alt="close popup" />
           </button>
         </div>
-        <form action="">
+        <form encType="multipart/form-data" onSubmit={submitAddCategoryForm}>
           <div className="banner-name input-container">
             <label htmlFor="">Name</label>
             <input
+              name="name"
               className="text-input"
-              // onChange={(e) => setBannerName(e.target.value)}
               placeholder="Enter Category Name"
             />
+          </div>
+
+          <div className="description input-container">
+            <label htmlFor="">Description</label>
+            <p className="textarea-msg">Enter Category Description</p>
+            <textarea name="description" className="text-input"></textarea>
           </div>
           <div className="upload-category-img">
             <label className="label">Icon</label>
             <div className="upload-input">
               <img src="/upload-gray.png" alt="upload image" />
               <input
+                name="categoryPhoto"
                 className="file-input"
                 type="file"
                 accept="image/png, image/jpeg"
-                // onChange={(e) => saveFile(e)}
-                // className="fileFieldText"
-                name="file"
-                // placeholder="Upload Image"
               />
             </div>
           </div>
           <div className="select-icons">
             <p>OR</p>
             <div className="icon-list">
-              <div className="icon">
-                <img src="/category-icons/education.png" alt="icon" />
-              </div>
-              <div className="icon">
-                <img src="/category-icons/safety.png" alt="icon" />
-              </div>
-              <div className="icon">
-                <img src="/category-icons/food.png" alt="icon" />
-              </div>
-              <div className="icon">
-                <img src="/category-icons/sport.png" alt="icon" />
-              </div>
-              <div className="icon">
-                <img src="/category-icons/cloth.png" alt="icon" />
-              </div>
-              {/* <div className="icon">
-                <img src="/category-icons/safety.png" alt="icon" />
-              </div> */}
+              {categories.map(({ name, icon }) => (
+                <div className="icon" key={name}>
+                  <img src={`http://localhost:8001/${icon}`} alt="icon" />
+                </div>
+              ))}
             </div>
           </div>
           <button className="add-category-btn">Add Category</button>

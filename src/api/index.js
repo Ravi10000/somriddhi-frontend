@@ -11,6 +11,7 @@ axios.interceptors.request.use(function (config, _onRejected) {
 
   return config;
 });
+
 // Banner APIs
 export const getAllBanners = () => axios.get(`/api/banner`);
 export const createNewBanner = (bodyFormData) => {
@@ -19,16 +20,16 @@ export const createNewBanner = (bodyFormData) => {
   });
 };
 // FAQ APIs
-export const getAllFaqs = (headers) => axios.get(`/api/faq`, headers);
-export const addNewFaq = (bodyFormData, headers) =>
+export const getAllFaqs = () => axios.get(`/api/faq`);
+export const addNewFaq = (bodyFormData) =>
   axios.post(`/api/faq`, bodyFormData, {
-    headers: { ...headers, "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" },
   });
 
 // users APIs
-export const getAllUsers = (headers) => axios.get(`/api/user`, headers);
-export const createUser = (bodyFormData, headers) =>
-  axios.post(`/api/user`, bodyFormData, { headers });
+export const getAllUsers = () => axios.get(`/api/user`);
+export const createUser = (bodyFormData) =>
+  axios.post(`/api/user`, bodyFormData);
 
 export async function sendOtp({ phone, countryCode = "+91" }) {
   // console.log("sendOTP", { phone, countryCode });
@@ -63,41 +64,38 @@ export async function updateUser({
 }
 
 // Deals APIs
-export const getAllDeals = (headers) => axios.get(`/api/deal`, headers);
-export const createNewDeal = (bodyFormData, headers) =>
-  axios.post(`/api/deal`, bodyFormData, { headers });
+export const getAllDeals = () => axios.get(`/api/deal`);
+export const createNewDeal = (bodyFormData) =>
+  axios.post(`/api/deal`, bodyFormData);
 
 // Category APIs
-export const getAllCategories = (headers) =>
-  axios.get(`/api/category`, headers);
-export const createNewCategory = (bodyFormData, headers) =>
-  axios.post(`/api/category`, bodyFormData, { headers });
+export const getAllCategories = () => axios.get(`/api/category`);
+export const createNewCategory = (bodyFormData) =>
+  axios.post(`/api/category`, bodyFormData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
 // NewLetter APIs
-export const getAllNewLetter = (headers) =>
-  axios.get(`/api/newsletter`, headers);
-export const createNewNewLetter = (data, headers) =>
-  axios.post(`/api/newsletter`, data, { headers });
+export const getAllNewLetter = () => axios.get(`/api/newsletter`);
+export const createNewNewLetter = (data) => axios.post(`/api/newsletter`, data);
 
 // Membership APIs
-export const getAllMemberships = (headers) =>
-  axios.get(`/api/membership`, headers);
-export const createNewMemberships = (bodyFormData, headers) => {
+export const getAllMemberships = () => axios.get(`/api/membership`);
+export const createNewMemberships = (bodyFormData) => {
   return axios.post(`/api/membership`, bodyFormData, {
-    headers: { ...headers, "Content-Type": "multipart/form-data" },
+    headers: { "Content-Type": "multipart/form-data" },
   });
 };
 
 // Feedback APIs
-export const getAllFeedbacks = (headers) => {
-  console.log({ headers });
-  return axios.get(`/api/feedback`, headers);
+export const getAllFeedbacks = () => {
+  return axios.get(`/api/feedback`);
 };
-export const getActiveFeedbacks = (headers) =>
+export const getActiveFeedbacks = () =>
   axios.get(
     `/api/feedback`,
     { status: "Active" },
-    { header: { ...headers, "Content-Type": "application/json" } }
+    { header: { "Content-Type": "application/json" } }
   );
 
 export const deleteFeedback = (_id, headers) => {

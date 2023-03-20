@@ -10,7 +10,7 @@ import Button from "../../components/button/button";
 import couponDetails from "./coupon-details";
 import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
-import { getADealData } from "../../api/index.js";
+// import { getADealData } from "../../api/index.js";
 
 export default function CouponPage() {
   const navigate = useNavigate();
@@ -35,10 +35,10 @@ export default function CouponPage() {
     setDealInfo(dealAllData.data.data);
   }
 
-  useEffect(() => {
-    dealData({ dealId: dealsId });
-    setRender(true);
-  }, [])
+  // useEffect(() => {
+  //   dealData({ dealId: dealsId });
+  //   setRender(true);
+  // }, [])
 
   // const hoursLeftRef = useRef(null);
   // const minutesLeftRef = useRef(null);
