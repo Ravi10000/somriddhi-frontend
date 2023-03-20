@@ -1,31 +1,34 @@
 .coupons-section {
-  background: linear-gradient(
-    180deg,
-    rgba(218, 218, 218, 0.25) 0%,
-    #dadada 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(218, 218, 218, 0.25) 0%,
+      #dadada 100%);
   overflow: hidden;
   margin-top: 50px;
   padding: 25px 0;
+
   .container {
     // outline: 2px solid red;
     text-align: center;
+
     h2._title {
       padding-top: 35px;
       width: 100%;
     }
   }
+
   .carousel-container {
     width: 100%;
     overflow: hidden;
     display: grid;
     place-items: center;
+
     .menu-cards-container {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       place-items: center;
       gap: 5px;
     }
+
     .coupon-category-card {
       text-transform: capitalize;
       cursor: pointer;
@@ -35,8 +38,10 @@
       border-radius: 8px 8px 0 0;
       color: #091431;
     }
+
     .coupon-category-card.selected {
       position: relative;
+
       &:after {
         content: "";
         position: absolute;
@@ -48,15 +53,18 @@
       }
     }
   }
+
   .options-section {
     overflow: hidden;
     padding: 25px 0;
     background: #fff;
+
     // width: 800;
     .options-carousel {
       .menu-cards-container {
         display: grid;
         grid-template-columns: 1fr;
+
         // background: #fff;
         .deal-card {
           border: none;
@@ -66,6 +74,11 @@
   }
 }
 
+.categoryIcons {
+  width: 50px;
+  height: 50px;
+}
+
 @media (min-width: 500px) {
   .coupons-section {
     .carousel-container {
@@ -73,6 +86,7 @@
         grid-template-columns: repeat(5, 1fr);
       }
     }
+
     .options-section {
       .options-carousel {
         .menu-cards-container {
@@ -87,6 +101,7 @@
     }
   }
 }
+
 @media (min-width: 800px) {
   .coupons-section {
     .carousel-container {
@@ -96,11 +111,13 @@
     }
   }
 }
+
 @media (min-width: 1400px) {
   .coupons-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     // outline: 2px solid red;
     .carousel-container {
       // width: 1000px;
@@ -114,9 +131,11 @@
         grid-template-columns: repeat(9, 1fr);
       }
     }
+
     .options-section {
       border-radius: 15px;
       width: 1000px;
+
       .options-carousel {
         .menu-cards-container {
           padding: 25px;

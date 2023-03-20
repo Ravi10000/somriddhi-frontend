@@ -2,19 +2,32 @@ import "./navbar.styles.scss";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-const navList = [
-  { name: "home", link: "/" },
-  { name: "deals", link: "/#deals" },
-  { name: "categories", link: "/category/entertainment" },
-  // { name: "stores", link: "/#stores" },
-  { name: "contact us", link: "/#contact-us" },
-];
+import { getAllCategories } from "../../api/index.js";
+
 export default function Navbar() {
+
   const [activeLink, setActiveLink] = useState("/");
   const location = useLocation();
+  const [category, setCategory] = useState('');
+
+  const firstCategory = async () => {
+    const allCats = await getAllCategories();
+    console.log(allCats.data.data[0].name);
+    setCategory(allCats.data.data[0].name);
+  }
   useEffect(() => {
     setActiveLink(location.pathname);
+    firstCategory();
   }, [location.pathname]);
+
+  const navList = [
+    { name: "home", link: "/" },
+    { name: "deals", link: "/#deals" },
+    { name: "categories", link: `/category/${category}` },
+    // { name: "stores", link: "/#stores" },
+    { name: "contact us", link: "/#contact-us" },
+  ];
+
   return (
     <nav className="top-navbar">
       <div className="links">

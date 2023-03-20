@@ -13,7 +13,8 @@ import CustomCarousel, {
 import couponsCategoryList from "./coupons-category-list";
 import offers from "./offers";
 import handleResponsive from "../../utils/handle-responsive";
-import { getAllDeals } from "../../api/index";
+import { getAllDeals, getAllCategories } from "../../api/index.js";
+import OfferCard from "../offers/offer-card/offer-card";
 
 
 export default function Coupons() {
@@ -23,6 +24,18 @@ export default function Coupons() {
   const [selectdCategoryOffers, setSelectedCategoryOffers] = useState([]);
   const [listOfItemsToShow, setListOfItemsToShow] = useState([]);
   const [deals, setDeals] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([]);
+  const [render, setRender] = useState(false);
+
+  const allCategories = async () => {
+    const data = await getAllCategories();
+    console.log(data.data.data)
+    setCategoriesData(data.data.data);
+    setRender(true);
+  }
+  useEffect(() => {
+    allCategories();
+  }, [])
 
   let dealData;
 
@@ -36,14 +49,14 @@ export default function Coupons() {
   }, [])
 
   useEffect(() => {
-    setSelectedCategory(couponsCategoryList[0]?.name); // selected Category
+    setSelectedCategory(categoriesData[0]?.name); // selected Category
     setDeviceWidth(window.innerWidth); // to use in responsive carousel
   }, []);
 
   useEffect(() => {
     if (deviceWidth < 500 && deviceWidth > 200) {
       handleResponsive({
-        list: couponsCategoryList,
+        list: categoriesData,
         setList: setListOfItemsToShow,
         itemsPerSlide: 3,
       });
@@ -54,7 +67,7 @@ export default function Coupons() {
       });
     } else if (deviceWidth < 800 && deviceWidth > 500) {
       handleResponsive({
-        list: couponsCategoryList,
+        list: categoriesData,
         setList: setListOfItemsToShow,
         itemsPerSlide: 5,
       });
@@ -65,7 +78,7 @@ export default function Coupons() {
       });
     } else if (deviceWidth > 1000 && deviceWidth < 1400) {
       handleResponsive({
-        list: couponsCategoryList,
+        list: categoriesData,
         setList: setListOfItemsToShow,
         itemsPerSlide: 7,
       });
@@ -76,7 +89,7 @@ export default function Coupons() {
       });
     } else if (deviceWidth > 1400) {
       handleResponsive({
-        list: couponsCategoryList,
+        list: categoriesData,
         setList: setListOfItemsToShow,
         itemsPerSlide: 9,
       });
@@ -100,7 +113,7 @@ export default function Coupons() {
                   return (
                     <CarouselItem key={index}>
                       <div className="menu-cards-container">
-                        {tableOfferListItem?.map(({ name, img }, index) => {
+                        {categoriesData?.map(({ name, icon }, index) => {
                           return (
                             <div
                               key={index}
@@ -110,7 +123,7 @@ export default function Coupons() {
                               className={`coupon-category-card ${name === selectedCategory && "selected"
                                 }`}
                             >
-                              <img src={img} alt="category" />
+                              <img className="categoryIcons" src={`http://localhost:8001/uploads/${icon}`} alt="category" />
                               <h5>{name}</h5>
                             </div>
                           );
@@ -145,7 +158,7 @@ export default function Coupons() {
                           {deals?.map(
                             ({ _id, name, cashbackPercent, image }) => {
                               return (
-                                <DealCard
+                                <OfferCard
                                   key={_id}
                                   _id={_id}
                                   name={name}
@@ -163,7 +176,7 @@ export default function Coupons() {
                     ({ _id, name, cashbackPercent, image }) => {
                       return (
                         <CarouselItem>
-                          <DealCard
+                          <OfferCard
                             key={_id}
                             _id={_id}
                             name={name}
