@@ -1,12 +1,26 @@
 import "./tickets-section.styles.scss";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { activeTickets, resolvedTickets } from "./dummyTickets";
-
+import { getAllTickets } from "../../../api";
 const options = ["active tickets", "resolved tickets"];
 
 export default function TicketsSection() {
   const [selectedTickets, setSelectedTickets] = useState("active tickets");
+  const [tickets, setTickets] = useState([]);
+
+  async function fetchTickets() {
+    try {
+      const response = await getAllTickets();
+      setTickets(response.data.data);
+      console.log({ response });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchTickets();
+  }, []);
   return (
     <div className="tickets-section">
       <div className="select-tickets">
@@ -24,9 +38,9 @@ export default function TicketsSection() {
       </div>
       <div className="tickets">
         {selectedTickets === "active tickets" &&
-          activeTickets?.map(({ title, description }, index) => (
+          tickets?.map(({ heading, description }, index) => (
             <div className="ticket active" key={index}>
-              <h5 className="title">{title}</h5>
+              <h5 className="title">{heading}</h5>
               <p className="desc">{description}</p>
               <div className="ticket-buttons">
                 <button className="resolve-btn">resolve</button>

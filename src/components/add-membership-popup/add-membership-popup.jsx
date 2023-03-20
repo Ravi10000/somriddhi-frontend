@@ -3,8 +3,13 @@ import "./add-membership-popup.styles.scss";
 import React, { useRef, useState } from "react";
 import Backdrop from "../backdrop/backdrop";
 import { createNewMemberships } from "../../api";
+import PopupHead from "../popup-head/popup-head";
+import TextInput from "../text-input/text-input";
+import LongTextInput from "../long-text-input/long-text-input";
+import ImageInput from "../image-input/image-input";
+import NumInput from "../num-input/num-input";
 
-export default function AddMembershipPopup({ setShowPopup }) {
+export default function AddMembershipPopup({ setShowPopup, fetchMemberships }) {
   const formRef = useRef(null);
   const [image, setImage] = useState(null);
 
@@ -19,6 +24,7 @@ export default function AddMembershipPopup({ setShowPopup }) {
       console.log({ response });
       if (response.data.status === "success") {
         setShowPopup(false);
+        fetchMemberships();
       }
     } catch (error) {
       console.log(error);
@@ -27,77 +33,31 @@ export default function AddMembershipPopup({ setShowPopup }) {
   return (
     <Backdrop>
       <div className="add-membership-popup">
-        <div className="head">
-          <div className="head-left">
-            <img src="/arrow-left-primary.png" alt="go back" />
-            <h3>Add Membership</h3>
-          </div>
-          <button
-            className="close-popup"
-            onClick={() => {
-              setShowPopup(false);
-            }}
-          >
-            <img src="/close.png" alt="close popup" />
-          </button>
-        </div>
+        <PopupHead title="Add Membership" setShowPopup={setShowPopup} />
         <form
           name="membership-form"
           ref={formRef}
           onSubmit={submitMembershipForm}
           encType="multipart/form-data"
         >
-          <div className="upload-membership-img">
-            <label className="label">Upload Photo</label>
-            <div className="upload-input">
-              <img src={image || "/upload-gray.png"} alt="upload image" />
-              {!image && <p>Upload Image</p>}
-              <input
-                onChange={(e) => {
-                  setImage(URL.createObjectURL(e.target.files[0]));
-                }}
-                className="file-input"
-                type="file"
-                accept="image/png, image/jpeg"
-                name="membershipPhoto"
-              />
-            </div>
-          </div>
-          <div className="membership-name input-container">
-            <label htmlFor="">Name</label>
-            <input
-              className="text-input"
-              name="name"
-              placeholder="Enter Membership Name"
-            />
-          </div>
-          <div className="description input-container">
-            <label htmlFor="">Description</label>
-            <textarea
-              className="text-input"
-              name="description"
-              id=""
-              cols="30"
-              rows="10"
-              defaultValue="Offer Description"
-            ></textarea>
-          </div>
-          <div className="membership-cashback input-container">
-            <label htmlFor="">Cashback Percentage</label>
-            <input
-              name="cashbackPercent"
-              className="text-input"
-              placeholder="Enter Cashback Percentage"
-            />
-          </div>
-          <div className="membership-url input-container">
-            <label htmlFor="">URL</label>
-            <input
-              name="url"
-              className="text-input"
-              placeholder="Paster banner URL"
-            />
-          </div>
+          <ImageInput label="Membership Image" name="membershipPhoto" />
+          <TextInput
+            label="Name"
+            name="name"
+            placeholder="Enter Membership Name"
+          />
+          <LongTextInput
+            label="Description"
+            name="description"
+            placeholder="Enter deal description"
+          />
+          <NumInput
+            label="Cashback Percentage"
+            name="cashbackPercent"
+            placeholder="Cashback"
+            maxLength="2"
+          />
+          <TextInput label="URL" name="url" placeholder="Paste URL" />
 
           <button className="add-membership-btn">Add membership</button>
         </form>

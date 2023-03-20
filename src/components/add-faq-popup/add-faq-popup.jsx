@@ -8,6 +8,10 @@ import Backdrop from "../backdrop/backdrop";
 //api requests
 import { addNewFaq } from "../../api/index";
 
+import PopupHead from "../popup-head/popup-head";
+import TextInput from "../text-input/text-input";
+import LongTextInput from "../long-text-input/long-text-input";
+
 export default function AddFaqPopup({ setShowPopup, fetchFaqs }) {
   const formRef = useRef(null);
 
@@ -28,42 +32,18 @@ export default function AddFaqPopup({ setShowPopup, fetchFaqs }) {
   return (
     <Backdrop>
       <div className="add-faq-popup">
-        <div className="head">
-          <div className="head-left">
-            <img
-              src="/arrow-left-primary.png"
-              alt="go back"
-              onClick={() => {
-                setShowPopup(false);
-              }}
-            />
-            <h3>Add FAQ</h3>
-          </div>
-          <button
-            className="close-popup"
-            onClick={() => {
-              setShowPopup(false);
-            }}
-          >
-            <img src="/close.png" alt="close popup" />
-          </button>
-        </div>
+        <PopupHead title="Add New FAQ" setShowPopup={setShowPopup} />
         <form onSubmit={faqFormSubmit} name="faq-form">
-          <div className="faq-name input-container">
-            <label>Question</label>
-            <input
-              required
-              className="text-input"
-              placeholder="Enter Question"
-              name="question"
-            />
-          </div>
-          <div className="answer input-container">
-            <label>Write Relevent Answer</label>
-            <p className="textarea-msg">Write Answer</p>
-            <textarea required className="text-input" name="answer"></textarea>
-          </div>
-
+          <TextInput
+            label="Question"
+            name="question"
+            placeholder="Enter Question"
+          />
+          <LongTextInput
+            label="Answer"
+            name="answer"
+            placeholder="Enter Answers"
+          />
           <button className="add-faq-btn">Save</button>
         </form>
       </div>

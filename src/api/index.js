@@ -106,3 +106,5 @@ export const deleteFeedback = (_id) => {
     { headers: { "Content-Type": "application/json" } }
   );
 };
+
+export const getAllTickets = () => axios.get(`/api/ticket`);

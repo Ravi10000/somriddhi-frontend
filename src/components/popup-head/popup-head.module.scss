@@ -1,0 +1,26 @@
+.head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .head-left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    img {
+      cursor: pointer;
+      width: 15px;
+    }
+  }
+  .close-popup {
+    background: #ffe9e6;
+    border-radius: 0;
+    padding: 10px;
+    img {
+      width: 25px;
+    }
+  }
+}

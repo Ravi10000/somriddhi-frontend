@@ -1,13 +1,17 @@
-import "./custom-select.styles.scss";
+import styles from "./custom-select.module.scss";
 import { useState } from "react";
 
-export default function CustomSelect({ categories, selectedCategory, setSelectedCategory }) {
+export default function CustomSelect({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+}) {
   const [showOptions, setShowOptions] = useState(false);
   return (
-    <div className="custom-select">
+    <div className={styles["custom-select"]}>
       {!selectedCategory ? (
         <div
-          className="selector"
+          className={styles["selector"]}
           onClick={() => {
             setShowOptions((prevState) => !prevState);
           }}
@@ -17,7 +21,7 @@ export default function CustomSelect({ categories, selectedCategory, setSelected
         </div>
       ) : (
         <div
-          className="selected-option"
+          className={styles["selected-option"]}
           onClick={() => {
             setShowOptions((prevState) => !prevState);
           }}
@@ -33,11 +37,11 @@ export default function CustomSelect({ categories, selectedCategory, setSelected
         </div>
       )}
       {showOptions && (
-        <div className="options">
+        <div className={styles["options"]}>
           {categories?.map((category) => {
             return (
               <div
-                className="option"
+                className={styles["option"]}
                 key={category.name}
                 onClick={() => {
                   setSelectedCategory(category);

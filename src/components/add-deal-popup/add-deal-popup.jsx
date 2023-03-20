@@ -7,6 +7,11 @@ import Backdrop from "../backdrop/backdrop";
 // utils
 import { createNewDeal, getAllCategories } from "../../api/";
 import CustomSelect from "../custom-select/custom-select";
+import TextInput from "../text-input/text-input";
+import LongTextInput from "../long-text-input/long-text-input";
+import ImageInput from "../image-input/image-input";
+import NumInput from "../num-input/num-input";
+import PopupHead from "../popup-head/popup-head";
 
 export default function AddDealPopup({ setShowPopup, fetchDeals }) {
   const id = useId();
@@ -42,7 +47,8 @@ export default function AddDealPopup({ setShowPopup, fetchDeals }) {
   return (
     <Backdrop>
       <div className="add-deal-popup">
-        <div className="head">
+        <PopupHead title="Add New Deal" setShowPopup={setShowPopup} />
+        {/* <div className="head">
           <div className="head-left">
             <img src="/arrow-left-primary.png" alt="go back" />
             <h3>Add Deal</h3>
@@ -55,75 +61,28 @@ export default function AddDealPopup({ setShowPopup, fetchDeals }) {
           >
             <img src="/close.png" alt="close popup" />
           </button>
-        </div>
+        </div> */}
         <form encType="multipart/form-data" onSubmit={submitAddDealForm}>
-          <div className="deal-name input-container">
-            <label htmlFor={`${id}-name`}>Name</label>
-            <input
-              id={`${id}-name`}
-              name="name"
-              className="text-input"
-              placeholder="Enter Banner Name"
-            />
-          </div>
-          <div className="description input-container">
-            <label htmlFor={`${id}-description`}>Description</label>
-            <p className="textarea-msg">Enter Deal Description</p>
-            <textarea
-              name="description"
-              id={`${id}-description`}
-              className="text-input"
-            ></textarea>
-          </div>
-          <div className="deal-url input-container">
-            <label htmlFor={`${id}-url`}>URL</label>
-            <input
-              id={`${id}-url`}
-              name="url"
-              className="text-input"
-              placeholder="Paster banner URL"
-            />
-          </div>
-          <div className="deal-cashback input-container">
-            <label htmlFor={`${id}-cashback`}>Cashback Percentage</label>
-            <input
-              id={`${id}-cashback`}
-              inputMode="numeric"
-              maxLength={2}
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
-              name="cashbackPercent"
-              className="text-input"
-              placeholder="Cashback"
-            />
-          </div>
-          <div className="input-container">
-            <CustomSelect
-              categories={categories}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          </div>
-          <div className="upload-deal-img">
-            <label className="label" htmlFor={`${id}-dealPhoto`}>
-              Banner Image
-            </label>
-            <div className="upload-input">
-              <img src={image || "/upload-gray.png"} alt="upload image" />
-              {!image && <p>Upload Image</p>}
-              <input
-                id={`${id}-dealPhoto`}
-                className="file-input"
-                name="dealPhoto"
-                type="file"
-                accept="image/png, image/jpeg"
-                onChange={(e) => {
-                  setImage(URL.createObjectURL(e.target.files[0]));
-                }}
-              />
-            </div>
-          </div>
+          <TextInput label="Name" name="name" placeholder="Enter Banner Name" />
+          <TextInput label="URL" name="url" placeholder="Paster banner Url" />
+          <NumInput
+            label="Cashback"
+            name="cashbackPercent"
+            placeholder="Cashback"
+            maxLength="2"
+          />
+          <LongTextInput
+            label="Description"
+            name="description"
+            placeholder="Enter deal description"
+          />
+          <CustomSelect
+            categories={categories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+
+          <ImageInput label="Deal Image" name="dealPhoto" />
           <div className="dates">
             <div className="live-date date-input">
               <label htmlFor={`${id}-liveDate`}>Live Date</label>

@@ -1,6 +1,6 @@
 import "./add-banner-popup.styles.scss";
 import { useRef, useState } from "react";
-
+import TextInput from "../text-input/text-input";
 // packages
 // import { useForm } from "react-hook-form";
 // import axios from "../../api";
@@ -10,6 +10,10 @@ import Backdrop from "../backdrop/backdrop";
 
 // utils
 import { createNewBanner } from "../../api";
+import ImageInput from "../image-input/image-input";
+import LongTextInput from "../long-text-input/long-text-input";
+import Button from "../button/button";
+import PopupHead from "../popup-head/popup-head";
 
 export default function AddBannerPopup({ setShowPopup, fetchBanners }) {
   const [image, setImage] = useState(null);
@@ -43,7 +47,7 @@ export default function AddBannerPopup({ setShowPopup, fetchBanners }) {
   return (
     <Backdrop>
       <div className="add-banner-popup">
-        <div className="head">
+        {/* <div className="head">
           <div className="head-left">
             <img src="/arrow-left-primary.png" alt="go back" />
             <h3>Add Banner</h3>
@@ -56,63 +60,13 @@ export default function AddBannerPopup({ setShowPopup, fetchBanners }) {
           >
             <img src="/close.png" alt="close popup" />
           </button>
-        </div>
+        </div> */}
+        <PopupHead setShowPopup={setShowPopup} title="Add Banner" />
         <form onSubmit={submitForm} encType="multipart/form-data">
-          <div className="upload-banner-img">
-            <label className="label">Banner Image</label>
-            <div className="upload-input">
-              <img src={image || "/upload-gray.png"} alt="upload image" />
-              {!image && <p>Upload Image</p>}
-              <input
-                onChange={(e) => {
-                  console.log(image);
-                  setImage(URL.createObjectURL(e.target.files[0]));
-                }}
-                className="file-input"
-                type="file"
-                accept="image/*"
-                name="bannerPhoto"
-                // {...register("bannerPhoto", { required: "Image is required" })}
-              />
-              {/* {errors.bannerPhoto && (
-                <p className="error">{errors.bannerPhoto.message}</p>
-              )} */}
-            </div>
-          </div>
-          <div className="banner-name input-container">
-            <label htmlFor="">Name</label>
-            <input
-              name="name"
-              className="text-input"
-              placeholder="Enter Banner Name"
-              // {...register("name", { required: "Name is required" })}
-            />
-            {/* {errors.name && <p className="error">{errors.name.message}</p>} */}
-          </div>
-          <div className="url input-container">
-            <label htmlFor="">URL</label>
-            <input
-              name="url"
-              className="text text-input"
-              placeholder="Paste Banner url"
-              // {...register("url", { required: "URL is required" })}
-            />
-            {/* {errors.url && <p className="error">{errors.url.message}</p>} */}
-          </div>
-          <div className="description input-container">
-            <label htmlFor="">Description</label>
-            <p className="textarea-msg">Enter Banner Description</p>
-            <textarea
-              name="description"
-              className="text-input"
-              // {...register("description", {
-              //   required: "Description is required",
-              // })}
-            ></textarea>
-            {/* {errors.description && (
-              <p className="error">{errors.description.message}</p>
-            )} */}
-          </div>
+          <ImageInput label="Banner Image" name="bannerPhoto" />
+          <TextInput label="Name" name="name" placeholder="Enter Banner Name" />
+          <TextInput label="URL" name="url" placeholder="Paste Banner url" />
+          <LongTextInput label="Description" name="description" />
           <button className="add-banner-btn">Add Banner</button>
         </form>
       </div>

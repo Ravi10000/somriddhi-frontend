@@ -3,6 +3,10 @@ import "./add-category-popup.styles.scss";
 import React, { useRef, useEffect, useState } from "react";
 import Backdrop from "../backdrop/backdrop";
 import { getAllCategories, createNewCategory } from "../../api";
+import PopupHead from "../popup-head/popup-head";
+import TextInput from "../text-input/text-input";
+import LongTextInput from "../long-text-input/long-text-input";
+import ImageInput from "../image-input/image-input";
 
 export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
   const [categories, setCategories] = useState([]);
@@ -38,51 +42,19 @@ export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
   return (
     <Backdrop>
       <div className="add-category-popup">
-        <div className="head">
-          <div className="head-left">
-            <img src="/arrow-left-primary.png" alt="go back" />
-            <h3>Add Category</h3>
-          </div>
-          <button
-            className="close-popup"
-            onClick={() => {
-              setShowPopup(false);
-            }}
-          >
-            <img src="/close.png" alt="close popup" />
-          </button>
-        </div>
+        <PopupHead title="Add New Category" setShowPopup={setShowPopup} />
         <form encType="multipart/form-data" onSubmit={submitAddCategoryForm}>
-          <div className="banner-name input-container">
-            <label htmlFor="">Name</label>
-            <input
-              name="name"
-              className="text-input"
-              placeholder="Enter Category Name"
-            />
-          </div>
-
-          <div className="description input-container">
-            <label htmlFor="">Description</label>
-            <p className="textarea-msg">Enter Category Description</p>
-            <textarea name="description" className="text-input"></textarea>
-          </div>
-          <div className="upload-category-img">
-            <label className="label">Icon</label>
-            <div className="upload-input">
-              <img src={image || "/upload-gray.png"} alt="upload image" />
-              {!image && <p>Upload Image</p>}
-              <input
-                onChange={(e) => {
-                  setImage(URL.createObjectURL(e.target.files[0]));
-                }}
-                name="categoryPhoto"
-                className="file-input"
-                type="file"
-                accept="image/png, image/jpeg"
-              />
-            </div>
-          </div>
+          <TextInput
+            label="Name"
+            name="name"
+            placeholder="Enter Category Name"
+          />
+          <LongTextInput
+            label="Description"
+            name="description"
+            placeholder="Enter Category Description"
+          />
+          <ImageInput label="Icon" name="categoryPhoto" />
           <div className="select-icons">
             <p>OR</p>
             <div className="icon-list">

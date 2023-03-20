@@ -8,17 +8,22 @@ import AddMembershipPopup from "../../../components/add-membership-popup/add-mem
 export default function AllMemberships() {
   const [showAddMembershipPopup, setShowAddMembershipPopup] = useState(false);
   const [memberships, setMemberships] = useState([]);
+
+  async function fetchMemberships() {
+    const response = await getAllMemberships();
+    setMemberships(response.data.data);
+    console.log(response);
+  }
   useEffect(() => {
-    (async function () {
-      const response = await getAllMemberships();
-      setMemberships(response.data.data);
-      console.log(response);
-    })();
+    fetchMemberships();
   }, []);
   return (
     <>
       {showAddMembershipPopup && (
-        <AddMembershipPopup setShowPopup={setShowAddMembershipPopup} />
+        <AddMembershipPopup
+          setShowPopup={setShowAddMembershipPopup}
+          fetchMemberships={fetchMemberships}
+        />
       )}
 
       <div className="all-memberships">
@@ -31,7 +36,7 @@ export default function AllMemberships() {
         <div className="membership-cards-container">
           {/* {bannerList?.map(
           ({ name, url, expiryDate, bannerImg, desc }, index) => ( */}
-          {memberships?.map(
+          {memberships.reverse()?.map(
             ({ name, image, description, cashbackPercent, url }, index) => (
               <div key={index} className="membership-card">
                 <img className="membership-img" src="/offer2.png" />
