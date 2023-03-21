@@ -22,8 +22,12 @@ import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
 import AdminPage from "./pages/admin/admin.page";
 import axios from "axios";
+import { setCurrentUser } from "./redux/user/user.actions";
+import { connect } from "react-redux";
+// import 
+// fetch user from api!!!!!!!!!!!!!!!!!!!!!
 
-export default function App() {
+function App({ setCurrentUser }) {
   const { pathname } = useLocation();
   // console.log({ pathname });
   const [modalOpen, setModalOpen] = useState(false);
@@ -73,3 +77,9 @@ export default function App() {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(App);

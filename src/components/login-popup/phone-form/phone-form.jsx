@@ -3,9 +3,10 @@ import "./phone-form.styles.scss";
 // packages imports
 import React, { useEffect, useRef, useState } from "react";
 import { sendOtp } from "../../../api/index";
-
+import axios from "axios";
 // components
 import Button from "../../button/button";
+import TextInput from "../../text-input/text-input";
 
 export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
   // const [phone, setPhoneNumber] = useState("");
@@ -16,13 +17,37 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
     phoneNumberRef.current.focus();
   }, []);
 
-  async function submitForm(e) {
+  async function phoneFormSubmit(e) {
     e.preventDefault();
-    // console.log(e.target[0].value);
-    // create otp and send it to the user
+    // let data = JSON.stringify({
+    //   phone: "3932537473",
+    //   countryCode: "+91",
+    // });
+
+    // let config = {
+    //   method: "post",
+    //   maxBodyLength: Infinity,
+    //   url: "http://localhost:8001/api/sendotp",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   data: data,
+    // };
+
+    // axios
+    //   .request(config)
+    //   .then((response) => {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    const formData = new FormData(e.target);
+    formData.append("countryCode", "+91");
     try {
       setIsLoading(true);
-      const response = await sendOtp({ phone });
+      const response = await sendOtp(formData);
+      console.log({ response });
       if (response.data.status === "success") {
         nextStage();
       }
@@ -41,14 +66,18 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
     }
   }
   return (
-    <form onSubmit={submitForm} className="phone-form">
+    <form
+      className="phone-form"
+      encType="application/json"
+      onSubmit={phoneFormSubmit}
+    >
       <h1>Your Phone Number</h1>
       <p>Enter your 10 digit phone number</p>
       <input
         className="input"
         ref={phoneNumberRef}
         type="text"
-        name="phone-number"
+        name="phone"
         maxLength={10}
         inputMode="numeric"
         onChange={handleChange}
@@ -56,6 +85,7 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
           (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
         }
       />
+      {/* <TextInput label="Phone" name="phone" placeholder="Enter Phone Number" /> */}
       <Button disabled={!validInput} isLoading={isLoading}>
         Next
       </Button>

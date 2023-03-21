@@ -11,10 +11,7 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
   const [isOtpValid, setIsOtpValid] = useState(true);
   const [otp, setOtp] = useState("");
   const [validInput, setValidInput] = useState(false);
-  // const [digit1, setDigit1] = useState("");
-  // const [digit2, setDigit2] = useState("");
-  // const [digit3, setDigit3] = useState("");
-  // const [digit4, setDigit4] = useState("");
+
   const [secondsLeft, setSecondsLeft] = useState(60);
   const [isLoading, setIsLoading] = useState(false);
   const digit1Ref = useRef();
@@ -47,9 +44,9 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
     digit1Ref.current.focus();
   }
 
-  async function submitForm(e) {
+  async function submitOtpForm(e) {
     e.preventDefault();
-    console.log({ otp });
+    console.log({ phone, otp });
     try {
       setIsLoading(true);
       const response = await verifyOtp({ phone, otp });
@@ -57,20 +54,17 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
       if (response.data.message === "Invalid otp") {
         resetOtpInputs();
         setIsOtpValid(false);
-        // return;
       } else if (response.data.status === "success") {
-        if (Array.isArray(response.data.data)) {
-        }
-        console.log(response.data.data[0]);
-        const user = response.data.data[0];
+        // if (Array.isArray(response.data.data)) {
+        // }
+        // console.log(response.data.data[0]);
+        // const user = response.data.data[0];
+        const { user } = response.data;
         setCurrentUser(user);
-        if (
-          user?.name === null ||
-          user?.name === "" ||
-          user?.name === undefined
-        ) {
-          nextStage();
-        }
+        nextStage();
+        // if (!user?.name) {
+        //   nextStage(3);
+        // }
       }
       setIsLoading(false);
     } catch (err) {
@@ -127,7 +121,11 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
     }
   }
   return (
-    <form action="#" onSubmit={submitForm} className="otp-form">
+    <form
+      className="otp-form"
+      encType="application/json"
+      onSubmit={submitOtpForm}
+    >
       <h1>Verify OTP</h1>
       <p>Enter OTP which you received for login</p>
       {secondsLeft > 1 && <h5>Expires in {secondsLeft} seconds</h5>}

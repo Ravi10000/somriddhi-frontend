@@ -35,7 +35,7 @@ export default function AllCustomers() {
             setShowAddCustomerPopup(true);
           }}
         />
-        <div className="customers-table-container">
+        {/* <div className="customers-table-container"> */}
           <div className="customers-table-container">
             <table className="customers-table">
               <thead>
@@ -77,7 +77,7 @@ export default function AllCustomers() {
               </tbody>
             </table>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );

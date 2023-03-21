@@ -26,28 +26,30 @@ export default function AllNewsletters() {
           alert("add newsletters popup need to be here");
         }}
       />
-      <table className="subscription-table">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Added At</th>
-            <th>Total</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {subscriptions?.map(({ email, addedAt, total }, index) => (
-            <tr key={index}>
-              <td>{email}</td>
-              <td>{addedAt ? addedAt : "unavailable"}</td>
-              <td>{total ? total : "unavailable"}</td>
-              <td>
-                <img src="/check.png" alt="" />
-              </td>
+      <div className="newslettes-table-container">
+        <table className="subscription-table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Added At</th>
+              <th>Total</th>
+              <th>Active</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {subscriptions?.map(({ email, addedAt, total }, index) => (
+              <tr key={index}>
+                <td>{email}</td>
+                <td>{addedAt ? addedAt : "unavailable"}</td>
+                <td>{total ? total : "unavailable"}</td>
+                <td>
+                  <img src="/check.png" alt="" />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
