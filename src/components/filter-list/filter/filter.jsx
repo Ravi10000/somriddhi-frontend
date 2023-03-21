@@ -21,25 +21,28 @@ export default function Filter({
       </div>
       <div className={`options-container ${!isOpen && "hidden"}`}>
         {options.map((option) => (
-          <div className="option" key={option}>
+          <div
+            className="option"
+            key={option._id}
+            onClick={(e) => {
+              setSelectedCategories((array) => {
+                if (!selectedCategories.includes(option._id)) {
+                  return [...array, option._id];
+                } else {
+                  return array.filter((item) => item !== option._id);
+                }
+              });
+            }}
+          >
             <input
               type="checkbox"
-              id={option}
-              name={option}
-              value={option}
-              checked={selectedCategories.includes(option)}
+              id={option._id}
+              name={option.name}
+              value={option._id}
+              checked={selectedCategories.includes(option._id)}
               readOnly
-              onClick={(e) => {
-                setSelectedCategories((array) => {
-                  if (!selectedCategories.includes(option)) {
-                    return [...array, option];
-                  } else {
-                    return array.filter((item) => item !== option);
-                  }
-                });
-              }}
             />
-            <label htmlFor={option}>{option}</label>
+            <label htmlFor={option.name}>{option.name}</label>
           </div>
         ))}
       </div>

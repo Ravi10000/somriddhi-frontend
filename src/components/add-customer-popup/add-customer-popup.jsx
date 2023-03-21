@@ -2,42 +2,50 @@ import "./add-customer-popup.styles.scss";
 
 import React from "react";
 import Backdrop from "../backdrop/backdrop";
-
+import PopupHead from "../popup-head/popup-head";
+import TextInput from "../text-input/text-input";
+import NumInput from "../num-input/num-input";
+import { createUser } from "../../api";
 export default function AddCustomerPopup({ setShowPopup }) {
+  async function submitAddCustomerForm(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    try {
+      const response = await createUser(formData);
+      console.log({ response });
+      setShowPopup(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <Backdrop>
       <div className="add-customer-popup">
-        <div className="head">
-          <div className="head-left">
-            <img src="/arrow-left-primary.png" alt="go back" />
-            <h3>Add Customer</h3>
-          </div>
-          <button
-            className="close-popup"
-            onClick={() => {
-              setShowPopup(false);
-            }}
-          >
-            <img src="/close.png" alt="close popup" />
-          </button>
-        </div>
-        <form>
-          <div className="customer-name input-container">
-            <label htmlFor="">Name</label>
-            <input className="text-input" placeholder="Enter Customer Name" />
-          </div>
-          <div className="customer-name input-container">
-            <label htmlFor="">Phone</label>
-            <input
-              className="text-input"
-              placeholder="Enter Phone Number"
-              maxLength={10}
-              inputMode="numeric"
-              onInput={(e) =>
-                (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
-              }
-            />
-          </div>
+        <PopupHead title="Add New Customer" setShowPopup={setShowPopup} />
+        <form onSubmit={submitAddCustomerForm} encType="multipart/form-data">
+          <TextInput
+            label="First Name"
+            name="fname"
+            placeholder="Enter First Name"
+          />
+          <TextInput
+            label="Last Name"
+            name="lname"
+            placeholder="Enter Last Name"
+          />
+          <NumInput
+            label="Phone"
+            name="phone"
+            placeholder="Enter Phone Number"
+            maxLength="10"
+          />
+          <TextInput
+            label="Email"
+            name="email"
+            placeholder="Enter Email Id"
+            type="email"
+          />
 
           <button className="add-customer-btn">Add customer</button>
         </form>

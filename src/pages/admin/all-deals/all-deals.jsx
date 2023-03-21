@@ -19,6 +19,15 @@ export default function AllDeals() {
     console.log({ response });
   }
   useEffect(() => {
+    const filteredList = deals.filter((deal) => {
+      console.log(selectedCategories.includes(deal.categoryId));
+      return selectedCategories.includes(deal.categoryId);
+    });
+    console.log({ filteredList, selectedCategories });
+    setDeals(filteredList);
+  }, [selectedCategories]);
+
+  useEffect(() => {
     fetchDeals();
   }, []);
 

@@ -36,7 +36,7 @@ export default function AddDealPopup({
     e.preventDefault();
     const formData = new FormData(e.target);
     formData.append("categoryId", selectedCategory._id);
-    formData.append("_id", dealToUpdate._id);
+    dealToUpdate && formData.append("_id", dealToUpdate._id);
     for (let entry of formData.entries()) {
       console.log(entry);
     }

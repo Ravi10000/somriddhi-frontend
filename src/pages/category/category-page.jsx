@@ -31,11 +31,20 @@ export default function CategoryPage() {
   useEffect(() => {
     allDealsData();
   }, []);
-
-  console.log({ selectedCategories });
   useEffect(() => {
-    setSelectedCategories([category]);
-  }, []);
+    allDealsData();
+    const filteredList = deals.filter((deal) => {
+      console.log(selectedCategories.includes(deal.categoryId));
+      return selectedCategories.includes(deal.categoryId);
+    });
+    console.log({ filteredList, selectedCategories });
+    setDeals(filteredList);
+  }, [selectedCategories]);
+
+  console.log({ selectedCategories, deals });
+  // useEffect(() => {
+  //   setSelectedCategories([category]);
+  // }, []);
   // console.log(filterDeals)
   return (
     <div className="category-page">
