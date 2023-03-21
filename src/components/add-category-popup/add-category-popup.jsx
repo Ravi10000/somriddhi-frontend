@@ -55,7 +55,7 @@ export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
             placeholder="Enter Category Description"
           />
           <ImageInput label="Icon" name="categoryPhoto" />
-          <div className="select-icons">
+          {/* <div className="select-icons">
             <p>OR</p>
             <div className="icon-list">
               {categories.map(({ name, icon }) => (
@@ -64,7 +64,7 @@ export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
           <button className="add-category-btn">Add Category</button>
         </form>
       </div>

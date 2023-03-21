@@ -36,16 +36,18 @@ export default function AddDealPopup({
     e.preventDefault();
     const formData = new FormData(e.target);
     formData.append("categoryId", selectedCategory._id);
-    // for (let entry of formData.entries()) {
-    //   console.log(entry);
-    // }
+    formData.append("_id", dealToUpdate._id);
+    for (let entry of formData.entries()) {
+      console.log(entry);
+    }
     try {
       if (!dealToUpdate) {
         const response = await createNewDeal(formData);
+        console.log({ response });
       } else {
         const response = await updateDeal(formData);
+        console.log({ response });
       }
-      console.log({ response });
       setShowPopup(false);
       fetchDeals();
     } catch (error) {

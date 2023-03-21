@@ -65,11 +65,20 @@ export async function updateUser({
 
 // Deals APIs
 export const getAllDeals = () => axios.get(`/api/deal`);
-export const deleteDeal = (_id) => axios.delete(`/api/deal`, { _id });
 export const createNewDeal = (bodyFormData) =>
-  axios.post(`/api/deal`, bodyFormData);
+  axios.post(`/api/deal`, bodyFormData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 export const updateDeal = (bodyFormData) =>
-  axios.patch(`/api/deal`, bodyFormData);
+  axios.patch(`/api/deal`, bodyFormData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+export const deleteDeal = (_id) =>
+  axios.delete(
+    `/api/deal`,
+    { _id },
+    { headers: { "Content-Type": "application/json" } }
+  );
 
 // Category APIs
 export const getAllCategories = () => axios.get(`/api/category`);

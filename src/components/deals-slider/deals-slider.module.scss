@@ -1,0 +1,22 @@
+.slider-container {
+  width: 100%;
+  // overflow-x: hidden;
+  // outline: 2px solid green;
+  .card-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px 0 10px;
+    // .deal-card-container {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    // }
+  }
+}
+
+@media (min-width: 700px) {
+  .card-container {
+    padding: 10px;
+  }
+}

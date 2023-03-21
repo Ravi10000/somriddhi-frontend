@@ -10,32 +10,27 @@ import { getAllDeals } from "../../api/index.js";
 // import { OfferCard } from '../../components/offers/offer-card'
 import OfferCard from "../../components/offers/offer-card/offer-card";
 
-
 export default function CategoryPage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   const [deals, setDeals] = useState([]);
-
-
-  let dealData;
+  const { category } = useParams();
+  // console.log({ category });
 
   const allDealsData = async () => {
-    dealData = await getAllDeals();
-    console.log(dealData.data.data)
-    const { category } = useParams();
-    console.log(category)
-    setDeals(dealData.data.data);
+    const response = await getAllDeals();
+    console.log(response.data.data);
+    setDeals(response.data.data);
     // let filterDeals = dealData.data.data.filter((deal) => deal.categoryId === '64146f847cc49d42dfe5e9b1')
     // let filterDeals = dealData.data.data;
 
     // // setDeals(filterDeals);
     // console.log("Filter Data")
     // console.log(filterDeals)
-
-  }
+  };
   useEffect(() => {
     allDealsData();
-  }, [])
+  }, []);
 
   console.log({ selectedCategories });
   useEffect(() => {
@@ -64,15 +59,16 @@ export default function CategoryPage() {
             <p>showing 1 -20 results</p>
           </div>
           <div className="category-cards-container">
-            {deals && deals.map(({ _id, name, cashbackPercent, image }) => (
-              <OfferCard
-                key={_id}
-                _id={_id}
-                name={name}
-                cashbackPercent={cashbackPercent}
-                image={image}
-              />
-            ))}
+            {deals &&
+              deals.map(({ _id, name, cashbackPercent, image }) => (
+                <OfferCard
+                  key={_id}
+                  _id={_id}
+                  name={name}
+                  cashbackPercent={cashbackPercent}
+                  image={image}
+                />
+              ))}
           </div>
         </div>
       </section>

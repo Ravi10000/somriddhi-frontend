@@ -73,6 +73,7 @@ export default function AllDeals() {
                       src="/edit.png"
                       alt="edit deal"
                       onClick={() => {
+                        window.scrollTo(0, 0);
                         setDealToUpdate(dealItem);
                         setShowAddDealPopup(true);
                       }}

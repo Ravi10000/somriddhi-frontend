@@ -3,60 +3,25 @@
   flex-direction: column;
   align-items: center;
   color: #091431;
-  //   .deals-container {
-  //     display: grid;
-  //     gap: 20px;
-  //   }
   .carousel-container {
-    width: 100%;
     overflow: hidden;
-    display: grid;
-    place-items: center;
+    width: 100%;
+    padding: 50px 0;
     // outline: 2px solid red;
+    // background: red;
   }
 }
 @media (min-width: 500px) {
   .deals-section {
-    .categories {
-      flex-direction: row;
-      justify-content: space-evenly;
-    }
-    .deals-cards-container {
-      display: grid;
-      width: 100%;
-      overflow: hidden;
-      gap: 20px;
-      max-width: 500px;
-      grid-template-columns: 1fr 1fr;
-      //   outline: 2px solid red;
+    .carousel-container {
+      width: 80%;
+      max-width: 1000px;
     }
   }
 }
 
-@media (min-width: 800px) {
-  .deals-section {
-    // width: max-content;
-    overflow: hidden;
-    .carousel-container {
-      width: 80%;
-      .deals-cards-container {
-        max-width: 750px;
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-    }
-  }
-}
+// @media (min-width: 800px) {
+//   .deals-section {
 
-@media (min-width: 1400px) {
-  .deals-section {
-    width: 100%;
-    overflow: hidden;
-    .carousel-container {
-      width: 80%;
-      .deals-cards-container {
-        max-width: 1000px;      
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-      }
-    }
-  }
-}
+//   }
+// }

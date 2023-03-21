@@ -10,10 +10,11 @@ import handleResponsive from "../../utils/handle-responsive";
 // import { useHistory } from "react-router-dom";
 import { getAllDeals } from "../../api/index.js";
 import OfferCard from "../offers/offer-card/offer-card";
+import DealsSlider from "../deals-slider/deals-slider";
 
 export default function Deals() {
   // const history = useHistory();
-  const [deviceWidth, setDeviceWidth] = useState(null);
+  // const [deviceWidth, setDeviceWidth] = useState(null);
   const [listOfItems, setListOFItems] = useState([]);
   const [deals, setDeals] = useState([]);
 
@@ -21,74 +22,44 @@ export default function Deals() {
 
   const allDealsData = async () => {
     dealData = await getAllDeals();
-    console.log(dealData.data.data)
+    console.log(dealData.data.data);
     setDeals(dealData.data.data);
-  }
+  };
   useEffect(() => {
     allDealsData();
-  }, [])
-
-  useEffect(() => {
-    setDeviceWidth(window.innerWidth);
   }, []);
 
-  useEffect(() => {
-    if (deviceWidth < 800 && deviceWidth > 500) {
-      handleResponsive({
-        list: deals,
-        setList: setListOFItems,
-        itemsPerSlide: 2,
-      });
-    } else if (deviceWidth > 800 && deviceWidth < 1400) {
-      handleResponsive({
-        list: deals,
-        setList: setListOFItems,
-        itemsPerSlide: 3,
-      });
-    } else if (deviceWidth > 1400) {
-      handleResponsive({
-        list: deals,
-        setList: setListOFItems,
-        itemsPerSlide: 4,
-      });
-    }
-  }, [deviceWidth]);
+  // useEffect(() => {
+  //   setDeviceWidth(window.innerWidth);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (deviceWidth < 800 && deviceWidth > 500) {
+  //     handleResponsive({
+  //       list: deals,
+  //       setList: setListOFItems,
+  //       itemsPerSlide: 2,
+  //     });
+  //   } else if (deviceWidth > 800 && deviceWidth < 1400) {
+  //     handleResponsive({
+  //       list: deals,
+  //       setList: setListOFItems,
+  //       itemsPerSlide: 3,
+  //     });
+  //   } else if (deviceWidth > 1400) {
+  //     handleResponsive({
+  //       list: deals,
+  //       setList: setListOFItems,
+  //       itemsPerSlide: 4,
+  //     });
+  //   }
+  // }, [deviceWidth]);
 
   return (
     <section className="deals-section" id="deals">
       <h2 className="_title">Deal Of The Day</h2>
       <div className="carousel-container">
-        <CustomCarousel>
-          {deals.length > 0
-            ? deals.map((deal, index) => {
-              return (
-                <CarouselItem key={index}>
-                  <div className="deals-cards-container">
-                    {deals?.map(({ _id, name, cashbackPercent, image, url }) => {
-                      return (
-                        <OfferCard
-                          key={_id}
-                          _id={_id}
-                          name={name}
-                          cashbackPercent={cashbackPercent}
-                          image={image}
-                          url={url}
-                        />
-
-                      );
-                    })}
-                  </div>
-                </CarouselItem>
-              );
-            })
-            : deals?.map(({ _id, name, cashbackPercent, image, url }, index) => {
-              return (
-                <CarouselItem key={index}>
-                  <OfferCard name={name} cashbackPercent={cashbackPercent} image={image} />
-                </CarouselItem>
-              );
-            })}
-        </CustomCarousel>
+        <DealsSlider deals={deals} />
       </div>
     </section>
   );

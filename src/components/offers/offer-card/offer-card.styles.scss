@@ -11,6 +11,7 @@
   max-width: 300px;
   white-space: normal;
   cursor: pointer;
+  // outline: 2px solid red;
 
   h4 {
     color: #3ba615;
@@ -18,8 +19,11 @@
     // width: 70;
   }
 
-  button {
+  .btn {
     width: 100%;
+    button {
+      width: 100%;
+    }
   }
 
   p {

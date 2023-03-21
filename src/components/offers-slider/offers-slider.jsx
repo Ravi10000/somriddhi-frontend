@@ -1,0 +1,64 @@
+import styles from "./offers-slider.module.scss";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import OfferCard from "../offers/offer-card/offer-card";
+export default function OffersSlider({ offers }) {
+  const settings = {
+    customPaging: function (i) {
+      return <div className="dots"></div>;
+    },
+    dots: true,
+    dotsClass: "slick-dots slick-thumb",
+    // infinite: offers.length > 3,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    rows: 2,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          rows: 1,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          rows: 1,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  return (
+    <div className={styles["slider-container"]}>
+      <Slider {...settings}>
+        {offers.length > 0 &&
+          offers.reverse()?.map(({ _id, image, name, cashbackPercent }) => (
+            <div className={styles["card-container"]} key={_id}>
+              {/* <div className={styles["deal-card-container"]}> */}
+              <OfferCard
+                _id={_id}
+                image={image}
+                name={name}
+                cashbackPercent={cashbackPercent}
+              />
+              {/* </div> */}
+            </div>
+          ))}
+      </Slider>
+    </div>
+  );
+}
