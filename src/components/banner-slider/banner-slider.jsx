@@ -11,6 +11,7 @@ export default function BannerSlider({ banners, ForMemberships }) {
       return <div className="dots"></div>;
     },
     dots: true,
+    arrows: false,
     dotsClass: "slick-dots slick-thumb",
     infinite: false,
     speed: 500,

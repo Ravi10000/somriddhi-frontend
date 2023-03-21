@@ -14,9 +14,10 @@ export default function SelectCategorySlider({
     customPaging: function (i) {
       return <div className="dots"></div>;
     },
+    arrows: false,
     dots: true,
     dotsClass: "slick-dots slick-thumb",
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 9,
     slidesToScroll: 9,

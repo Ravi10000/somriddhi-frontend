@@ -15,6 +15,7 @@ export default function OffersSlider({ offers }) {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
+    arrows: false,
     rows: 2,
     responsive: [
       {
@@ -48,14 +49,14 @@ export default function OffersSlider({ offers }) {
         {offers.length > 0 &&
           offers.reverse()?.map(({ _id, image, name, cashbackPercent }) => (
             <div className={styles["card-container"]} key={_id}>
-              {/* <div className={styles["deal-card-container"]}> */}
+              <div className={styles["offers-card-container"]}>
               <OfferCard
                 _id={_id}
                 image={image}
                 name={name}
                 cashbackPercent={cashbackPercent}
               />
-              {/* </div> */}
+              </div>
             </div>
           ))}
       </Slider>

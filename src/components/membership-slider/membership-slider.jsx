@@ -9,8 +9,8 @@ export default function MembershipSlider({ banners }) {
     customPaging: function (i) {
       return <div className="dots"></div>;
     },
+    arrows: false,
     adaptiveHeight: true,
-    // variableWidth: true,
     dots: true,
     dotsClass: "slick-dots slick-thumb",
     infinite: false,

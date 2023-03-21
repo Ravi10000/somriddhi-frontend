@@ -27,6 +27,7 @@ export default function DealsSlider({ deals, forCoupons }) {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
+    arrows: false,
     // swipeToSlide: true,
     responsive: [
       {
@@ -59,16 +60,16 @@ export default function DealsSlider({ deals, forCoupons }) {
         {deals.length > 0 &&
           deals.reverse()?.map(({ _id, name, cashbackPercent, image, url }) => (
             <div className={styles["card-container"]}>
-              {/* <div className={styles["deal-card-container"]}> */}
-              <OfferCard
-                forCoupons
-                _id={_id}
-                image={image}
-                name={name}
-                url={url}
-                cashbackPercent={cashbackPercent}
-              />
-              {/* </div> */}
+              <div className={styles["deals-card-container"]}>
+                <OfferCard
+                  forCoupons
+                  _id={_id}
+                  image={image}
+                  name={name}
+                  url={url}
+                  cashbackPercent={cashbackPercent}
+                />
+              </div>
             </div>
           ))}
       </Slider>

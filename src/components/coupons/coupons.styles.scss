@@ -27,8 +27,9 @@
     overflow: hidden;
   }
   .coupons-carousel-container {
-    border-radius: 8px 8px 15px 15px;
-    // background: #fff;
+    margin-top: 2px;
+    // border-radius: 8px 8px 15px 15px;
+    background: #fff;
     display: flex;
     justify-content: center;
     // width: 80%;
@@ -43,35 +44,33 @@
   height: 50px;
 }
 
-@media (min-width: 500px) {
-  .coupons-section {
-    .carousel-container {
-      .menu-cards-container {
-        grid-template-columns: repeat(5, 1fr);
-      }
-    }
+// @media (min-width: 500px) {
+//   .coupons-section {
+//     // .carousel-container {
+//     //   .menu-cards-container {
+//     //     grid-template-columns: repeat(5, 1fr);
+//     //   }
+//     // }
 
-    .options-section {
-      .options-carousel {
-        .menu-cards-container {
-          width: 700px;
-          overflow: hidden;
-          display: grid;
-          gap: 10px;
-          grid-template-columns: repeat(3, 1fr);
-          // background: #fff;
-        }
-      }
-    }
-  }
-}
+//     // .options-section {
+//     //   .options-carousel {
+//     //     .menu-cards-container {
+//     //       width: 700px;
+//     //       overflow: hidden;
+//     //       display: grid;
+//     //       gap: 10px;
+//     //       grid-template-columns: repeat(3, 1fr);
+//     //       // background: #fff;
+//     //     }
+//     //   }
+//     // }
+//   }
+// }
 
 @media (min-width: 800px) {
   .coupons-section {
-    .carousel-container {
-      .menu-cards-container {
-        grid-template-columns: repeat(7, 1fr);
-      }
+    .coupons-carousel-container {
+      background: transparent;
     }
   }
 }
@@ -96,17 +95,17 @@
       }
     }
 
-    .options-section {
-      border-radius: 15px;
-      width: 1000px;
+    // .options-section {
+    //   border-radius: 15px;
+    //   width: 1000px;
 
-      .options-carousel {
-        .menu-cards-container {
-          padding: 25px;
-          width: 1000px;
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-    }
+    //   .options-carousel {
+    //     .menu-cards-container {
+    //       padding: 25px;
+    //       width: 1000px;
+    //       grid-template-columns: repeat(4, 1fr);
+    //     }
+    //   }
+    // }
   }
 }

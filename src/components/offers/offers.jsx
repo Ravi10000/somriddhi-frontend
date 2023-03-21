@@ -87,7 +87,7 @@ export default function Offers() {
           />
         ))}
       </div>
-      <div className="carousel-container">
+      <div className="offer-carousel">
         <OffersSlider offers={deals} />
       </div>
     </section>
