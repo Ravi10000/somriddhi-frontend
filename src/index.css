@@ -125,7 +125,16 @@ a {
   background-color: #091431;
   width: 40px;
 }
+/*
+.slick-dots li {
+  display: none;
+}
 
+.slick-dots li.slick-active,
+.slick-dots li.slick-active + li,
+.slick-dots li.slick-active + li + li {
+  display: inline-block;
+} */
 /* * {
   outline: 2px solid red;
 } */

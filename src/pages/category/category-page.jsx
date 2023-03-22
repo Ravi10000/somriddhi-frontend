@@ -11,41 +11,27 @@ import { getAllDeals } from "../../api/index.js";
 import OfferCard from "../../components/offers/offer-card/offer-card";
 
 export default function CategoryPage() {
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [deals, setDeals] = useState([]);
   const { category } = useParams();
   // console.log({ category });
 
   const allDealsData = async () => {
-    const response = await getAllDeals();
-    console.log(response.data.data);
-    setDeals(response.data.data);
-    // let filterDeals = dealData.data.data.filter((deal) => deal.categoryId === '64146f847cc49d42dfe5e9b1')
-    // let filterDeals = dealData.data.data;
-
-    // // setDeals(filterDeals);
-    // console.log("Filter Data")
-    // console.log(filterDeals)
+    try {
+      const formData = new FormData();
+      if (selectedCategory) formData.append("categoryId", selectedCategory);
+      const response = await getAllDeals(formData);
+      console.log({ response });
+      setDeals(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  useEffect(() => {
-    allDealsData();
-  }, []);
-  useEffect(() => {
-    allDealsData();
-    const filteredList = deals.filter((deal) => {
-      console.log(selectedCategories.includes(deal.categoryId));
-      return selectedCategories.includes(deal.categoryId);
-    });
-    console.log({ filteredList, selectedCategories });
-    setDeals(filteredList);
-  }, [selectedCategories]);
 
-  console.log({ selectedCategories, deals });
-  // useEffect(() => {
-  //   setSelectedCategories([category]);
-  // }, []);
-  // console.log(filterDeals)
+  useEffect(() => {
+    allDealsData();
+  }, [selectedCategory]);
   return (
     <div className="category-page">
       <div className="heading">
@@ -58,8 +44,8 @@ export default function CategoryPage() {
         <div className="filter-container">
           <FilterList
             // category={category}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
           />
         </div>
         <div className="category-container">

@@ -42,6 +42,7 @@ function UserDetailsForm({
       <h1 className="title">Your Phone Number</h1>
       <div className="inputs-container">
         <input
+          required
           name="fname"
           className="user-details-input"
           placeholder="First name"
@@ -50,6 +51,7 @@ function UserDetailsForm({
           }
         />
         <input
+          required
           className="user-details-input"
           pattern="[A-Za-z]+"
           name="lname"
@@ -60,6 +62,7 @@ function UserDetailsForm({
         />
         <div className="input-container">
           <input
+            required
             className="user-details-input"
             placeholder="Email"
             type="email"
@@ -67,13 +70,16 @@ function UserDetailsForm({
           />
         </div>
         <input
-          className="user-details-input"
           name="referralCode"
           placeholder="Referral Code"
+          className="user-details-input"
         />
       </div>
       <p className="msg">It&#39;s okay, If you do not have any</p>
-      <Button className="user-form-btn" isLoading={isLoading}>
+      <Button
+        className="user-form-btn"
+        isLoading={isLoading}
+      >
         Continue
       </Button>
       <p className="skip-now" onClick={closeModal}>

@@ -10,18 +10,28 @@ export default function MembershipSlider({ banners }) {
       return <div className="dots"></div>;
     },
     arrows: false,
-    adaptiveHeight: true,
+    // adaptiveHeight: true,
     dots: true,
     dotsClass: "slick-dots slick-thumb",
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-    initialSlide: 0,
+    // initialSlide: 2,
+    rows: 2,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          rows: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
       {
         breakpoint: 800,
         settings: {
+          rows: 1,
           slidesToShow: 1,
           slidesToScroll: 1,
         },

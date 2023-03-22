@@ -10,26 +10,24 @@ import { getAllDeals, deleteDeal } from "../../../api/index";
 export default function AllDeals() {
   const [deals, setDeals] = useState([]);
   const [showAddDealPopup, setShowAddDealPopup] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [dealToUpdate, setDealToUpdate] = useState(null);
 
   async function fetchDeals() {
-    const response = await getAllDeals();
-    setDeals(response.data.data);
-    console.log({ response });
+    try {
+      const formData = new FormData();
+      if (selectedCategory) formData.append("categoryId", selectedCategory);
+      const response = await getAllDeals(formData);
+      console.log({ response });
+      setDeals(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
-  useEffect(() => {
-    const filteredList = deals.filter((deal) => {
-      console.log(selectedCategories.includes(deal.categoryId));
-      return selectedCategories.includes(deal.categoryId);
-    });
-    console.log({ filteredList, selectedCategories });
-    setDeals(filteredList);
-  }, [selectedCategories]);
 
   useEffect(() => {
     fetchDeals();
-  }, []);
+  }, [selectedCategory]);
 
   async function deleteDealHandler(_id) {
     try {
@@ -59,8 +57,8 @@ export default function AllDeals() {
         <div className="main-content">
           <div className="filter-container">
             <FilterList
-              selectedCategories={selectedCategories}
-              setSelectedCategories={setSelectedCategories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
             />
           </div>
           <div className="deals-container">

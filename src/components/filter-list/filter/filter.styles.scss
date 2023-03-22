@@ -45,10 +45,14 @@
       display: none;
     }
     .option {
+      cursor: pointer;
       display: flex;
       gap: 10px;
       font-weight: 400;
       color: #b9babb;
+      label{
+        cursor: pointer;
+      }
     }
   }
 }

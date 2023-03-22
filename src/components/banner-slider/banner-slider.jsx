@@ -13,7 +13,7 @@ export default function BannerSlider({ banners, ForMemberships }) {
     dots: true,
     arrows: false,
     dotsClass: "slick-dots slick-thumb",
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,

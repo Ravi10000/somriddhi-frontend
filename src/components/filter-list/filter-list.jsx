@@ -5,19 +5,13 @@ import filterOptions from "./filter-options";
 import Filter from "./filter/filter";
 import { getAllCategories } from "../../api";
 
-export default function FilterList({
-  selectedCategories,
-  setSelectedCategories,
-}) {
+export default function FilterList({ selectedCategory, setSelectedCategory }) {
   const [categories, setCategories] = useState([]);
   async function fetchCategories() {
     try {
       const response = await getAllCategories();
       console.log({ response });
       setCategories(response.data.data);
-      // const allCategories = response.data.data.map((category) => category.name);
-      // console.log(response.data.data);
-      // setCategories(allCategories);
     } catch (error) {
       console.log(error);
     }
@@ -30,15 +24,15 @@ export default function FilterList({
   return (
     <div className="filter-list">
       <Filter
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
         title="Categories"
         options={categories}
       />
       {filterOptions.map(({ title, options }, index) => (
         <Filter
-          selectedCategories={selectedCategories}
-          setSelectedCategories={setSelectedCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
           title={title}
           options={options}
           key={index}

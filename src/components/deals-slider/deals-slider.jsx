@@ -22,11 +22,11 @@ export default function DealsSlider({ deals, forCoupons }) {
     },
     dots: true,
     dotsClass: "slick-dots slick-thumb",
-    // infinite: true,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    initialSlide: 0,
+    // initialSlide: 0,
     arrows: false,
     // swipeToSlide: true,
     responsive: [

@@ -32,6 +32,9 @@ export const addNewFaq = (formData) =>
   });
 
 // users APIs
+export const getUser = () =>
+  axios.post(`/getuser`, { headers: { Authorization } });
+
 export const getAllUsers = () =>
   axios.get(`/user`, { headers: { Authorization } });
 export const createUser = (formData) => axios.post(`/user`, formData);
@@ -58,7 +61,15 @@ export async function updateUser(formData) {
 }
 
 // Deals APIs
-export const getAllDeals = () => axios.get(`/deal`);
+export const getAllDeals = (formData) => {
+  for (let entry of formData.entries()) {
+    console.log(entry);
+  }
+  // return axios.post("/deal");
+  return axios.post("/getdeal", formData, {
+    headers: { "Content-Type": "application/json" },
+  });
+};
 export const createNewDeal = (formData) =>
   axios.post(`/deal`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },

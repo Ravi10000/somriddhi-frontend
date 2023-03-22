@@ -21,7 +21,7 @@ export default function SelectCategorySlider({
     speed: 500,
     slidesToShow: 9,
     slidesToScroll: 9,
-    initialSlide: 0,
+    // initialSlide: 0,
     responsive: [
       {
         breakpoint: 1200,

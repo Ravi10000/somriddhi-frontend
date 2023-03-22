@@ -1,7 +1,7 @@
 import "./App.scss";
 
 // react hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // packages
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
@@ -22,15 +22,32 @@ import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
 import AdminPage from "./pages/admin/admin.page";
 import axios from "axios";
+
 import { setCurrentUser } from "./redux/user/user.actions";
 import { connect } from "react-redux";
-// import 
+import { getUser } from "./api";
 // fetch user from api!!!!!!!!!!!!!!!!!!!!!
 
 function App({ setCurrentUser }) {
   const { pathname } = useLocation();
   // console.log({ pathname });
   const [modalOpen, setModalOpen] = useState(false);
+
+  async function fetchUser() {
+    try {
+      const response = await getUser();
+      console.log({ response });
+      // if (response.data.status === "success") {
+      //   setCurrentUser(response.data.data);
+      // }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
+
   function closeModal() {
     setModalOpen(false);
   }

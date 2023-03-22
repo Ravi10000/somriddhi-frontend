@@ -11,10 +11,11 @@ export default function OffersSlider({ offers }) {
     dots: true,
     dotsClass: "slick-dots slick-thumb",
     // infinite: offers.length > 3,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    initialSlide: 0,
+    // initialSlide: 0,
     arrows: false,
     rows: 2,
     responsive: [
