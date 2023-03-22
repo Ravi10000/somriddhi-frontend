@@ -34,6 +34,16 @@
       color: #fff;
       border-radius: 8px;
       align-items: center;
+      position: relative;
+      overflow: visible;
+      .answer {
+        position: absolute;
+        // bottom: -100%;
+        background: #ccc;
+        p{
+          color: #091431;
+        }
+      }
       p {
         // font-weight: 500;
         font-size: 0.9rem;

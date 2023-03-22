@@ -1,0 +1,17 @@
+.add-ticket-popup {
+  background: #fff;
+  width: 95vw;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 8px;
+  form {
+    margin-top: 25px;
+    display: grid;
+    gap: 20px;
+    place-items: center;
+
+    .add-ticket-btn {
+      width: 100%;
+    }
+  }
+}

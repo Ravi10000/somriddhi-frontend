@@ -7,7 +7,7 @@ import { sendOtp, verifyOtp } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 
-function OtpForm({ phone, nextStage, setCurrentUser }) {
+function OtpForm({ phone, nextStage, setCurrentUser, closeModal }) {
   const [isOtpValid, setIsOtpValid] = useState(true);
   const [otp, setOtp] = useState("");
   const [validInput, setValidInput] = useState(false);
@@ -61,12 +61,17 @@ function OtpForm({ phone, nextStage, setCurrentUser }) {
         // const user = response.data.data[0];
         const { user } = response.data;
         setCurrentUser(user);
+        if (user?.fname) {
+          closeModal();
+          setIsLoading(false);
+          return;
+        }
+        setIsLoading(false);
         nextStage();
         // if (!user?.name) {
         //   nextStage(3);
         // }
       }
-      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }

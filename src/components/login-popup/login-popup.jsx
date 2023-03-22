@@ -54,6 +54,7 @@ function LoginPopup({ closeModal }) {
           <OtpForm
             nextStage={nextStage}
             phone={phone}
+            closeModal={closeModal}
             // otp={otp}
             // setOtp={setOtp}
           />

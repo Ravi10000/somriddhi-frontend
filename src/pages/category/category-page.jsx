@@ -20,7 +20,7 @@ export default function CategoryPage() {
   const allDealsData = async () => {
     try {
       const formData = new FormData();
-      if (selectedCategory) formData.append("categoryId", selectedCategory);
+      if (selectedCategory) formData.append("categoryId", selectedCategory._id);
       const response = await getAllDeals(formData);
       console.log({ response });
       setDeals(response.data.data);

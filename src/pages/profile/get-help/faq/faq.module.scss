@@ -1,0 +1,32 @@
+.faq {
+  .question {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    background: #091431;
+    color: #fff;
+    border-radius: 8px;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    &.active {
+      font-weight: 600;
+      background: #fff;
+      color: #091431;
+    }
+    p {
+      // font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .arrow {
+      width: 15px;
+      transition: all 0.2s ease-in-out;
+      &.active {
+        transform: rotateZ(90deg);
+      }
+    }
+  }
+  .answer {
+    padding: 15px;
+    color: #616161;
+  }
+}

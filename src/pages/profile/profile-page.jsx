@@ -1,6 +1,8 @@
 import "./profile-page.styles.scss";
 import { useState } from "react";
+
 import menuList from "./menu-list";
+
 import MyEarnings from "./my-earnings/my-earnings";
 import PaymentHistory from "./payment-history/payment-history";
 import ReferEarn from "./refer-earn/refer-earn";
@@ -9,8 +11,14 @@ import GetHelp from "./get-help/get-help";
 import Settings from "./settings/settings";
 import MissingCashbacks from "./missing-cashbacks/missing-cashbacks";
 import Testimonials from "./testimonials/testimonials";
+import AddTicket from "./add-ticket/add-ticket";
 
-export default function ProfilePage() {
+import { logoutUser } from "../../api";
+import { setCurrentUser } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
+import ListTickets from "./list-tickets/list-tickets";
+
+function ProfilePage({ setCurrentUser }) {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
   function closeMenu() {
@@ -30,6 +38,10 @@ export default function ProfilePage() {
                 !img && "submenu"
               }`}
               onClick={() => {
+                if (name === "logout") {
+                  logoutUser();
+                  setCurrentUser(null);
+                }
                 scrollToTop();
                 closeMenu();
                 setActiveMenu(name);
@@ -61,6 +73,8 @@ export default function ProfilePage() {
           {activeMenu == "my earnings" && <MyEarnings />}
           {activeMenu == "payment history" && <PaymentHistory />}
           {activeMenu == "missing cashbacks" && <MissingCashbacks />}
+          {activeMenu == "add new tickets" && <AddTicket />}
+          {activeMenu == "check old tickets" && <ListTickets />}
           {activeMenu == "refer & earn" && <ReferEarn />}
           {activeMenu == "referral network" && <ReferralNetwork />}
           {activeMenu == "get help" && <GetHelp />}
@@ -71,3 +85,9 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(ProfilePage);

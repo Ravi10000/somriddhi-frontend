@@ -8,6 +8,9 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE3ZjQwMjE1NGEzNWU4NTU3OWMyMDAiLCJpYXQiOjE2NzkyOTEzOTQsImV4cCI6MTY3OTg5NjE5NH0.79NZuV_0z-b6jyl2TlK7V5bjtzfJZVfyQtbB9VCN1aI";
 const Authorization = `Bearer ${token}`;
 
+console.log(localStorage.getItem("token"));
+const localToken = localStorage.getItem("token");
+const authLocal = localToken ? `Bearer ${localToken}` : "";
 // axios.interceptors.request.use(function (config, _onRejected) {
 //   // config.headers['Authorization'] = localStorage.getItem('token') || '';
 //   config.headers["Authorization"] =
@@ -33,11 +36,31 @@ export const addNewFaq = (formData) =>
 
 // users APIs
 export const getUser = () =>
-  axios.post(`/getuser`, { headers: { Authorization } });
+  axios.get(`/getuser`, { headers: { Authorization: authLocal } });
+export const createUser = (formData) => {
+  return axios.post(`/user`, formData, {
+    headers: { Authorization: authLocal, "Content-Type": "application/json" },
+  });
+};
+export const updateUser = (id, formData) => {
+  return axios.put(`/user/${id}`, formData, {
+    headers: { Authorization: authLocal, "Content-Type": "application/json" },
+  });
+};
+
+export const logoutUser = async () => {
+  const response = await axios.post(`/logout`, {
+    headers: { Authorization: authLocal },
+  });
+  console.log({ response });
+  if (response.status === "success") {
+    localStorage.removeItem("token");
+  }
+  return response;
+};
 
 export const getAllUsers = () =>
   axios.get(`/user`, { headers: { Authorization } });
-export const createUser = (formData) => axios.post(`/user`, formData);
 
 export async function sendOtp(formData) {
   for (let entry of formData.entries()) {
@@ -53,19 +76,16 @@ export async function verifyOtp(formData) {
   const response = await axios.post(`verifyotp`, formData, {
     headers: { "Content-Type": "application/json" },
   });
+  localStorage.setItem("token", response.data.token);
   return response;
 }
-export async function updateUser(formData) {
-  const response = await axios.patch("/user", formData);
-  return response;
-}
+// export async function updateUser(formData) {
+//   const response = await axios.patch("/user", formData);
+//   return response;
+// }
 
 // Deals APIs
 export const getAllDeals = (formData) => {
-  for (let entry of formData.entries()) {
-    console.log(entry);
-  }
-  // return axios.post("/deal");
   return axios.post("/getdeal", formData, {
     headers: { "Content-Type": "application/json" },
   });
@@ -129,3 +149,12 @@ export const deleteFeedback = (_id) => {
 
 export const getAllTickets = () =>
   axios.get(`/ticket`, { headers: { Authorization } });
+
+export const getMyTickets = () =>
+  axios.get(`/mytickets`, { headers: { Authorization: authLocal } });
+
+export const addNewTicket = (formData) => {
+  return axios.post("/ticket", formData, {
+    headers: { Authorization: authLocal, "Content-Type": "application/json" },
+  });
+};

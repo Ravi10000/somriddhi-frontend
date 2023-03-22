@@ -1,0 +1,12 @@
+.list-tickets {
+  display: grid;
+  .tickets-container {
+    .ticket {
+      padding: 20px;
+      display: grid;
+      gap: 10px;
+      border-bottom: 1px solid #ccc;
+      //   margin-bottom: 25px;
+    }
+  }
+}

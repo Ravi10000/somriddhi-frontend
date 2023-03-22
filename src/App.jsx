@@ -37,16 +37,16 @@ function App({ setCurrentUser }) {
     try {
       const response = await getUser();
       console.log({ response });
-      // if (response.data.status === "success") {
-      //   setCurrentUser(response.data.data);
-      // }
+      if (response.data.status === "success") {
+        setCurrentUser(response.data.user);
+      }
     } catch (err) {
       console.log(err);
     }
   }
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   function closeModal() {
     setModalOpen(false);

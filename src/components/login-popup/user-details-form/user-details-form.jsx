@@ -29,7 +29,7 @@ function UserDetailsForm({
       console.log({ response });
       setIsLoading(false);
       if (response.data.status === "success") {
-        // setCurrentUser(response.data.data);
+        setCurrentUser(response.data.user);
         closeModal();
       }
     } catch (err) {
@@ -76,10 +76,7 @@ function UserDetailsForm({
         />
       </div>
       <p className="msg">It&#39;s okay, If you do not have any</p>
-      <Button
-        className="user-form-btn"
-        isLoading={isLoading}
-      >
+      <Button className="user-form-btn" isLoading={isLoading}>
         Continue
       </Button>
       <p className="skip-now" onClick={closeModal}>

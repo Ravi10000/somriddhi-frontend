@@ -25,7 +25,7 @@ export default function Filter({
             className="option"
             key={option._id}
             onClick={(e) => {
-              setSelectedCategory(option._id);
+              setSelectedCategory(option);
             }}
           >
             <input
@@ -33,7 +33,7 @@ export default function Filter({
               id={option._id}
               name={option.name}
               value={option._id}
-              checked={selectedCategory === option._id}
+              checked={selectedCategory?._id === option._id}
               readOnly
             />
             <label htmlFor={option.name}>{option.name}</label>

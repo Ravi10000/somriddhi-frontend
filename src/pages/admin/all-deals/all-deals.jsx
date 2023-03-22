@@ -16,7 +16,7 @@ export default function AllDeals() {
   async function fetchDeals() {
     try {
       const formData = new FormData();
-      if (selectedCategory) formData.append("categoryId", selectedCategory);
+      if (selectedCategory) formData.append("categoryId", selectedCategory._id);
       const response = await getAllDeals(formData);
       console.log({ response });
       setDeals(response.data.data);

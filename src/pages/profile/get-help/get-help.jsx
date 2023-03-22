@@ -1,6 +1,8 @@
 import "./get-help.styles.scss";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllFaqs } from "../../../api";
+import Faq from "./faq/faq";
 
 const popularQuestions = [
   "How Somriddhi Works?",
@@ -13,6 +15,15 @@ const popularQuestions = [
   "Any other question?",
 ];
 export default function GetHelp() {
+  const [faqs, setFaqs] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const response = await getAllFaqs();
+      console.log({ response });
+      setFaqs(response.data.data);
+    })();
+  }, []);
+
   return (
     <div className="get-help">
       <h2>Get Help</h2>
@@ -30,11 +41,15 @@ export default function GetHelp() {
           />
         </div>
         <div className="popular-questions">
-          {popularQuestions?.map((question, index) => (
-            <div className="question" key={index}>
-              <p>{question}</p>
-              <img src="/arrow-right.png" alt="ask question" />
-            </div>
+          {faqs?.map((faq, index) => (
+            <Faq faq={faq} key={faq._id} />
+            // <div className="question" key={index}>
+            //   <p>{faq.question}</p>
+            //   <img src="/arrow-right.png" alt="ask question" />
+            //   <div className="answer">
+            //     <p>{faq.answer}</p>
+            //   </div>
+            // </div>
           ))}
         </div>
       </div>
