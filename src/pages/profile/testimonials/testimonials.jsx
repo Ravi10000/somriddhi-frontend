@@ -1,5 +1,5 @@
 import "./testimonials.styles.scss";
-import React from "react";
+import React, { useState, useEffect } from "react";
 const reviews = [
   {
     name: "Savannah Nguyen",
@@ -26,10 +26,33 @@ const reviews = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
   },
 ];
+import { getAllFeedbacks } from "../../../api";
 
+import AddFeedbackPopup from "../../../components/add-feedback-popup/add-feedback-popup";
 export default function Testimonials() {
+  const [reviews, setReviews] = useState([]);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  async function fetchFeedbacks() {
+    try {
+      const response = await getAllFeedbacks();
+      console.log({ response });
+      setReviews(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchFeedbacks();
+  }, []);
+
   return (
     <div className="testimonials">
+      {isModelOpen && (
+        <AddFeedbackPopup
+          setShowPopup={setIsModelOpen}
+          fetchFeedbacks={fetchFeedbacks}
+        />
+      )}
       <h2>Testimonials</h2>
       <p>
         Lakhs of Indians visit CashKaro every day and make the most of our best
@@ -46,35 +69,54 @@ export default function Testimonials() {
         Billionaire tycoon Ratan Tata has also invested in CashKaro, because he
         also believes that Indians love to #GetMoreHamesha!
       </p>
-      <button>Write a review</button>
+      <button
+        onClick={() => {
+          setIsModelOpen(true);
+        }}
+      >
+        Write a review
+      </button>
       <div className="reviews">
-        {reviews.map(({ name, discount, date, rating, message }, index) => (
-          <div className="review-container" key={index}>
-            <div className="reviewer-info">
-              <img src="/reviewer.png" alt="reviewer" />
-              <div className="reviewer-details">
-                <p className="name">{name}</p>
-                <p className="discount">
-                  Total Discount: <span>{discount}</span>
-                </p>
+        {reviews?.map(
+          ({ username, createdAt, starRating, feedbackText }, index) => {
+            const date = new Date(createdAt).toDateString();
+            return (
+              <div className="review-container" key={index}>
+                <div className="reviewer-info">
+                  <img src="/reviewer.png" alt="reviewer" />
+                  <div className="reviewer-details">
+                    <p className="name">{username}</p>
+                    {/* <p className="discount">
+                      Total Discount: <span>{discount}</span>
+                    </p> */}
+                  </div>
+                </div>
+                <div className="review">
+                  <div className="rating">
+                    {Array(5)
+                      .fill()
+                      .map((_, index) => (
+                        <img
+                          key={index}
+                          src={
+                            starRating - 1 >= index
+                              ? "/star.png"
+                              : "blank-star.png"
+                          }
+                          alt="star"
+                        />
+                      ))}
+                    {/* <img src="/star.png" alt="star" /> */}
+                    <p className="date">{date}</p>
+                  </div>
+                  <div className="message">
+                    <p>{feedbackText}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="review">
-              <div className="rating">
-                {Array(rating)
-                  .fill()
-                  .map((_, index) => (
-                    <img key={index} src="/star.png" alt="star" />
-                  ))}
-                {/* <img src="/star.png" alt="star" /> */}
-                <p className="date">{date}</p>
-              </div>
-              <div className="message">
-                <p>{message}</p>
-              </div>
-            </div>
-          </div>
-        ))}
+            );
+          }
+        )}
       </div>
     </div>
   );

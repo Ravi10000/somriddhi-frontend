@@ -5,7 +5,7 @@ export default function LongTextInput({ label, placeholder, ...otherProps }) {
   const id = useId();
   return (
     <div className={styles["long-text-input"]}>
-      <label htmlFor={id}>Description</label>
+      <label htmlFor={id}>{label}</label>
       <p className={styles["textarea-msg"]}>{placeholder}</p>
       <textarea
         required

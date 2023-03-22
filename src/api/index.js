@@ -128,8 +128,16 @@ export const createNewMemberships = (formData) => {
 };
 
 // Feedback APIs
+export const createNewFeedback = (formData) => {
+  return axios.post(`/feedback`, formData, {
+    headers: {
+      Authorization: authLocal,
+      "Content-Type": "application/json",
+    },
+  });
+};
 export const getAllFeedbacks = () => {
-  return axios.get(`/feedback`, { headers: { Authorization } });
+  return axios.get(`/feedback`, { headers: { Authorization: authLocal } });
 };
 export const getActiveFeedbacks = () =>
   axios.get(
