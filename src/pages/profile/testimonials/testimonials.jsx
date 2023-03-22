@@ -106,7 +106,6 @@ export default function Testimonials() {
                           alt="star"
                         />
                       ))}
-                    {/* <img src="/star.png" alt="star" /> */}
                     <p className="date">{date}</p>
                   </div>
                   <div className="message">

@@ -16,10 +16,14 @@ export default function AllFeedbacks() {
   useEffect(() => {
     changeFeedbackList();
   }, [selectedFeedbackList]);
+
   async function deleteThisFeedback(_id) {
     console.log(_id);
+    const formData = new FormData();
+    formData.append("_id", _id);
     try {
-      const response = await deleteFeedback(_id);
+      const response = await deleteFeedback(formData);
+      console.log({ response });
       if (response.data.status === "success") {
         console.log(response.data);
         changeFeedbackList();
@@ -101,10 +105,18 @@ export default function AllFeedbacks() {
                     </div>
                     <div className="feedback-details">
                       <div className="rating">
-                        {Array(starRating)
+                        {Array(5)
                           .fill()
                           .map((_, index) => (
-                            <img key={index} src="/star.png" />
+                            <img
+                              key={index}
+                              src={
+                                starRating - 1 >= index
+                                  ? "/star.png"
+                                  : "/blank-star.png"
+                              }
+                              alt="star"
+                            />
                           ))}
                       </div>
                       <p className="feedback-text">{feedbackText}</p>

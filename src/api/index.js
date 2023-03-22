@@ -146,13 +146,10 @@ export const getActiveFeedbacks = () =>
     { header: { Authorization, "Content-Type": "application/json" } }
   );
 
-export const deleteFeedback = (_id) => {
-  console.log({ _id });
-  return axios.delete(
-    `/feedback`,
-    { _id },
-    { headers: { Authorization, "Content-Type": "application/json" } }
-  );
+export const deleteFeedback = (formData) => {
+  return axios.delete(`/feedback`, formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
 };
 
 export const getAllTickets = () =>
