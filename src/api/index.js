@@ -192,3 +192,8 @@ export const updateTicketStatus = (formData) =>
   axios.patch(`/ticket/status`, formData, {
     headers: { Authorization, "Content-Type": "application/json" },
   });
+
+export const createUserByAdmin = (formData) =>
+  axios.post("/newuser", formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });

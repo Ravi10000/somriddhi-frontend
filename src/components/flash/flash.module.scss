@@ -1,0 +1,70 @@
+@keyframes slideMobilePopup {
+  0% {
+    left: -20%;
+  }
+
+  100% {
+    left: 5%;
+  }
+}
+
+@keyframes slideDesktopPopup {
+  0% {
+    right: -20%;
+  }
+
+  100% {
+    right: 5%;
+  }
+}
+
+.flash {
+  position: fixed;
+  top: 10%;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 15px;
+  font-weight: 600;
+  z-index: 4000000;
+  min-width: 200px;
+  max-width: 90vw;
+  color: #0aa06e;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease-in-out;
+  animation: slideMobilePopup 0.2s ease-in-out forwards;
+  .main {
+    display: flex;
+    align-items: center;
+    img {
+      width: 20px;
+      aspect-ratio: 1/1;
+      margin-right: 10px;
+    }
+  }
+  .count {
+    align-self: flex-start;
+    color: var(--text-clr);
+    font-size: 0.9rem;
+  }
+}
+
+.flash.error {
+  color: #fc476e;
+}
+
+.flash.warning {
+  color: #ffc048;
+}
+
+@media (min-width: 800px) {
+  .flash {
+    width: auto;
+    max-width: 600px;
+    top: auto;
+    top: 10%;
+    animation: slideDesktopPopup 0.2s ease-in-out forwards;
+  }
+}

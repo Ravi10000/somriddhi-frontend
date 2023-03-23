@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user/user.reducer";
-
+import flashReducer from "./flash/flash.reducer";
 const store = configureStore({
-  reducer: { user: userReducer },
+  reducer: { user: userReducer, flash: flashReducer },
 });
 // import { createStore, applyMiddleware } from "redux";
 // import logger from "redux-logger";

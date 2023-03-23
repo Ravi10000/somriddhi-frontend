@@ -13,6 +13,7 @@ import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import LoginPopup from "./components/login-popup/login-popup";
 import ProtectedRoute from "./components/protected-route/protected-route";
+import Flash from "./components/flash/flash";
 
 // pages
 import HomePage from "./pages/home/home.page";
@@ -26,9 +27,10 @@ import axios from "axios";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { connect } from "react-redux";
 import { getUser } from "./api";
-// fetch user from api!!!!!!!!!!!!!!!!!!!!!
+import { selectFlash } from "./redux/flash/flash.selectors";
+import { createStructuredSelector } from "reselect";
 
-function App({ setCurrentUser }) {
+function App({ setCurrentUser, flash, setFlash }) {
   const { pathname } = useLocation();
   // console.log({ pathname });
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,6 +58,8 @@ function App({ setCurrentUser }) {
   }
   return (
     <div className="App">
+      {flash && <Flash type={flash.type} message={flash.message} />}
+      {/* <Flash type={"success"} message={"hie"} /> */}
       <ScrollToTop />
       {!pathname.includes("/admin") && (
         <>
@@ -95,8 +99,20 @@ function App({ setCurrentUser }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+// const mapDispatchToProps = (dispatch) => ({
+//   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+// });
+
+const mapStateToProps = createStructuredSelector({
+  // currentUser: selectCurrentUser,
+  flash: selectFlash,
 });
 
-export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  // signIn: (user) => dispatch(signIn(user)),
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
