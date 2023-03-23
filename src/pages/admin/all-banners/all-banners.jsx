@@ -9,7 +9,7 @@ import AddBannerPopup from "../../../components/add-banner-popup/add-banner-popu
 import bannerList from "./banner-list";
 
 // api requests
-import { getAllBanners } from "../../../api/index";
+import { getAllBanners, deleteBanner } from "../../../api/index";
 
 export default function AllBanners() {
   const [banners, setBanners] = useState([]);
@@ -25,6 +25,16 @@ export default function AllBanners() {
   useEffect(() => {
     fetchBanners();
   }, [showAddBannerPopup]);
+
+  async function deleteBannerHandler(id) {
+    try {
+      const response = await deleteBanner(id);
+      console.log({ response });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       {showAddBannerPopup && (
@@ -39,34 +49,46 @@ export default function AllBanners() {
           addFunction={() => setShowAddBannerPopup(true)}
         />
         <div className="banner-cards-container">
-          {banners
-            .reverse()
-            ?.map(({ name, url, expiryDate, image, description }, index) => (
-              <div className="banner-card" key={index}>
-                <img
-                  className="banner-img"
-                  src={`http://localhost:8001/${image}`}
-                  alt={name}
-                />
-                <div className="banner-details">
-                  <div className="info-container">
-                    <div className="banner-info">
-                      <h5 className="name">{name}</h5>
-                      {/* <div className="info expiry-date">
+          {banners.reverse()?.map((banner, index) => (
+            <div className="banner-card" key={index}>
+              <img
+                className="banner-img"
+                src={`http://localhost:8001/${banner?.image}`}
+                alt={banner?.name}
+              />
+              <div className="banner-details">
+                <div className="info-container">
+                  <div className="banner-info">
+                    <h5 className="name">{banner?.name}</h5>
+                    {/* <div className="info expiry-date">
                         <img src="/date.png" alt="date" />
                         <p>{expiryDate ? expiryDate : "unavailable"}</p>
                       </div> */}
+                    <a
+                      href={banner?.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <div className="info banner-link">
                         <img src="/link.png" alt="banner link" />
-                        <p>{url}</p>
+                        <p>{banner?.url}</p>
                       </div>
-                    </div>
-                    <img className="lock-icon" src="/lock.png" alt="locked" />
+                    </a>
                   </div>
-                  <div className="banner-desc">{description}</div>
+                  <img
+                    className="lock-icon"
+                    src="/delete.png"
+                    alt="locked"
+                    onClick={() => {
+                      deleteBannerHandler(banner?._id);
+                    }}
+                  />
+                  {/* <img src="/delete.png" alt="" /> */}
                 </div>
+                <div className="banner-desc">{banner?.description}</div>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
     </>

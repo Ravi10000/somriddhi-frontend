@@ -44,12 +44,19 @@ export default function MembershipSlider({ banners }) {
       <Slider {...settings}>
         {banners.length > 0 &&
           banners.reverse()?.map((banner, index) => (
-            <div className={styles["card-container"]} key={index}>
-              <img
-                className="bannerImageSet"
-                src={`http://localhost:8001/${banner.image}`}
-              />
-            </div>
+            <a
+              href={banner?.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={index}
+            >
+              <div className={styles["card-container"]}>
+                <img
+                  className="bannerImageSet"
+                  src={`http://localhost:8001/${banner.image}`}
+                />
+              </div>
+            </a>
           ))}
       </Slider>
     </div>

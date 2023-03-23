@@ -55,14 +55,8 @@ export default function CategoryPage() {
           </div>
           <div className="category-cards-container">
             {deals &&
-              deals.map(({ _id, name, cashbackPercent, image }) => (
-                <OfferCard
-                  key={_id}
-                  _id={_id}
-                  name={name}
-                  cashbackPercent={cashbackPercent}
-                  image={image}
-                />
+              deals.map((offer) => (
+                <OfferCard key={offer?._id} offer={offer} />
               ))}
           </div>
         </div>

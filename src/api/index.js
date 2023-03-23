@@ -26,6 +26,11 @@ export const createNewBanner = (formData) => {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
 };
+export const deleteBanner = (id) =>
+  axios.delete(`/banner/${id}`, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
+
 // FAQ APIs
 export const getAllFaqs = () =>
   axios.get(`/faq`, { headers: { Authorization } });

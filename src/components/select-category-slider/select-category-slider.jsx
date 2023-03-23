@@ -51,7 +51,7 @@ export default function SelectCategorySlider({
       <Slider {...settings}>
         {categories.length > 0 &&
           categories?.map(({ name, icon }, index) => (
-            <div className={styles["card-container"]}>
+            <div className={styles["card-container"]} key={index}>
               <div className={styles["inner-card-container"]}>
                 <div
                   key={index}
