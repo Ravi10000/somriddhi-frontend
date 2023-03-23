@@ -1,0 +1,34 @@
+.ticket {
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  background: #fff;
+  padding: 20px;
+  .title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .desc {
+    line-height: 1.5rem;
+    color: #858997;
+  }
+  .ticket-buttons {
+    display: flex;
+    gap: 20px;
+    .resolve-btn {
+      background: #41b079;
+    }
+    .reply-btn {
+      background: #e53b2c;
+    }
+  }
+  .resolved {
+    font-weight: 500;
+    text-transform: capitalize;
+    border-radius: 8px;
+    padding: 10px 20px;
+    width: fit-content;
+    background: #e5fff2;
+    color: #41b079;
+  }
+}

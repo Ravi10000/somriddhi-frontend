@@ -44,6 +44,7 @@ export const deleteFaq = (id) =>
 // users APIs
 export const getUser = () =>
   axios.get(`/getuser`, { headers: { Authorization: authLocal } });
+
 export const createUser = (formData) => {
   return axios.post(`/user`, formData, {
     headers: { Authorization: authLocal, "Content-Type": "application/json" },
@@ -166,6 +167,12 @@ export const deleteFeedback = (id) => {
 export const getAllTickets = () =>
   axios.get(`/ticket`, { headers: { Authorization } });
 
+export const getActiveTickets = () =>
+  axios.get(`/ticket?status=Active`, { headers: { Authorization } });
+
+export const getResolvedTickets = () =>
+  axios.get(`/ticket?status=Inactive`, { headers: { Authorization } });
+
 export const getMyTickets = () =>
   axios.get(`/mytickets`, { headers: { Authorization: authLocal } });
 
@@ -174,3 +181,14 @@ export const addNewTicket = (formData) => {
     headers: { Authorization: authLocal, "Content-Type": "application/json" },
   });
 };
+
+export const replyToTicket = (formData) => {
+  return axios.post("/ticket/reply", formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
+};
+
+export const updateTicketStatus = (formData) =>
+  axios.patch(`/ticket/status`, formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });

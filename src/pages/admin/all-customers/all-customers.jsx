@@ -9,7 +9,6 @@ import AddCustomerPopup from "../../../components/add-customer-popup/add-custome
 
 // utils
 import { getAllUsers } from "../../../api/index";
-// import customers from "./customers";
 
 export default function AllCustomers() {
   const [showAddCustomerPopup, setShowAddCustomerPopup] = useState(false);
@@ -36,47 +35,47 @@ export default function AllCustomers() {
           }}
         />
         {/* <div className="customers-table-container"> */}
-          <div className="customers-table-container">
-            <table className="customers-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Phone No.</th>
-                  <th>Joined on</th>
-                  <th>Total Purchase</th>
-                  <th>Total Payment</th>
-                  <th>Total Payout</th>
-                </tr>
-              </thead>
-              <tbody>
-                {customers?.map(
-                  (
-                    {
-                      email,
-                      phone,
-                      createdAt,
-                      totalPurchase,
-                      totalPayment,
-                      totalPayout,
-                    },
-                    index
-                  ) => {
-                    const joinedOn = new Date(createdAt).toDateString();
-                    return (
-                      <tr key={index}>
-                        <td>{email ? email : "<unavailable>"}</td>
-                        <td>{phone ? phone : "<unavailable>"}</td>
-                        <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
-                        <td>Rs. {totalPurchase ? totalPurchase : 0}</td>
-                        <td>Rs. {totalPayment ? totalPayment : 0}</td>
-                        <td>Rs. {totalPayout ? totalPayout : 0}</td>
-                      </tr>
-                    );
-                  }
-                )}
-              </tbody>
-            </table>
-          </div>
+        <div className="customers-table-container">
+          <table className="customers-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone No.</th>
+                <th>Joined on</th>
+                <th>Total Purchase</th>
+                <th>Total Payment</th>
+                <th>Total Payout</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customers?.map(
+                (
+                  {
+                    email,
+                    phone,
+                    createdAt,
+                    totalPurchase,
+                    totalPayment,
+                    totalPayout,
+                  },
+                  index
+                ) => {
+                  const joinedOn = new Date(createdAt).toDateString();
+                  return (
+                    <tr key={index}>
+                      <td>{email ? email : "<unavailable>"}</td>
+                      <td>{phone ? phone : "<unavailable>"}</td>
+                      <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
+                      <td>Rs. {totalPurchase ? totalPurchase : 0}</td>
+                      <td>Rs. {totalPayment ? totalPayment : 0}</td>
+                      <td>Rs. {totalPayout ? totalPayout : 0}</td>
+                    </tr>
+                  );
+                }
+              )}
+            </tbody>
+          </table>
+        </div>
         {/* </div> */}
       </div>
     </>

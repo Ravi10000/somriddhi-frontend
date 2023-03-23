@@ -23,7 +23,7 @@ export default function AddCustomerPopup({ setShowPopup }) {
     <Backdrop>
       <div className="add-customer-popup">
         <PopupHead title="Add New Customer" setShowPopup={setShowPopup} />
-        <form onSubmit={submitAddCustomerForm} encType="multipart/form-data">
+        <form onSubmit={submitAddCustomerForm} encType="application/json">
           <TextInput
             label="First Name"
             name="fname"

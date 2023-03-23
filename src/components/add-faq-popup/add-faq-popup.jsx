@@ -1,7 +1,5 @@
 import "./add-faq-popup.styles.scss";
 
-import { useRef } from "react";
-
 // components
 import Backdrop from "../backdrop/backdrop";
 
@@ -13,8 +11,6 @@ import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
 
 export default function AddFaqPopup({ setShowPopup, fetchFaqs }) {
-  const formRef = useRef(null);
-
   const faqFormSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
