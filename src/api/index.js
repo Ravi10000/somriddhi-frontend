@@ -145,14 +145,12 @@ export const getAllFeedbacks = () => {
   return axios.get(`/feedback`, { headers: { Authorization: authLocal } });
 };
 export const getActiveFeedbacks = () =>
-  axios.get(
-    `/feedback`,
-    { status: "Active" },
-    { header: { Authorization, "Content-Type": "application/json" } }
-  );
+  axios.get(`/feedback?status=Active`, {
+    headers: { Authorization },
+  });
 
-export const deleteFeedback = (formData) => {
-  return axios.delete(`/feedback`, formData, {
+export const deleteFeedback = (id) => {
+  return axios.delete(`/feedback/${id}`, {
     headers: { Authorization, "Content-Type": "application/json" },
   });
 };

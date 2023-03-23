@@ -7,34 +7,14 @@ import {
   getActiveFeedbacks,
   deleteFeedback,
 } from "../../../api";
+import FeedbackCard from "./feedback-card/feedback-card";
 
 const options = ["all", "active"];
 export default function AllFeedbacks() {
   const [selectedFeedbackList, setSelectedFeedbackList] = useState("all");
   const [feedbacks, setFeedbacks] = useState([]);
 
-  useEffect(() => {
-    changeFeedbackList();
-  }, [selectedFeedbackList]);
-
-  async function deleteThisFeedback(_id) {
-    console.log(_id);
-    const formData = new FormData();
-    formData.append("_id", _id);
-    try {
-      const response = await deleteFeedback(formData);
-      console.log({ response });
-      if (response.data.status === "success") {
-        console.log(response.data);
-        changeFeedbackList();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function changeFeedbackList() {
-    // setSelectedFeedbackList(item);
     if (selectedFeedbackList === "active") {
       try {
         const response = await getActiveFeedbacks();
@@ -57,6 +37,26 @@ export default function AllFeedbacks() {
       }
     }
   }
+
+  useEffect(() => {
+    changeFeedbackList();
+  }, [selectedFeedbackList]);
+
+  async function deleteThisFeedback(id, setIsDeleting) {
+    setIsDeleting(true);
+    try {
+      const response = await deleteFeedback(id);
+      console.log({ response });
+      if (response.data.status === "success") {
+        console.log(response.data);
+        await changeFeedbackList();
+      }
+      setIsDeleting(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="all-feedbacks">
       <div className="select-feedbacks">
@@ -74,103 +74,19 @@ export default function AllFeedbacks() {
       </div>
       <div className="feedbacks-container">
         {selectedFeedbackList === "all" &&
-          feedbacks?.map(
-            (
-              { _id, username, feedbackText, createdAt, userImg, starRating },
-              index
-            ) => {
-              const date = new Date(createdAt).toDateString();
-              return (
-                <div className="feedback-card" key={_id}>
-                  <img className="userimg" src={userImg} alt="" />
-                  <div className="details">
-                    <div className="user">
-                      <div className="user-info">
-                        <h4>{username}</h4>
-                        <p>{date}</p>
-                      </div>
-                      <div className="actions">
-                        <button
-                          className="cancel"
-                          onClick={() => {
-                            deleteThisFeedback(_id);
-                          }}
-                        >
-                          <img src="/close.png" alt="" />
-                        </button>
-                        <button className="check">
-                          <img src="/check.png" alt="" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="feedback-details">
-                      <div className="rating">
-                        {Array(5)
-                          .fill()
-                          .map((_, index) => (
-                            <img
-                              key={index}
-                              src={
-                                starRating - 1 >= index
-                                  ? "/star.png"
-                                  : "/blank-star.png"
-                              }
-                              alt="star"
-                            />
-                          ))}
-                      </div>
-                      <p className="feedback-text">{feedbackText}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-          )}
+          feedbacks?.map((feedback) => {
+            return (
+              <FeedbackCard
+                key={feedback?._id}
+                feedback={feedback}
+                deleteThisFeedback={deleteThisFeedback}
+              />
+            );
+          })}
         {selectedFeedbackList === "active" &&
-          feedbacks?.map(
-            (
-              { _id, username, feedbackText, createdAt, userImg, starRating },
-              index
-            ) => {
-              const date = new Date(createdAt).toDateString();
-              return (
-                <div className="feedback-card" key={_id}>
-                  <img className="userimg" src={userImg} alt="" />
-                  <div className="details">
-                    <div className="user">
-                      <div className="user-info">
-                        <h4>{username}</h4>
-                        <p>{date}</p>
-                      </div>
-                      <div className="actions">
-                        <button
-                          className="cancel"
-                          onClick={() => {
-                            deleteThisFeedback(_id);
-                          }}
-                        >
-                          <img src="/close.png" alt="" />
-                        </button>
-                        <button className="check">
-                          <img src="/check.png" alt="" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="feedback-details">
-                      <div className="rating">
-                        {Array(starRating)
-                          .fill()
-                          .map((_, index) => (
-                            <img key={index} src="/star.png" />
-                          ))}
-                      </div>
-                      <p className="feedback-text">{feedbackText}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-          )}
+          feedbacks?.map((feedback) => {
+            return <FeedbackCard feedback={feedback} key={feedback?._id} />;
+          })}
       </div>
     </div>
   );
