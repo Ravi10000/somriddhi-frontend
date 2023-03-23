@@ -9,11 +9,10 @@ import { addNewTicket } from "../../api/index";
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
+import { setFlash } from "../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-export default function AddTicketPopup({
-  setShowPopup,
-  setShowSuccessMsg,
-}) {
+function AddTicketPopup({ setShowPopup, setShowSuccessMsg, setFlash }) {
   async function submitTicket(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -26,7 +25,8 @@ export default function AddTicketPopup({
       console.log({ response });
       if (response.data.status === "success") {
         setShowPopup(false);
-        setShowSuccessMsg(true);
+        setFlash({ type: "success", message: "Ticket added successfully" });
+        // setShowSuccessMsg(true);
       }
     } catch (error) {
       console.log(error);
@@ -54,3 +54,9 @@ export default function AddTicketPopup({
     </Backdrop>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AddTicketPopup);

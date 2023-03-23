@@ -57,14 +57,15 @@ export const updateUser = (id, formData) => {
 };
 
 export const logoutUser = async () => {
-  const response = await axios.post(`/logout`, {
-    headers: { Authorization: authLocal },
-  });
-  console.log({ response });
-  if (response.status === "success") {
-    localStorage.removeItem("token");
-  }
-  return response;
+  localStorage.removeItem("token");
+  // const response = await axios.post(`/logout`, {
+  //   headers: { Authorization: authLocal },
+  // });
+  // console.log({ response });
+  // if (response.status === "success") {
+  //   localStorage.removeItem("token");
+  // }
+  // return response;
 };
 
 export const getAllUsers = () =>
