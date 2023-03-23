@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import TitleSection from "../title-section/title-section";
 import quries from "./quries";
 
-import axios from "axios";
 import AddFaqPopup from "../../../components/add-faq-popup/add-faq-popup";
-import { getAllFaqs } from "../../../api/index";
+import { getAllFaqs, deleteFaq } from "../../../api/index";
+import FaqCard from "./faq-card/faq-card";
+
 export default function AllFaqs() {
   const [showAddFaqPopup, setShowAddFaqPopup] = useState(false);
   const [faqs, setFaqs] = useState([]);
@@ -21,6 +22,19 @@ export default function AllFaqs() {
   useEffect(() => {
     fetchFaqs();
   }, []);
+
+  async function deleteFaqHandler(id, setIsDeleting) {
+    setIsDeleting(true);
+    try {
+      const response = await deleteFaq(id);
+      console.log({ response });
+      await fetchFaqs();
+      setIsDeleting(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       {showAddFaqPopup && (
@@ -34,11 +48,16 @@ export default function AllFaqs() {
           }}
         />
         <div className="queries">
-          {faqs.reverse()?.map(({ question, answer }, index) => (
-            <div className="query" key={index}>
-              <h3 className="query-title">{question}</h3>
-              <p className="query-desc">{answer}</p>
-            </div>
+          {faqs.reverse()?.map((query) => (
+            <FaqCard
+              query={query}
+              key={query?._id}
+              deleteFaqHandler={deleteFaqHandler}
+            />
+            // <div className="query" key={index}>
+            //   <h3 className="query-title">{question}</h3>
+            //   <p className="query-desc">{answer}</p>
+            // </div>
           ))}
         </div>
       </div>

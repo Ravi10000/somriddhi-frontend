@@ -1,0 +1,38 @@
+.deal {
+  min-width: 350px;
+  max-width: 350px;
+  min-height: 200px;
+  background: #fff;
+  width: fit-content;
+  border-radius: 8px;
+  .deal-img {
+    width: 100%;
+  }
+  .deal-info {
+    padding: 20px;
+    .icons {
+      padding: 20px 0;
+      display: flex;
+      gap: 20px;
+      img {
+        cursor: pointer;
+        width: 25px;
+      }
+      .delete-loader {
+        width: 25px;
+        height: 25px;
+        border: 2px solid #f01c21;
+        border-radius: 50%;
+        border-bottom: transparent;
+        border-right: transparent;
+        animation: spinLoader 0.5s linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes spinLoader {
+  to {
+    transform: rotate(360deg);
+  }
+}

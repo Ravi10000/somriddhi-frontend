@@ -38,6 +38,8 @@ export const addNewFaq = (formData) =>
   axios.post(`/faq`, formData, {
     headers: { Authorization, "Content-Type": "application/json" },
   });
+export const deleteFaq = (id) =>
+  axios.delete(`/faq/${id}`, { headers: { Authorization } });
 
 // users APIs
 export const getUser = () =>
@@ -103,12 +105,10 @@ export const updateDeal = (formData) =>
   axios.patch(`/deal`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
-export const deleteDeal = (_id) =>
-  axios.delete(
-    `/deal`,
-    { _id },
-    { headers: { Authorization, "Content-Type": "application/json" } }
-  );
+export const deleteDeal = (id) =>
+  axios.delete(`/deal/${id}`, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
 
 // Category APIs
 export const getAllCategories = () => axios.get(`/category`);
