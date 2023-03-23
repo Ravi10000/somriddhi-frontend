@@ -6,6 +6,7 @@ import {
   getAllFeedbacks,
   getActiveFeedbacks,
   deleteFeedback,
+  updateFeedbackStatus,
 } from "../../../api";
 import FeedbackCard from "./feedback-card/feedback-card";
 
@@ -14,12 +15,12 @@ export default function AllFeedbacks() {
   const [selectedFeedbackList, setSelectedFeedbackList] = useState("all");
   const [feedbacks, setFeedbacks] = useState([]);
 
-  async function changeFeedbackList() {
+  async function fetchFeedbacks() {
     if (selectedFeedbackList === "active") {
       try {
         const response = await getActiveFeedbacks();
         if (response.data.status === "success") {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setFeedbacks(response.data.data);
         }
       } catch (error) {
@@ -29,7 +30,7 @@ export default function AllFeedbacks() {
       try {
         const response = await getAllFeedbacks();
         if (response.data.status === "success") {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setFeedbacks(response.data.data);
         }
       } catch (error) {
@@ -39,7 +40,7 @@ export default function AllFeedbacks() {
   }
 
   useEffect(() => {
-    changeFeedbackList();
+    fetchFeedbacks();
   }, [selectedFeedbackList]);
 
   async function deleteThisFeedback(id, setIsDeleting) {
@@ -49,9 +50,23 @@ export default function AllFeedbacks() {
       console.log({ response });
       if (response.data.status === "success") {
         console.log(response.data);
-        await changeFeedbackList();
+        await fetchFeedbacks();
       }
       setIsDeleting(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function handleUpdateStatus(id, status, setLoading) {
+    setLoading(true);
+    try {
+      const response = await updateFeedbackStatus({ id, status });
+      console.log({ response });
+      if (response.data.status === "success") {
+        console.log(response.data);
+        await fetchFeedbacks();
+      }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -79,13 +94,20 @@ export default function AllFeedbacks() {
               <FeedbackCard
                 key={feedback?._id}
                 feedback={feedback}
+                handleUpdateStatus={handleUpdateStatus}
                 deleteThisFeedback={deleteThisFeedback}
               />
             );
           })}
         {selectedFeedbackList === "active" &&
           feedbacks?.map((feedback) => {
-            return <FeedbackCard feedback={feedback} key={feedback?._id} />;
+            return (
+              <FeedbackCard
+                feedback={feedback}
+                key={feedback?._id}
+                handleUpdateStatus={handleUpdateStatus}
+              />
+            );
           })}
       </div>
     </div>

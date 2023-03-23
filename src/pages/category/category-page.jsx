@@ -3,11 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 // components
-import entertainmentCoupons from "./entertainment-coupons";
-import DealCard from "../../components/deals/deal-card/deal-card";
 import FilterList from "../../components/filter-list/filter-list";
 import { getAllDeals } from "../../api/index.js";
-// import { OfferCard } from '../../components/offers/offer-card'
 import OfferCard from "../../components/offers/offer-card/offer-card";
 
 export default function CategoryPage() {
@@ -20,8 +17,9 @@ export default function CategoryPage() {
   const allDealsData = async () => {
     try {
       const formData = new FormData();
-      if (selectedCategory) formData.append("categoryId", selectedCategory._id);
-      const response = await getAllDeals(formData);
+      // if (selectedCategory) formData.append("categoryId", selectedCategory._id);
+      const categoryId = selectedCategory?._id || null;
+      const response = await getAllDeals(categoryId);
       console.log({ response });
       setDeals(response.data.data);
     } catch (error) {
@@ -37,12 +35,13 @@ export default function CategoryPage() {
       <div className="heading">
         <h1>{category}</h1>
         <p>
-          Home / <span>{category}</span>
+          Home / <span>{selectedCategory?.name}</span>
         </p>
       </div>
       <section className="category-section">
         <div className="filter-container">
           <FilterList
+            // showAll
             // category={category}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -50,7 +49,7 @@ export default function CategoryPage() {
         </div>
         <div className="category-container">
           <div className="category-heading-container">
-            <h4>Coupons</h4>
+            <h4>{selectedCategory?.name} Coupons</h4>
             <p>showing 1 -20 results</p>
           </div>
           <div className="category-cards-container">

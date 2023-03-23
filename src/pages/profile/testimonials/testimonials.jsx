@@ -1,32 +1,6 @@
 import "./testimonials.styles.scss";
 import React, { useState, useEffect } from "react";
-const reviews = [
-  {
-    name: "Savannah Nguyen",
-    discount: "Rs.600",
-    date: "02 March 2023",
-    rating: 5,
-    message:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
-  },
-  {
-    name: "Savannah Nguyen",
-    discount: "Rs.600",
-    date: "02 March 2023",
-    rating: 3,
-    message:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
-  },
-  {
-    name: "Savannah Nguyen",
-    discount: "Rs.600",
-    date: "02 March 2023",
-    rating: 4,
-    message:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged",
-  },
-];
-import { getAllFeedbacks } from "../../../api";
+import { getActiveFeedbacks } from "../../../api";
 
 import AddFeedbackPopup from "../../../components/add-feedback-popup/add-feedback-popup";
 export default function Testimonials() {
@@ -34,7 +8,7 @@ export default function Testimonials() {
   const [isModelOpen, setIsModelOpen] = useState(false);
   async function fetchFeedbacks() {
     try {
-      const response = await getAllFeedbacks();
+      const response = await getActiveFeedbacks();
       console.log({ response });
       setReviews(response.data.data);
     } catch (error) {

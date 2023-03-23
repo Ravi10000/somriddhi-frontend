@@ -2,7 +2,6 @@ import "./offer-card.styles.scss";
 
 import React from "react";
 import Button from "../../button/button";
-import { Link } from "react-router-dom";
 
 export default function OfferCard({ offer, forCoupons, ...otherProps }) {
   return (

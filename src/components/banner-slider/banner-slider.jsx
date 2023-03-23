@@ -17,7 +17,8 @@ export default function BannerSlider({ banners, ForMemberships }) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    initialSlide: 0,
+    // initialSlide: 0,
+    draggable: true,
   };
 
   return (

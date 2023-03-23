@@ -1,4 +1,4 @@
-.banner-card {
+.membership-card {
   margin: 0 20px;
   padding: 20px;
   background: #fff;
@@ -6,20 +6,18 @@
   border: 2px solid #e6e8ea;
   display: grid;
   gap: 10px;
-  .banner-img {
+  .membership-img {
     width: 100%;
   }
-  .banner-details {
-    width: 100%;
-    // outline: 2px solid red;
+  .membership-details {
     display: grid;
-    height: fit-content;
     gap: 20px;
+    width: 100%;
     .info-container {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      .banner-info {
+      .membership-info {
+        height: fit-content;
         display: grid;
         gap: 15px;
         .name {
@@ -39,8 +37,8 @@
         }
       }
       .delete-icon {
-        align-self: flex-start;
         cursor: pointer;
+        height: fit-content;
         width: 15px;
       }
       .delete-loader {
@@ -54,14 +52,13 @@
         animation: spinLoader 0.5s linear infinite;
       }
     }
-    .banner-desc {
+    .membership-desc {
       color: #858997;
-    }
-    .banner-desc {
       line-height: 1.5rem;
     }
   }
 }
+
 @keyframes spinLoader {
   to {
     transform: rotate(360deg);
@@ -69,26 +66,19 @@
 }
 
 @media (min-width: 500px) {
-  .banner-card {
+  .membership-card {
     max-width: 700px;
     display: flex;
     gap: 20px;
-    .banner-img {
+    .membership-img {
       width: 200px;
       height: fit-content;
-    }
-    .banner-details {
-      .info-container {
-        .lock-icon {
-          align-self: flex-start;
-        }
-      }
     }
   }
 }
 
 @media (min-width: 1400px) {
-  .banner-card {
+  .membership-card {
     max-width: 850px;
   }
 }

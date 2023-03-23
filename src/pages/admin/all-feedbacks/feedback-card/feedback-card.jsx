@@ -2,8 +2,14 @@ import styles from "./feedback-card.module.scss";
 
 import React, { useState } from "react";
 
-export default function FeedbackCard({ feedback, deleteThisFeedback }) {
+export default function FeedbackCard({
+  feedback,
+  deleteThisFeedback,
+  handleUpdateStatus,
+}) {
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isStatusChanging, setIsStatusChanging] = useState(false);
+
   const date = new Date(feedback?.createdAt).toDateString();
   return (
     <div className={styles["feedback-card"]}>
@@ -28,12 +34,44 @@ export default function FeedbackCard({ feedback, deleteThisFeedback }) {
               {isDeleting ? (
                 <div className={styles["delete-loader"]}></div>
               ) : (
-                <img src="/close.png" alt="" />
+                <img src="/delete.png" alt="" />
               )}
             </button>
-            <button className={styles["check"]}>
-              <img src="/check.png" alt="" />
-            </button>
+            {feedback?.status === "Active" ? (
+              <button
+                className={styles["delete"]}
+                onClick={() => {
+                  handleUpdateStatus(
+                    feedback?._id,
+                    "Inactive",
+                    setIsStatusChanging
+                  );
+                }}
+              >
+                {isStatusChanging ? (
+                  <div className={styles["status-loader"]}></div>
+                ) : (
+                  <img src="/close.png" alt="" />
+                )}
+              </button>
+            ) : (
+              <button
+                className={styles["check"]}
+                onClick={() => {
+                  handleUpdateStatus(
+                    feedback?._id,
+                    "Active",
+                    setIsStatusChanging
+                  );
+                }}
+              >
+                {isStatusChanging ? (
+                  <div className={styles["status-loader"]}></div>
+                ) : (
+                  <img src="/check.png" alt="" />
+                )}
+              </button>
+            )}
           </div>
         </div>
         <div className={styles["feedback-details"]}>

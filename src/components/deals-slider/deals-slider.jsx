@@ -1,13 +1,14 @@
 import styles from "./deals-slider.module.scss";
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import dealList from "./deal-list";
-// import DealCard from "../deals/deal-card/deal-card";
 import OfferCard from "../offers/offer-card/offer-card";
 
 export default function DealsSlider({ deals, forCoupons }) {
+  // useEffect(() => {
+  //   console.log("deals changed");
+  // }, [deals]);
   const couponsStyles = forCoupons
     ? {
         width: "80%",
@@ -22,12 +23,14 @@ export default function DealsSlider({ deals, forCoupons }) {
     },
     dots: true,
     dotsClass: "slick-dots slick-thumb",
-    infinite: true,
+    infinite: deals.length > 4 ? true : false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    // initialSlide: 0,
+    initialSlide: 1,
     arrows: false,
+    draggable: true,
+    // accessibility: true,
     // swipeToSlide: true,
     responsive: [
       {

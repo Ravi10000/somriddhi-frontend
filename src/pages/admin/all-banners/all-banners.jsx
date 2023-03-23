@@ -18,7 +18,8 @@ export default function AllBanners() {
   async function fetchBanners() {
     try {
       const response = await getAllBanners();
-      setBanners(response.data.data);
+      console.log({ response });
+      setBanners(response.data.data.reverse());
     } catch (error) {
       console.log(error);
     }
@@ -53,50 +54,12 @@ export default function AllBanners() {
           addFunction={() => setShowAddBannerPopup(true)}
         />
         <div className="banner-cards-container">
-          {banners.reverse()?.map((banner) => (
+          {banners?.map((banner) => (
             <BannerCard
               banner={banner}
               key={banner?._id}
               deleteBannerHandler={deleteBannerHandler}
             />
-            // <div className="banner-card" key={index}>
-            //   <img
-            //     className="banner-img"
-            //     src={`http://localhost:8001/${banner?.image}`}
-            //     alt={banner?.name}
-            //   />
-            //   <div className="banner-details">
-            //     <div className="info-container">
-            //       <div className="banner-info">
-            //         <h5 className="name">{banner?.name}</h5>
-            //         {/* <div className="info expiry-date">
-            //             <img src="/date.png" alt="date" />
-            //             <p>{expiryDate ? expiryDate : "unavailable"}</p>
-            //           </div> */}
-            //         <a
-            //           href={banner?.url}
-            //           target="_blank"
-            //           rel="noopener noreferrer"
-            //         >
-            //           <div className="info banner-link">
-            //             <img src="/link.png" alt="banner link" />
-            //             <p>{banner?.url}</p>
-            //           </div>
-            //         </a>
-            //       </div>
-            //       <img
-            //         className="delete-icon"
-            //         src="/delete.png"
-            //         alt="locked"
-            //         onClick={() => {
-            //           deleteBannerHandler(banner?._id);
-            //         }}
-            //       />
-            //       {/* <img src="/delete.png" alt="" /> */}
-            //     </div>
-            //     <div className="banner-desc">{banner?.description}</div>
-            //   </div>
-            // </div>
           ))}
         </div>
       </div>

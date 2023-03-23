@@ -92,8 +92,8 @@ export async function verifyOtp(formData) {
 // }
 
 // Deals APIs
-export const getAllDeals = (formData) => {
-  return axios.post("/getdeal", formData, {
+export const getAllDeals = (id) => {
+  return axios.get(`/deal${id ? "/" + id : ""}`, {
     headers: { "Content-Type": "application/json" },
   });
 };
@@ -132,6 +132,9 @@ export const createNewMemberships = (formData) => {
   });
 };
 
+export const deleteMembership = (id) =>
+  axios.delete(`/membership/${id}`, { headers: { Authorization } });
+
 // Feedback APIs
 export const createNewFeedback = (formData) => {
   return axios.post(`/feedback`, formData, {
@@ -147,6 +150,11 @@ export const getAllFeedbacks = () => {
 export const getActiveFeedbacks = () =>
   axios.get(`/feedback?status=Active`, {
     headers: { Authorization },
+  });
+
+export const updateFeedbackStatus = (formData) =>
+  axios.patch(`/feedback`, formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
   });
 
 export const deleteFeedback = (id) => {

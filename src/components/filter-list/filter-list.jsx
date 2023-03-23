@@ -5,13 +5,19 @@ import filterOptions from "./filter-options";
 import Filter from "./filter/filter";
 import { getAllCategories } from "../../api";
 
-export default function FilterList({ selectedCategory, setSelectedCategory }) {
+export default function FilterList({
+  selectedCategory,
+  setSelectedCategory,
+  showAll,
+}) {
   const [categories, setCategories] = useState([]);
+
   async function fetchCategories() {
     try {
       const response = await getAllCategories();
       console.log({ response });
       setCategories(response.data.data);
+      if (!showAll) setSelectedCategory(response.data.data[0]);
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,6 @@
 import "./add-deal-popup.styles.scss";
 
-import React, { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId } from "react";
 // components
 import Backdrop from "../backdrop/backdrop";
 
@@ -13,16 +13,24 @@ import ImageInput from "../image-input/image-input";
 import NumInput from "../num-input/num-input";
 import PopupHead from "../popup-head/popup-head";
 
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 export default function AddDealPopup({
   setShowPopup,
   fetchDeals,
   dealToUpdate,
+  setDealToUpdate,
 }) {
-  console.log({ dealToUpdate });
+  // console.log({ dealToUpdate });
   const id = useId();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
+
+  // console.log({ image });
 
   useEffect(() => {
     (async () => {
@@ -30,6 +38,9 @@ export default function AddDealPopup({
       console.log({ response });
       setCategories(response.data.data);
     })();
+    return () => {
+      setDealToUpdate(null);
+    };
   }, []);
 
   async function submitAddDealForm(e) {
@@ -95,16 +106,27 @@ export default function AddDealPopup({
           <ImageInput
             label="Deal Image"
             name="dealPhoto"
-            defaultValue={dealToUpdate?.image || ""}
+            dealImage={dealToUpdate?.image}
+            // onChange={(e) => setImage(e.target.files[0])}
           />
           <div className="dates">
             <div className="live-date date-input">
               <label htmlFor={`${id}-liveDate`}>Live Date</label>
-              <input id={`${id}-liveDate`} name="liveDate" type="date" />
+              <input
+                defaultValue={dealToUpdate?.liveDate}
+                id={`${id}-liveDate`}
+                name="liveDate"
+                type="date"
+              />
             </div>
             <div className="expiry-date date-input">
               <label htmlFor={`${id}-expiryDate`}>Expiry Date</label>
-              <input id={`${id}-expiryDate`} name="expiryDate" type="date" />
+              <input
+                defaultValue={dealToUpdate?.expiryDate}
+                id={`${id}-expiryDate`}
+                name="expiryDate"
+                type="date"
+              />
             </div>
           </div>
           <button className="add-deal-btn">Add Deal</button>

@@ -17,6 +17,7 @@ export default function OffersSlider({ offers }) {
     slidesToScroll: 4,
     // initialSlide: 0,
     arrows: false,
+    draggable: true,
     rows: 2,
     responsive: [
       {

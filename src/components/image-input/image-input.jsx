@@ -1,29 +1,31 @@
 import styles from "./image-input.module.scss";
 import React, { useState, useEffect } from "react";
 
-export default function ImageInput({ label, defaultValue, ...otherProps }) {
+export default function ImageInput({ label, dealImage, ...otherProps }) {
   const [image, setImage] = useState(null);
+  const [defaultImage, setDefaultImage] = useState(null);
 
+  console.log({ image });
+  console.log({ defaultImage });
   useEffect(() => {
-    if (defaultValue) {
-      setImage(defaultValue);
+    if (dealImage) {
+      setDefaultImage(dealImage || null);
     }
   }, []);
   return (
     <div className={styles["upload-img"]}>
       <label>{label}</label>
       <div className={styles["upload-input"]}>
-        {!defaultValue ? (
-          <img src={image || "/upload-gray.png"} alt="upload image" />
+        {defaultImage ? (
+          <img src={`http://localhost:8001/${defaultImage}`} alt="image" />
         ) : (
-          <img src={`http://localhost:8001/${image}`} alt="upload image" />
+          <img src={image || "/upload-gray.png"} alt="" />
         )}
-        {/* <img src={`http://localhost:8001/${image}`} alt="upload image" /> */}
-        {!image && <p>Upload Image</p>}
+        {!image && !defaultImage && <p>Upload Image</p>}
         <input
           required
           onChange={(e) => {
-            console.log(image);
+            setDefaultImage(null);
             setImage(URL.createObjectURL(e.target.files[0]));
           }}
           className={styles["file-input"]}

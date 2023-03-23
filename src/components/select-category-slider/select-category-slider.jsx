@@ -50,20 +50,23 @@ export default function SelectCategorySlider({
     <div className={styles["slider-container"]}>
       <Slider {...settings}>
         {categories.length > 0 &&
-          categories?.map(({ name, icon }, index) => (
-            <div className={styles["card-container"]} key={index}>
+          categories?.map((category) => (
+            <div className={styles["card-container"]} key={category?._id}>
               <div className={styles["inner-card-container"]}>
                 <div
-                  key={index}
                   onClick={() => {
-                    setSelectedCategory(name);
+                    setSelectedCategory(category);
                   }}
                   className={`${styles["menu-card"]} ${
-                    name === selectedCategory && styles["selected"]
+                    category?._id === selectedCategory?._id &&
+                    styles["selected"]
                   }`}
                 >
-                  <img src={`http://localhost:8001/${icon}`} alt="category" />
-                  <h5>{name}</h5>
+                  <img
+                    src={`http://localhost:8001/${category?.icon}`}
+                    alt="category"
+                  />
+                  <h5>{category?.name}</h5>
                 </div>
               </div>
             </div>

@@ -19,7 +19,7 @@ export default function BannerCard({ banner, deleteBannerHandler }) {
             <p>{expiryDate ? expiryDate : "unavailable"}</p>
           </div> */}
             <a href={banner?.url} target="_blank" rel="noopener noreferrer">
-              <div className={styles["info banner-link"]}>
+              <div className={styles["info"] + " " + styles["banner-link"]}>
                 <img src="/link.png" alt="banner link" />
                 <p>{banner?.url}</p>
               </div>

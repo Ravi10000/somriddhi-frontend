@@ -1,15 +1,8 @@
 import "./deals.styles.scss";
 
-import React, { useState, useEffect } from "react";
-import DealCard from "./deal-card/deal-card";
-import dealList from "./deal-list";
-import CustomCarousel, {
-  CarouselItem,
-} from "../custom-carousel/custom-carousel";
-import handleResponsive from "../../utils/handle-responsive";
+import { useState, useEffect } from "react";
 // import { useHistory } from "react-router-dom";
 import { getAllDeals } from "../../api/index.js";
-import OfferCard from "../offers/offer-card/offer-card";
 import DealsSlider from "../deals-slider/deals-slider";
 
 export default function Deals() {

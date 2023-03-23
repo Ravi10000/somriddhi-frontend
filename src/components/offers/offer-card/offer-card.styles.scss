@@ -14,19 +14,21 @@
   // outline: 2px solid red;
 
   h4 {
+    // pointer-events: none;
     color: #3ba615;
     font-size: 1.2rem;
     // width: 70;
   }
 
-  .btn {
+  // .btn {
+  // width: 100%;
+  button {
     width: 100%;
-    button {
-      width: 100%;
-    }
   }
+  // }
 
   p {
+    // pointer-events: none;
     // width: 70%;
     color: #878787;
   }

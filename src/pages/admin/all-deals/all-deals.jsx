@@ -16,16 +16,22 @@ export default function AllDeals() {
 
   async function fetchDeals() {
     try {
-      const formData = new FormData();
-      if (selectedCategory) formData.append("categoryId", selectedCategory._id);
-      const response = await getAllDeals(formData);
+      // const formData = new FormData();
+      // if (selectedCategory) formData.append("categoryId", selectedCategory._id);
+      const categoryId = selectedCategory?._id || null;
+      const response = await getAllDeals(categoryId);
       console.log({ response });
-      setDeals(response.data.data);
+      setDeals(response.data.data.reverse());
     } catch (error) {
       console.log(error);
     }
   }
-
+  useEffect(() => {
+    return () => {
+      setDeals([]);
+      setDealToUpdate(null);
+    };
+  }, []);
   useEffect(() => {
     fetchDeals();
   }, [selectedCategory]);
@@ -45,6 +51,7 @@ export default function AllDeals() {
     <>
       {showAddDealPopup && (
         <AddDealPopup
+          setDealToUpdate={setDealToUpdate}
           dealToUpdate={dealToUpdate}
           setShowPopup={setShowAddDealPopup}
           fetchDeals={fetchDeals}
@@ -52,7 +59,7 @@ export default function AllDeals() {
       )}
       <div className={styles["all-deals"]}>
         <TitleSection
-          title="all deals"
+          title={`${selectedCategory ? selectedCategory?.name : "All"} Deals`}
           addFunction={() => {
             setShowAddDealPopup(true);
           }}
@@ -60,12 +67,13 @@ export default function AllDeals() {
         <div className={styles["main-content"]}>
           <div className={styles["filter-container"]}>
             <FilterList
+              showAll
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
             />
           </div>
           <div className={styles["deals-container"]}>
-            {deals.reverse()?.map((deal) => (
+            {deals?.map((deal) => (
               <DealCard
                 key={deal?._id}
                 deal={deal}
@@ -73,38 +81,6 @@ export default function AllDeals() {
                 setDealToUpdate={setDealToUpdate}
                 setShowAddDealPopup={setShowAddDealPopup}
               />
-              // <div className={styles["deal"]} key={index}>
-              //   <img
-              //     className={styles["deal-img"]}
-              //     src={`http://localhost:8001/${dealItem?.image}`}
-              //     alt="deal banner"
-              //   />
-              //   <div className={styles["deal-info"]}>
-              //     <p>
-              //       {dealItem?.description
-              //         ? dealItem?.description
-              //         : "unavailable"}
-              //     </p>
-              //     <div className={styles["icons"]}>
-              //       <img
-              //         src="/edit.png"
-              //         alt="edit deal"
-              //         onClick={() => {
-              //           window.scrollTo(0, 0);
-              //           setDealToUpdate(dealItem);
-              //           setShowAddDealPopup(true);
-              //         }}
-              //       />
-              //       <img
-              //         src="/delete.png"
-              //         alt="delete deal"
-              //         onClick={() => {
-              //           deleteDealHandler(dealItem?._id);
-              //         }}
-              //       />
-              //     </div>
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>
