@@ -58,7 +58,7 @@ const Banner = (props) => {
             banners.map((banner, index) => (
               <div className='bBanPar'>
                 <div className='bBanChild'>
-                  <img className='bBanImgOne' src={`http://localhost:8001/uploads/${banner.image}`} alt='' />
+                  <img className='bBanImgOne' src={`${process.env.REACT_APP_API_URL}/uploads/${banner.image}`} alt='' />
                   <div className='bCon'>
                     <p className='bTextTwo'>{banner.name}</p>
                     <div className='bExpOne'>

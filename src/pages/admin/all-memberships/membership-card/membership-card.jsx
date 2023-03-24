@@ -11,7 +11,7 @@ export default function MembershipCard({
     <div className={styles["membership-card"]}>
       <img
         className={styles["membership-img"]}
-        src={`http://localhost:8001/${membership?.image}`}
+        src={`${process.env.REACT_APP_API_URL}/${membership?.image}`}
       />
       <div className={styles["membership-details"]}>
         <div className={styles["info-container"]}>

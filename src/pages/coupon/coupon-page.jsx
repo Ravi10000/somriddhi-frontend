@@ -118,13 +118,10 @@ export default function CouponPage() {
               <p>SS</p>
             </div>
           </div>
-          {dealInfo.image && (
-            <img
-              className="dealInfoImage"
-              src={`http://localhost:8001/${dealInfo.image}`}
-              alt="coupon image"
-            />
-          )}
+          {
+            dealInfo.image && <img className="dealInfoImage" src={`${process.env.REACT_APP_API_URL}/uploads/${dealInfo.image}`} alt="coupon image" />
+          }
+
         </div>
         <div className="right">
           <h3>Use Code</h3>

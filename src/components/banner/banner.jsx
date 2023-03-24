@@ -36,7 +36,7 @@ export default function Banner() {
             {
               banners.map((banner, index) => (
                 <CarouselItem>
-                  <img className="bannerImageSet" src={`http://localhost:8001/${banner.image}`} />
+                  <img className="bannerImageSet" src={`${process.env.REACT_APP_API_URL}/${banner.image}`} />
                 </CarouselItem>
               ))
             }

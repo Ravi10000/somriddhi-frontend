@@ -17,7 +17,7 @@ export default function ImageInput({ label, dealImage, ...otherProps }) {
       <label>{label}</label>
       <div className={styles["upload-input"]}>
         {defaultImage ? (
-          <img src={`http://localhost:8001/${defaultImage}`} alt="image" />
+          <img src={`${process.env.REACT_APP_API_URL}/${defaultImage}`} alt="image" />
         ) : (
           <img src={image || "/upload-gray.png"} alt="" />
         )}

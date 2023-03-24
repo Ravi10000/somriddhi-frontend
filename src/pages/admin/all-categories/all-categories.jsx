@@ -36,7 +36,7 @@ export default function AllCategories() {
           {categories?.map(({ name, icon }, index) => (
             <div className="category" key={index}>
               <div className="category-icon">
-                <img src={`http://localhost:8001/${icon}`} alt={name} />
+                <img src={`${process.env.REACT_APP_API_URL}/${icon}`} alt={name} />
               </div>
               <p className="name">{name}</p>
             </div>

@@ -31,7 +31,7 @@ export default function BannerSlider({ banners, ForMemberships }) {
               <div className={styles["card-container"]}>
                 <img
                   className="bannerImageSet"
-                  src={`http://localhost:8001/${banner.image}`}
+                  src={`${process.env.REACT_APP_API_URL}/${banner.image}`}
                 />
               </div>
             </Link>
