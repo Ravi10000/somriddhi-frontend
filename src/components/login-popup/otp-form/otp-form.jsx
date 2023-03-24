@@ -3,7 +3,7 @@ import "./otp-form.styles.scss";
 import React, { useEffect, useState, useRef } from "react";
 import Button from "../../button/button";
 // import { connect } from "react-redux";
-import { sendOtp, verifyOtp } from "../../../api/index";
+import { sendOtp, verifyOtp, checkIfSubscribed } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 
@@ -55,22 +55,32 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal }) {
         resetOtpInputs();
         setIsOtpValid(false);
       } else if (response.data.status === "success") {
-        // if (Array.isArray(response.data.data)) {
-        // }
-        // console.log(response.data.data[0]);
-        // const user = response.data.data[0];
         const { user } = response.data;
         setCurrentUser(user);
-        if (user?.fname) {
-          closeModal();
-          setIsLoading(false);
-          return;
+        if (!user?.email) {
+          return nextStage();
         }
-        setIsLoading(false);
-        nextStage();
-        // if (!user?.name) {
-        //   nextStage(3);
+        const subscribedResponse = await checkIfSubscribed();
+        console.log({ subscribedResponse });
+        if (subscribedResponse.data.status === "success") {
+          if (!subscribedResponse.data.isSubscribed) {
+            return nextStage(3);
+          }
+          return closeModal();
+        }
+        // if (user?.email) {
+        //   setIsLoading(false);
+        //   const subscribedResponse = await checkIfSubscribed();
+        //   if (subscribedResponse.data.status === "success") {
+        //     if (!subscribedResponse.data.isSubscribed) {
+        //       return nextStage(3);
+        //     }
+        //     return closeModal();
+        //   }
+        //   return nextStage();
         // }
+        setIsLoading(false);
+        // nextStage();
       }
     } catch (err) {
       console.log(err);

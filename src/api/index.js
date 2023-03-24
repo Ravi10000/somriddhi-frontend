@@ -9,8 +9,8 @@ const token =
 const Authorization = `Bearer ${token}`;
 
 console.log(localStorage.getItem("token"));
-const localToken = localStorage.getItem("token");
-const authLocal = localToken ? `Bearer ${localToken}` : "";
+// const localToken = localStorage.getItem("token");
+// const authLocal = localToken ? `Bearer ${localToken}` : "";
 // axios.interceptors.request.use(function (config, _onRejected) {
 //   // config.headers['Authorization'] = localStorage.getItem('token') || '';
 //   config.headers["Authorization"] =
@@ -43,23 +43,33 @@ export const deleteFaq = (id) =>
 
 // users APIs
 export const getUser = () =>
-  axios.get(`/getuser`, { headers: { Authorization: authLocal } });
+  axios.get(`/getuser`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const createUser = (formData) => {
+  // console.log({ authLocal });
+  console.log({ token: localStorage.getItem("token") });
   return axios.post(`/user`, formData, {
-    headers: { Authorization: authLocal, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 };
 export const updateUser = (id, formData) => {
   return axios.put(`/user/${id}`, formData, {
-    headers: { Authorization: authLocal, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 };
 
 export const logoutUser = async () => {
   localStorage.removeItem("token");
-  // const response = await axios.post(`/logout`, {
-  //   headers: { Authorization: authLocal },
+  // const response = await axios.delete(`/logout`, {
+  //   headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   // });
   // console.log({ response });
   // if (response.status === "success") {
@@ -85,6 +95,7 @@ export async function verifyOtp(formData) {
   const response = await axios.post(`verifyotp`, formData, {
     headers: { "Content-Type": "application/json" },
   });
+  console.log("after verify otp", response);
   localStorage.setItem("token", response.data.token);
   return response;
 }
@@ -122,12 +133,21 @@ export const createNewCategory = (formData) =>
 // NewLetter APIs
 export const getAllNewLetter = () =>
   axios.get(`/newsletter`, { headers: { Authorization } });
+
 export const createNewNewLetter = (data) =>
   axios.post(`/newsletter`, data, { headers: { Authorization } });
+
+export const checkIfSubscribed = () => {
+  console.log({ tokenOnCheckingSubscription: localStorage.getItem("token") });
+  return axios.get(`/newsletter/check`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+};
 
 // Membership APIs
 export const getAllMemberships = () =>
   axios.get(`/membership`, { headers: { Authorization } });
+
 export const createNewMemberships = (formData) => {
   return axios.post(`/membership`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
@@ -141,13 +161,15 @@ export const deleteMembership = (id) =>
 export const createNewFeedback = (formData) => {
   return axios.post(`/feedback`, formData, {
     headers: {
-      Authorization: authLocal,
+      Authorization: "Bearer " + localStorage.getItem("token"),
       "Content-Type": "application/json",
     },
   });
 };
 export const getAllFeedbacks = () => {
-  return axios.get(`/feedback`, { headers: { Authorization: authLocal } });
+  return axios.get(`/feedback`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 };
 export const getActiveFeedbacks = () =>
   axios.get(`/feedback?status=Active`, {
@@ -175,11 +197,16 @@ export const getResolvedTickets = () =>
   axios.get(`/ticket?status=Inactive`, { headers: { Authorization } });
 
 export const getMyTickets = () =>
-  axios.get(`/mytickets`, { headers: { Authorization: authLocal } });
+  axios.get(`/mytickets`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const addNewTicket = (formData) => {
   return axios.post("/ticket", formData, {
-    headers: { Authorization: authLocal, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 };
 

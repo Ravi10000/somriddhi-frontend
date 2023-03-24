@@ -57,7 +57,7 @@ function App({ setCurrentUser, flash, setFlash }) {
     setModalOpen(true);
   }
   return (
-    <div className="App">
+    <div className="App" id="App">
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"success"} message={"hie"} /> */}
       <ScrollToTop />

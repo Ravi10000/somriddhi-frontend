@@ -7,8 +7,9 @@ import UserDetailsForm from "./user-details-form/user-details-form";
 import Backdrop from "../backdrop/backdrop";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
+import SubscribeForm from "../subscribe-form/subscribe-form";
 
-const loginStages = ["phone-entry", "verify-otp", "user-details"];
+const loginStages = ["phone-entry", "verify-otp", "user-details", "subscribe"];
 
 function LoginPopup({ closeModal }) {
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
@@ -24,12 +25,17 @@ function LoginPopup({ closeModal }) {
     };
   }, []);
 
-  function nextStage() {
+  function nextStage(stage) {
+    if (stage) {
+      setCurrentLoginStage(stage);
+      return;
+    }
     if (currentLoginStage === loginStages.length - 1) {
       return;
     }
     setCurrentLoginStage((prevStage) => prevStage + 1);
   }
+
   function previousStage() {
     if (currentLoginStage === 0) {
       return;
@@ -61,6 +67,14 @@ function LoginPopup({ closeModal }) {
         )}
         {loginStages[currentLoginStage] === "user-details" && (
           <UserDetailsForm
+            nextStage={nextStage}
+            closeModal={closeModal}
+            phone={phone}
+            // setReferralCode={setReferralCode}
+          />
+        )}
+        {loginStages[currentLoginStage] === "subscribe" && (
+          <SubscribeForm
             nextStage={nextStage}
             closeModal={closeModal}
             phone={phone}

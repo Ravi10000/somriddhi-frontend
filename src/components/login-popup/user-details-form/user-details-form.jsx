@@ -6,7 +6,7 @@ import { useState } from "react";
 // components
 import Button from "../../button/button";
 import { useForm } from "react-hook-form";
-import { createUser } from "../../../api/index";
+import { checkIfSubscribed, createUser } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 
@@ -29,8 +29,16 @@ function UserDetailsForm({
       console.log({ response });
       setIsLoading(false);
       if (response.data.status === "success") {
-        setCurrentUser(response.data.user);
-        closeModal();
+        if (response.data.user) {
+          setCurrentUser(response.data.user);
+          const suscribedResponse = await checkIfSubscribed();
+          if (suscribedResponse.data.status === "success") {
+            if (!suscribedResponse.data.isSubscribed) {
+              return nextStage();
+            }
+          }
+          closeModal();
+        }
       }
     } catch (err) {
       console.log(err);

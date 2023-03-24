@@ -1,0 +1,30 @@
+.subscribe-form {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  place-items: center;
+  text-align: center;
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: #908f8f;
+    width: 80%;
+    // outline: 2px solid green;
+  }
+
+  input {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    margin: 10px 0;
+    background: transparent;
+  }
+  button {
+    width: 100%;
+    padding: 15px 40px;
+  }
+}
