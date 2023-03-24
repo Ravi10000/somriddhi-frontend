@@ -17,7 +17,7 @@ export default function DealCard({
         // }}
         {...otherProps}
       >
-        <img className="dealsImage" src={`${process.env.REACT_APP_API_URL}/uploads/${image}`} alt="amazon" />
+        <img className="dealsImage" src={`${import.meta.env.VITE_REACT_APP_API_URL}/uploads/${image}`} alt="amazon" />
         <h4 className="title">{name}</h4>
         <p className="discount-details">Flat {cashbackPercent}% Off</p>
         <Button>Grab Now</Button>

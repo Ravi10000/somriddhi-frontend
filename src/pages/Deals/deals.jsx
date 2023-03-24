@@ -53,7 +53,7 @@ const Deal = (props) => {
                         categoriesData.map((category, index) => (
                             <div className='cat'>
                                 <div className='ic'>
-                                    <img src={`${process.env.REACT_APP_API_URL}/uploads/${category.icon}`} alt='' className='clothImg' />
+                                    <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/uploads/${category.icon}`} alt='' className='clothImg' />
                                 </div>
                                 <p className='clothText'>{category.name} </p>
                             </div>

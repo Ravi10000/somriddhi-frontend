@@ -1,6 +1,7 @@
 import axios from "axios";
 
-// const BASEURL = "${process.env.REACT_APP_API_URL}";
+// const BASEURL = `${import.meta.env.VITE_REACT_APP_API_URL}`;
+// console.log(BASEURL);
 // const BASEURL = "http://3.108.161.80:8002";
 axios.defaults.baseURL = "/api";
 // axios.defaults.withCredentials = true;

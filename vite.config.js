@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         // target: "http://3.108.161.80:8002",
-        target: `${process.env.REACT_APP_API_URL}`,
+        target: "http://13.234.49.6:8001",
       },
     },
   },

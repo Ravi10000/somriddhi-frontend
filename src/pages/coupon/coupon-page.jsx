@@ -120,7 +120,7 @@ export default function CouponPage() {
             </div>
           </div>
           {
-            dealInfo.image && <img className="dealInfoImage" src={`${process.env.REACT_APP_API_URL}/uploads/${dealInfo.image}`} alt="coupon image" />
+            dealInfo.image && <img className="dealInfoImage" src={`${import.meta.env.VITE_REACT_APP_API_URL}/uploads/${dealInfo.image}`} alt="coupon image" />
           }
 
         </div>

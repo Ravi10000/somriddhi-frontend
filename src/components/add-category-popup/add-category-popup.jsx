@@ -60,7 +60,7 @@ export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
             <div className="icon-list">
               {categories.map(({ name, icon }) => (
                 <div className="icon" key={name}>
-                  <img src={`${process.env.REACT_APP_API_URL}/${icon}`} alt="icon" />
+                  <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${icon}`} alt="icon" />
                 </div>
               ))}
             </div>
