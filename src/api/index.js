@@ -225,3 +225,18 @@ export const createUserByAdmin = (formData) =>
   axios.post("/newuser", formData, {
     headers: { Authorization, "Content-Type": "application/json" },
   });
+
+export const createContent = (formData) =>
+  axios.post("/content", formData, {
+    headers: { Authorization, "Content-Type": "multipart/form-data" },
+  });
+export const updateContent = (id, formData) =>
+  axios.put(`/content/${id}`, formData, {
+    headers: { Authorization, "Content-Type": "multipart/form-data" },
+  });
+export const deleteContent = (id) =>
+  axios.delete(`/content/${id}`, {
+    headers: { Authorization },
+  });
+
+export const getAllContent = () => axios.get("/content");

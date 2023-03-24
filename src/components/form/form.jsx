@@ -2,21 +2,33 @@ import "./form.styles.scss";
 import React, { useState } from "react";
 import Button from "../button/button";
 import { createNewNewLetter } from "../../api/index";
+import { setFlash } from "../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-export default function Form() {
-  const [email, setEmail] = useState('');
+function Form({ setFlash }) {
+  const [email, setEmail] = useState("");
+  const inputRef = React.useRef();
 
   const subscribeToNewsLetter = async (e) => {
     e.preventDefault();
-    let userName = email.split('@')[0];
+    let userName = email.split("@")[0];
     let addNewsletter = {
       name: userName,
       email: email,
-      status: "Active"
-    }
+      status: "Active",
+    };
+
     const newletter = await createNewNewLetter(addNewsletter);
-    console.log(newletter);
-  }
+    console.log({ newletter });
+    if (newletter.data.status === "success") {
+      // setEmail("");
+      inputRef.current.value = "";
+      setFlash({
+        type: "success",
+        message: "Subscribed Successfully",
+      });
+    }
+  };
 
   return (
     <section className="form-section">
@@ -25,7 +37,7 @@ export default function Form() {
           <img src="/form-img.png" alt="form-background" />
           <div className="img-cover"></div>
         </div>
-        <form >
+        <form>
           <h4 className="title">
             Subscribe to our
             <br />
@@ -36,10 +48,21 @@ export default function Form() {
             <br />
             ands the latest news
           </p>
-          <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter your email address" />
-          <Button onClick={subscribeToNewsLetter} >Subscribe</Button>
+          <input
+            ref={inputRef}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Enter your email address"
+          />
+          <Button onClick={subscribeToNewsLetter}>Subscribe</Button>
         </form>
       </div>
     </section>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(Form);

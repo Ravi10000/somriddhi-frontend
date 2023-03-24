@@ -36,6 +36,7 @@ export default function AdminPage() {
       setSelectedOption(params.tab);
     }
   }, [params]);
+
   function closeModal() {
     setModalOpen(false);
   }

@@ -1,0 +1,12 @@
+.updateContentPopup {
+  background: #fff;
+  width: 95vw;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 8px;
+  .updateContentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
