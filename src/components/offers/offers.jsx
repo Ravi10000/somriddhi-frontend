@@ -21,14 +21,14 @@ export default function Offers() {
       name: "popular coupons",
       img: "/popular.png",
     },
-    {
-      name: "ending soon",
-      img: "/ending.png",
-    },
-    {
-      name: "latest coupons",
-      img: "/latest.png",
-    },
+    // {
+    //   name: "ending soon",
+    //   img: "/ending.png",
+    // },
+    // {
+    //   name: "latest coupons",
+    //   img: "/latest.png",
+    // },
   ];
 
   const [deals, setDeals] = useState([]);
