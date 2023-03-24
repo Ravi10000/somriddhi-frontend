@@ -63,7 +63,7 @@ export default function SelectCategorySlider({
                   }`}
                 >
                   <img
-                    src={`${import.meta.env.REA}/${category?.icon}`}
+                    src={`${import.meta.env.VITE_REACT_APP_API_URL}/${category?.icon}`}
                     alt="category"
                   />
                   <h5>{category?.name}</h5>
