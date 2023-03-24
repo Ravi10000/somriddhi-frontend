@@ -24,7 +24,7 @@ export default function Navbar() {
     { name: "deals", link: "/#deals" },
     { name: "categories", link: `/category` },
     // { name: "stores", link: "/#stores" },
-    { name: "contact us", link: "/#contact-us" },
+    { name: "contact us", link: "/#feedback-form" },
   ];
 
   return (

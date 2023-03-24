@@ -17,7 +17,10 @@ export default function FilterList({
       const response = await getAllCategories();
       console.log({ response });
       setCategories(response.data.data);
-      if (!showAll) setSelectedCategory(response.data.data[0]);
+      console.log({ selectedCategory });
+      // if (!showAll && !selectedCategory) {
+      //   setSelectedCategory(response.data.data[0]);
+      // }
     } catch (error) {
       console.log(error);
     }

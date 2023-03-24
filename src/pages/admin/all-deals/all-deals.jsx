@@ -21,7 +21,7 @@ export default function AllDeals() {
       const categoryId = selectedCategory?._id || null;
       const response = await getAllDeals(categoryId);
       console.log({ response });
-      setDeals(response.data.data.reverse());
+      setDeals(response.data.data);
     } catch (error) {
       console.log(error);
     }

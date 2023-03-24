@@ -19,7 +19,7 @@ export default function AllBanners() {
     try {
       const response = await getAllBanners();
       console.log({ response });
-      setBanners(response.data.data.reverse());
+      setBanners(response.data.data);
     } catch (error) {
       console.log(error);
     }

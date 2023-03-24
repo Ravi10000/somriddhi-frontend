@@ -12,7 +12,7 @@ export default function AllMemberships() {
 
   async function fetchMemberships() {
     const response = await getAllMemberships();
-    setMemberships(response.data.data.reverse());
+    setMemberships(response.data.data);
     console.log(response);
   }
   useEffect(() => {

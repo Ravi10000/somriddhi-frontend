@@ -3,6 +3,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 export default function BannerSlider({ banners, ForMemberships }) {
   const membershipStyles = ForMemberships ? { width: "100%" } : {};
@@ -25,20 +26,15 @@ export default function BannerSlider({ banners, ForMemberships }) {
     <div className={styles["slider-container"]} style={membershipStyles}>
       <Slider {...settings}>
         {banners.length > 0 &&
-          banners.reverse()?.map((banner, index) => (
-            <a
-              href={banner?.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={index}
-            >
+          banners?.map((banner, index) => (
+            <Link to={"//" + banner?.url} key={index}>
               <div className={styles["card-container"]}>
                 <img
                   className="bannerImageSet"
                   src={`${import.meta.env.VITE_REACT_APP_API_URL}/${banner.image}`}
                 />
               </div>
-            </a>
+            </Link>
           ))}
       </Slider>
     </div>

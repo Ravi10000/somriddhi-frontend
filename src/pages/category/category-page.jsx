@@ -1,6 +1,6 @@
 import "./category-page.style.scss";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 // components
 import FilterList from "../../components/filter-list/filter-list";
@@ -8,48 +8,52 @@ import { getAllDeals } from "../../api/index.js";
 import OfferCard from "../../components/offers/offer-card/offer-card";
 
 export default function CategoryPage() {
+  const { state } = useLocation();
+
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [deals, setDeals] = useState([]);
-  const { category } = useParams();
-  // console.log({ category });
 
   const allDealsData = async () => {
     try {
-      const formData = new FormData();
-      // if (selectedCategory) formData.append("categoryId", selectedCategory._id);
       const categoryId = selectedCategory?._id || null;
       const response = await getAllDeals(categoryId);
       console.log({ response });
       setDeals(response.data.data);
+      console.log({ state });
     } catch (error) {
       console.log(error);
     }
   };
+  console.log({ selectedCategory });
+  useEffect(() => {
+    if (state) {
+      setSelectedCategory(state?.category);
+    }
+  }, []);
 
   useEffect(() => {
     allDealsData();
   }, [selectedCategory]);
+
   return (
     <div className="category-page">
       <div className="heading">
-        <h1>{category}</h1>
+        <h1>{selectedCategory?.name || "Coupons"}</h1>
         <p>
-          Home / <span>{selectedCategory?.name}</span>
+          Home / <span>{selectedCategory?.name || "All"}</span>
         </p>
       </div>
       <section className="category-section">
         <div className="filter-container">
           <FilterList
-            // showAll
-            // category={category}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />
         </div>
         <div className="category-container">
           <div className="category-heading-container">
-            <h4>{selectedCategory?.name} Coupons</h4>
+            <h4>{selectedCategory?.name || "All"} Coupons</h4>
             <p>showing 1 -20 results</p>
           </div>
           <div className="category-cards-container">
