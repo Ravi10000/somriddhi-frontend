@@ -21,17 +21,24 @@ import ListTickets from "./list-tickets/list-tickets";
 import { setFlash } from "../../redux/flash/flash.actions";
 
 function ProfilePage({ setCurrentUser, setFlash }) {
-  const { tab } = useParams();
+  const params = useParams();
   const navigate = useNavigate();
 
-  const [activeMenu, setActiveMenu] = useState("my earnings");
+  const [activeMenu, setActiveMenu] = useState();
   const [isMenuActive, setIsMenuActive] = useState(false);
+  console.log({ activeMenu });
+  console.log({ tab: params.tab });
 
   useEffect(() => {
-    if (!menuList.includes(tab)) {
-      navigate("/profile/my earnings");
+    const menuLinks = menuList.map((item) => item.link);
+    console.log({ menuLinks });
+    const tab = "/" + params.tab;
+    if (!menuLinks.includes(tab)) {
+      console.log("redirecting");
+      navigate("/profile/my-earnings");
     } else {
-      setActiveMenu(tab);
+      console.log("path not found");
+      setActiveMenu("/" + params.tab);
     }
   }, [params]);
 
@@ -47,38 +54,40 @@ function ProfilePage({ setCurrentUser, setFlash }) {
     <div className="profile-page">
       <div className="profile-container">
         <div className={`left-menu ${isMenuActive && "active"}`}>
-          {menuList?.map(({ name, img }) => (
-            <div
-              key={name}
-              className={`menu-item ${activeMenu === name && "active"} ${
-                !img && "submenu"
-              }`}
-              onClick={() => {
-                if (name === "logout") {
-                  logoutUser();
-                  setFlash({
-                    type: "success",
-                    message: "successfully logged out",
-                  });
-                  setCurrentUser(null);
-                }
-                scrollToTop();
-                closeMenu();
-                setActiveMenu(name);
-              }}
-            >
-              {img && (
-                <img
-                  src={
-                    activeMenu === name
-                      ? img.replace(".png", "-active.png")
-                      : img
+          {menuList?.map(({ name, img, link }) => (
+            <Link to={`${link === "/logout" ? "/" : "/profile" + link}`}>
+              <div
+                key={name}
+                className={`menu-item ${activeMenu === link && "active"} ${
+                  !img && "submenu"
+                }`}
+                onClick={() => {
+                  if (name === "logout") {
+                    logoutUser();
+                    setFlash({
+                      type: "success",
+                      message: "successfully logged out",
+                    });
+                    setCurrentUser(null);
                   }
-                  alt={name}
-                />
-              )}
-              <p>{name}</p>
-            </div>
+                  scrollToTop();
+                  closeMenu();
+                  setActiveMenu(name);
+                }}
+              >
+                {img && (
+                  <img
+                    src={
+                      activeMenu === name
+                        ? img.replace(".png", "-active.png")
+                        : img
+                    }
+                    alt={name}
+                  />
+                )}
+                <p>{name}</p>
+              </div>
+            </Link>
           ))}
         </div>
         <div
@@ -90,16 +99,16 @@ function ProfilePage({ setCurrentUser, setFlash }) {
           <div className={`line ${isMenuActive && "active"}`}></div>
         </div>
         <div className="right">
-          {activeMenu == "my earnings" && <MyEarnings />}
-          {activeMenu == "payment history" && <PaymentHistory />}
-          {activeMenu == "missing cashbacks" && <MissingCashbacks />}
-          {activeMenu == "add new tickets" && <AddTicket />}
-          {activeMenu == "check old tickets" && <ListTickets />}
-          {activeMenu == "refer & earn" && <ReferEarn />}
-          {activeMenu == "referral network" && <ReferralNetwork />}
-          {activeMenu == "get help" && <GetHelp />}
-          {activeMenu == "settings" && <Settings />}
-          {activeMenu == "testimonials" && <Testimonials />}
+          {activeMenu == "/my-earnings" && <MyEarnings />}
+          {activeMenu == "/payment-history" && <PaymentHistory />}
+          {activeMenu == "/missing-cashbacks" && <MissingCashbacks />}
+          {activeMenu == "/add-new-tickets" && <AddTicket />}
+          {activeMenu == "/check-old-tickets" && <ListTickets />}
+          {activeMenu == "/refer-earn" && <ReferEarn />}
+          {activeMenu == "/referral-network" && <ReferralNetwork />}
+          {activeMenu == "/get-help" && <GetHelp />}
+          {activeMenu == "/settings" && <Settings />}
+          {activeMenu == "/testimonials" && <Testimonials />}
         </div>
       </div>
     </div>
