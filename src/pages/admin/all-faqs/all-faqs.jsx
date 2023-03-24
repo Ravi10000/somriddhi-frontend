@@ -48,7 +48,7 @@ export default function AllFaqs() {
           }}
         />
         <div className="queries">
-          {faqs.reverse()?.map((query) => (
+          {faqs?.map((query) => (
             <FaqCard
               query={query}
               key={query?._id}

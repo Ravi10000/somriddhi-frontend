@@ -94,8 +94,8 @@
 }
 
 .dealInfoImage {
-  height: 500px;
-  width: 500px;
+  max-height: 400px;
+  max-width: 400px;
   object-fit: contain;
 }
 

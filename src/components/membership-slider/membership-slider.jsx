@@ -43,7 +43,7 @@ export default function MembershipSlider({ banners }) {
     <div className={styles["slider-container"]}>
       <Slider {...settings}>
         {banners.length > 0 &&
-          banners.reverse()?.map((banner, index) => (
+          banners?.map((banner, index) => (
             <a
               href={banner?.url}
               target="_blank"

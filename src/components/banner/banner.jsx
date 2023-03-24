@@ -30,9 +30,9 @@ export default function Banner() {
   return (
     <section className="banner">
       {/* <div className="carousel-container"> */}
-        <div className="banner-carousel-container">
-          <BannerSlider banners={banners} />
-          {/* <CustomCarousel>
+      <div className="banner-carousel-container">
+        <BannerSlider banners={banners} />
+        {/* <CustomCarousel>
             {
               banners.map((banner, index) => (
                 <CarouselItem>
@@ -41,7 +41,7 @@ export default function Banner() {
               ))
             }
           </CustomCarousel> */}
-        </div>
+      </div>
       {/* </div> */}
     </section>
   );

@@ -10,39 +10,36 @@ import Button from "../../components/button/button";
 import couponDetails from "./coupon-details";
 import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
+import { getDealById } from "../../api";
 // import { getADealData } from "../../api/index.js";
 
 export default function CouponPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
   // states
   const [hoursLeft, setHoursLeft] = useState("00");
   const [minutesLeft, setMinutesLeft] = useState("00");
   const [secondsLeft, setSecondsLeft] = useState("00");
   const [dealInfo, setDealInfo] = useState([]);
-  const [render, setRender] = useState(false);
   const info = [
     "Click on Orange button and visit Gizmore",
     "Shop there as you normally do",
     "Cashback will be added to your account",
-  ]
-  const url = window.location.href;
-  const dealsId = url.split('/')[4];
-  console.log(dealsId)
+  ];
+  // const url = window.location.href;
+  // const dealsId = url.split("/")[4];
+  // console.log(dealsId);
 
-  const dealData = async (params) => {
-    const dealAllData = await getADealData(dealsId, params);
-    console.log(dealAllData.data.data);
-    setDealInfo(dealAllData.data.data);
+  async function getDeal() {
+    const response = await getDealById(id);
+    console.log({ response });
+    // console.log(response.data.data);
+    setDealInfo(response.data.deal);
   }
 
   // useEffect(() => {
   //   dealData({ dealId: dealsId });
-  //   setRender(true);
-  // }, [])
-
-  // const hoursLeftRef = useRef(null);
-  // const minutesLeftRef = useRef(null);
-  // const secondsLeftRef = useRef(null);
+  // }, []);
   useEffect(() => {
     setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
@@ -56,15 +53,17 @@ export default function CouponPage() {
       // minutesLeftRef.current = minutes;
       // secondsLeftRef.current = seconds;
     }, 1000);
+    getDeal();
   }, []);
 
-  let des = dealInfo.description && dealInfo.description.split('.');
+  // let des = dealInfo.description && dealInfo.description.split(".");
 
-  const handleClick = (url) => {
-    console.log(url)
-    window.open(url);
-  }
-  const routeToLink = dealInfo.url;
+  const handleClick = () => {};
+  // const handleClick = (url) => {
+  //   console.log(url);
+  //   window.open(url);
+  // };
+  // const routeToLink = dealInfo.url;
   // String.prototype.toHHMMSS = function () {
   //   var sec_num = parseInt(this, 10); // don't forget the second param
   //   var hours = Math.floor(sec_num / 3600);
@@ -119,10 +118,13 @@ export default function CouponPage() {
               <p>SS</p>
             </div>
           </div>
-          {
-            dealInfo.image && <img className="dealInfoImage" src={`http://localhost:8001/uploads/${dealInfo.image}`} alt="coupon image" />
-          }
-
+          {dealInfo.image && (
+            <img
+              className="dealInfoImage"
+              src={`http://localhost:8001/${dealInfo.image}`}
+              alt="coupon image"
+            />
+          )}
         </div>
         <div className="right">
           <h3>Use Code</h3>
@@ -131,24 +133,26 @@ export default function CouponPage() {
             <Button onClick={() => handleClick(routeToLink)}>visit site</Button>
           </div>
           <div className="info-container">
-
-            <div className="list" >
+            <div className="list">
               <h3>About Coupon</h3>
               <ul>
-                {dealInfo.description && des.map((message, index) => (
-                  <li>{message}</li>
-                ))}
+                {/* {dealInfo.description &&
+                  des.map((message, index) => <li>{message}</li>)} */}
               </ul>
             </div>
-            <div className="list" >
+            <div className="list">
               <h3>About category</h3>
               <ul>
                 {/* {dealInfo.description && des.map((message, index) => ( */}
-                <li>Started in the year 2018, Gizmore is Smart Accessories and Audio brand in India, known for its fashionable product styling</li>
+                <li>
+                  Started in the year 2018, Gizmore is Smart Accessories and
+                  Audio brand in India, known for its fashionable product
+                  styling
+                </li>
                 {/* ))} */}
               </ul>
             </div>
-            <div className="list" >
+            <div className="list">
               <h3>how to get this offer</h3>
               <ul>
                 {info.map((message, index) => (
@@ -156,7 +160,7 @@ export default function CouponPage() {
                 ))}
               </ul>
             </div>
-            <div className="list" >
+            <div className="list">
               <h3>important information</h3>
               <ul>
                 <li>Free Shipping on all orders</li>

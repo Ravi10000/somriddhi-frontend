@@ -61,7 +61,7 @@ export default function DealsSlider({ deals, forCoupons }) {
     <div className={styles["slider-container"]} style={couponsStyles}>
       <Slider {...settings}>
         {deals.length > 0 &&
-          deals.reverse()?.map((offer) => (
+          deals?.map((offer) => (
             <div className={styles["card-container"]} key={offer._id}>
               <div className={styles["deals-card-container"]}>
                 <OfferCard forCoupons offer={offer} />

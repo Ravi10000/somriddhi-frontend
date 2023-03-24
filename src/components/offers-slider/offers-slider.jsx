@@ -49,7 +49,7 @@ export default function OffersSlider({ offers }) {
     <div className={styles["slider-container"]}>
       <Slider {...settings}>
         {offers.length > 0 &&
-          offers.reverse()?.map((offer) => (
+          offers?.map((offer) => (
             <div className={styles["card-container"]} key={offer._id}>
               <div className={styles["offers-card-container"]}>
                 <OfferCard offer={offer} />

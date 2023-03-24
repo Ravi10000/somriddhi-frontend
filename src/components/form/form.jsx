@@ -31,7 +31,7 @@ function Form({ setFlash }) {
   };
 
   return (
-    <section className="form-section">
+    <section className="form-section" id="feedback-form">
       <div className="form-container">
         <div className="img-container">
           <img src="/form-img.png" alt="form-background" />
