@@ -7,7 +7,7 @@ export default function BannerCard({ banner, deleteBannerHandler }) {
     <div className={styles["banner-card"]}>
       <img
         className={styles["banner-img"]}
-        src={`http://localhost:8001/${banner?.image}`}
+        src={`${process.env.REACT_APP_API_URL}/${banner?.image}`}
         alt={banner?.name}
       />
       <div className={styles["banner-details"]}>

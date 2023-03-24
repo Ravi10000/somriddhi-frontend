@@ -63,7 +63,7 @@ export default function SelectCategorySlider({
                   }`}
                 >
                   <img
-                    src={`http://localhost:8001/${category?.icon}`}
+                    src={`${process.env.REACT_APP_API_URL}/${category?.icon}`}
                     alt="category"
                   />
                   <h5>{category?.name}</h5>

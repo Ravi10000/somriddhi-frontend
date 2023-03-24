@@ -22,7 +22,7 @@ export default function Process() {
                     processData.map((item, index) => (
                         <div className="process-card">
                             <div className="img-container">
-                                <img src={`http://localhost:8001/uploads/${item.image}`} alt="" />
+                                <img src={`${process.env.REACT_APP_API_URL}/uploads/${item.image}`} alt="" />
                             </div>
                             <h4>{item.name}</h4>
                             <p>{item.description} </p>

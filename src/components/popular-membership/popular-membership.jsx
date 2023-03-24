@@ -36,7 +36,7 @@ export default function PopularMembership() {
                   window.open(membership.url);
                 }}
                 className="offer"
-                src={`http://localhost:8001/${membership.image}`}
+                src={`${process.env.REACT_APP_API_URL}/${membership.image}`}
                 alt="offer"
               />
             );
@@ -44,7 +44,7 @@ export default function PopularMembership() {
             return (
               <img
                 className="Oddoffer"
-                src={`http://localhost:8001/${membership.image}`}
+                src={`${process.env.REACT_APP_API_URL}/${membership.image}`}
                 alt="offer"
               />
             );
