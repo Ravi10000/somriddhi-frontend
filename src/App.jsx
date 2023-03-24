@@ -84,6 +84,7 @@ function App({ setCurrentUser, flash, setFlash }) {
           element={<CouponsClaimedPage />}
         />
         <Route exact path="/profile" element={<ProfilePage />} />
+        <Route exact path="/profile/:tab" element={<ProfilePage />} />
         {/* <Route
           exact
           path="/profile"

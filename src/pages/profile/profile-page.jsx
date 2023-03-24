@@ -1,5 +1,6 @@
 import "./profile-page.styles.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import menuList from "./menu-list";
 
@@ -20,14 +21,28 @@ import ListTickets from "./list-tickets/list-tickets";
 import { setFlash } from "../../redux/flash/flash.actions";
 
 function ProfilePage({ setCurrentUser, setFlash }) {
+  const { tab } = useParams();
+  const navigate = useNavigate();
+
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
+
+  useEffect(() => {
+    if (!menuList.includes(tab)) {
+      navigate("/profile/my earnings");
+    } else {
+      setActiveMenu(tab);
+    }
+  }, [params]);
+
   function closeMenu() {
     setIsMenuActive(false);
   }
+
   function scrollToTop() {
     window.scrollTo(0, 0);
   }
+
   return (
     <div className="profile-page">
       <div className="profile-container">
