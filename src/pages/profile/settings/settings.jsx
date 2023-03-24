@@ -5,19 +5,40 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { updateUser } from "../../../api";
+import { setFlash } from "../../../redux/flash/flash.actions";
+import { setCurrentUser } from "../../../redux/user/user.actions";
 
 const viewList = ["profile", "payment"];
 
-function Settings({ currentUser }) {
-  async function submitUpdateForm(e) {
+function Settings({ currentUser, setCurrentUser, setFlash }) {
+  const [isLoading, setIsLoading] = useState(false);
+  console.log({ currentUser });
+
+  async function handleUserUpdate(e) {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const formData = new FormData(e.target);
+      formData.append("usertype", "customer");
+
       for (let pair of formData.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
       const response = await updateUser(currentUser._id, formData);
+      setIsLoading(false);
+      console.log({ response });
+      if (response.data.status === "success") {
+        setCurrentUser(response.data.user);
+        setFlash({
+          type: "success",
+          message: "User Details Updated Successfully",
+        });
+      }
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong. Please try again later.",
+      });
       console.log(error);
     }
   }
@@ -40,13 +61,13 @@ function Settings({ currentUser }) {
         ))}
       </div>
       {view === "payment" && (
-        <form onSubmit={submitUpdateForm} encType="application/json">
+        <form>
           <input type="text" placeholder="Edit your excel id" />
           <button>Save Excel ID</button>
         </form>
       )}
       {view === "profile" && (
-        <form>
+        <form onSubmit={handleUserUpdate} encType="application/json">
           <input
             name="fname"
             type="text"
@@ -75,7 +96,9 @@ function Settings({ currentUser }) {
               (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
             }
           />
-          <button>Edit Profile</button>
+          <button>
+            Edit Profile {isLoading && <div className="loader"></div>}
+          </button>
         </form>
       )}
     </div>
@@ -85,4 +108,9 @@ function Settings({ currentUser }) {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
-export default connect(mapStateToProps)(Settings);
+
+const mapDispatchToProp = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+export default connect(mapStateToProps, mapDispatchToProp)(Settings);

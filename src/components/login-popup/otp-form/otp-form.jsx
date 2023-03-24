@@ -6,8 +6,9 @@ import Button from "../../button/button";
 import { sendOtp, verifyOtp, checkIfSubscribed } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
+import { setFlash } from "../../../redux/flash/flash.actions";
 
-function OtpForm({ phone, nextStage, setCurrentUser, closeModal }) {
+function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
   const [isOtpValid, setIsOtpValid] = useState(true);
   const [otp, setOtp] = useState("");
   const [validInput, setValidInput] = useState(false);
@@ -57,6 +58,7 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal }) {
       } else if (response.data.status === "success") {
         const { user } = response.data;
         setCurrentUser(user);
+        setFlash({ message: "Logged in successfully", type: "success" });
         if (!user?.email) {
           return nextStage();
         }
@@ -211,6 +213,7 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal }) {
 }
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setFlash: (flash) => dispatch(setFlash(flash)),
 });
 
 export default connect(null, mapDispatchToProps)(OtpForm);

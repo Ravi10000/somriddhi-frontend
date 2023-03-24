@@ -13,21 +13,18 @@ const Flash = ({ message, type, clearFlash }) => {
     setTimeout(function () {
       setHideFlash(true);
       clearFlash();
-    }, 5000);
-    setInterval(() => {
-      setCount((count) => count - 1);
-    }, 999);
+    }, 10000);
+    // setInterval(() => {
+    //   setCount((count) => count - 1);
+    // }, 999);
   }, [clearFlash]);
 
   return (
     <div
-      className={styles.flash + " " + styles.type}
+      className={styles.flash + " " + styles[type]}
       style={{
         display: hideFlash && "none",
         boxShadow: `0px 0px 1px var(--${type})`,
-      }}
-      onClick={() => {
-        setHideFlash(false);
       }}
     >
       {message && (
@@ -36,7 +33,15 @@ const Flash = ({ message, type, clearFlash }) => {
             <img src={`/${type}.png`} alt={type} />
             <p>{message}</p>
           </div>
-          <div className={styles.count}>{count}</div>
+          <button
+            className={styles.close}
+            onClick={() => {
+              console.log("close");
+              setHideFlash(true);
+            }}
+          >
+            <img src={`/close-${type}.png`} alt="" />
+          </button>
         </>
       )}
     </div>

@@ -17,8 +17,9 @@ import { logoutUser } from "../../api";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import ListTickets from "./list-tickets/list-tickets";
+import { setFlash } from "../../redux/flash/flash.actions";
 
-function ProfilePage({ setCurrentUser }) {
+function ProfilePage({ setCurrentUser, setFlash }) {
   const [activeMenu, setActiveMenu] = useState("my earnings");
   const [isMenuActive, setIsMenuActive] = useState(false);
   function closeMenu() {
@@ -40,6 +41,10 @@ function ProfilePage({ setCurrentUser }) {
               onClick={() => {
                 if (name === "logout") {
                   logoutUser();
+                  setFlash({
+                    type: "success",
+                    message: "successfully logged out",
+                  });
                   setCurrentUser(null);
                 }
                 scrollToTop();
@@ -88,6 +93,7 @@ function ProfilePage({ setCurrentUser }) {
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setFlash: (flash) => dispatch(setFlash(flash)),
 });
 
 export default connect(null, mapDispatchToProps)(ProfilePage);

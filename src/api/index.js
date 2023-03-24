@@ -58,7 +58,7 @@ export const createUser = (formData) => {
   });
 };
 export const updateUser = (id, formData) => {
-  return axios.put(`/user/${id}`, formData, {
+  return axios.put(`/updateUser/${id}`, formData, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
       "Content-Type": "application/json",

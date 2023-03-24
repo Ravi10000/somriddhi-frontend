@@ -47,6 +47,12 @@
       padding: 15px 30px;
       width: fit-content;
       background: #21aa27;
+      &.loader {
+        width: 16px;
+        height: 16px;
+        background: transparent;
+        border: 2px solid #fff;
+      }
     }
   }
 }

@@ -59,7 +59,7 @@ function App({ setCurrentUser, flash, setFlash }) {
   return (
     <div className="App" id="App">
       {flash && <Flash type={flash.type} message={flash.message} />}
-      {/* <Flash type={"success"} message={"hie"} /> */}
+      {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
       {!pathname.includes("/admin") && (
         <>

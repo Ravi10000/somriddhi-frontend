@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { checkIfSubscribed, createUser } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
+import { setFlash } from "../../../redux/flash/flash.actions";
 
 function UserDetailsForm({
   nextStage,
@@ -16,6 +17,7 @@ function UserDetailsForm({
   phone,
   setReferralCode,
   setCurrentUser,
+  setFlash,
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,6 +33,10 @@ function UserDetailsForm({
       if (response.data.status === "success") {
         if (response.data.user) {
           setCurrentUser(response.data.user);
+          setFlash({
+            type: "success",
+            message: "User Details Updated Successfully",
+          });
           const suscribedResponse = await checkIfSubscribed();
           if (suscribedResponse.data.status === "success") {
             if (!suscribedResponse.data.isSubscribed) {
@@ -96,5 +102,6 @@ function UserDetailsForm({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setFlash: (flash) => dispatch(setFlash(flash)),
 });
 export default connect(null, mapDispatchToProps)(UserDetailsForm);
