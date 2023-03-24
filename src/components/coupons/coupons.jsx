@@ -39,6 +39,7 @@ export default function Coupons() {
   useEffect(() => {
     (async () => {
       try {
+        console.log(selectedCategory);
         const categoryId = selectedCategory?._id || null;
         const response = await getAllDeals(categoryId);
         console.log({ response });

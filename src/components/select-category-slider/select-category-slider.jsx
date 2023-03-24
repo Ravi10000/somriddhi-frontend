@@ -55,6 +55,7 @@ export default function SelectCategorySlider({
               <div className={styles["inner-card-container"]}>
                 <div
                   onClick={() => {
+                    console.log(category)
                     setSelectedCategory(category);
                   }}
                   className={`${styles["menu-card"]} ${

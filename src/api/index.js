@@ -107,7 +107,7 @@ export async function verifyOtp(formData) {
 
 // Deals APIs
 export const getAllDeals = (categoryId) => {
-  return axios.get(`/deal/${categoryId ? "/" + categoryId : ""}`);
+  return axios.get(`/deal/${categoryId}`);
 };
 export const getDealById = (id) => {
   return axios.get(`/deal/single/${id}`);
