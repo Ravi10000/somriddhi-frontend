@@ -45,6 +45,7 @@ export default function Testimonials() {
       </p>
       <button
         onClick={() => {
+          window.scrollTo(0, 0);
           setIsModelOpen(true);
         }}
       >
@@ -75,7 +76,7 @@ export default function Testimonials() {
                           src={
                             starRating - 1 >= index
                               ? "/star.png"
-                              : "blank-star.png"
+                              : "/blank-star.png"
                           }
                           alt="star"
                         />

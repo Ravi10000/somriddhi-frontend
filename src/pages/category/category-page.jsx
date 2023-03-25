@@ -54,14 +54,19 @@ export default function CategoryPage() {
         <div className="category-container">
           <div className="category-heading-container">
             <h4>{selectedCategory?.name || "All"} Coupons</h4>
-            <p>showing 1 -20 results</p>
+            <p>showing {deals?.length || 0} results</p>
           </div>
-          <div className="category-cards-container">
-            {deals &&
-              deals.map((offer) => (
+          {deals?.length > 0 ? (
+            <div className="category-cards-container">
+              {deals.map((offer) => (
                 <OfferCard key={offer?._id} offer={offer} />
               ))}
-          </div>
+            </div>
+          ) : (
+            <p className="no-deals">
+              We have no {selectedCategory?.name} coupons for now
+            </p>
+          )}
         </div>
       </section>
     </div>

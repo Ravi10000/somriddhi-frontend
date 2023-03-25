@@ -1,6 +1,11 @@
 import styles from "./update-content-popup.module.scss";
+// react hooks
+import { useState } from "react";
 
-import React from "react";
+// packages
+import { connect } from "react-redux";
+
+// components
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
@@ -8,14 +13,19 @@ import ImageInput from "../image-input/image-input";
 import Backdrop from "../backdrop/backdrop";
 import Button from "../button/button";
 
+// api calls
 import { updateContent } from "../../api";
 
-export default function UpdateContentPopup({
+// redux actions
+import { setFlash } from "../../redux/flash/flash.actions";
+
+function UpdateContentPopup({
   fetchAllContents,
   content,
+  setFlash,
   setShowPopup,
 }) {
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleUpdateContent(e) {
     setIsLoading(true);
@@ -24,10 +34,18 @@ export default function UpdateContentPopup({
     try {
       const response = await updateContent(content?._id, formData);
       console.log({ response });
+
+      response.data.status === "success" &&
+        setFlash({ type: "success", message: "Content Updated Successfully" });
+
       setIsLoading(false);
       setShowPopup(false);
       fetchAllContents();
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
       console.log(error);
     }
   }
@@ -54,3 +72,8 @@ export default function UpdateContentPopup({
     </Backdrop>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+export default connect(null, mapDispatchToProps)(UpdateContentPopup);

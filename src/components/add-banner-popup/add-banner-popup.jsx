@@ -14,20 +14,16 @@ import ImageInput from "../image-input/image-input";
 import LongTextInput from "../long-text-input/long-text-input";
 import Button from "../button/button";
 import PopupHead from "../popup-head/popup-head";
+import { connect } from "react-redux";
+import { setFlash } from "../../redux/flash/flash.actions";
 
-export default function AddBannerPopup({ setShowPopup, fetchBanners }) {
+function AddBannerPopup({ setShowPopup, fetchBanners, setFlash }) {
   const [image, setImage] = useState(null);
-  // const formRef = useRef(null);
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm();
-
-  // console.log({ errors });
+  const [isLoading, setIsLoading] = useState(false);
 
   async function submitForm(e) {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     for (let key of formData.entries()) {
       console.log(key);
@@ -37,9 +33,18 @@ export default function AddBannerPopup({ setShowPopup, fetchBanners }) {
       console.log({ response });
       if (response.data.status === "success") {
         fetchBanners();
+        setFlash({
+          type: "success",
+          message: "Banner Added Successfully",
+        });
+        setIsLoading(false);
         setShowPopup(false);
       }
     } catch (error) {
+      setFlash({
+        message: "Something went wrong, please try again",
+        type: "error",
+      });
       console.log(error);
     }
   }
@@ -47,29 +52,20 @@ export default function AddBannerPopup({ setShowPopup, fetchBanners }) {
   return (
     <Backdrop>
       <div className="add-banner-popup">
-        {/* <div className="head">
-          <div className="head-left">
-            <img src="/arrow-left-primary.png" alt="go back" />
-            <h3>Add Banner</h3>
-          </div>
-          <button
-            className="close-popup"
-            onClick={() => {
-              setShowPopup(false);
-            }}
-          >
-            <img src="/close.png" alt="close popup" />
-          </button>
-        </div> */}
         <PopupHead setShowPopup={setShowPopup} title="Add Banner" />
         <form onSubmit={submitForm} encType="multipart/form-data">
           <ImageInput label="Banner Image" name="bannerPhoto" />
           <TextInput label="Name" name="name" placeholder="Enter Banner Name" />
           <TextInput label="URL" name="url" placeholder="Paste Banner url" />
           <LongTextInput label="Description" name="description" />
-          <button className="add-banner-btn">Add Banner</button>
+          <Button isLoading={isLoading}>Add Banner</Button>
         </form>
       </div>
     </Backdrop>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+export default connect(null, mapDispatchToProps)(AddBannerPopup);

@@ -1,16 +1,28 @@
 import "./add-category-popup.styles.scss";
 
-import React, { useRef, useEffect, useState } from "react";
+// react hooks
+import { useRef, useEffect, useState } from "react";
+// packages
+import { connect } from "react-redux";
+
+// components
 import Backdrop from "../backdrop/backdrop";
-import { getAllCategories, createNewCategory } from "../../api";
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
 import ImageInput from "../image-input/image-input";
+import Button from "../button/button";
 
-export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
+// api calls
+import { getAllCategories, createNewCategory } from "../../api";
+
+// redux actions
+import { setFlash } from "../../redux/flash/flash.actions";
+
+function AddCategoryPopup({ setShowPopup, fetchCategories, setFlash }) {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -20,25 +32,29 @@ export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
     })();
   }, []);
   async function submitAddCategoryForm(e) {
-    console.log("submit");
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
-    // for (let key of formData.entries()) {
-    //   console.log(key);
-    // }
     try {
       const response = await createNewCategory(formData);
       if ((response.data.status = "success")) {
         fetchCategories();
-        setShowPopup(false);
+        setFlash({
+          type: "success",
+          message: "Category Added Successfully",
+        });
       }
+      setIsLoading(false);
+      setShowPopup(false);
     } catch (error) {
       console.log(error);
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
     }
-    // console.log({ response });
   }
 
-  // const imgInputRef = useRef(null);
   return (
     <Backdrop>
       <div className="add-category-popup">
@@ -55,19 +71,14 @@ export default function AddCategoryPopup({ setShowPopup, fetchCategories }) {
             placeholder="Enter Category Description"
           />
           <ImageInput label="Icon" name="categoryPhoto" />
-          {/* <div className="select-icons">
-            <p>OR</p>
-            <div className="icon-list">
-              {categories.map(({ name, icon }) => (
-                <div className="icon" key={name}>
-                  <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${icon}`} alt="icon" />
-                </div>
-              ))}
-            </div>
-          </div> */}
-          <button className="add-category-btn">Add Category</button>
+          <Button isLoading={isLoading}>Add Category</Button>
         </form>
       </div>
     </Backdrop>
   );
 }
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AddCategoryPopup);

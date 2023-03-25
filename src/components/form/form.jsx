@@ -13,8 +13,8 @@ function Form({ setFlash }) {
     e.preventDefault();
     let userName = email.split("@")[0];
     let addNewsletter = {
+      email,
       name: userName,
-      email: email,
       status: "Active",
     };
 
@@ -37,7 +37,7 @@ function Form({ setFlash }) {
           <img src="/form-img.png" alt="form-background" />
           <div className="img-cover"></div>
         </div>
-        <form>
+        <form onSubmit={subscribeToNewsLetter}>
           <h4 className="title">
             Subscribe to our
             <br />
@@ -54,7 +54,7 @@ function Form({ setFlash }) {
             type="email"
             placeholder="Enter your email address"
           />
-          <Button onClick={subscribeToNewsLetter}>Subscribe</Button>
+          <Button>Subscribe</Button>
         </form>
       </div>
     </section>

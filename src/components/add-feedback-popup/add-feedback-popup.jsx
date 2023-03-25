@@ -1,20 +1,31 @@
 import styles from "./add-feedback-popup.module.scss";
-import { useState } from "react";
-import TextInput from "../text-input/text-input";
-// packages
-// components
-import Backdrop from "../backdrop/backdrop";
 
-// utils
-import { createNewFeedback } from "../../api";
+// react hooks
+import { useState } from "react";
+
+// packages
+import { connect } from "react-redux";
+
+// components
+import Button from "../button/button";
+import TextInput from "../text-input/text-input";
+import Backdrop from "../backdrop/backdrop";
 import LongTextInput from "../long-text-input/long-text-input";
 import PopupHead from "../popup-head/popup-head";
 
-export default function AddFeedbackPopup({ setShowPopup, fetchFeedbacks }) {
+// api calls
+import { createNewFeedback } from "../../api";
+
+// redux actions
+import { setFlash } from "../../redux/flash/flash.actions";
+
+function AddFeedbackPopup({ setShowPopup, fetchFeedbacks, setFlash }) {
   const [rating, setRating] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function submitFeedback(e) {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     formData.append("starRating", rating);
     formData.append("status", "Active");
@@ -25,10 +36,19 @@ export default function AddFeedbackPopup({ setShowPopup, fetchFeedbacks }) {
       const response = await createNewFeedback(formData);
       console.log({ response });
       if (response.data.status === "success") {
+        setFlash({
+          type: "success",
+          message: "Feedback Added Successfully",
+        });
         fetchFeedbacks();
-        setShowPopup(false);
       }
+      setIsLoading(false);
+      setShowPopup(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something Went Wrong, Please Try Again",
+      });
       console.log(error);
     }
   }
@@ -46,11 +66,6 @@ export default function AddFeedbackPopup({ setShowPopup, fetchFeedbacks }) {
           <div className={styles["rating-selector"]}>
             <label>Rate</label>
             <div className={styles["stars"]}>
-              {/* {Array(rating)
-                .fill()
-                .map((_, i) => (
-                  <img src="/star.png" alt="rating" key={i} />
-                ))} */}
               {Array(5)
                 .fill()
                 .map((_, i) => {
@@ -73,9 +88,15 @@ export default function AddFeedbackPopup({ setShowPopup, fetchFeedbacks }) {
             name="feedbackText"
             placeholder="Enter Your Feedback"
           />
-          <button className={styles["add-feedback-btn"]}>Add Feedback</button>
+          <Button isLoading={isLoading}>Add Feedback</Button>
         </form>
       </div>
     </Backdrop>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AddFeedbackPopup);

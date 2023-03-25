@@ -6,24 +6,17 @@ import { connect } from "react-redux";
 import { clearFlash } from "../../redux/flash/flash.actions";
 
 const Flash = ({ message, type, clearFlash }) => {
-  const [hideFlash, setHideFlash] = useState(false);
-  const [count, setCount] = useState(5);
-
   useEffect(() => {
     setTimeout(function () {
-      setHideFlash(true);
       clearFlash();
     }, 10000);
-    // setInterval(() => {
-    //   setCount((count) => count - 1);
-    // }, 999);
-  }, [clearFlash]);
+  }, [clearFlash, message, type]);
 
   return (
     <div
       className={styles.flash + " " + styles[type]}
       style={{
-        display: hideFlash && "none",
+        display: !message ? "none" : "flex",
         boxShadow: `0px 0px 1px var(--${type})`,
       }}
     >
@@ -36,8 +29,7 @@ const Flash = ({ message, type, clearFlash }) => {
           <button
             className={styles.close}
             onClick={() => {
-              console.log("close");
-              setHideFlash(true);
+              clearFlash();
             }}
           >
             <img src={`/close-${type}.png`} alt="" />

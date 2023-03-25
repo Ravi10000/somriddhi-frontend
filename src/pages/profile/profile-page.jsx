@@ -1,9 +1,12 @@
 import "./profile-page.styles.scss";
+// react hooks
 import { useState, useEffect } from "react";
+
+// packages
+import { connect } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-import menuList from "./menu-list";
-
+// components
 import MyEarnings from "./my-earnings/my-earnings";
 import PaymentHistory from "./payment-history/payment-history";
 import ReferEarn from "./refer-earn/refer-earn";
@@ -13,12 +16,17 @@ import Settings from "./settings/settings";
 import MissingCashbacks from "./missing-cashbacks/missing-cashbacks";
 import Testimonials from "./testimonials/testimonials";
 import AddTicket from "./add-ticket/add-ticket";
-
-import { logoutUser } from "../../api";
-import { setCurrentUser } from "../../redux/user/user.actions";
-import { connect } from "react-redux";
 import ListTickets from "./list-tickets/list-tickets";
+
+// api calls
+import { logoutUser } from "../../api";
+
+// redux actions
+import { setCurrentUser } from "../../redux/user/user.actions";
 import { setFlash } from "../../redux/flash/flash.actions";
+
+// utils
+import menuList from "./menu-list";
 
 function ProfilePage({ setCurrentUser, setFlash }) {
   const params = useParams();
@@ -55,9 +63,11 @@ function ProfilePage({ setCurrentUser, setFlash }) {
       <div className="profile-container">
         <div className={`left-menu ${isMenuActive && "active"}`}>
           {menuList?.map(({ name, img, link }) => (
-            <Link to={`${link === "/logout" ? "/" : "/profile" + link}`}>
+            <Link
+              to={`${link === "/logout" ? "/" : "/profile" + link}`}
+              key={name}
+            >
               <div
-                key={name}
                 className={`menu-item ${activeMenu === link && "active"} ${
                   !img && "submenu"
                 }`}

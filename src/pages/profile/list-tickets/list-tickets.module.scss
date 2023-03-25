@@ -6,7 +6,26 @@
       display: grid;
       gap: 10px;
       border-bottom: 1px solid #ccc;
-      //   margin-bottom: 25px;
+      p {
+        color: #828282;
+      }
+      .replies-container {
+        padding-top: 15px;
+        .replies {
+          border-top: 2px solid #ccc;
+          margin: 10px 0;
+          .reply {
+            padding: 10px;
+          }
+        }
+      }
     }
+  }
+  .no-tickets {
+    font-weight: 500;
+    color: #acabab;
+    display: grid;
+    place-items: center;
+    padding: 20px;
   }
 }

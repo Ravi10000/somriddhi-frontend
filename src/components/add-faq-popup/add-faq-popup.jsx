@@ -1,29 +1,48 @@
 import "./add-faq-popup.styles.scss";
 
+// react hooks
+import { useState } from "react";
+
+// packages
+import { connect } from "react-redux";
+
 // components
 import Backdrop from "../backdrop/backdrop";
 
 //api requests
 import { addNewFaq } from "../../api/index";
-import { connect } from "react-redux";
 
+// components
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
+
+// redux actions
 import { setFlash } from "../../redux/flash/flash.actions";
+import Button from "../button/button";
 
 function AddFaqPopup({ setShowPopup, fetchFaqs, setFlash }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const faqFormSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     console.log("fomr");
     try {
       const response = await addNewFaq(formData);
-      setShowPopup(false);
-      setFlash({ type: "success", message: "FAQ added successfully" });
-      fetchFaqs();
       console.log({ response });
+      if (response.data.status === "success") {
+        setFlash({ type: "success", message: "FAQ added successfully" });
+        fetchFaqs();
+      }
+      setIsLoading(false);
+      setShowPopup(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
       console.log(error);
     }
   };
@@ -43,7 +62,7 @@ function AddFaqPopup({ setShowPopup, fetchFaqs, setFlash }) {
             name="answer"
             placeholder="Enter Answers"
           />
-          <button className="add-faq-btn">Save</button>
+          <Button isLoading={isLoading}>Save</Button>
         </form>
       </div>
     </Backdrop>

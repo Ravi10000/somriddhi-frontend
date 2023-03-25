@@ -39,7 +39,7 @@ export default function AllCustomers() {
           <table className="customers-table">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Email</th>
                 <th>Phone No.</th>
                 <th>Joined on</th>
                 <th>Total Purchase</th>

@@ -5,44 +5,17 @@
   padding: 20px;
   border-radius: 8px;
 
-  .head {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    .head-left {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      h3 {
-        font-size: 20px;
-        font-weight: 600;
-      }
-      img {
-        width: 15px;
-      }
-    }
-    .close-popup {
-      background: #ffe9e6;
-      border-radius: 0;
-      padding: 10px;
-      img {
-        width: 25px;
-      }
-    }
-  }
   form {
     margin-top: 25px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    place-items: center;
     .dates {
       display: flex;
       width: 100%;
-      // justify-content: space-between;
       gap: 20px;
       .date-input {
         width: 100%;
-        // width: fit-content;
         display: grid;
         gap: 5px;
         color: #545a6e;
@@ -65,10 +38,6 @@
           // position: absolute;
         }
       }
-    }
-
-    .add-deal-btn {
-      width: 100%;
     }
   }
 }

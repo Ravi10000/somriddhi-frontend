@@ -1,20 +1,31 @@
 import "./add-ticket-popup.styles.scss";
+// react hooks
+import { useState } from "react";
+
+// packages
+import { connect } from "react-redux";
 
 // components
 import Backdrop from "../backdrop/backdrop";
 
-//api requests
+//api calls
 import { addNewTicket } from "../../api/index";
 
+// components
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
+
+// redux actions
 import { setFlash } from "../../redux/flash/flash.actions";
-import { connect } from "react-redux";
+import Button from "../button/button";
 
 function AddTicketPopup({ setShowPopup, setShowSuccessMsg, setFlash }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   async function submitTicket(e) {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     formData.append("status", "Active");
     for (var pair of formData.entries()) {
@@ -24,11 +35,15 @@ function AddTicketPopup({ setShowPopup, setShowSuccessMsg, setFlash }) {
       const response = await addNewTicket(formData);
       console.log({ response });
       if (response.data.status === "success") {
-        setShowPopup(false);
         setFlash({ type: "success", message: "Ticket added successfully" });
-        // setShowSuccessMsg(true);
       }
+      setShowPopup(false);
+      setIsLoading(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
       console.log(error);
     }
   }
@@ -48,7 +63,7 @@ function AddTicketPopup({ setShowPopup, setShowSuccessMsg, setFlash }) {
             name="description"
             placeholder="Describe your problem"
           />
-          <button className="add-ticket-btn">Save</button>
+          <Button isLoading={isLoading}>Save</Button>
         </form>
       </div>
     </Backdrop>

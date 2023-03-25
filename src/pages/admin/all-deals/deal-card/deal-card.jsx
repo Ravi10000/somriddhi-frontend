@@ -1,6 +1,10 @@
 import styles from "./deal-card.module.scss";
 
-import React, { useState } from "react";
+// packages
+import { useNavigate } from "react-router-dom";
+
+// react hooks
+import { useState } from "react";
 
 export default function DealCard({
   deal,
@@ -8,10 +12,16 @@ export default function DealCard({
   setShowAddDealPopup,
   setDealToUpdate,
 }) {
+  const navigate = useNavigate();
   const [isDeleting, setIsDeleting] = useState(false);
 
   return (
-    <div className={styles["deal"]}>
+    <div
+      className={styles["deal"]}
+      onClick={() => {
+        navigate(`/coupon/${deal?._id}`);
+      }}
+    >
       <img
         className={styles["deal-img"]}
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${deal?.image}`}
@@ -23,7 +33,8 @@ export default function DealCard({
           <img
             src="/edit.png"
             alt="edit deal"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               window.scrollTo(0, 0);
               setDealToUpdate(deal);
               setShowAddDealPopup(true);
@@ -35,7 +46,8 @@ export default function DealCard({
             <img
               src="/delete.png"
               alt="delete deal"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 deleteDealHandler(deal?._id, setIsDeleting);
               }}
             />

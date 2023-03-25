@@ -1,36 +1,37 @@
 import "./add-deal-popup.styles.scss";
-
+// react hooks
 import { useState, useEffect, useId } from "react";
+
+// packages
+import { connect } from "react-redux";
+
 // components
 import Backdrop from "../backdrop/backdrop";
-
-// utils
-import { createNewDeal, getAllCategories, updateDeal } from "../../api/";
+import PopupHead from "../popup-head/popup-head";
 import CustomSelect from "../custom-select/custom-select";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
 import ImageInput from "../image-input/image-input";
 import NumInput from "../num-input/num-input";
-import PopupHead from "../popup-head/popup-head";
+import Button from "../button/button";
 
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// api calls
+import { createNewDeal, getAllCategories, updateDeal } from "../../api/";
 
-export default function AddDealPopup({
+// redux actions
+import { setFlash } from "../../redux/flash/flash.actions";
+
+function AddDealPopup({
   setShowPopup,
   fetchDeals,
   dealToUpdate,
   setDealToUpdate,
+  setFlash,
 }) {
-  // console.log({ dealToUpdate });
   const id = useId();
+  const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  // const [image, setImage] = useState(null);
-
-  // console.log({ image });
 
   useEffect(() => {
     (async () => {
@@ -45,6 +46,7 @@ export default function AddDealPopup({
 
   async function submitAddDealForm(e) {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     formData.append("categoryId", selectedCategory._id);
     dealToUpdate && formData.append("_id", dealToUpdate._id);
@@ -55,10 +57,21 @@ export default function AddDealPopup({
       if (!dealToUpdate) {
         const response = await createNewDeal(formData);
         console.log({ response });
+        response.data.status === "success" &&
+          setFlash({
+            type: "success",
+            message: "Deal Added Successfully",
+          });
       } else {
         const response = await updateDeal(formData);
         console.log({ response });
+        response.data.status === "success" &&
+          setFlash({
+            type: "success",
+            message: "Deal Updated Successfully",
+          });
       }
+      setIsLoading(false);
       setShowPopup(false);
       fetchDeals();
     } catch (error) {
@@ -74,19 +87,19 @@ export default function AddDealPopup({
           <TextInput
             label="Name"
             name="name"
-            placeholder="Enter Banner Name"
+            placeholder="Enter deal Name"
             defaultValue={dealToUpdate?.name || ""}
           />
           <TextInput
             label="URL"
             name="url"
-            placeholder="Paster banner Url"
+            placeholder="Paster deal Url"
             defaultValue={dealToUpdate?.url || ""}
           />
           <NumInput
             label="Cashback"
             name="cashbackPercent"
-            placeholder="Cashback"
+            placeholder="Cashback in percent"
             maxLength="2"
             defaultValue={dealToUpdate?.cashbackPercent || ""}
           />
@@ -97,6 +110,7 @@ export default function AddDealPopup({
             defaultValue={dealToUpdate?.description || ""}
           />
           <CustomSelect
+            label="Select Category"
             categories={categories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -107,7 +121,7 @@ export default function AddDealPopup({
             label="Deal Image"
             name="dealPhoto"
             dealImage={dealToUpdate?.image}
-            // onChange={(e) => setImage(e.target.files[0])}
+            required={!dealToUpdate}
           />
           <div className="dates">
             <div className="live-date date-input">
@@ -129,9 +143,15 @@ export default function AddDealPopup({
               />
             </div>
           </div>
-          <button className="add-deal-btn">Add Deal</button>
+          <Button isLoading={isLoading}>
+            {dealToUpdate ? "Update Deal" : "Add Deal"}
+          </Button>
         </form>
       </div>
     </Backdrop>
   );
 }
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+export default connect(null, mapDispatchToProps)(AddDealPopup);

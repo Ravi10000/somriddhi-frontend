@@ -1,17 +1,29 @@
 import "./tickets-section.styles.scss";
 
-import React, { useState, useEffect } from "react";
-import { activeTickets, resolvedTickets } from "./dummyTickets";
+// react hooks
+import { useState, useEffect } from "react";
+
+// packages
+import { connect } from "react-redux";
+
+// api calls
 import {
   updateTicketStatus,
   getActiveTickets,
   getResolvedTickets,
 } from "../../../api";
+
+// components
 import AddReplyPopup from "../../../components/add-reply-popup/add-reply-popup";
 import TicketCard from "./ticket-card/ticket-card";
+
+// redux actions
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+// utils
 const options = ["active tickets", "resolved tickets"];
 
-export default function TicketsSection() {
+function TicketsSection({ setFlash }) {
   const [selectedTickets, setSelectedTickets] = useState("active tickets");
   const [tickets, setTickets] = useState([]);
 
@@ -41,11 +53,21 @@ export default function TicketsSection() {
         status,
       });
       console.log({ response });
+      response.data.status === "success" &&
+        setFlash({
+          type: "success",
+          message: `Ticket Resolved Successfully`,
+        });
       fetchTickets();
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
       console.log(error);
     }
   }
+
   useEffect(() => {
     fetchTickets();
   }, [selectedTickets]);
@@ -96,3 +118,8 @@ export default function TicketsSection() {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+export default connect(null, mapDispatchToProps)(TicketsSection);

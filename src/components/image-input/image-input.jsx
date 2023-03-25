@@ -17,13 +17,15 @@ export default function ImageInput({ label, dealImage, ...otherProps }) {
       <label>{label}</label>
       <div className={styles["upload-input"]}>
         {defaultImage ? (
-          <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${defaultImage}`} alt="image" />
+          <img
+            src={`${import.meta.env.VITE_REACT_APP_API_URL}/${defaultImage}`}
+            alt="image"
+          />
         ) : (
           <img src={image || "/upload-gray.png"} alt="" />
         )}
         {!image && !defaultImage && <p>Upload Image</p>}
         <input
-          required
           onChange={(e) => {
             setDefaultImage(null);
             setImage(URL.createObjectURL(e.target.files[0]));

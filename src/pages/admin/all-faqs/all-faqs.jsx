@@ -1,14 +1,22 @@
 import "./all-faqs.styles.scss";
 
+// react hooks
 import { useState, useEffect } from "react";
-import TitleSection from "../title-section/title-section";
-import quries from "./quries";
+// packages
+import { connect } from "react-redux";
 
+// components
+import TitleSection from "../title-section/title-section";
 import AddFaqPopup from "../../../components/add-faq-popup/add-faq-popup";
-import { getAllFaqs, deleteFaq } from "../../../api/index";
 import FaqCard from "./faq-card/faq-card";
 
-export default function AllFaqs() {
+// redux actions
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+// api calls
+import { getAllFaqs, deleteFaq } from "../../../api/index";
+
+function AllFaqs({ setFlash }) {
   const [showAddFaqPopup, setShowAddFaqPopup] = useState(false);
   const [faqs, setFaqs] = useState([]);
   async function fetchFaqs() {
@@ -28,9 +36,16 @@ export default function AllFaqs() {
     try {
       const response = await deleteFaq(id);
       console.log({ response });
-      await fetchFaqs();
+      if (response.data.status === "success") {
+        await fetchFaqs();
+        setFlash({ type: "success", message: "FAQ deleted successfully" });
+      }
       setIsDeleting(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
       console.log(error);
     }
   }
@@ -54,13 +69,15 @@ export default function AllFaqs() {
               key={query?._id}
               deleteFaqHandler={deleteFaqHandler}
             />
-            // <div className="query" key={index}>
-            //   <h3 className="query-title">{question}</h3>
-            //   <p className="query-desc">{answer}</p>
-            // </div>
           ))}
         </div>
       </div>
     </>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AllFaqs);

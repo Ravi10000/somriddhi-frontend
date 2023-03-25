@@ -5,96 +5,11 @@
   padding: 20px;
   border-radius: 8px;
 
-  .head {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    .head-left {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      h3 {
-        font-size: 20px;
-        font-weight: 600;
-      }
-      img {
-        width: 15px;
-      }
-    }
-    .close-popup {
-      background: #ffe9e6;
-      border-radius: 0;
-      padding: 10px;
-      img {
-        width: 25px;
-      }
-    }
-  }
   form {
     margin-top: 25px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    place-items: center;
-    .upload-category-img {
-      width: 100%;
-      display: grid;
-      gap: 5px;
-      .upload-input {
-        // height: 200px;
-        border-radius: 8px;
-        padding: 20px;
-        border: 2px solid #ced0d6;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        // input::-webkit-file-upload-button {
-        //   font-weight: 600;
-        //   border: none;
-        //   padding: 10px 20px;
-        //   font-family: "Metropolis", sans-serif;
-        //   border-radius: 8px;
-        // }
-        input {
-          opacity: 0;
-          // padding: 10px;
-          position: absolute;
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-    .input-container {
-      display: grid;
-      gap: 5px;
-      width: 100%;
-      .text-input {
-        padding: 15px 20px;
-        border: 2px solid #ced0d6;
-        color: #545a6e;
-        border-radius: 8px;
-        &::placeholder {
-          color: #545a6e;
-        }
-      }
-
-      textarea.text-input {
-        font-family: "Metropolis", sans-serif;
-        resize: none;
-        height: 100px;
-      }
-      &.description {
-        .textarea-msg {
-          font-weight: 300;
-          letter-spacing: 1.5px;
-          color: #ced0d6;
-          padding-left: 5px;
-          margin: 0;
-        }
-      }
-    }
     .select-icons {
       display: grid;
       gap: 20px;
@@ -119,9 +34,6 @@
           }
         }
       }
-    }
-    .add-category-btn {
-      width: 100%;
     }
   }
 }

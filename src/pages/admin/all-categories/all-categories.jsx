@@ -1,9 +1,13 @@
 import "./all-categories.styles.scss";
 
-import React, { useState, useEffect } from "react";
+// react hooks
+import { useState, useEffect } from "react";
+
+// components
 import TitleSection from "../title-section/title-section";
-import categoryList from "./category-list";
 import AddCategoryPopup from "../../../components/add-category-popup/add-category-popup";
+
+// api calls
 import { getAllCategories } from "../../../api/index";
 
 export default function AllCategories() {
@@ -36,7 +40,10 @@ export default function AllCategories() {
           {categories?.map(({ name, icon }, index) => (
             <div className="category" key={index}>
               <div className="category-icon">
-                <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${icon}`} alt={name} />
+                <img
+                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${icon}`}
+                  alt={name}
+                />
               </div>
               <p className="name">{name}</p>
             </div>

@@ -6,12 +6,8 @@
   border-radius: 8px;
   form {
     margin-top: 25px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    place-items: center;
-
-    .add-reply-btn {
-      width: 100%;
-    }
   }
 }

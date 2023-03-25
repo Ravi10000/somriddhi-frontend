@@ -7,21 +7,18 @@
 
   form {
     margin-top: 25px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    place-items: center;
-    .dates {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      .date-input {
-        width: 100%;
-        display: grid;
-        gap: 5px;
-      }
-    }
-    .add-membership-btn {
-      width: 100%;
-    }
+    // .dates {
+    //   display: flex;
+    //   justify-content: space-between;
+    //   gap: 20px;
+    //   .date-input {
+    //     width: 100%;
+    //     display: grid;
+    //     gap: 5px;
+    //   }
+    // }
   }
 }

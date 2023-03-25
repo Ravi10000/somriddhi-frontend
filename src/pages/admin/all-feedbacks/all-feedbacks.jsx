@@ -1,17 +1,27 @@
 import "./all-feedbacks.styles.scss";
 
+// react hooks
 import { useState, useEffect } from "react";
-// import { allFeedbacks, activeFeedbacks } from "./feedbacks";
+
+// packages
+import { connect } from "react-redux";
+
+// api calls
 import {
   getAllFeedbacks,
   getActiveFeedbacks,
   deleteFeedback,
   updateFeedbackStatus,
 } from "../../../api";
+
+// components
 import FeedbackCard from "./feedback-card/feedback-card";
 
-const options = ["all", "active"];
-export default function AllFeedbacks() {
+// redux actions
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+function AllFeedbacks({ setFlash }) {
+  const options = ["all", "active"];
   const [selectedFeedbackList, setSelectedFeedbackList] = useState("all");
   const [feedbacks, setFeedbacks] = useState([]);
 
@@ -20,7 +30,6 @@ export default function AllFeedbacks() {
       try {
         const response = await getActiveFeedbacks();
         if (response.data.status === "success") {
-          // console.log(response.data.data);
           setFeedbacks(response.data.data);
         }
       } catch (error) {
@@ -30,7 +39,6 @@ export default function AllFeedbacks() {
       try {
         const response = await getAllFeedbacks();
         if (response.data.status === "success") {
-          // console.log(response.data.data);
           setFeedbacks(response.data.data);
         }
       } catch (error) {
@@ -50,10 +58,18 @@ export default function AllFeedbacks() {
       console.log({ response });
       if (response.data.status === "success") {
         console.log(response.data);
+        setFlash({
+          type: "success",
+          message: "Feedback Deleted Successfully",
+        });
         await fetchFeedbacks();
       }
       setIsDeleting(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something Went Wrong, Please Try Again",
+      });
       console.log(error);
     }
   }
@@ -64,10 +80,18 @@ export default function AllFeedbacks() {
       console.log({ response });
       if (response.data.status === "success") {
         console.log(response.data);
+        setFlash({
+          type: "success",
+          message: "Feedback Status Updated Successfully",
+        });
         await fetchFeedbacks();
       }
       setLoading(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something Went Wrong, Please Try Again",
+      });
       console.log(error);
     }
   }
@@ -113,3 +137,9 @@ export default function AllFeedbacks() {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AllFeedbacks);

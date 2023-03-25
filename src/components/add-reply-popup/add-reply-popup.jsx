@@ -1,31 +1,57 @@
 import styles from "./add-reply-popup.module.scss";
 
-import React, { useEffect } from "react";
+// react hooks
+import { useEffect, useState } from "react";
+
+// packages
+import { connect } from "react-redux";
+
+// components
 import Backdrop from "../backdrop/backdrop";
 import PopupHead from "../popup-head/popup-head";
-// import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
+
+// api calls
 import { replyToTicket } from "../../api/index";
 
-export default function AddReplyPopup({
+// redux actions
+import { setFlash } from "../../redux/flash/flash.actions";
+import Button from "../button/button";
+
+function AddReplyPopup({
   setShowPopup,
   ticketToReply,
   setTicketToReply,
+  setFlash,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     return () => {
       setTicketToReply(null);
     };
   }, []);
+
   async function handleReply(e) {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
-    formData.append("id", ticketId);
+    formData.append("id", ticketToReply?._id);
     try {
       const response = await replyToTicket(formData);
       console.log({ response });
+      response.data.status === "success" &&
+        setFlash({
+          type: "success",
+          message: "Reply added successfully",
+        });
+      setIsLoading(false);
       setShowPopup(false);
     } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
       console.log(error);
     }
   }
@@ -41,9 +67,15 @@ export default function AddReplyPopup({
             name="replies"
             placeholder="Enter your reply here"
           />
-          <button className={styles["add-reply-btn"]}>Save</button>
+          <Button isLoading={isLoading}>Save</Button>
         </form>
       </div>
     </Backdrop>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AddReplyPopup);

@@ -1,14 +1,24 @@
 import styles from "./all-deals.module.scss";
 
-import React, { useState, useEffect } from "react";
+// react hooks
+import { useState, useEffect } from "react";
+
+// packages
+import { connect } from "react-redux";
+
+// components
 import TitleSection from "../title-section/title-section";
 import FilterList from "../../../components/filter-list/filter-list";
-import dealList from "./dealsList";
 import AddDealPopup from "../../../components/add-deal-popup/add-deal-popup";
-import { getAllDeals, deleteDeal } from "../../../api/index";
 import DealCard from "./deal-card/deal-card";
 
-export default function AllDeals() {
+// api calls
+import { getAllDeals, deleteDeal } from "../../../api/index";
+
+// redux actions
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+function AllDeals({ setFlash }) {
   const [deals, setDeals] = useState([]);
   const [showAddDealPopup, setShowAddDealPopup] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -16,8 +26,6 @@ export default function AllDeals() {
 
   async function fetchDeals() {
     try {
-      // const formData = new FormData();
-      // if (selectedCategory) formData.append("categoryId", selectedCategory._id);
       const categoryId = selectedCategory?._id || null;
       const response = await getAllDeals(categoryId);
       console.log({ response });
@@ -41,9 +49,16 @@ export default function AllDeals() {
     try {
       const response = await deleteDeal(id);
       console.log(response);
+      response.data.status === "success" &&
+        setFlash({ message: "Deal deleted successfully", type: "success" });
+
       await fetchDeals();
       setIsDeleting(false);
     } catch (error) {
+      setFlash({
+        message: "Something went wrong, please try again",
+        type: "error",
+      });
       console.log(error);
     }
   }
@@ -72,19 +87,31 @@ export default function AllDeals() {
               setSelectedCategory={setSelectedCategory}
             />
           </div>
-          <div className={styles["deals-container"]}>
-            {deals?.map((deal) => (
-              <DealCard
-                key={deal?._id}
-                deal={deal}
-                deleteDealHandler={deleteDealHandler}
-                setDealToUpdate={setDealToUpdate}
-                setShowAddDealPopup={setShowAddDealPopup}
-              />
-            ))}
-          </div>
+          {deals?.length ? (
+            <div className={styles["deals-container"]}>
+              {deals?.map((deal) => (
+                <DealCard
+                  key={deal?._id}
+                  deal={deal}
+                  deleteDealHandler={deleteDealHandler}
+                  setDealToUpdate={setDealToUpdate}
+                  setShowAddDealPopup={setShowAddDealPopup}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className={styles["no-deals"]}>
+              We have no {selectedCategory?.name} coupons for now!
+            </p>
+          )}
         </div>
       </div>
     </>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AllDeals);

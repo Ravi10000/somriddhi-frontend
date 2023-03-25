@@ -5,6 +5,7 @@ export default function CustomSelect({
   categories,
   selectedCategory,
   setSelectedCategory,
+  label,
   defaultValue,
 }) {
   const [showOptions, setShowOptions] = useState(false);
@@ -13,7 +14,7 @@ export default function CustomSelect({
     console.log({ defaultValue, categories });
     if (defaultValue) {
       const defaultCategory = categories.filter((category) => {
-        console.log({category});
+        console.log({ category });
         return category._id === defaultValue;
       });
       console.log({ defaultCategory });
@@ -29,7 +30,7 @@ export default function CustomSelect({
             setShowOptions((prevState) => !prevState);
           }}
         >
-          <p>Select</p>
+          <p>{label}</p>
           <img src="/arrow-down.png" alt="select" />
         </div>
       ) : (
@@ -41,7 +42,9 @@ export default function CustomSelect({
         >
           <div>
             <img
-              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${selectedCategory.icon}`}
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                selectedCategory.icon
+              }`}
               alt={selectedCategory.name}
             />
             <p>{selectedCategory.name}</p>
@@ -62,7 +65,9 @@ export default function CustomSelect({
                 }}
               >
                 <img
-                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${category.icon}`}
+                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                    category.icon
+                  }`}
                   alt={category.name}
                 />
                 <p>{category.name}</p>

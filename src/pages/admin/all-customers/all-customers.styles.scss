@@ -3,11 +3,15 @@
     width: 100vw;
     overflow-x: scroll;
     .customers-table {
+      max-width: 600px;
       background: #fff;
       border-collapse: collapse;
+      table-layout: fixed;
+      white-space: normal;
       th,
       td {
-        word-wrap: normal;
+        max-width: 200px;
+        word-wrap: break-word;
         text-align: start;
         padding: 20px;
         img {
@@ -53,7 +57,7 @@
 @media (min-width: 800px) {
   .all-customers {
     .customers-table-container {
-      place-items: flex-start;
+      place-content: flex-start;
     }
   }
 }

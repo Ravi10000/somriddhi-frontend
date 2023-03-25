@@ -2,17 +2,21 @@ import "./all-banners.styles.scss";
 // react hooks
 import { useState, useEffect } from "react";
 
+// packages
+import { connect } from "react-redux";
+
 // components
 import TitleSection from "../title-section/title-section";
 import AddBannerPopup from "../../../components/add-banner-popup/add-banner-popup";
-// utils
-import bannerList from "./banner-list";
+import BannerCard from "./banner-card/banner-card";
 
 // api requests
 import { getAllBanners, deleteBanner } from "../../../api/index";
-import BannerCard from "./banner-card/banner-card";
 
-export default function AllBanners() {
+// redux actions
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+function AllBanners({ setFlash }) {
   const [banners, setBanners] = useState([]);
   const [showAddBannerPopup, setShowAddBannerPopup] = useState(false);
   async function fetchBanners() {
@@ -33,6 +37,9 @@ export default function AllBanners() {
     try {
       const response = await deleteBanner(id);
       console.log({ response });
+      if (response.data.status === "success") {
+        setFlash({ message: "Banner deleted successfully", type: "success" });
+      }
       await fetchBanners();
       setIsDeleting(false);
     } catch (error) {
@@ -66,3 +73,8 @@ export default function AllBanners() {
     </>
   );
 }
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+
+export default connect(null, mapDispatchToProps)(AllBanners);

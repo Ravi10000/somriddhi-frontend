@@ -1,20 +1,33 @@
 import "./add-membership-popup.styles.scss";
+// react hooks
+import { useRef, useState } from "react";
 
-import React, { useRef, useState } from "react";
+// packages
+import { connect } from "react-redux";
+
+// components
 import Backdrop from "../backdrop/backdrop";
-import { createNewMemberships } from "../../api";
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
 import LongTextInput from "../long-text-input/long-text-input";
 import ImageInput from "../image-input/image-input";
 import NumInput from "../num-input/num-input";
 
-export default function AddMembershipPopup({ setShowPopup, fetchMemberships }) {
+// api calls
+import { createNewMemberships } from "../../api";
+
+// redux actions
+import { setFlash } from "../../redux/flash/flash.actions";
+import Button from "../button/button";
+
+function AddMembershipPopup({ setShowPopup, fetchMemberships, setFlash }) {
   const formRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
 
   async function submitMembershipForm(e) {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.target);
     for (let key of formData.entries()) {
       console.log(key);
@@ -23,10 +36,19 @@ export default function AddMembershipPopup({ setShowPopup, fetchMemberships }) {
       const response = await createNewMemberships(formData);
       console.log({ response });
       if (response.data.status === "success") {
-        setShowPopup(false);
+        setFlash({
+          message: "Membership added successfully",
+          type: "success",
+        });
         fetchMemberships();
       }
+      setIsLoading(false);
+      setShowPopup(false);
     } catch (error) {
+      setFlash({
+        message: "Something went wrong, please try again",
+        type: "error",
+      });
       console.log(error);
     }
   }
@@ -59,9 +81,14 @@ export default function AddMembershipPopup({ setShowPopup, fetchMemberships }) {
           />
           <TextInput label="URL" name="url" placeholder="Paste URL" />
 
-          <button className="add-membership-btn">Add membership</button>
+          <Button isLoading={isLoading}>Add membership</Button>
         </form>
       </div>
     </Backdrop>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+export default connect(null, mapDispatchToProps)(AddMembershipPopup);

@@ -1,12 +1,23 @@
 import "./all-memberships.styles.scss";
 
-import React, { useState, useEffect } from "react";
+// react hooks
+import { useState, useEffect } from "react";
+
+// packages
+import { connect } from "react-redux";
+
+// redux actions
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+// api calls
 import { getAllMemberships, deleteMembership } from "../../../api/index";
 
+// components
 import TitleSection from "../title-section/title-section";
 import AddMembershipPopup from "../../../components/add-membership-popup/add-membership-popup";
 import MembershipCard from "./membership-card/membership-card";
-export default function AllMemberships() {
+
+function AllMemberships({ setFlash }) {
   const [showAddMembershipPopup, setShowAddMembershipPopup] = useState(false);
   const [memberships, setMemberships] = useState([]);
 
@@ -24,9 +35,18 @@ export default function AllMemberships() {
     try {
       const response = await deleteMembership(id);
       console.log({ response });
+      response.data.status === "success" &&
+        setFlash({
+          message: "Membership deleted successfully",
+          type: "success",
+        });
       await fetchMemberships();
       setIsDeleting(false);
     } catch (error) {
+      setFlash({
+        message: "Something went wrong, please try again later",
+        type: "error",
+      });
       console.log(error);
     }
   }
@@ -47,8 +67,6 @@ export default function AllMemberships() {
           }}
         />
         <div className="membership-cards-container">
-          {/* {bannerList?.map(
-          ({ name, url, expiryDate, bannerImg, desc }, index) => ( */}
           {memberships?.map((membership) => (
             <MembershipCard
               key={membership?._id}
@@ -56,10 +74,13 @@ export default function AllMemberships() {
               deleteMembershipHandler={deleteMembershipHandler}
             />
           ))}
-          {/* )
-        )} */}
         </div>
       </div>
     </>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setFlash: (flash) => dispatch(setFlash(flash)),
+});
+export default connect(null, mapDispatchToProps)(AllMemberships);

@@ -63,7 +63,13 @@ export default function Coupons() {
             />
           </div>
           <div className="coupons-carousel-container">
-            <DealsSlider deals={deals} forCoupons />
+            {deals?.length > 0 ? (
+              <DealsSlider deals={deals} forCoupons />
+            ) : (
+              <p className="no-deals">
+                We have no {selectedCategory?.name} coupons for now!
+              </p>
+            )}
           </div>
         </div>
       </div>
