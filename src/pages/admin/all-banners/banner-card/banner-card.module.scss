@@ -38,20 +38,24 @@
           }
         }
       }
-      .delete-icon {
+      .actions {
+        display: flex;
+        gap: 15px;
         align-self: flex-start;
-        cursor: pointer;
-        width: 15px;
-      }
-      .delete-loader {
-        align-self: flex-start;
-        width: 25px;
-        height: 25px;
-        border: 2px solid #f01c21;
-        border-radius: 50%;
-        border-bottom: transparent;
-        border-right: transparent;
-        animation: spinLoader 0.5s linear infinite;
+        img {
+          width: 15px;
+          cursor: pointer;
+        }
+        .delete-loader {
+          align-self: flex-start;
+          width: 25px;
+          height: 25px;
+          border: 2px solid #f01c21;
+          border-radius: 50%;
+          border-bottom: transparent;
+          border-right: transparent;
+          animation: spinLoader 0.5s linear infinite;
+        }
       }
     }
     .banner-desc {

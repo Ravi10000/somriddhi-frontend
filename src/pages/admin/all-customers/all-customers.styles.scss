@@ -58,6 +58,9 @@
   .all-customers {
     .customers-table-container {
       place-content: flex-start;
+      .customers-table {
+        max-width: 1000px;
+      }
     }
   }
 }

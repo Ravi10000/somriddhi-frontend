@@ -19,6 +19,8 @@ import { setFlash } from "../../../redux/flash/flash.actions";
 function AllBanners({ setFlash }) {
   const [banners, setBanners] = useState([]);
   const [showAddBannerPopup, setShowAddBannerPopup] = useState(false);
+  const [bannerToEdit, setBannerToEdit] = useState(null);
+  console.log({ bannerToEdit });
   async function fetchBanners() {
     try {
       const response = await getAllBanners();
@@ -51,6 +53,8 @@ function AllBanners({ setFlash }) {
     <>
       {showAddBannerPopup && (
         <AddBannerPopup
+          setBannerToEdit={setBannerToEdit}
+          bannerToEdit={bannerToEdit}
           setShowPopup={setShowAddBannerPopup}
           fetchBanners={fetchBanners}
         />
@@ -63,6 +67,8 @@ function AllBanners({ setFlash }) {
         <div className="banner-cards-container">
           {banners?.map((banner) => (
             <BannerCard
+              setShowPopup={setShowAddBannerPopup}
+              setBannerToEdit={setBannerToEdit}
               banner={banner}
               key={banner?._id}
               deleteBannerHandler={deleteBannerHandler}

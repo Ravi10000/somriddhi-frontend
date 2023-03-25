@@ -1,7 +1,12 @@
 import styles from "./banner-card.module.scss";
 import React, { useState } from "react";
 
-export default function BannerCard({ banner, deleteBannerHandler }) {
+export default function BannerCard({
+  banner,
+  deleteBannerHandler,
+  setBannerToEdit,
+  setShowPopup,
+}) {
   const [isDeleting, setIsDeleting] = useState(false);
   return (
     <div className={styles["banner-card"]}>
@@ -25,18 +30,29 @@ export default function BannerCard({ banner, deleteBannerHandler }) {
               </div>
             </a>
           </div>
-          {isDeleting ? (
-            <div className={styles["delete-loader"]}></div>
-          ) : (
+          <div className={styles["actions"]}>
             <img
-              className={styles["delete-icon"]}
-              src="/delete.png"
-              alt="locked"
+              src="/edit.png"
+              alt="edit banner"
               onClick={() => {
-                deleteBannerHandler(banner?._id, setIsDeleting);
+                window.scrollTo(0, 0);
+                setBannerToEdit(banner);
+                setShowPopup(true);
               }}
             />
-          )}
+            {isDeleting ? (
+              <div className={styles["delete-loader"]}></div>
+            ) : (
+              <img
+                className={styles["delete-icon"]}
+                src="/delete.png"
+                alt="locked"
+                onClick={() => {
+                  deleteBannerHandler(banner?._id, setIsDeleting);
+                }}
+              />
+            )}
+          </div>
           {/* <img src="/delete.png" alt="" /> */}
         </div>
         <div className={styles["banner-desc"]}>{banner?.description}</div>

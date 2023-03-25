@@ -1,25 +1,39 @@
 import "./add-banner-popup.styles.scss";
-import { useRef, useState } from "react";
-import TextInput from "../text-input/text-input";
+
+// react hooks
+import { useState, useEffect } from "react";
 // packages
-// import { useForm } from "react-hook-form";
-// import axios from "../../api";
+import { connect } from "react-redux";
 
 // components
 import Backdrop from "../backdrop/backdrop";
-
-// utils
-import { createNewBanner } from "../../api";
+import PopupHead from "../popup-head/popup-head";
+import TextInput from "../text-input/text-input";
 import ImageInput from "../image-input/image-input";
 import LongTextInput from "../long-text-input/long-text-input";
 import Button from "../button/button";
-import PopupHead from "../popup-head/popup-head";
-import { connect } from "react-redux";
+
+// api calls
+import { createNewBanner, editBanner } from "../../api";
+
+// redux actions
 import { setFlash } from "../../redux/flash/flash.actions";
 
-function AddBannerPopup({ setShowPopup, fetchBanners, setFlash }) {
+function AddBannerPopup({
+  setShowPopup,
+  fetchBanners,
+  setFlash,
+  bannerToEdit,
+  setBannerToEdit,
+}) {
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setBannerToEdit(null);
+    };
+  }, [bannerToEdit]);
 
   async function submitForm(e) {
     e.preventDefault();
@@ -29,17 +43,30 @@ function AddBannerPopup({ setShowPopup, fetchBanners, setFlash }) {
       console.log(key);
     }
     try {
-      const response = await createNewBanner(formData);
-      console.log({ response });
-      if (response.data.status === "success") {
-        fetchBanners();
-        setFlash({
-          type: "success",
-          message: "Banner Added Successfully",
-        });
-        setIsLoading(false);
-        setShowPopup(false);
+      if (!bannerToEdit) {
+        const response = await createNewBanner(formData);
+        console.log({ response });
+        if (response.data.status === "success") {
+          fetchBanners();
+          setFlash({
+            type: "success",
+            message: "Banner Added Successfully",
+          });
+        }
+      } else {
+        formData.append("_id", bannerToEdit._id);
+        const response = await editBanner(formData);
+        console.log({ response });
+        if (response.data.status === "success") {
+          fetchBanners();
+          setFlash({
+            type: "success",
+            message: "Banner Updated Successfully",
+          });
+        }
       }
+      setIsLoading(false);
+      setShowPopup(false);
     } catch (error) {
       setFlash({
         message: "Something went wrong, please try again",
@@ -54,10 +81,28 @@ function AddBannerPopup({ setShowPopup, fetchBanners, setFlash }) {
       <div className="add-banner-popup">
         <PopupHead setShowPopup={setShowPopup} title="Add Banner" />
         <form onSubmit={submitForm} encType="multipart/form-data">
-          <ImageInput label="Banner Image" name="bannerPhoto" />
-          <TextInput label="Name" name="name" placeholder="Enter Banner Name" />
-          <TextInput label="URL" name="url" placeholder="Paste Banner url" />
-          <LongTextInput label="Description" name="description" />
+          <ImageInput
+            label="Banner Image"
+            name="bannerPhoto"
+            defaultValue={bannerToEdit?.image}
+          />
+          <TextInput
+            label="Name"
+            name="name"
+            placeholder="Enter Banner Name"
+            defaultValue={bannerToEdit?.name}
+          />
+          <TextInput
+            label="URL"
+            name="url"
+            placeholder="Paste Banner url"
+            defaultValue={bannerToEdit?.url}
+          />
+          <LongTextInput
+            label="Description"
+            name="description"
+            defaultValue={bannerToEdit?.description}
+          />
           <Button isLoading={isLoading}>Add Banner</Button>
         </form>
       </div>

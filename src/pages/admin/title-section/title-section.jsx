@@ -12,10 +12,13 @@ export default function TitleSection({
       <h3 className="title active">{title}</h3>
       <div className="title-buttons">
         {uploadBtn && (
-          <button className="upload button" onClick={addFunction}>
-            <img src="/upload.png" alt="upload button" />
-            <p>Upload</p>
-          </button>
+          <div className="upload-container">
+            <button className="upload">
+              <img src="/upload.png" alt="upload button" />
+              <p>Upload</p>
+            </button>
+            <input type="file" />
+          </div>
         )}
         {!noAddButton && (
           <button className="add button" onClick={addFunction}>
