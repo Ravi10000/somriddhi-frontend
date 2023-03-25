@@ -32,18 +32,12 @@ export default function CouponPage() {
 
   async function getDeal() {
     const response = await getDealById(id);
-    // console.log({ response });
+    console.log({ response });
     // console.log(response.data.data);
     setDealInfo(response.data.deal);
-  }
-
-  // useEffect(() => {
-  //   dealData({ dealId: dealsId });
-  // }, []);
-  useEffect(() => {
     setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
-        couponDetails.expiryDate
+        response?.data?.deal?.expiryDate
       );
       // console.log(hours, minutes, seconds);
       setHoursLeft(hours);
@@ -53,6 +47,24 @@ export default function CouponPage() {
       // minutesLeftRef.current = minutes;
       // secondsLeftRef.current = seconds;
     }, 1000);
+  }
+
+  // useEffect(() => {
+  //   dealData({ dealId: dealsId });
+  // }, []);
+  useEffect(() => {
+    // setInterval(() => {
+    //   let { hours, minutes, seconds } = getRemaingTime(
+    //     couponDetails.expiryDate
+    //   );
+    //   // console.log(hours, minutes, seconds);
+    //   setHoursLeft(hours);
+    //   setMinutesLeft(minutes);
+    //   setSecondsLeft(seconds);
+    //   // hoursLeftRef.current = hours;
+    //   // minutesLeftRef.current = minutes;
+    //   // secondsLeftRef.current = seconds;
+    // }, 1000);
     getDeal();
   }, []);
 
@@ -106,22 +118,27 @@ export default function CouponPage() {
           <h3>Deal Ends In</h3>
           <div className="expires-in">
             <div className="hh time">
-              <p className="highlight">00</p>
+              <p className="highlight">{hoursLeft}</p>
               <p>HH</p>
             </div>
             <div className="mm time">
-              <p className="highlight">00</p>
+              <p className="highlight">{minutesLeft}</p>
               <p>MM</p>
             </div>
             <div className="ss time">
-              <p className="highlight">00</p>
+              <p className="highlight">{secondsLeft}</p>
               <p>SS</p>
             </div>
           </div>
-          {
-            dealInfo.image && <img className="dealInfoImage" src={`${import.meta.env.VITE_REACT_APP_API_URL}/uploads/${dealInfo.image}`} alt="coupon image" />
-          }
-
+          {dealInfo.image && (
+            <img
+              className="dealInfoImage"
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                dealInfo.image
+              }`}
+              alt="coupon image"
+            />
+          )}
         </div>
         <div className="right">
           <h3>Use Code</h3>

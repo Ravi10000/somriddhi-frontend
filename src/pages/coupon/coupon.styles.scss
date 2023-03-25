@@ -42,9 +42,14 @@
           gap: 10px;
 
           .highlight {
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 500;
             color: #f01c21;
-            padding: 20px;
+            // padding: 20px;
             border-radius: 50%;
             background: #fdddde;
           }
