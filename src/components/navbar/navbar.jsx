@@ -23,8 +23,11 @@ export default function Navbar() {
     { name: "home", link: "/" },
     { name: "deals", link: "/#deals" },
     { name: "categories", link: `/category` },
-    // { name: "stores", link: "/#stores" },
     { name: "contact us", link: "/#feedback-form" },
+    {
+      name: "wallet login",
+      link: `https://login.somriddhidigital.co.in/#/login`,
+    },
   ];
 
   return (

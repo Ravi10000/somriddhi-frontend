@@ -11,17 +11,26 @@ export default function BannerSlider({ banners, ForMemberships }) {
     customPaging: function (i) {
       return <div className="dots">'</div>;
     },
-    autoPlay: true,
-    autoplaySpeed: 1000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     dots: true,
     arrows: false,
     dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 2,
+    slidesToScroll: 2,
     // initialSlide: 0,
-    draggable: true,
+    // draggable: true,
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -29,16 +38,16 @@ export default function BannerSlider({ banners, ForMemberships }) {
       <Slider {...settings}>
         {banners.length > 0 &&
           banners?.map((banner, index) => (
-            <Link to={"//" + banner?.url} key={index}>
-              <div className={styles["card-container"]}>
+            <div className={styles["card-container"]}>
+              <Link to={"//" + banner?.url} key={index}>
                 <img
                   className="bannerImageSet"
                   src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                     banner.image
                   }`}
                 />
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
       </Slider>
     </div>

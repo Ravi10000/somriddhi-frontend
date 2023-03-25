@@ -12,7 +12,7 @@ export default function OffersSlider({ offers }) {
     },
     dots: true,
     dotsClass: "slick-dots slick-thumb",
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,

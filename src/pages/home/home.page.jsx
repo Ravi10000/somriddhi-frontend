@@ -17,9 +17,9 @@ export default function HomePage() {
     <div className="home-page" id="home">
       <ScrollToTop />
       <Banner />
+      <Coupons />
       <Offers />
       <Deals />
-      <Coupons />
       <PopularMembership />
       <Form />
       <Process />
