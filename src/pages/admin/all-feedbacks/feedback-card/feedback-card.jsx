@@ -15,7 +15,7 @@ export default function FeedbackCard({
     <div className={styles["feedback-card"]}>
       <img
         className={styles["userimg"]}
-        src={feedback?.userImg || "/user.png"}
+        src={feedback?.userImg || "/person.png"}
         alt="user image"
       />
       <div className={styles["details"]}>
