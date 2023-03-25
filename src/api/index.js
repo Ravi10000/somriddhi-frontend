@@ -9,7 +9,7 @@ const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE3ZjQwMjE1NGEzNWU4NTU3OWMyMDAiLCJpYXQiOjE2NzkyOTEzOTQsImV4cCI6MTY3OTg5NjE5NH0.79NZuV_0z-b6jyl2TlK7V5bjtzfJZVfyQtbB9VCN1aI";
 const Authorization = `Bearer ${token}`;
 
-console.log(localStorage.getItem("token"));
+// console.log(localStorage.getItem("token"));
 // const localToken = localStorage.getItem("token");
 // const authLocal = localToken ? `Bearer ${localToken}` : "";
 // axios.interceptors.request.use(function (config, _onRejected) {
@@ -56,7 +56,7 @@ export const getUser = () =>
 
 export const createUser = (formData) => {
   // console.log({ authLocal });
-  console.log({ token: localStorage.getItem("token") });
+  // console.log({ token: localStorage.getItem("token") });
   return axios.post(`/user`, formData, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -89,9 +89,9 @@ export const getAllUsers = () =>
   axios.get(`/user`, { headers: { Authorization } });
 
 export async function sendOtp(formData) {
-  for (let entry of formData.entries()) {
-    console.log(entry);
-  }
+  // for (let entry of formData.entries()) {
+  //   console.log(entry);
+  // }
   const response = await axios.post(`/sendotp`, formData, {
     headers: { "Content-Type": "application/json" },
   });
@@ -102,7 +102,7 @@ export async function verifyOtp(formData) {
   const response = await axios.post(`verifyotp`, formData, {
     headers: { "Content-Type": "application/json" },
   });
-  console.log("after verify otp", response);
+  // console.log("after verify otp", response);
   localStorage.setItem("token", response.data.token);
   return response;
 }
@@ -113,7 +113,7 @@ export async function verifyOtp(formData) {
 
 // Deals APIs
 export const getAllDeals = (categoryId) => {
-  console.log(`Get all deals ${categoryId}`);
+  // console.log(`Get all deals ${categoryId}`);
   if (categoryId) return axios.get(`/deal/${categoryId}`);
   else return axios.get(`/deal`);
 };
@@ -154,7 +154,7 @@ export const createNewNewLetter = (data) =>
   axios.post(`/newsletter`, data, { headers: { Authorization } });
 
 export const checkIfSubscribed = () => {
-  console.log({ tokenOnCheckingSubscription: localStorage.getItem("token") });
+  // console.log({ tokenOnCheckingSubscription: localStorage.getItem("token") });
   return axios.get(`/newsletter/check`, {
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });

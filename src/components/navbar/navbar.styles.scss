@@ -6,8 +6,8 @@ nav {
   top: 0;
   left: 0;
   .links {
-    font-size: .75rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     a {
       padding: 20px 0;

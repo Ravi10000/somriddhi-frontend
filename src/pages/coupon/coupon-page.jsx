@@ -32,7 +32,7 @@ export default function CouponPage() {
 
   async function getDeal() {
     const response = await getDealById(id);
-    console.log({ response });
+    // console.log({ response });
     // console.log(response.data.data);
     setDealInfo(response.data.deal);
   }

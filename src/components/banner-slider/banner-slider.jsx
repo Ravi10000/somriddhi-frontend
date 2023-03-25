@@ -35,8 +35,8 @@ export default function BannerSlider({ banners, ForMemberships }) {
       <Slider {...settings}>
         {banners.length > 0 &&
           banners?.map((banner, index) => (
-            <div className={styles["card-container"]}>
-              <Link to={"//" + banner?.url} key={index}>
+            <div className={styles["card-container"]} key={index}>
+              <Link to={"//" + banner?.url}>
                 <img
                   className="bannerImageSet"
                   src={`${import.meta.env.VITE_REACT_APP_API_URL}/${

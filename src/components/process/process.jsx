@@ -10,8 +10,8 @@ export default function Process() {
 
   async function fetchAllContents() {
     const response = await getAllContent();
-    console.log({ response });
-    console.log(response.data.content);
+    // console.log({ response });
+    // console.log(response.data.content);
     if (response.data.status === "success") setContents(response.data.content);
   }
 

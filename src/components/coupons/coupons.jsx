@@ -12,11 +12,11 @@ export default function Coupons() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [deals, setDeals] = useState([]);
   const [categories, setCategories] = useState([]);
-  console.log({ selectedCategory, categories, deals });
+  // console.log({ selectedCategory, categories, deals });
 
   const fetchCategories = async () => {
     const response = await getAllCategories();
-    console.log({ response });
+    // console.log({ response });
     setCategories(response.data.data);
     setSelectedCategory(response.data.data[0]);
   };
@@ -25,7 +25,7 @@ export default function Coupons() {
     try {
       const categoryId = selectedCategory?._id || null;
       const response = await getAllDeals(categoryId);
-      console.log({ response });
+      // console.log({ response });
       setDeals(response.data.data);
     } catch (error) {
       console.log(error);
@@ -39,10 +39,10 @@ export default function Coupons() {
   useEffect(() => {
     (async () => {
       try {
-        console.log(selectedCategory);
+        // console.log(selectedCategory);
         const categoryId = selectedCategory?._id || null;
         const response = await getAllDeals(categoryId);
-        console.log({ response });
+        // console.log({ response });
         setDeals(response.data.data);
       } catch (error) {
         console.log(error);

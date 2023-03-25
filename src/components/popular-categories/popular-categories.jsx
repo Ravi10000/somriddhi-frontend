@@ -11,7 +11,7 @@ export default function PopulatCategories() {
 
   const getAllCategoriesData = async () => {
     const response = await getAllCategories();
-    console.log({ response });
+    // console.log({ response });
     setCategories(response.data.data);
   };
 

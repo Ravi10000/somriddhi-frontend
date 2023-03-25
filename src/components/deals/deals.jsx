@@ -15,7 +15,7 @@ export default function Deals() {
 
   const allDealsData = async () => {
     dealData = await getAllDeals();
-    console.log(dealData.data.data);
+    // console.log(dealData.data.data);
     setDeals(dealData.data.data);
   };
   useEffect(() => {

@@ -32,7 +32,7 @@ export default function Offers() {
   const fetchAllDeals = async () => {
     try {
       const response = await getAllDeals();
-      console.log({ response });
+      // console.log({ response });
       setDeals(response.data.data);
     } catch (error) {
       console.log(error);

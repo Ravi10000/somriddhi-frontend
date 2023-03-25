@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 
 // packages
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 // components
 import ScrollToTop from "./components/scrollToTop";
@@ -14,8 +16,8 @@ import Header from "./components/header/header";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import LoginPopup from "./components/login-popup/login-popup";
-import ProtectedRoute from "./components/protected-route/protected-route";
 import Flash from "./components/flash/flash";
+import ProtectedRoute from "./components/protected-route/protected-route";
 
 // pages
 import HomePage from "./pages/home/home.page";
@@ -24,13 +26,15 @@ import CategoryPage from "./pages/category/category-page";
 import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
 import AdminPage from "./pages/admin/admin.page";
-import axios from "axios";
 
+// redux actions
 import { setCurrentUser } from "./redux/user/user.actions";
-import { connect } from "react-redux";
-import { getUser } from "./api";
+
+// redux selectors
 import { selectFlash } from "./redux/flash/flash.selectors";
-import { createStructuredSelector } from "reselect";
+
+// api calls
+import { getUser } from "./api";
 
 function App({ setCurrentUser, flash, setFlash }) {
   const { pathname } = useLocation();
@@ -40,7 +44,7 @@ function App({ setCurrentUser, flash, setFlash }) {
   async function fetchUser() {
     try {
       const response = await getUser();
-      console.log({ response });
+      // console.log({ response });
       if (response.data.status === "success") {
         setCurrentUser(response.data.user);
       }
