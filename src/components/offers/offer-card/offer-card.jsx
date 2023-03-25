@@ -19,7 +19,7 @@ export default function OfferCard({ offer, forCoupons, ...otherProps }) {
       </h4>
       <img
         className="dealImage"
-        src={`http://localhost:8001/${offer?.image}`}
+        src={`${process.env.REACT_APP_API_URL}/${offer?.image}`}
         alt=""
       />
       <p>Upto {offer?.cashbackPercent}% off on summer Appliances</p>
