@@ -41,10 +41,16 @@ export const deleteBanner = (id) =>
 // FAQ APIs
 export const getAllFaqs = () =>
   axios.get(`/faq`, { headers: { Authorization } });
+
 export const addNewFaq = (formData) =>
   axios.post(`/faq`, formData, {
     headers: { Authorization, "Content-Type": "application/json" },
   });
+export const editFaq = (formData) =>
+  axios.patch(`/faq`, formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
+
 export const deleteFaq = (id) =>
   axios.delete(`/faq/${id}`, { headers: { Authorization } });
 

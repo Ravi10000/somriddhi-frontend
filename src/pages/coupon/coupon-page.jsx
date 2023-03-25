@@ -144,7 +144,9 @@ export default function CouponPage() {
           <h3>Use Code</h3>
           <div className="coupon-link-container">
             <CouponCode couponCode={couponDetails?.couponCode} />
-            <Button onClick={() => handleClick(routeToLink)}>visit site</Button>
+            <Button onClick={() => navigate(`//${dealInfo?.url}`)}>
+              visit site
+            </Button>
           </div>
           <div className="info-container">
             <div className="list">

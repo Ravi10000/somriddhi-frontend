@@ -1,7 +1,7 @@
 import "./add-faq-popup.styles.scss";
 
 // react hooks
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // packages
 import { connect } from "react-redux";
@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import Backdrop from "../backdrop/backdrop";
 
 //api requests
-import { addNewFaq } from "../../api/index";
+import { addNewFaq, editFaq } from "../../api/index";
 
 // components
 import PopupHead from "../popup-head/popup-head";
@@ -21,8 +21,20 @@ import LongTextInput from "../long-text-input/long-text-input";
 import { setFlash } from "../../redux/flash/flash.actions";
 import Button from "../button/button";
 
-function AddFaqPopup({ setShowPopup, fetchFaqs, setFlash }) {
+function AddFaqPopup({
+  setShowPopup,
+  fetchFaqs,
+  setFlash,
+  faqToEdit,
+  setFaqToEdit,
+}) {
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setFaqToEdit(null);
+    };
+  }, []);
 
   const faqFormSubmit = async (e) => {
     e.preventDefault();
@@ -30,15 +42,27 @@ function AddFaqPopup({ setShowPopup, fetchFaqs, setFlash }) {
     const formData = new FormData(e.target);
     console.log("fomr");
     try {
-      const response = await addNewFaq(formData);
-      console.log({ response });
-      if (response.data.status === "success") {
-        setFlash({ type: "success", message: "FAQ added successfully" });
-        fetchFaqs();
+      if (!faqToEdit) {
+        const response = await addNewFaq(formData);
+        console.log({ response });
+        if (response.data.status === "success") {
+          setFlash({ type: "success", message: "FAQ added successfully" });
+          fetchFaqs();
+        }
+      } else {
+        formData.append("_id", faqToEdit._id);
+        const response = await editFaq(formData);
+        console.log({ response });
+        if (response.data.status === "success") {
+          setFlash({ type: "success", message: "FAQ updated successfully" });
+          fetchFaqs();
+        }
       }
       setIsLoading(false);
       setShowPopup(false);
     } catch (error) {
+      setIsLoading(false);
+      setShowPopup(false);
       setFlash({
         type: "error",
         message: "Something went wrong, please try again",
@@ -50,17 +74,22 @@ function AddFaqPopup({ setShowPopup, fetchFaqs, setFlash }) {
   return (
     <Backdrop>
       <div className="add-faq-popup">
-        <PopupHead title="Add New FAQ" setShowPopup={setShowPopup} />
+        <PopupHead
+          title={faqToEdit ? "Edit FAQ" : "Add New FAQ"}
+          setShowPopup={setShowPopup}
+        />
         <form onSubmit={faqFormSubmit} name="faq-form">
           <TextInput
             label="Question"
             name="question"
             placeholder="Enter Question"
+            defaultValue={faqToEdit?.question}
           />
           <LongTextInput
             label="Answer"
             name="answer"
             placeholder="Enter Answers"
+            defaultValue={faqToEdit?.answer}
           />
           <Button isLoading={isLoading}>Save</Button>
         </form>

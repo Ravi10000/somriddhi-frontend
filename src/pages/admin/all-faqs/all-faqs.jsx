@@ -19,6 +19,8 @@ import { getAllFaqs, deleteFaq } from "../../../api/index";
 function AllFaqs({ setFlash }) {
   const [showAddFaqPopup, setShowAddFaqPopup] = useState(false);
   const [faqs, setFaqs] = useState([]);
+  const [faqToEdit, setFaqToEdit] = useState(null);
+
   async function fetchFaqs() {
     try {
       const response = await getAllFaqs();
@@ -53,7 +55,12 @@ function AllFaqs({ setFlash }) {
   return (
     <>
       {showAddFaqPopup && (
-        <AddFaqPopup setShowPopup={setShowAddFaqPopup} fetchFaqs={fetchFaqs} />
+        <AddFaqPopup
+          setShowPopup={setShowAddFaqPopup}
+          fetchFaqs={fetchFaqs}
+          setFaqToEdit={setFaqToEdit}
+          faqToEdit={faqToEdit}
+        />
       )}
       <div className="all-faqs">
         <TitleSection
@@ -65,6 +72,8 @@ function AllFaqs({ setFlash }) {
         <div className="queries">
           {faqs?.map((query) => (
             <FaqCard
+              setFaqToEdit={setFaqToEdit}
+              setShowPopup={setShowAddFaqPopup}
               query={query}
               key={query?._id}
               deleteFaqHandler={deleteFaqHandler}
