@@ -120,7 +120,7 @@ function AddDealPopup({
           <ImageInput
             label="Deal Image"
             name="dealPhoto"
-            dealImage={dealToUpdate?.image}
+            defaultValue={dealToUpdate?.image}
             required={!dealToUpdate}
           />
           <div className="dates">

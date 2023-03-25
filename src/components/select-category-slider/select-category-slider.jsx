@@ -55,7 +55,7 @@ export default function SelectCategorySlider({
               <div className={styles["inner-card-container"]}>
                 <div
                   onClick={() => {
-                    console.log(category)
+                    console.log(category);
                     setSelectedCategory(category);
                   }}
                   className={`${styles["menu-card"]} ${
@@ -64,7 +64,9 @@ export default function SelectCategorySlider({
                   }`}
                 >
                   <img
-                    src={`${import.meta.env.VITE_REACT_APP_API_URL}/${category?.icon}`}
+                    src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                      category?.icon
+                    }`}
                     alt="category"
                   />
                   <h5>{category?.name}</h5>

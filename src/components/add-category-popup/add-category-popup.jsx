@@ -14,12 +14,18 @@ import ImageInput from "../image-input/image-input";
 import Button from "../button/button";
 
 // api calls
-import { getAllCategories, createNewCategory } from "../../api";
+import { getAllCategories, createNewCategory, editCategory } from "../../api";
 
 // redux actions
 import { setFlash } from "../../redux/flash/flash.actions";
 
-function AddCategoryPopup({ setShowPopup, fetchCategories, setFlash }) {
+function AddCategoryPopup({
+  setShowPopup,
+  fetchCategories,
+  setFlash,
+  categoryToEdit,
+  setCategoryToEdit,
+}) {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,19 +36,36 @@ function AddCategoryPopup({ setShowPopup, fetchCategories, setFlash }) {
       console.log({ response });
       setCategories(response.data.data);
     })();
+    return () => {
+      setCategoryToEdit(null);
+    };
   }, []);
+
+  console.log({ categoryToEdit });
   async function submitAddCategoryForm(e) {
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData(e.target);
     try {
-      const response = await createNewCategory(formData);
-      if ((response.data.status = "success")) {
-        fetchCategories();
-        setFlash({
-          type: "success",
-          message: "Category Added Successfully",
-        });
+      if (!categoryToEdit) {
+        const response = await createNewCategory(formData);
+        if ((response.data.status = "success")) {
+          fetchCategories();
+          setFlash({
+            type: "success",
+            message: "Category Added Successfully",
+          });
+        }
+      } else {
+        formData.append("_id", categoryToEdit._id);
+        const response = await editCategory(formData);
+        if ((response.data.status = "success")) {
+          fetchCategories();
+          setFlash({
+            type: "success",
+            message: "Category Updated Successfully",
+          });
+        }
       }
       setIsLoading(false);
       setShowPopup(false);
@@ -64,14 +87,22 @@ function AddCategoryPopup({ setShowPopup, fetchCategories, setFlash }) {
             label="Name"
             name="name"
             placeholder="Enter Category Name"
+            defaultValue={categoryToEdit?.name}
           />
           <LongTextInput
             label="Description"
             name="description"
             placeholder="Enter Category Description"
+            defaultValue={categoryToEdit?.description}
           />
-          <ImageInput label="Icon" name="categoryPhoto" />
-          <Button isLoading={isLoading}>Add Category</Button>
+          <ImageInput
+            label="Icon"
+            name="categoryPhoto"
+            defaultValue={categoryToEdit?.icon}
+          />
+          <Button isLoading={isLoading}>
+            {categoryToEdit ? "Update Category" : "Add Category"}
+          </Button>
         </form>
       </div>
     </Backdrop>

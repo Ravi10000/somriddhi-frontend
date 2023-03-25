@@ -9,8 +9,10 @@ export default function BannerSlider({ banners, ForMemberships }) {
   const membershipStyles = ForMemberships ? { width: "100%" } : {};
   const settings = {
     customPaging: function (i) {
-      return <div className="dots"></div>;
+      return <div className="dots">'</div>;
     },
+    autoPlay: true,
+    autoplaySpeed: 1000,
     dots: true,
     arrows: false,
     dotsClass: "slick-dots slick-thumb",
@@ -31,7 +33,9 @@ export default function BannerSlider({ banners, ForMemberships }) {
               <div className={styles["card-container"]}>
                 <img
                   className="bannerImageSet"
-                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${banner.image}`}
+                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                    banner.image
+                  }`}
                 />
               </div>
             </Link>

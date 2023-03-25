@@ -1,19 +1,15 @@
 import "./offers.styles.scss";
 
-// packgages
+// react hooks
 import { useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
 
 // components
-// import OfferCard from "./offer-card/offer-card";
 import Category from "./category/category";
-// import OffersSlider from "../offers-slider/offers-slider";
-
-// utils
-// import offerList from "./offers-list";
-// import handleResponsive from "../../utils/handle-responsive";
-import { getAllDeals } from "../../api/index";
 import OffersSlider from "../offers-slider/offers-slider";
+
+// api calls
+import { getAllDeals } from "../../api/index";
+import DealsSlider from "../deals-slider/deals-slider";
 
 export default function Offers() {
   const categories = [
@@ -61,6 +57,7 @@ export default function Offers() {
         ))}
       </div>
       <div className="offer-carousel">
+        {/* <DealsSlider deals={deals} /> */}
         <OffersSlider offers={deals} />
       </div>
     </section>

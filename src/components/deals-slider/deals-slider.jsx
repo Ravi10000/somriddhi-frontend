@@ -1,14 +1,12 @@
 import styles from "./deals-slider.module.scss";
-import React, { useEffect } from "react";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import OfferCard from "../offers/offer-card/offer-card";
 
 export default function DealsSlider({ deals, forCoupons }) {
-  // useEffect(() => {
-  //   console.log("deals changed");
-  // }, [deals]);
   const couponsStyles = forCoupons
     ? {
         width: "80%",
@@ -19,7 +17,7 @@ export default function DealsSlider({ deals, forCoupons }) {
     : {};
   const settings = {
     customPaging: function (i) {
-      return <div className="dots"></div>;
+      return <div className="dots">'</div>;
     },
     dots: true,
     dotsClass: "slick-dots slick-thumb",
@@ -30,8 +28,6 @@ export default function DealsSlider({ deals, forCoupons }) {
     initialSlide: 1,
     arrows: false,
     draggable: true,
-    // accessibility: true,
-    // swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1200,

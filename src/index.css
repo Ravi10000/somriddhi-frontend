@@ -119,10 +119,12 @@ a {
   transition: all 0.25s ease-in-out;
   will-change: width;
   background: #d9d9d9;
+  color: #d9d9d9;
 }
 
 .slick-dots.slick-thumb li.slick-active {
   background-color: #091431;
+  color: #091431;
   width: 40px;
 }
 /*
@@ -139,4 +141,3 @@ a {
   outline: 2px solid red;
 } */
 /* //fix popular memberships */
-

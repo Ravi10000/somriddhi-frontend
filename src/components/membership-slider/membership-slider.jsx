@@ -3,6 +3,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 export default function MembershipSlider({ banners }) {
   const settings = {
@@ -10,14 +11,12 @@ export default function MembershipSlider({ banners }) {
       return <div className="dots"></div>;
     },
     arrows: false,
-    // adaptiveHeight: true,
     dots: true,
     dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-    // initialSlide: 2,
     rows: 2,
     responsive: [
       {
@@ -44,19 +43,16 @@ export default function MembershipSlider({ banners }) {
       <Slider {...settings}>
         {banners.length > 0 &&
           banners?.map((banner, index) => (
-            <a
-              href={banner?.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={index}
-            >
+            <Link to={"//" + banner?.url} key={index}>
               <div className={styles["card-container"]}>
                 <img
                   className="bannerImageSet"
-                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${banner.image}`}
+                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                    banner?.image
+                  }`}
                 />
               </div>
-            </a>
+            </Link>
           ))}
       </Slider>
     </div>

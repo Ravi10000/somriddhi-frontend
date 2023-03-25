@@ -1,15 +1,15 @@
 import styles from "./image-input.module.scss";
 import React, { useState, useEffect } from "react";
 
-export default function ImageInput({ label, dealImage, ...otherProps }) {
+export default function ImageInput({ label, defaultValue, ...otherProps }) {
   const [image, setImage] = useState(null);
   const [defaultImage, setDefaultImage] = useState(null);
 
   console.log({ image });
   console.log({ defaultImage });
   useEffect(() => {
-    if (dealImage) {
-      setDefaultImage(dealImage || null);
+    if (defaultValue) {
+      setDefaultImage(defaultValue);
     }
   }, []);
   return (
