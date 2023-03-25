@@ -25,10 +25,7 @@ export default function Process() {
       <div className="process-cards-container">
         <div className="process-card">
           <div className="img-container">
-            <img
-              src={`${process.env.REACT_APP_API_URL}/${contents?.[0]?.image}`}
-              alt=""
-            />
+            <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${contents?.[0]?.image}`} alt="" />
           </div>
           <h4>{contents?.[0]?.title}</h4>
           <p>{contents?.[0]?.description}</p>
@@ -36,10 +33,7 @@ export default function Process() {
         </div>
         <div className="process-card">
           <div className="img-container">
-            <img
-              src={`${process.env.REACT_APP_API_URL}/${contents?.[1]?.image}`}
-              alt=""
-            />
+            <img src={`${process.env.REACT_APP_API_URL}/${contents?.[1]?.image}`} alt="" />
           </div>
           <h4>{contents?.[1]?.title}</h4>
           <p>{contents?.[1]?.title}</p>
@@ -47,10 +41,7 @@ export default function Process() {
         </div>
         <div className="process-card">
           <div className="img-container">
-            <img
-              src={`${process.env.REACT_APP_API_URL}/${contents?.[2]?.image}`}
-              alt=""
-            />
+            <img src={`${process.env.REACT_APP_API_URL}/${contents?.[2]?.image}`} alt="" />
           </div>
           <h4>{contents?.[2]?.title}</h4>
           <p>{contents?.[2]?.description}</p>

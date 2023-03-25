@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// const BASEURL = "${process.env.REACT_APP_API_URL}";
+// const BASEURL = `${import.meta.env.VITE_REACT_APP_API_URL}`;
+// console.log(BASEURL);
 // const BASEURL = "http://3.108.161.80:8002";
-axios.defaults.baseURL = "/api";
+axios.defaults.baseURL = `${import.meta.env.VITE_REACT_APP_API_URL}/api`;
 // axios.defaults.withCredentials = true;
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE3ZjQwMjE1NGEzNWU4NTU3OWMyMDAiLCJpYXQiOjE2NzkyOTEzOTQsImV4cCI6MTY3OTg5NjE5NH0.79NZuV_0z-b6jyl2TlK7V5bjtzfJZVfyQtbB9VCN1aI";
@@ -106,7 +107,11 @@ export async function verifyOtp(formData) {
 
 // Deals APIs
 export const getAllDeals = (categoryId) => {
-  return axios.get(`/deal/${categoryId ? "/" + categoryId : ""}`);
+  console.log(`Get all deals ${categoryId}`)
+  if(categoryId)
+  return axios.get(`/deal/${categoryId}`);
+  else
+  return axios.get(`/deal`);
 };
 export const getDealById = (id) => {
   return axios.get(`/deal/single/${id}`);

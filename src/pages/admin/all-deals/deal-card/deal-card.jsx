@@ -14,7 +14,7 @@ export default function DealCard({
     <div className={styles["deal"]}>
       <img
         className={styles["deal-img"]}
-        src={`${process.env.REACT_APP_API_URL}/${deal?.image}`}
+        src={`${import.meta.env.VITE_REACT_APP_API_URL}/${deal?.image}`}
         alt="deal banner"
       />
       <div className={styles["deal-info"]}>

@@ -27,7 +27,7 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
     // let config = {
     //   method: "post",
     //   maxBodyLength: Infinity,
-    //   url: "${process.env.REACT_APP_API_URL}/api/sendotp",
+    //   url: "${import.meta.env.VITE_REACT_APP_API_URL}/api/sendotp",
     //   headers: {
     //     "Content-Type": "application/json",
     //   },

@@ -41,7 +41,7 @@ export default function CustomSelect({
         >
           <div>
             <img
-              src={`${process.env.REACT_APP_API_URL}/${selectedCategory.icon}`}
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${selectedCategory.icon}`}
               alt={selectedCategory.name}
             />
             <p>{selectedCategory.name}</p>
@@ -62,7 +62,7 @@ export default function CustomSelect({
                 }}
               >
                 <img
-                  src={`${process.env.REACT_APP_API_URL}/${category.icon}`}
+                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${category.icon}`}
                   alt={category.name}
                 />
                 <p>{category.name}</p>
