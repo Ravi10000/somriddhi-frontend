@@ -1,8 +1,8 @@
 import styles from "./offers-slider.module.scss";
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 import OfferCard from "../offers/offer-card/offer-card";
 export default function OffersSlider({ offers }) {
@@ -19,6 +19,7 @@ export default function OffersSlider({ offers }) {
     arrows: false,
     draggable: true,
     rows: 2,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1200,

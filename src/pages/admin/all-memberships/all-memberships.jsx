@@ -20,6 +20,7 @@ import MembershipCard from "./membership-card/membership-card";
 function AllMemberships({ setFlash }) {
   const [showAddMembershipPopup, setShowAddMembershipPopup] = useState(false);
   const [memberships, setMemberships] = useState([]);
+  const [membersipToEdit, setMembersipToEdit] = useState(null);
 
   async function fetchMemberships() {
     const response = await getAllMemberships();
@@ -54,6 +55,8 @@ function AllMemberships({ setFlash }) {
     <>
       {showAddMembershipPopup && (
         <AddMembershipPopup
+          membersipToEdit={membersipToEdit}
+          setMembersipToEdit={setMembersipToEdit}
           setShowPopup={setShowAddMembershipPopup}
           fetchMemberships={fetchMemberships}
         />
@@ -70,6 +73,8 @@ function AllMemberships({ setFlash }) {
           {memberships?.map((membership) => (
             <MembershipCard
               key={membership?._id}
+              setShowPopup={setShowAddMembershipPopup}
+              setMembersipToEdit={setMembersipToEdit}
               membership={membership}
               deleteMembershipHandler={deleteMembershipHandler}
             />

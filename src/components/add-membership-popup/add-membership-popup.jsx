@@ -1,6 +1,6 @@
 import "./add-membership-popup.styles.scss";
 // react hooks
-import { useRef, useState } from "react";
+import { useState, useEffect } from "react";
 
 // packages
 import { connect } from "react-redux";
@@ -20,10 +20,21 @@ import { createNewMemberships } from "../../api";
 import { setFlash } from "../../redux/flash/flash.actions";
 import Button from "../button/button";
 
-function AddMembershipPopup({ setShowPopup, fetchMemberships, setFlash }) {
-  const formRef = useRef(null);
+function AddMembershipPopup({
+  setShowPopup,
+  fetchMemberships,
+  setFlash,
+  setMembersipToEdit,
+  membersipToEdit,
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      setMembersipToEdit(null);
+    };
+  }, []);
 
   async function submitMembershipForm(e) {
     e.preventDefault();
@@ -55,33 +66,49 @@ function AddMembershipPopup({ setShowPopup, fetchMemberships, setFlash }) {
   return (
     <Backdrop>
       <div className="add-membership-popup">
-        <PopupHead title="Add Membership" setShowPopup={setShowPopup} />
+        <PopupHead
+          title={membersipToEdit ? "Update Membership" : "Add Membership"}
+          setShowPopup={setShowPopup}
+        />
         <form
           name="membership-form"
-          ref={formRef}
           onSubmit={submitMembershipForm}
           encType="multipart/form-data"
         >
-          <ImageInput label="Membership Image" name="membershipPhoto" />
+          <ImageInput
+            label="Membership Image"
+            name="membershipPhoto"
+            defaultValue={membersipToEdit?.image}
+          />
           <TextInput
             label="Name"
             name="name"
             placeholder="Enter Membership Name"
+            defaultValue={membersipToEdit?.name}
           />
           <LongTextInput
             label="Description"
             name="description"
             placeholder="Enter deal description"
+            defaultValue={membersipToEdit?.description}
           />
           <NumInput
             label="Cashback Percentage"
             name="cashbackPercent"
             placeholder="Cashback"
             maxLength="2"
+            defaultValue={membersipToEdit?.cashbackPercent}
           />
-          <TextInput label="URL" name="url" placeholder="Paste URL" />
+          <TextInput
+            label="URL"
+            name="url"
+            placeholder="Paste URL"
+            defaultValue={membersipToEdit?.url}
+          />
 
-          <Button isLoading={isLoading}>Add membership</Button>
+          <Button isLoading={isLoading}>
+            {membersipToEdit ? "Update Membership" : "Add Membership"}
+          </Button>
         </form>
       </div>
     </Backdrop>

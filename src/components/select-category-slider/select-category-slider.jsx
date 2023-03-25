@@ -1,9 +1,7 @@
 import styles from "./select-category-slider.module.scss";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import OfferCard from "../offers/offer-card/offer-card";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 export default function SelectCategorySlider({
   categories,
@@ -21,7 +19,7 @@ export default function SelectCategorySlider({
     speed: 500,
     slidesToShow: 9,
     slidesToScroll: 9,
-    // initialSlide: 0,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1200,

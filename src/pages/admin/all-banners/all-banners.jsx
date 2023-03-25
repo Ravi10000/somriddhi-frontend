@@ -67,10 +67,10 @@ function AllBanners({ setFlash }) {
         <div className="banner-cards-container">
           {banners?.map((banner) => (
             <BannerCard
+            key={banner?._id}
               setShowPopup={setShowAddBannerPopup}
               setBannerToEdit={setBannerToEdit}
               banner={banner}
-              key={banner?._id}
               deleteBannerHandler={deleteBannerHandler}
             />
           ))}

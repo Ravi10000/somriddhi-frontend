@@ -1,14 +1,14 @@
 import styles from "./membership-slider.module.scss";
 import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 export default function MembershipSlider({ banners }) {
   const settings = {
     customPaging: function (i) {
-      return <div className="dots"></div>;
+      return <div className="dots">'</div>;
     },
     arrows: false,
     dots: true,
@@ -43,16 +43,16 @@ export default function MembershipSlider({ banners }) {
       <Slider {...settings}>
         {banners.length > 0 &&
           banners?.map((banner, index) => (
-            <Link to={"//" + banner?.url} key={index}>
-              <div className={styles["card-container"]}>
+            <div className={styles["card-container"]}>
+              <Link to={"//" + banner?.url} key={index}>
                 <img
                   className="bannerImageSet"
                   src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                     banner?.image
                   }`}
                 />
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
       </Slider>
     </div>

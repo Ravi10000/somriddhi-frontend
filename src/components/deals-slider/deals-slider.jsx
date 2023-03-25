@@ -1,8 +1,8 @@
 import styles from "./deals-slider.module.scss";
 
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 import OfferCard from "../offers/offer-card/offer-card";
 
@@ -25,9 +25,9 @@ export default function DealsSlider({ deals, forCoupons }) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    initialSlide: 1,
     arrows: false,
     draggable: true,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1200,

@@ -79,7 +79,10 @@ function AddBannerPopup({
   return (
     <Backdrop>
       <div className="add-banner-popup">
-        <PopupHead setShowPopup={setShowPopup} title="Add Banner" />
+        <PopupHead
+          setShowPopup={setShowPopup}
+          title={bannerToEdit ? "Update Banner" : "Add New Banner"}
+        />
         <form onSubmit={submitForm} encType="multipart/form-data">
           <ImageInput
             label="Banner Image"
@@ -103,7 +106,9 @@ function AddBannerPopup({
             name="description"
             defaultValue={bannerToEdit?.description}
           />
-          <Button isLoading={isLoading}>Add Banner</Button>
+          <Button isLoading={isLoading}>
+            {bannerToEdit ? "Update Banner" : "Add Banner"}
+          </Button>
         </form>
       </div>
     </Backdrop>

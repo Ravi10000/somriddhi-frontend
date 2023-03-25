@@ -81,7 +81,7 @@ function AddCategoryPopup({
   return (
     <Backdrop>
       <div className="add-category-popup">
-        <PopupHead title="Add New Category" setShowPopup={setShowPopup} />
+        <PopupHead title={categoryToEdit ? "Update Category" : "Add New Category"} setShowPopup={setShowPopup} />
         <form encType="multipart/form-data" onSubmit={submitAddCategoryForm}>
           <TextInput
             label="Name"

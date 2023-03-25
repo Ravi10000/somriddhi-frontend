@@ -82,7 +82,10 @@ function AddDealPopup({
   return (
     <Backdrop>
       <div className="add-deal-popup">
-        <PopupHead title="Add New Deal" setShowPopup={setShowPopup} />
+        <PopupHead
+          title={dealToUpdate ? "Update Deal" : "Add New Deal"}
+          setShowPopup={setShowPopup}
+        />
         <form encType="multipart/form-data" onSubmit={submitAddDealForm}>
           <TextInput
             label="Name"

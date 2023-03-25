@@ -4,6 +4,8 @@ import React, { useState } from "react";
 
 export default function MembershipCard({
   membership,
+  setMembersipToEdit,
+  setShowPopup,
   deleteMembershipHandler,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -26,7 +28,30 @@ export default function MembershipCard({
               <p>{membership?.url}</p>
             </div>
           </div>
-          {isDeleting ? (
+          <div className={styles["actions"]}>
+            <img
+              src="/edit.png"
+              alt="edit banner"
+              onClick={() => {
+                window.scrollTo(0, 0);
+                setMembersipToEdit(membership);
+                setShowPopup(true);
+              }}
+            />
+            {isDeleting ? (
+              <div className={styles["delete-loader"]}></div>
+            ) : (
+              <img
+                className={styles["delete-icon"]}
+                src="/delete.png"
+                alt="delete membership"
+                onClick={() => {
+                  deleteMembershipHandler(membership?._id, setIsDeleting);
+                }}
+              />
+            )}
+          </div>
+          {/* {isDeleting ? (
             <div className={styles["delete-loader"]}></div>
           ) : (
             <img
@@ -37,7 +62,7 @@ export default function MembershipCard({
               src="/delete.png"
               alt="delete membership"
             />
-          )}
+          )} */}
         </div>
         <div className={styles["membership-desc"]}>
           {membership?.description}

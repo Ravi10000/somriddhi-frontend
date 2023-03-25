@@ -1,8 +1,6 @@
 import styles from "./banner-slider.module.scss";
 import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 export default function BannerSlider({ banners, ForMemberships }) {
@@ -20,8 +18,7 @@ export default function BannerSlider({ banners, ForMemberships }) {
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 2,
-    // initialSlide: 0,
-    // draggable: true,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 800,
