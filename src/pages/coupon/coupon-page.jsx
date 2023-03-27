@@ -17,7 +17,7 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 
-function CouponPage({ currentUser }) {
+function CouponPage({ currentUser, openModal }) {
   const { id } = useParams();
   const navigate = useNavigate();
   // states
@@ -99,6 +99,9 @@ function CouponPage({ currentUser }) {
       } catch (error) {
         console.log(error);
       }
+    }
+    if (!currentUser) {
+      return openModal();
     }
     navigate(`//${dealInfo?.url}`);
   }

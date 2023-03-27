@@ -28,15 +28,15 @@ export default function OfferCard({
         alt=""
       />
       <p>Upto {offer?.cashbackPercent}% off on summer Appliances</p>
-      <Link
+      {/* <Link
         to={"//" + offer?.url}
         className="btn"
         onClick={(e) => {
           e.stopPropagation();
         }}
-      >
-        <Button>Grab Now</Button>
-      </Link>
+      > */}
+      <Button>Grab Now</Button>
+      {/* </Link> */}
     </div>
     // </Link>
   );

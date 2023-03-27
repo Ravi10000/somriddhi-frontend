@@ -1,6 +1,8 @@
 import "./coupon-code.styles.scss";
+import { setFlash } from "../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-export default function CouponCode({ couponCode }) {
+function CouponCode({ couponCode, setFlash }) {
   return (
     <div className="coupon-code">
       <img src="/coupon-bg.png" alt="coupon background" />
@@ -9,6 +11,10 @@ export default function CouponCode({ couponCode }) {
         src="/copy.png"
         alt="copy code"
         onClick={() => {
+          setFlash({
+            type: "success",
+            message: "Coupon code copied to clipboard",
+          });
           navigator.clipboard.writeText(couponCode);
         }}
       />
@@ -16,3 +22,5 @@ export default function CouponCode({ couponCode }) {
     </div>
   );
 }
+
+export default connect(null, { setFlash })(CouponCode);

@@ -82,7 +82,10 @@ function App({ setCurrentUser, flash, setFlash }) {
         />
         <Route path="/admin/:tab" element={<AdminPage />} />
         {/* <Route path="/admin/banner" element={<Banner />} /> */}
-        <Route path="/coupon/:id" element={<CouponPage />} />
+        <Route
+          path="/coupon/:id"
+          element={<CouponPage openModal={openModal} />}
+        />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route
