@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // react hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, createContext } from "react";
 
 // packages
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
@@ -63,6 +63,7 @@ function App({ setCurrentUser, flash, setFlash }) {
     setModalOpen(true);
   }
   return (
+    // <LoginModalProvider>
     <div className="App" id="App">
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"error"} message={"successfully logged in"} /> */}
@@ -111,6 +112,7 @@ function App({ setCurrentUser, flash, setFlash }) {
       </Routes>
       {!pathname.includes("/admin") && <Footer />}
     </div>
+    // </LoginModalProvider>
   );
 }
 
@@ -131,3 +133,17 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 // export default connect(null, mapDispatchToProps)(App);
+
+export const LoginModalContext = createContext();
+export const useLoginModal = () => useContext(LoginModalContext);
+
+export function LoginModalProvider({ children }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const closeModal = () => setModalOpen(false);
+  const openModal = () => setModalOpen(true);
+  return (
+    <LoginModalContext.Provider value={{ modalOpen, closeModal, openModal }}>
+      {children}
+    </LoginModalContext.Provider>
+  );
+}

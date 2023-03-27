@@ -1,10 +1,24 @@
 import styles from "./banner-slider.module.scss";
 import React from "react";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
+import { useLoginModal } from "../../App";
 
-export default function BannerSlider({ banners, ForMemberships }) {
+function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
+  const navigate = useNavigate();
+  // const modal = useLoginModal();
+  // console.log({ modal });
   const membershipStyles = ForMemberships ? { width: "100%" } : {};
+  async function checkLogin(url) {
+    console.log({ currentUser });
+    if (!currentUser) {
+      // return modal.openModal();
+    }
+    // navigate(url);
+  }
   const settings = {
     customPaging: function (i) {
       return <div className="dots">'</div>;
@@ -50,17 +64,25 @@ export default function BannerSlider({ banners, ForMemberships }) {
         {banners.length > 0 &&
           banners?.map((banner, index) => (
             <div className={styles["card-container"]} key={index}>
-              <Link to={"//" + banner?.url}>
-                <img
-                  className="bannerImageSet"
-                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
-                    banner.image
-                  }`}
-                />
-              </Link>
+              {/* <Link to={"//" + banner?.url}> */}
+              <img
+                onClick={() => {
+                  checkLogin("//" + banner?.url);
+                }}
+                className="bannerImageSet"
+                src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                  banner.image
+                }`}
+              />
+              {/* </Link> */}
             </div>
           ))}
       </Slider>
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+export default connect(mapStateToProps)(BannerSlider);
