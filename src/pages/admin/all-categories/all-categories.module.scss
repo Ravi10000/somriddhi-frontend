@@ -1,0 +1,82 @@
+// .all-categories {
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    // .category {
+    //   display: grid;
+    //   gap: 10px;
+    //   place-items: center;
+    //   background: #fff;
+    //   padding: 20px;
+    //   width: 100%;
+    //   max-width: 150px;
+    //   border-radius: 8px;
+    //   text-align: center;
+    //   .category-icon {
+    //     width: fit-content;
+    //     border-radius: 8px;
+    //     padding: 20px;
+    //     background: #e6e8ea;
+    //     img {
+    //       width: 20px;
+    //       height: fit-content;
+    //     }
+    //   }
+    //   p.name {
+    //     font-size: 14px;
+    //     font-weight: 600;
+    //   }
+    //   .actions {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     // gap: 10px;
+    //     div {
+    //       border-radius: 50%;
+    //       padding: 15px;
+    //       display: flex;
+    //       justify-content: center;
+    //       align-items: center;
+    //       transition: all 0.2s ease-in-out;
+    //       &:hover {
+    //         background: #ffe9e6;
+    //         img {
+    //           transform: scale(1.2);
+    //         }
+    //       }
+    //       img {
+    //         transition: all 0.2s ease-in-out;
+    //         // padding: 0;
+    //         width: 15px;
+    //         height: 15px;
+    //       }
+    //     }
+    //     .delete-loader {
+    //       align-self: flex-start;
+    //       width: 25px;
+    //       height: 25px;
+    //       border: 2px solid #f01c21;
+    //       border-radius: 50%;
+    //       border-bottom: transparent;
+    //       border-right: transparent;
+    //       animation: spinLoader 0.5s linear infinite;
+    //     }
+    //     .edit {
+    //       &:hover {
+    //         background: #e5fff2;
+    //       }
+    //     }
+    //   }
+    // }
+  }
+// }
+
+@media (min-width: 500px) {
+  // .all-categories {
+    .categories {
+      justify-content: flex-start;
+    }
+  // }
+}

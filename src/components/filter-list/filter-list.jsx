@@ -15,7 +15,7 @@ export default function FilterList({
   async function fetchCategories() {
     try {
       const response = await getAllCategories();
-      console.log({ response });
+      console.log({ categoryResponse: response });
       setCategories(response.data.data);
       console.log({ selectedCategory });
       // if (!showAll && !selectedCategory) {

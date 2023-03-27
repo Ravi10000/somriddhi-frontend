@@ -17,15 +17,15 @@
       width: 20px;
       height: fit-content;
     }
-    .delete-loader {
-      width: 25px;
-      height: 25px;
-      border: 2px solid #f01c21;
-      border-radius: 50%;
-      border-bottom: transparent;
-      border-right: transparent;
-      animation: spinLoader 0.5s linear infinite;
-    }
+    // .delete-loader {
+    //   width: 25px;
+    //   height: 25px;
+    //   border: 2px solid #f01c21;
+    //   border-radius: 50%;
+    //   border-bottom: transparent;
+    //   border-right: transparent;
+    //   animation: spinLoader 0.5s linear infinite;
+    // }
   }
   .query-desc {
     padding: 20px;
@@ -45,8 +45,7 @@
       height: 25px;
       border: 2px solid #f01c21;
       border-radius: 50%;
-      border-bottom: transparent;
-      border-right: transparent;
+      border-bottom-color: transparent;
       animation: spinLoader 0.5s linear infinite;
     }
   }

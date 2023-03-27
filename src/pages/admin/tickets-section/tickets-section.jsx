@@ -71,10 +71,12 @@ function TicketsSection({ setFlash }) {
   useEffect(() => {
     fetchTickets();
   }, [selectedTickets]);
+
   return (
     <div className="tickets-section">
       {showReplyPopup && (
         <AddReplyPopup
+          fetchTickets={fetchTickets}
           setShowPopup={setShowReplyPopup}
           ticketToReply={ticketToReply}
           setTicketToReply={setTicketToReply}

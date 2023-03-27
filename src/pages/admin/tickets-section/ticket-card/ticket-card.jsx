@@ -12,6 +12,20 @@ export default function TicketCard({
     <div className={styles["ticket"]} key={ticket?._id}>
       <h5 className={styles["title"]}>{ticket?.heading}</h5>
       <p className={styles["desc"]}>{ticket?.description}</p>
+      <div className={styles["replies-container"]}>
+        {ticket?.replies?.length > 0 && <h4>Replies</h4>}
+        {ticket?.replies?.length > 0 ? (
+          <div className={styles["replies"]}>
+            {ticket?.replies.map((reply, index) => (
+              <p key={index}>{reply}</p>
+            ))}
+          </div>
+        ) : (
+          <p className={styles["not-replied"]}>
+            No replies sent for this ticket
+          </p>
+        )}
+      </div>
       {ticket?.status === "Active" ? (
         <div className={styles["ticket-buttons"]}>
           <button

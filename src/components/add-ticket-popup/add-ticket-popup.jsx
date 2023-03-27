@@ -20,7 +20,12 @@ import LongTextInput from "../long-text-input/long-text-input";
 import { setFlash } from "../../redux/flash/flash.actions";
 import Button from "../button/button";
 
-function AddTicketPopup({ setShowPopup, setShowSuccessMsg, setFlash }) {
+function AddTicketPopup({
+  setShowPopup,
+  setShowSuccessMsg,
+  setFlash,
+  fetchTickets,
+}) {
   const [isLoading, setIsLoading] = useState(false);
 
   async function submitTicket(e) {
@@ -36,15 +41,17 @@ function AddTicketPopup({ setShowPopup, setShowSuccessMsg, setFlash }) {
       console.log({ response });
       if (response.data.status === "success") {
         setFlash({ type: "success", message: "Ticket added successfully" });
+        fetchTickets();
       }
-      setShowPopup(false);
-      setIsLoading(false);
     } catch (error) {
       setFlash({
         type: "error",
         message: "Something went wrong, please try again",
       });
       console.log(error);
+    } finally {
+      setShowPopup(false);
+      setIsLoading(false);
     }
   }
 

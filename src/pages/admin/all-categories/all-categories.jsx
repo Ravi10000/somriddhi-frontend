@@ -1,4 +1,4 @@
-import "./all-categories.styles.scss";
+import styles from "./all-categories.module.scss";
 
 // react hooks
 import { useState, useEffect } from "react";
@@ -15,6 +15,7 @@ import { getAllCategories, deleteCategory } from "../../../api/index";
 
 // redux actions
 import { setFlash } from "../../../redux/flash/flash.actions";
+import CategoryCard from "./category-card/category-card";
 
 function AllCategories({ setFlash }) {
   const [showAddCategoryPopup, setShowAddCategoryPopup] = useState(false);
@@ -29,7 +30,8 @@ function AllCategories({ setFlash }) {
   useEffect(() => {
     fetchCategories();
   }, []);
-  async function handleDeleteCategory(id) {
+  async function handleDeleteCategory(id, setIsDeleting) {
+    setIsDeleting(true);
     try {
       const response = await deleteCategory(id);
       console.log({ response });
@@ -46,6 +48,8 @@ function AllCategories({ setFlash }) {
         message: "Something went wrong, please try again later",
       });
       console.log({ error });
+    } finally {
+      setIsDeleting(false);
     }
   }
 
@@ -66,38 +70,48 @@ function AllCategories({ setFlash }) {
             setShowAddCategoryPopup(true);
           }}
         />
-        <div className="categories">
+        <div className={styles["categories"]}>
           {categories?.map((category, index) => (
-            <div className="category" key={index}>
-              <div className="category-icon">
-                <img
-                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
-                    category?.icon
-                  }`}
-                  alt={category?.name}
-                />
-              </div>
-              <p className="name">{category?.name}</p>
-              <div className="actions">
-                <div
-                  className="edit"
-                  onClick={() => {
-                    setCategoryToEdit(category);
-                    setShowAddCategoryPopup(true);
-                  }}
-                >
-                  <img src="/edit.png" alt="edit category" />
-                </div>
-                <div
-                  className="delete"
-                  onClick={() => {
-                    handleDeleteCategory(category?._id);
-                  }}
-                >
-                  <img src="/delete.png" alt="delete category" />
-                </div>
-              </div>
-            </div>
+            // <div className={styles["category"]} key={index}>
+            //   <div className={styles["category-icon"]}>
+            //     <img
+            //       src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+            //         category?.icon
+            //       }`}
+            //       alt={category?.name}
+            //     />
+            //   </div>
+            //   <p className={styles["name"]}>{category?.name}</p>
+            //   <div className={styles["actions"]}>
+            //     <div
+            //       className={styles["edit"]}
+            //       onClick={() => {
+            //         setCategoryToEdit(category);
+            //         setShowAddCategoryPopup(true);
+            //       }}
+            //     >
+            //       <img src="/edit.png" alt="edit category" />
+            //     </div>
+
+            //     {isDeleting ? (
+            //       <div className={styles["delete-loader"]}></div>
+            //     ) : (
+            //       <div
+            //         className={styles["delete"]}
+            //         onClick={() => {
+            //           handleDeleteCategory(category?._id);
+            //         }}
+            //       >
+            //         <img src="/delete.png" alt="delete category" />
+            //       </div>
+            //     )}
+            //   </div>
+            // </div>
+            <CategoryCard
+              category={category}
+              key={category?._id}
+              handleDeleteCategory={handleDeleteCategory}
+            />
           ))}
         </div>
       </div>

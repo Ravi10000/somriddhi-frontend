@@ -12,6 +12,20 @@
     line-height: 1.5rem;
     color: #858997;
   }
+  .replies-container {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    .replies {
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+      color: gray;
+    }
+    .not-replied {
+      color: #858997;
+      font-size: 0.9rem;
+    }
+  }
   .ticket-buttons {
     display: flex;
     gap: 20px;

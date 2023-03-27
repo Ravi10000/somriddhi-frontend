@@ -15,7 +15,7 @@ export default function SelectCategorySlider({
     arrows: false,
     dots: true,
     dotsClass: "slick-dots slick-thumb",
-    infinite: true,
+    infinite: categories.length > 9 ? true : false,
     speed: 500,
     slidesToShow: 9,
     slidesToScroll: 9,

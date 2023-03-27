@@ -52,8 +52,7 @@
           height: 25px;
           border: 2px solid #f01c21;
           border-radius: 50%;
-          border-bottom: transparent;
-          border-right: transparent;
+          border-bottom-color: transparent;
           animation: spinLoader 0.5s linear infinite;
         }
       }

@@ -23,6 +23,7 @@ function AddReplyPopup({
   ticketToReply,
   setTicketToReply,
   setFlash,
+  fetchTickets,
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,14 +46,16 @@ function AddReplyPopup({
           type: "success",
           message: "Reply added successfully",
         });
-      setIsLoading(false);
-      setShowPopup(false);
+      fetchTickets();
     } catch (error) {
       setFlash({
         type: "error",
         message: "Something went wrong, please try again",
       });
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      setShowPopup(false);
     }
   }
 
