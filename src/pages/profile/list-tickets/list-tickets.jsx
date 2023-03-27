@@ -13,7 +13,7 @@ export default function ListTickets() {
     (async () => {
       const response = await getMyTickets();
       console.log({ response });
-      setTickets(response.data.data);
+      setTickets(response.data.tickets);
     })();
   }, []);
 
@@ -32,7 +32,7 @@ export default function ListTickets() {
                 <h5>
                   {ticket?.replies?.length > 0
                     ? ticket?.replies?.length + " Replies"
-                    : "No reply yet"}{" "}
+                    : "No reply yet"}
                 </h5>
                 <div className={styles["replies"]}>
                   {ticket?.replies?.map((reply, index) => (

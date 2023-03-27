@@ -24,7 +24,6 @@ function AddTicketPopup({
   setShowPopup,
   setShowSuccessMsg,
   setFlash,
-  fetchTickets,
 }) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +40,6 @@ function AddTicketPopup({
       console.log({ response });
       if (response.data.status === "success") {
         setFlash({ type: "success", message: "Ticket added successfully" });
-        fetchTickets();
       }
     } catch (error) {
       setFlash({

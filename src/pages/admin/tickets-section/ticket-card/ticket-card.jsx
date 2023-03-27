@@ -50,6 +50,14 @@ export default function TicketCard({
       ) : (
         <div className={styles["resolved"]}>
           <p>resolved</p>
+          <button
+            className={styles["not-resolved-btn"]}
+            onClick={() => {
+              handleUpdateTicketStatus(ticket?._id, "Active");
+            }}
+          >
+            set to not resolved
+          </button>
         </div>
       )}
     </div>

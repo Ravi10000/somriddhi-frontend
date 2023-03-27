@@ -15,7 +15,7 @@ export default function Faq({ faq }) {
         <p>{faq.question}</p>
         <img
           className={styles[`arrow`]}
-          src={!isOpen ? "/arrow-right.png" : "arrow-active.png"}
+          src={!isOpen ? "/arrow-right.png" : "/arrow-active.png"}
           alt="ask question"
         />
       </div>

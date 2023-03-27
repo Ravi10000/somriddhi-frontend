@@ -37,12 +37,22 @@
     }
   }
   .resolved {
-    font-weight: 500;
-    text-transform: capitalize;
-    border-radius: 8px;
-    padding: 10px 20px;
-    width: fit-content;
-    background: #e5fff2;
-    color: #41b079;
+    display: flex;
+    gap: 10px;
+    p {
+      font-weight: 500;
+      text-transform: capitalize;
+      border-radius: 8px;
+      padding: 10px 20px;
+      width: fit-content;
+      background: #e5fff2;
+      color: #41b079;
+    }
+    .not-resolved-btn {
+      padding: 0 15px;
+      color: #f01c21;
+      background: transparent;
+      border: 2px solid #f01c21;
+    }
   }
 }
