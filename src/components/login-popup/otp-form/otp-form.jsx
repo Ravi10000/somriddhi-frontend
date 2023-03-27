@@ -62,14 +62,15 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
         if (!user?.email) {
           return nextStage();
         }
-        const subscribedResponse = await checkIfSubscribed();
-        console.log({ subscribedResponse });
-        if (subscribedResponse.data.status === "success") {
-          if (!subscribedResponse.data.isSubscribed) {
-            return nextStage(3);
-          }
-          return closeModal();
-        }
+        return closeModal();
+        // const subscribedResponse = await checkIfSubscribed();
+        // console.log({ subscribedResponse });
+        // if (subscribedResponse.data.status === "success") {
+        //   if (!subscribedResponse.data.isSubscribed) {
+        //     return nextStage(3);
+        //   }
+        //   return closeModal();
+        // }
         // if (user?.email) {
         //   setIsLoading(false);
         //   const subscribedResponse = await checkIfSubscribed();

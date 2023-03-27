@@ -48,11 +48,19 @@ function AddDealPopup({
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData(e.target);
+
     formData.append("categoryId", selectedCategory._id);
     dealToUpdate && formData.append("_id", dealToUpdate._id);
+
     for (let entry of formData.entries()) {
       console.log(entry);
     }
+
+    if (dealToUpdate && !formData.get("dealPhoto")) {
+      console.log("no photo");
+      formData.delete("dealPhoto");
+    }
+
     try {
       if (!dealToUpdate) {
         const response = await createNewDeal(formData);

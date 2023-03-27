@@ -31,6 +31,9 @@
     gap: 20px;
     .resolve-btn {
       background: #41b079;
+      &.loading {
+        background: #76b897;
+      }
     }
     .reply-btn {
       background: #e53b2c;
@@ -54,5 +57,23 @@
       background: transparent;
       border: 2px solid #f01c21;
     }
+  }
+  .loader {
+    border: 2px solid #fff;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.5s linear infinite;
+    &.not-resolved {
+      border-color: #f01c21;
+      border-top-color: transparent;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

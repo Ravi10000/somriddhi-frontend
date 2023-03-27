@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 function Header({ openModal, currentUser }) {
   return (
     <header>
-      <img src="/logo.png" alt="logo" />
+      <img className="logo" src="/Somriddhi Final Logo-01.png" alt="logo" />
       <Search />
       {/* change below to !currentUser */}
       {!currentUser ? (

@@ -13,6 +13,20 @@ export default function BannerSlider({ banners, ForMemberships }) {
     autoplaySpeed: 3000,
     dots: true,
     arrows: false,
+    appendDots: (dots) => (
+      <div
+        className="dots-container"
+        style={{
+          width: "100%",
+          display: "flex",
+          height: "10px",
+          overflowY: "hidden",
+          justifyContent: "center",
+        }}
+      >
+        <div style={{ width: "80%" }}>{dots}</div>
+      </div>
+    ),
     dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,

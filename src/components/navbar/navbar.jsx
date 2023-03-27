@@ -14,8 +14,9 @@ export default function Navbar() {
   //   console.log(allCats.data.data[0].name);
   //   setCategory(allCats.data.data[0]);
   // };
+  // console.log({ location });
   useEffect(() => {
-    setActiveLink(location.pathname);
+    setActiveLink(location.pathname + location?.hash);
     // firstCategory();
   }, [location.pathname]);
 

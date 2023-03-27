@@ -20,6 +20,20 @@ export default function OffersSlider({ offers }) {
     draggable: true,
     rows: 2,
     initialSlide: 0,
+    appendDots: (dots) => (
+      <div
+        className="dots-container"
+        style={{
+          width: "100%",
+          display: "flex",
+          height: "10px",
+          overflowY: "hidden",
+          justifyContent: "center",
+        }}
+      >
+        <div style={{ width: "80%" }}>{dots}</div>
+      </div>
+    ),
     responsive: [
       {
         breakpoint: 1200,
@@ -40,6 +54,7 @@ export default function OffersSlider({ offers }) {
         breakpoint: 600,
         settings: {
           rows: 1,
+          initialSlide: 0,
           slidesToShow: 1,
           slidesToScroll: 1,
         },

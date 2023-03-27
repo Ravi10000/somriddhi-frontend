@@ -1,6 +1,6 @@
 import styles from "./ticket-card.module.scss";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function TicketCard({
   ticket,
@@ -8,6 +8,15 @@ export default function TicketCard({
   setShowPopup,
   handleUpdateTicketStatus,
 }) {
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  // console.log({ isLoading });
+  // useEffect(() => {
+  //   return () => {
+  //     setIsLoading(false);
+  //   };
+  // }, []);
+
   return (
     <div className={styles["ticket"]} key={ticket?._id}>
       <h5 className={styles["title"]}>{ticket?.heading}</h5>
@@ -29,12 +38,16 @@ export default function TicketCard({
       {ticket?.status === "Active" ? (
         <div className={styles["ticket-buttons"]}>
           <button
-            className={styles["resolve-btn"]}
+            disabled={isLoading}
+            className={`${styles["resolve-btn"]} ${
+              isLoading && " " + styles["loading"]
+            }`}
             onClick={() => {
-              handleUpdateTicketStatus(ticket?._id, "Inactive");
+              handleUpdateTicketStatus(ticket?._id, "Inactive", setIsLoading);
             }}
           >
             resolve
+            {isLoading && <div className={styles["loader"]}></div>}
           </button>
           <button
             className={styles["reply-btn"]}
@@ -53,10 +66,15 @@ export default function TicketCard({
           <button
             className={styles["not-resolved-btn"]}
             onClick={() => {
-              handleUpdateTicketStatus(ticket?._id, "Active");
+              handleUpdateTicketStatus(ticket?._id, "Active", setIsLoading);
             }}
           >
             set to not resolved
+            {isLoading && (
+              <div
+                className={styles["loader"] + " " + styles["not-resolved"]}
+              ></div>
+            )}
           </button>
         </div>
       )}

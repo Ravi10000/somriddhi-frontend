@@ -1,12 +1,18 @@
 .popup-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  inset: 0;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
   width: 100%;
   min-height: 100%;
-  padding: 20px;
+  padding: 30px 10px;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  display: grid;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  // height: fit-content;
+  // align-items: center;
+  // place-content: center;
 }

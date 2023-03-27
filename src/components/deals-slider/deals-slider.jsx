@@ -21,6 +21,20 @@ export default function DealsSlider({ deals, forCoupons }) {
     },
     dots: true,
     dotsClass: "slick-dots slick-thumb",
+    appendDots: (dots) => (
+      <div
+        className="dots-container"
+        style={{
+          width: "100%",
+          display: "flex",
+          height: "10px",
+          overflowY: "hidden",
+          justifyContent: "center",
+        }}
+      >
+        <div style={{ width: "80%" }}>{dots}</div>
+      </div>
+    ),
     infinite: deals.length > 4 ? true : false,
     speed: 500,
     slidesToShow: 4,

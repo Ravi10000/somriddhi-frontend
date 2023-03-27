@@ -46,7 +46,8 @@ function TicketsSection({ setFlash }) {
     }
   }
 
-  async function handleUpdateTicketStatus(id, status) {
+  async function handleUpdateTicketStatus(id, status, setIsLoading) {
+    setIsLoading(true);
     try {
       const response = await updateTicketStatus({
         id,
@@ -65,6 +66,8 @@ function TicketsSection({ setFlash }) {
         message: "Something went wrong, please try again",
       });
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 

@@ -14,7 +14,10 @@
     .logo-and-download-links {
       display: grid;
       place-items: center;
-
+      .logo-light{
+        height: 40px;
+        width: fit-content;
+      }
       .buttons-container {
         margin-top: 10px;
         display: flex;

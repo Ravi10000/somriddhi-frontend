@@ -37,12 +37,12 @@ function UserDetailsForm({
             type: "success",
             message: "User Details Updated Successfully",
           });
-          const suscribedResponse = await checkIfSubscribed();
-          if (suscribedResponse.data.status === "success") {
-            if (!suscribedResponse.data.isSubscribed) {
-              return nextStage();
-            }
-          }
+          // const suscribedResponse = await checkIfSubscribed();
+          // if (suscribedResponse.data.status === "success") {
+          //   if (!suscribedResponse.data.isSubscribed) {
+          //     return nextStage();
+          //   }
+          // }
           closeModal();
         }
       }

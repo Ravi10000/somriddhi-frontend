@@ -6,8 +6,9 @@ header {
   align-items: center;
   background: #f8f8f8;
 
-  img {
-    height: fit-content;
+  img.logo {
+    height: 40px;
+    // height: fit-content;
     width: fit-content;
   }
   .logged-in {

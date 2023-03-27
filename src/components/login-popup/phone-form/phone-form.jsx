@@ -12,6 +12,7 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
   // const [phone, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [validInput, setValidInput] = useState(false);
+
   const phoneNumberRef = useRef();
   useEffect(() => {
     phoneNumberRef.current.focus();

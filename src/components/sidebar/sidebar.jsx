@@ -69,7 +69,7 @@ function SideBar({
     // </div>
     <div className={`sidebar ${isMenuVisible && "visible"}`}>
       <div className="logo-and-close" onClick={hideMenu}>
-        <img src="/logo.png" alt="somriddihi" />
+        <img src="/Somriddhi Final Logo-01.png" alt="somriddihi" />
         <img className="close-btn" src="/close-menu.png" alt="somriddihi" />
       </div>
       <div className="options">

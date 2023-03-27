@@ -1,9 +1,10 @@
 .add-deal-popup {
   background: #fff;
-  width: 95vw;
+  width: 100%;
   max-width: 500px;
   padding: 20px;
   border-radius: 8px;
+  height: fit-content;
 
   form {
     margin-top: 25px;
