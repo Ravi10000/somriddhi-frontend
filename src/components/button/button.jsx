@@ -8,8 +8,8 @@ export default function Button({
 }) {
   return (
     <button
-      className={`button ${disabled && "disabled"}`}
-      disabled={disabled}
+      className={`button ${disabled || (isLoading && "disabled")}`}
+      disabled={disabled || isLoading}
       {...otherProps}
     >
       {children}

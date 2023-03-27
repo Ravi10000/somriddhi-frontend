@@ -7,9 +7,12 @@ import { connect } from "react-redux";
 
 function Form({ setFlash }) {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState("");
+
   const inputRef = React.useRef();
 
   const subscribeToNewsLetter = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     let userName = email.split("@")[0];
     let addNewsletter = {
@@ -18,15 +21,20 @@ function Form({ setFlash }) {
       status: "Active",
     };
 
-    const newletter = await createNewNewLetter(addNewsletter);
-    console.log({ newletter });
-    if (newletter.data.status === "success") {
-      // setEmail("");
-      inputRef.current.value = "";
-      setFlash({
-        type: "success",
-        message: "Subscribed Successfully",
-      });
+    try {
+      const newletter = await createNewNewLetter(addNewsletter);
+      console.log({ newletter });
+      if (newletter.data.status === "success") {
+        inputRef.current.value = "";
+        setFlash({
+          type: "success",
+          message: "Subscribed Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -54,7 +62,7 @@ function Form({ setFlash }) {
             type="email"
             placeholder="Enter your email address"
           />
-          <Button>Subscribe</Button>
+          <Button isLoading={isLoading}>Subscribe</Button>
         </form>
       </div>
     </section>
