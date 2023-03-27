@@ -4,12 +4,17 @@ import React from "react";
 import Button from "../../button/button";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function OfferCard({ offer, forCoupons, ...otherProps }) {
+export default function OfferCard({
+  offer,
+  forCoupons,
+  noVisit,
+  ...otherProps
+}) {
   const navigate = useNavigate();
   return (
     // <Link to={`/coupon/${offer?._id}`}>
     <div
-      onClick={() => navigate(`/coupon/${offer?._id}`)}
+      onClick={() => !noVisit && navigate(`/coupon/${offer?._id}`)}
       className="offer-card"
       {...otherProps}
       style={forCoupons ? { border: "none" } : {}}

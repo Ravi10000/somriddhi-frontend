@@ -2,7 +2,12 @@ import styles from "./category-card.module.scss";
 
 import React from "react";
 
-export default function CategoryCard({ category, handleDeleteCategory }) {
+export default function CategoryCard({
+  category,
+  handleDeleteCategory,
+  setCategoryToEdit,
+  setShowPopup,
+}) {
   const [isDeleting, setIsDeleting] = React.useState(false);
 
   return (
@@ -19,7 +24,7 @@ export default function CategoryCard({ category, handleDeleteCategory }) {
           className={styles["edit"]}
           onClick={() => {
             setCategoryToEdit(category);
-            setShowAddCategoryPopup(true);
+            setShowPopup(true);
           }}
         >
           <img src="/edit.png" alt="edit category" />

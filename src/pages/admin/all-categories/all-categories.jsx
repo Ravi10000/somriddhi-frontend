@@ -110,6 +110,8 @@ function AllCategories({ setFlash }) {
             <CategoryCard
               category={category}
               key={category?._id}
+              setShowPopup={setShowAddCategoryPopup}
+              setCategoryToEdit={setCategoryToEdit}
               handleDeleteCategory={handleDeleteCategory}
             />
           ))}

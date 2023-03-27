@@ -12,8 +12,12 @@ import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
 import { getDealById } from "../../api";
 // import { getADealData } from "../../api/index.js";
+import axios from "axios";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { createStructuredSelector } from "reselect";
+import { connect } from "react-redux";
 
-export default function CouponPage() {
+function CouponPage({ currentUser }) {
   const { id } = useParams();
   const navigate = useNavigate();
   // states
@@ -21,14 +25,13 @@ export default function CouponPage() {
   const [minutesLeft, setMinutesLeft] = useState("00");
   const [secondsLeft, setSecondsLeft] = useState("00");
   const [dealInfo, setDealInfo] = useState([]);
+  const [analyticId, setAnalyticId] = useState(null);
+
   const info = [
     "Click on Orange button and visit Gizmore",
     "Shop there as you normally do",
     "Cashback will be added to your account",
   ];
-  // const url = window.location.href;
-  // const dealsId = url.split("/")[4];
-  // console.log(dealsId);
 
   async function getDeal() {
     const response = await getDealById(id);
@@ -49,53 +52,65 @@ export default function CouponPage() {
     }, 1000);
   }
 
-  // useEffect(() => {
-  //   dealData({ dealId: dealsId });
-  // }, []);
+  async function sendAnalytics() {
+    if (id) {
+      const formData = new FormData();
+      formData.append("couponId", id);
+      // currentUser && formData.append("userId", currentUser?._id);
+      formData.append("deviceType", "Web");
+      formData.append("startDateTime", new Date(Date.now()).toString());
+
+      try {
+        // const { data } = await axios.get("https://geolocation-db.com/json");
+        // formData.append("ipAddress", data?.IPv4);
+
+        for (let entry of formData.entries()) {
+          console.log(entry);
+        }
+
+        const response = await axios.post("/analytic/coupon", formData, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.data.status === "success") {
+          setAnalyticId(response.data.analyticId);
+        }
+        console.log({ response });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+  async function updateEndTime() {
+    console.log({ analyticId });
+    if (analyticId) {
+      try {
+        const response = await axios.patch(
+          `/analytic/coupon`,
+          {
+            analyticId,
+            endDateTime: new Date(Date.now()).toString(),
+          },
+          { headers: { "Content-Type": "application/json" } }
+        );
+        console.log({ response });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    navigate(`//${dealInfo?.url}`);
+  }
+
   useEffect(() => {
-    // setInterval(() => {
-    //   let { hours, minutes, seconds } = getRemaingTime(
-    //     couponDetails.expiryDate
-    //   );
-    //   // console.log(hours, minutes, seconds);
-    //   setHoursLeft(hours);
-    //   setMinutesLeft(minutes);
-    //   setSecondsLeft(seconds);
-    //   // hoursLeftRef.current = hours;
-    //   // minutesLeftRef.current = minutes;
-    //   // secondsLeftRef.current = seconds;
-    // }, 1000);
+    sendAnalytics();
+  }, []);
+
+  useEffect(() => {
     getDeal();
   }, []);
 
-  // let des = dealInfo.description && dealInfo.description.split(".");
-
-  const handleClick = () => {};
-  // const handleClick = (url) => {
-  //   console.log(url);
-  //   window.open(url);
-  // };
-  // const routeToLink = dealInfo.url;
-  // String.prototype.toHHMMSS = function () {
-  //   var sec_num = parseInt(this, 10); // don't forget the second param
-  //   var hours = Math.floor(sec_num / 3600);
-  //   var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-  //   var seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-  //   if (hours < 10) { hours = "0" + hours; }
-  //   if (minutes < 10) { minutes = "0" + minutes; }
-  //   if (seconds < 10) { seconds = "0" + seconds; }
-  //   return hours + ':' + minutes + ':' + seconds;
-  // }
-  // const time = dealInfo.expiryDate.toHHMMSS();
-  // const [hrs, setHrs] = useState(time.split(':')[0]);
-  // const [mins, setMins] = useState(time.split(':')[1]);
-  // const [secs, setSecs] = useState(time.split(':')[2]);
-  // useInterval(() => {
-  //   if (secs != '00') {
-  //     setSecs((Number(hrs) - 1).toString());
-  //   }
-  // }, 1000)
   return (
     <div className="coupon-page">
       <div className="head">
@@ -144,9 +159,7 @@ export default function CouponPage() {
           <h3>Use Code</h3>
           <div className="coupon-link-container">
             <CouponCode couponCode={couponDetails?.couponCode} />
-            <Button onClick={() => navigate(`//${dealInfo?.url}`)}>
-              visit site
-            </Button>
+            <Button onClick={updateEndTime}>visit site</Button>
           </div>
           <div className="info-container">
             <div className="list">
@@ -188,3 +201,9 @@ export default function CouponPage() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(CouponPage);
