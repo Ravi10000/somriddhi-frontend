@@ -41,7 +41,15 @@ export default function ProcessEditable() {
             <img className="edit-icon" src="/edit.png" alt="edit img" />
           </div>
           <div className="img-container">
-            <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${contents?.[0]?.image}`} alt="" />
+            <img
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                contents?.[0]?.image
+              }`}
+              alt=""
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
+            />
           </div>
           <div className="title">
             <h4>{contents?.[0]?.title}</h4>
@@ -62,7 +70,15 @@ export default function ProcessEditable() {
             <img className="edit-icon" src="/edit.png" alt="edit img" />
           </div>
           <div className="img-container">
-            <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${contents?.[1]?.image}`} alt="" />
+            <img
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                contents?.[1]?.image
+              }`}
+              alt=""
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
+            />
           </div>
           <div className="title">
             <h4>{contents?.[1]?.title}</h4>
@@ -83,7 +99,15 @@ export default function ProcessEditable() {
             <img className="edit-icon" src="/edit.png" alt="edit img" />
           </div>
           <div className="img-container">
-            <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${contents?.[2]?.image}`} alt="" />
+            <img
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                contents?.[2]?.image
+              }`}
+              alt=""
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
+            />
           </div>
           <div className="title">
             <h4>{contents?.[2]?.title}</h4>

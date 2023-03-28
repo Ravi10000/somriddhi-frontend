@@ -52,13 +52,17 @@ function AddDealPopup({
     formData.append("categoryId", selectedCategory._id);
     dealToUpdate && formData.append("_id", dealToUpdate._id);
 
+    // if (dealToUpdate && !formData.get("dealPhoto")) {
+    //   console.log("no photo");
+    //   formData.delete("dealPhoto");
+    // }
+
+    // const img = formData.get("dealPhoto");
+    // !img?.name && formData.delete("dealPhoto");
+    // console.log({ img });
+
     for (let entry of formData.entries()) {
       console.log(entry);
-    }
-
-    if (dealToUpdate && !formData.get("dealPhoto")) {
-      console.log("no photo");
-      formData.delete("dealPhoto");
     }
 
     try {

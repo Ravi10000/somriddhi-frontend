@@ -20,6 +20,9 @@ export default function ImageInput({ label, defaultValue, ...otherProps }) {
           <img
             src={`${import.meta.env.VITE_REACT_APP_API_URL}/${defaultImage}`}
             alt="image"
+            onError={(e) => {
+              e && (e.target.alt = "error loading " + label);
+            }}
           />
         ) : (
           <img src={image || "/upload-gray.png"} alt="" />

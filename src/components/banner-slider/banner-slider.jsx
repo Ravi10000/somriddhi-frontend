@@ -10,7 +10,7 @@ import { useLoginModal } from "../../context/login-modal-context";
 function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
   const navigate = useNavigate();
   const modal = useLoginModal();
-  console.log({ modal });
+  // console.log({ modal });
   const membershipStyles = ForMemberships ? { width: "100%" } : {};
 
   function checkLogin(url) {

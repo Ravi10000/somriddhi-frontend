@@ -39,6 +39,10 @@ function AddBannerPopup({
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData(e.target);
+
+    // const img = formData.get("bannerPhoto");
+    // !img?.name && formData.delete("bannerPhoto");
+
     for (let key of formData.entries()) {
       console.log(key);
     }

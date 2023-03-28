@@ -32,21 +32,23 @@ function UpdateContentPopup({
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
-      const response = await updateContent(content?._id, formData);
+      formData.append("_id", content._id);
+      const response = await updateContent(formData);
       console.log({ response });
 
-      response.data.status === "success" &&
+      if (response.data.status === "success") {
         setFlash({ type: "success", message: "Content Updated Successfully" });
-
-      setIsLoading(false);
-      setShowPopup(false);
-      fetchAllContents();
+        fetchAllContents();
+      }
     } catch (error) {
       setFlash({
         type: "error",
         message: "Something went wrong, please try again",
       });
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      setShowPopup(false);
     }
   }
 
@@ -59,7 +61,7 @@ function UpdateContentPopup({
           onSubmit={handleUpdateContent}
           encType="multipart/form-data"
         >
-          <ImageInput label="Icon" name="image" dealImage={content?.image} />
+          <ImageInput label="Icon" name="image" defaultValue={content?.image} />
           <TextInput label="Title" name="title" defaultValue={content?.title} />
           <LongTextInput
             label="Description"

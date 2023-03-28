@@ -70,15 +70,21 @@ function AllFaqs({ setFlash }) {
           }}
         />
         <div className="queries">
-          {faqs?.map((query) => (
-            <FaqCard
-              setFaqToEdit={setFaqToEdit}
-              setShowPopup={setShowAddFaqPopup}
-              query={query}
-              key={query?._id}
-              deleteFaqHandler={deleteFaqHandler}
-            />
-          ))}
+          {faqs?.length > 0 ? (
+            faqs?.map((query) => (
+              <FaqCard
+                setFaqToEdit={setFaqToEdit}
+                setShowPopup={setShowAddFaqPopup}
+                query={query}
+                key={query?._id}
+                deleteFaqHandler={deleteFaqHandler}
+              />
+            ))
+          ) : (
+            <div className="no-queries">
+              <h3>No FAQs found</h3>
+            </div>
+          )}
         </div>
       </div>
     </>

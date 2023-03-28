@@ -177,6 +177,11 @@ export const createNewMemberships = (formData) => {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
 };
+export const updateMembership = (formData) => {
+  return axios.patch(`/membership`, formData, {
+    headers: { Authorization, "Content-Type": "multipart/form-data" },
+  });
+};
 
 export const deleteMembership = (id) =>
   axios.delete(`/membership/${id}`, { headers: { Authorization } });
@@ -254,8 +259,8 @@ export const createContent = (formData) =>
   axios.post("/content", formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
-export const updateContent = (id, formData) =>
-  axios.put(`/content/${id}`, formData, {
+export const updateContent = (formData) =>
+  axios.patch(`/content`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
 export const deleteContent = (id) =>

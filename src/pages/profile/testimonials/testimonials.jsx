@@ -60,7 +60,7 @@ export default function Testimonials() {
                 <div className="reviewer-info">
                   <img src="/reviewer.png" alt="reviewer" />
                   <div className="reviewer-details">
-                    <p className="name">{username}</p>
+                    <h4 className="name">{username}</h4>
                     {/* <p className="discount">
                       Total Discount: <span>{discount}</span>
                     </p> */}

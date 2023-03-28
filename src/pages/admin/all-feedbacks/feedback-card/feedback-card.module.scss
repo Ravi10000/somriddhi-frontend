@@ -9,6 +9,9 @@
     height: 50px;
     border-radius: 8px;
   }
+  h4{
+    text-transform: capitalize;
+  }
   .details {
     width: 100%;
     .user {
@@ -20,17 +23,17 @@
         display: flex;
         gap: 10px;
         .status-loader, .delete-loader{
-          width: 25px;
-          height: 25px;
+          width: 15px;
+          height: 15px;
           border: 2px solid #f01c21;
           border-radius: 50%;
-          border-bottom: transparent;
-          border-right: transparent;
+          border-bottom-color: transparent;
           animation: spinLoader 0.5s linear infinite;
         }
         .check {
           .status-loader {
             border-color: #41b079;
+            border-bottom-color: transparent;
           }
         }
         .delete {
@@ -38,7 +41,7 @@
           border-radius: 0;
           padding: 10px;
           img {
-            width: 25px;
+            width: 15px;
           }
         }
         .check {
@@ -46,7 +49,7 @@
           border-radius: 0;
           padding: 10px;
           img {
-            width: 25px;
+            width: 15px;
           }
         }
       }
@@ -58,8 +61,8 @@
         display: flex;
         gap: 2px;
         img {
-          width: 25px;
-          height: 25px;
+          width: 15px;
+          height: 15px;
         }
       }
       .feedback-text {

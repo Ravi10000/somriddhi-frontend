@@ -14,7 +14,7 @@ import ImageInput from "../image-input/image-input";
 import NumInput from "../num-input/num-input";
 
 // api calls
-import { createNewMemberships } from "../../api";
+import { createNewMemberships, updateMembership } from "../../api";
 
 // redux actions
 import { setFlash } from "../../redux/flash/flash.actions";
@@ -44,23 +44,37 @@ function AddMembershipPopup({
       console.log(key);
     }
     try {
-      const response = await createNewMemberships(formData);
-      console.log({ response });
-      if (response.data.status === "success") {
-        setFlash({
-          message: "Membership added successfully",
-          type: "success",
-        });
-        fetchMemberships();
+      if (!membersipToEdit) {
+        const response = await createNewMemberships(formData);
+        console.log({ response });
+        if (response.data.status === "success") {
+          setFlash({
+            message: "Membership added successfully",
+            type: "success",
+          });
+          fetchMemberships();
+        }
+      } else {
+        formData.append("_id", membersipToEdit._id);
+        const response = await updateMembership(formData);
+        console.log({ response });
+        if (response.data.status === "success") {
+          setFlash({
+            message: "Membership updated successfully",
+            type: "success",
+          });
+          fetchMemberships();
+        }
       }
-      setIsLoading(false);
-      setShowPopup(false);
     } catch (error) {
       setFlash({
         message: "Something went wrong, please try again",
         type: "error",
       });
       console.log(error);
+    } finally {
+      setIsLoading(false);
+      setShowPopup(false);
     }
   }
   return (

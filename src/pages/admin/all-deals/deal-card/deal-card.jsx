@@ -26,6 +26,9 @@ export default function DealCard({
         className={styles["deal-img"]}
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${deal?.image}`}
         alt="deal banner"
+        onError={(e) => {
+          e && (e.target.src = "/no-photo.png");
+        }}
       />
       <div className={styles["deal-info"]}>
         <p>{deal?.description ? deal?.description : "unavailable"}</p>

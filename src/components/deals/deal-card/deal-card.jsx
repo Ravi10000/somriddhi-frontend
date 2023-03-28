@@ -5,7 +5,11 @@ import Button from "../../button/button";
 // import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 export default function DealCard({
-  _id, name, cashbackPercent, image, ...otherProps
+  _id,
+  name,
+  cashbackPercent,
+  image,
+  ...otherProps
 }) {
   // const history = useHistory();
   return (
@@ -17,7 +21,11 @@ export default function DealCard({
         // }}
         {...otherProps}
       >
-        <img className="dealsImage" src={`${import.meta.env.VITE_REACT_APP_API_URL}/uploads/${image}`} alt="amazon" />
+        <img
+          className="dealsImage"
+          src={`${import.meta.env.VITE_REACT_APP_API_URL}/uploads/${image}`}
+          alt="amazon"
+        />
         <h4 className="title">{name}</h4>
         <p className="discount-details">Flat {cashbackPercent}% Off</p>
         <Button>Grab Now</Button>

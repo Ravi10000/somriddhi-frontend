@@ -28,6 +28,12 @@ export default function ListTickets() {
               <p className={styles["ticket-description"]}>
                 {ticket?.description}
               </p>
+              <div className={styles["status"]}>
+                <h5>Status</h5>
+                <p className={styles[ticket?.status]}>
+                  {ticket?.status === "Active" ? "Active" : "Resolved"}
+                </p>
+              </div>
               <div className={styles["replies-container"]}>
                 <h5>
                   {ticket?.replies?.length > 0

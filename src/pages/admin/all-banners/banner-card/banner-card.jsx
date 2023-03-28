@@ -14,6 +14,9 @@ export default function BannerCard({
         className={styles["banner-img"]}
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${banner?.image}`}
         alt={banner?.name}
+        onError={(e) => {
+          e && (e.target.src = "/no-photo.png");
+        }}
       />
       <div className={styles["banner-details"]}>
         <div className={styles["info-container"]}>
