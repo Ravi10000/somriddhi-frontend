@@ -1,4 +1,4 @@
-import "./App.scss";
+import styles from "./App.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -37,19 +37,14 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 // api calls
 import { getUser } from "./api";
 
-function App({ setCurrentUser, flash, setFlash }) {
+function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
 
-  console.log({ modal });
-
   const { pathname } = useLocation();
-  // console.log({ pathname });
-  // const [modalOpen, setModalOpen] = useState(false);
 
   async function fetchUser() {
     try {
       const response = await getUser();
-      // console.log({ response });
       if (response.data.status === "success") {
         setCurrentUser(response.data.user);
       }
@@ -61,14 +56,8 @@ function App({ setCurrentUser, flash, setFlash }) {
     fetchUser();
   }, []);
 
-  // function closeModal() {
-  //   setModalOpen(false);
-  // }
-  // function openModal() {
-  //   setModalOpen(true);
-  // }
   return (
-    <div className="App" id="App">
+    <div className={styles["App"]} id="App">
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
@@ -86,7 +75,6 @@ function App({ setCurrentUser, flash, setFlash }) {
           element={<Navigate to="/admin/banners" replace />}
         />
         <Route path="/admin/:tab" element={<AdminPage />} />
-        {/* <Route path="/admin/banner" element={<Banner />} /> */}
         <Route path="/coupon/:id" element={<CouponPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/category" element={<CategoryPage />} />
@@ -122,21 +110,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-  setFlash: (flash) => dispatch(setFlash(flash)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-// export const LoginModalContext = createContext();
-// export const useLoginModal = () => useContext(LoginModalContext);
-
-// export function LoginModalProvider({ children }) {
-//   const [modalOpen, setModalOpen] = useState(false);
-//   const closeModal = () => setModalOpen(false);
-//   const openModal = () => setModalOpen(true);
-//   return (
-//     <LoginModalContext.Provider value={{ modalOpen, closeModal, openModal }}>
-//       {children}
-//     </LoginModalContext.Provider>
-//   );
-// }

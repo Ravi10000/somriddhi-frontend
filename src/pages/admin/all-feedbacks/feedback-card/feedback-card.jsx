@@ -9,7 +9,7 @@ export default function FeedbackCard({
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isStatusChanging, setIsStatusChanging] = useState(false);
-  console.log({ status: feedback?.status });
+  // console.log({ status: feedback?.status });
   const date = new Date(feedback?.createdAt).toDateString();
   return (
     <div className={styles["feedback-card"]}>

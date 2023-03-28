@@ -11,7 +11,6 @@ import couponDetails from "./coupon-details";
 import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
 import { getDealById } from "../../api";
-// import { getADealData } from "../../api/index.js";
 import axios from "axios";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
@@ -41,7 +40,7 @@ function CouponPage({ currentUser }) {
     console.log({ response });
     // console.log(response.data.data);
     setDealInfo(response.data.deal);
-    setInterval(() => {
+    const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
         response?.data?.deal?.expiryDate
       );
@@ -53,6 +52,15 @@ function CouponPage({ currentUser }) {
       // minutesLeftRef.current = minutes;
       // secondsLeftRef.current = seconds;
     }, 1000);
+    console.log(Date.parse(response.data.deal.expiryDate));
+    console.log(Date.parse(new Date(Date.now())));
+    if (
+      Date.parse(response.data.deal.expiryDate) <
+      Date.parse(new Date(Date.now()))
+    ) {
+      console.log("expired");
+      clearInterval(timeLeftTimeer);
+    }
   }
 
   async function sendAnalytics() {
@@ -191,7 +199,7 @@ function CouponPage({ currentUser }) {
               <h3>how to get this offer</h3>
               <ul>
                 {info.map((message, index) => (
-                  <li>{message}</li>
+                  <li key={index}>{message}</li>
                 ))}
               </ul>
             </div>
