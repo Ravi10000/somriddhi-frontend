@@ -21,10 +21,16 @@
       justify-content: space-between;
       .user-info {
         span {
+          display: inline-block;
+          padding: 5px 15px;
+          margin: 0 0 5px 5px;
+          background: #e6fff2;
           font-size: 0.8rem;
           font-weight: 500;
+          border-radius: 8px;
           color: #41b079;
-          &.Inactive{
+          &.Inactive {
+            background: #ffe9e6;
             color: #f01c21;
           }
         }
