@@ -1,7 +1,7 @@
 import "./coupon.styles.scss";
 
 // packages
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // components
 import Button from "../../components/button/button";
@@ -16,8 +16,11 @@ import axios from "axios";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
+import { useLoginModal } from "../../context/login-modal-context";
 
-function CouponPage({ currentUser, openModal }) {
+function CouponPage({ currentUser }) {
+  const modal = useLoginModal();
+
   const { id } = useParams();
   const navigate = useNavigate();
   // states
@@ -101,7 +104,7 @@ function CouponPage({ currentUser, openModal }) {
       }
     }
     if (!currentUser) {
-      return openModal();
+      return modal.openModal();
     }
     navigate(`//${dealInfo?.url}`);
   }

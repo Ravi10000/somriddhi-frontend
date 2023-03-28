@@ -1,11 +1,25 @@
 import styles from "./membership-slider.module.scss";
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginModal } from "../../context/login-modal-context";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-export default function MembershipSlider({ banners }) {
+function MembershipSlider({ banners, currentUser }) {
+  const navigate = useNavigate();
+  const modal = useLoginModal();
+
+  function checkLogin(url) {
+    console.log({ currentUser });
+    if (!currentUser) {
+      return modal.openModal();
+    }
+    navigate(url);
+  }
   const settings = {
     customPaging: function (i) {
       return <div className="dots">'</div>;
@@ -44,17 +58,30 @@ export default function MembershipSlider({ banners }) {
         {banners.length > 0 &&
           banners?.map((banner, index) => (
             <div className={styles["card-container"]} key={index}>
-              <Link to={"//" + banner?.url}>
-                <img
-                  className="bannerImageSet"
-                  src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
-                    banner?.image
-                  }`}
-                />
-              </Link>
+              {/* <Link to={}> */}
+              <img
+                onClick={() => {
+                  checkLogin("//" + banner?.url);
+                }}
+                className="bannerImageSet"
+                src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                  banner?.image
+                }`}
+                onError={(e) => {
+                  e && (e.target.src = "/no-photo.png");
+                }}
+                alt={banner?.title}
+              />
+              {/* </Link> */}
             </div>
           ))}
       </Slider>
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(MembershipSlider);

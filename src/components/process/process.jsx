@@ -29,7 +29,10 @@ export default function Process() {
               src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                 contents?.[0]?.image
               }`}
-              alt=""
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
+              alt="content image"
             />
           </div>
           <h4>{contents?.[0]?.title}</h4>
@@ -42,7 +45,10 @@ export default function Process() {
               src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                 contents?.[1]?.image
               }`}
-              alt=""
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
+              alt="content image"
             />
           </div>
           <h4>{contents?.[1]?.title}</h4>
@@ -52,8 +58,13 @@ export default function Process() {
         <div className="process-card">
           <div className="img-container">
             <img
-              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${contents?.[2]?.image}`}
-              alt=""
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                contents?.[2]?.image
+              }`}
+              alt="content"
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
             />
           </div>
           <h4>{contents?.[2]?.title}</h4>

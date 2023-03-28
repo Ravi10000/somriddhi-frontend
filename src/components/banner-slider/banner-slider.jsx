@@ -5,20 +5,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-import { useLoginModal } from "../../App";
+import { useLoginModal } from "../../context/login-modal-context";
 
 function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
   const navigate = useNavigate();
-  // const modal = useLoginModal();
-  // console.log({ modal });
+  const modal = useLoginModal();
+  console.log({ modal });
   const membershipStyles = ForMemberships ? { width: "100%" } : {};
-  async function checkLogin(url) {
+
+  function checkLogin(url) {
     console.log({ currentUser });
     if (!currentUser) {
-      // return modal.openModal();
+      return modal.openModal();
     }
-    // navigate(url);
+    navigate(url);
   }
+
   const settings = {
     customPaging: function (i) {
       return <div className="dots">'</div>;
@@ -73,6 +75,9 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
                 src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                   banner.image
                 }`}
+                onError={(e) => {
+                  if (e) e.target.src = "/no-photo.png";
+                }}
               />
               {/* </Link> */}
             </div>

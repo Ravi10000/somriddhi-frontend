@@ -72,7 +72,7 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
       encType="application/json"
       onSubmit={phoneFormSubmit}
     >
-      <h1>Your Phone Number</h1>
+      <h1>Login</h1>
       <p>Enter your 10 digit phone number</p>
       <input
         className="input"

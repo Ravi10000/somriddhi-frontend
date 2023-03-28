@@ -3,7 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // react hooks
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState, useEffect } from "react";
+import { useLoginModal } from "./context/login-modal-context";
 
 // packages
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
@@ -37,9 +38,13 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 import { getUser } from "./api";
 
 function App({ setCurrentUser, flash, setFlash }) {
+  const modal = useLoginModal();
+
+  console.log({ modal });
+
   const { pathname } = useLocation();
   // console.log({ pathname });
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
 
   async function fetchUser() {
     try {
@@ -56,22 +61,21 @@ function App({ setCurrentUser, flash, setFlash }) {
     fetchUser();
   }, []);
 
-  function closeModal() {
-    setModalOpen(false);
-  }
-  function openModal() {
-    setModalOpen(true);
-  }
+  // function closeModal() {
+  //   setModalOpen(false);
+  // }
+  // function openModal() {
+  //   setModalOpen(true);
+  // }
   return (
-    // <LoginModalProvider>
     <div className="App" id="App">
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
       {!pathname.includes("/admin") && (
         <>
-          {modalOpen && <LoginPopup closeModal={closeModal} />}
-          <Header openModal={openModal} />
+          {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
+          <Header openModal={modal.openModal} />
           <Navbar />
         </>
       )}
@@ -83,10 +87,7 @@ function App({ setCurrentUser, flash, setFlash }) {
         />
         <Route path="/admin/:tab" element={<AdminPage />} />
         {/* <Route path="/admin/banner" element={<Banner />} /> */}
-        <Route
-          path="/coupon/:id"
-          element={<CouponPage openModal={openModal} />}
-        />
+        <Route path="/coupon/:id" element={<CouponPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route
@@ -112,38 +113,30 @@ function App({ setCurrentUser, flash, setFlash }) {
       </Routes>
       {!pathname.includes("/admin") && <Footer />}
     </div>
-    // </LoginModalProvider>
   );
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-// });
-
 const mapStateToProps = createStructuredSelector({
-  // currentUser: selectCurrentUser,
   flash: selectFlash,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-  // signIn: (user) => dispatch(signIn(user)),
   setFlash: (flash) => dispatch(setFlash(flash)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-// export default connect(null, mapDispatchToProps)(App);
 
-export const LoginModalContext = createContext();
-export const useLoginModal = () => useContext(LoginModalContext);
+// export const LoginModalContext = createContext();
+// export const useLoginModal = () => useContext(LoginModalContext);
 
-export function LoginModalProvider({ children }) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const closeModal = () => setModalOpen(false);
-  const openModal = () => setModalOpen(true);
-  return (
-    <LoginModalContext.Provider value={{ modalOpen, closeModal, openModal }}>
-      {children}
-    </LoginModalContext.Provider>
-  );
-}
+// export function LoginModalProvider({ children }) {
+//   const [modalOpen, setModalOpen] = useState(false);
+//   const closeModal = () => setModalOpen(false);
+//   const openModal = () => setModalOpen(true);
+//   return (
+//     <LoginModalContext.Provider value={{ modalOpen, closeModal, openModal }}>
+//       {children}
+//     </LoginModalContext.Provider>
+//   );
+// }

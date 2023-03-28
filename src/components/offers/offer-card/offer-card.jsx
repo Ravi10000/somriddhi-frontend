@@ -25,6 +25,9 @@ export default function OfferCard({
       <img
         className="dealImage"
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${offer?.image}`}
+        onError={(e) => {
+          if (e) e.target.src = "/no-photo.png";
+        }}
         alt=""
       />
       <p>Upto {offer?.cashbackPercent}% off on summer Appliances</p>

@@ -1,6 +1,7 @@
 import UserActionTypes from "./user.types";
 const initialState = {
   currentUser: null,
+  isFetching: false,
 };
 
 export default function userReducer(state = initialState, action) {

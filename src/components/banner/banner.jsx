@@ -1,15 +1,15 @@
 import "./banner.styles.scss";
 // import Carousel from "../carousel/carousel";
 import React, { useEffect, useState } from "react";
-import CustomCarousel, {
-  CarouselItem,
-} from "../custom-carousel/custom-carousel";
+// import CustomCarousel, {
+//   CarouselItem,
+// } from "../custom-carousel/custom-carousel";
 import { getAllBanners, getAllDeals } from "../../api/index";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import BannerSlider from "../banner-slider/banner-slider";
 
 export default function Banner() {
-  const listOfImages = ["/banner1.png", "/table-bg.png", "/banner1.png"];
+  // const listOfImages = ["/banner1.png", "/table-bg.png", "/banner1.png"];
   const [banners, setBanners] = useState([]);
 
   let bannerData;
