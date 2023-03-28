@@ -1,6 +1,6 @@
-import "./otp-form.styles.scss";
+import styles from "./otp-form.module.scss";
 
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Button from "../../button/button";
 // import { connect } from "react-redux";
 import { sendOtp, verifyOtp, checkIfSubscribed } from "../../../api/index";
@@ -90,7 +90,6 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
     }
   }
   async function resendOtp() {
-    // setValidInput(false);
     resetOtpInputs();
     try {
       setIsOtpValid(true);
@@ -140,14 +139,14 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
   }
   return (
     <form
-      className="otp-form"
+      className={styles["otp-form"]}
       encType="application/json"
       onSubmit={submitOtpForm}
     >
       <h1>Verify OTP</h1>
       <p>Enter OTP which you received for login</p>
       {secondsLeft > 1 && <h5>Expires in {secondsLeft} seconds</h5>}
-      <div className="otp-inputs">
+      <div className={styles["otp-inputs"]}>
         <input
           disabled={secondsLeft < 1 ? true : false}
           ref={digit1Ref}
@@ -200,9 +199,11 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
       <p onClick={resendOtp}>
         Didn&#39;t get otp? <span> Send Again</span>
       </p>
-      {!isOtpValid && <p className="invalid-msg">Incorrect OTP, Try Again</p>}
+      {!isOtpValid && (
+        <p className={styles["invalid-msg"]}>Incorrect OTP, Try Again</p>
+      )}
       {secondsLeft < 1 && (
-        <p className="invalid-msg" onClick={resendOtp}>
+        <p className={styles["invalid-msg"]} onClick={resendOtp}>
           OTP Expired, Send Again
         </p>
       )}

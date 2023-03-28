@@ -1,20 +1,12 @@
-import "./navbar.styles.scss";
+import styles from "./navbar.module.scss";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-// import { getAllCategories } from "../../api/index.js";
 
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("/");
   const location = useLocation();
-  // const [category, setCategory] = useState("");
 
-  // const firstCategory = async () => {
-  //   const allCats = await getAllCategories();
-  //   console.log(allCats.data.data[0].name);
-  //   setCategory(allCats.data.data[0]);
-  // };
-  // console.log({ location });
   useEffect(() => {
     setActiveLink(location.pathname + location?.hash);
     // firstCategory();
@@ -32,25 +24,18 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="top-navbar">
-      <div className="links">
+    <nav className={styles["top-navbar"]}>
+      <div className={styles["links"]}>
         {navList.map(({ name, link }) => (
           <HashLink
             onClick={() => setActiveLink(link)}
             to={link}
             key={name}
-            className={`${activeLink === link && "active"}`}
+            className={`${activeLink === link && styles["active"]}`}
           >
             {name}
           </HashLink>
         ))}
-        {/* <HashLink to="/" className={"nav-link"}>
-          Home
-        </HashLink>
-        <HashLink to="/#deals">Deals</HashLink>
-        <HashLink to="/#coupons">Coupons</HashLink>
-        <HashLink to="#Stores">Stores</HashLink>
-        <HashLink to="#contact-us">Contact us</HashLink> */}
       </div>
     </nav>
   );

@@ -9,19 +9,24 @@ export default function FeedbackCard({
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isStatusChanging, setIsStatusChanging] = useState(false);
-
+  console.log({ status: feedback?.status });
   const date = new Date(feedback?.createdAt).toDateString();
   return (
     <div className={styles["feedback-card"]}>
       <img
         className={styles["userimg"]}
-        src={feedback?.userImg || "/person.png"}
+        src={feedback?.userImg || "/user.png"}
         alt="user image"
       />
       <div className={styles["details"]}>
         <div className={styles["user"]}>
           <div className={styles["user-info"]}>
-            <h4>{feedback?.username}</h4>
+            <h4>
+              {feedback?.username} -
+              <span className={styles[feedback?.status]}>
+                {feedback?.status === "Active" ? " Public" : " Hidden"}
+              </span>
+            </h4>
             <p>{date}</p>
           </div>
           <div className={styles["actions"]}>

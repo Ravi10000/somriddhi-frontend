@@ -1,5 +1,4 @@
-import "./header.styles.scss";
-import React, { useState } from "react";
+import styles from "./header.module.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -13,19 +12,25 @@ import { Link } from "react-router-dom";
 function Header({ openModal, currentUser }) {
   return (
     <header>
-      <img className="logo" src="/Somriddhi Final Logo-01.png" alt="logo" />
+      <img
+        className={styles["logo"]}
+        src="/Somriddhi Final Logo-01.png"
+        alt="logo"
+      />
       <Search />
       {/* change below to !currentUser */}
-      {!currentUser ? (
-        <Button onClick={openModal}>Login / Sign Up</Button>
-      ) : (
-        <Link to="/profile">
-          <button className="logged-in">
-            <img src="/user.png" alt="user" />
-            <p>My Account</p>
-          </button>
-        </Link>
-      )}
+      <div className={styles["buttons"]}>
+        {!currentUser ? (
+          <Button onClick={openModal}>Login / Sign Up</Button>
+        ) : (
+          <Link to="/profile">
+            <button className={styles["logged-in"]}>
+              <img src="/user-logged-in.png" alt="user" />
+              <p>My Account</p>
+            </button>
+          </Link>
+        )}
+      </div>
     </header>
   );
 }

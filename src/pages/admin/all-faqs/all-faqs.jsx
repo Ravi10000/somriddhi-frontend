@@ -1,4 +1,4 @@
-import "./all-faqs.styles.scss";
+import styles from "./all-faqs.module.scss";
 
 // react hooks
 import { useState, useEffect } from "react";
@@ -62,14 +62,14 @@ function AllFaqs({ setFlash }) {
           faqToEdit={faqToEdit}
         />
       )}
-      <div className="all-faqs">
+      <div className={styles["all-faqs"]}>
         <TitleSection
           title="All FAQs"
           addFunction={() => {
             setShowAddFaqPopup(true);
           }}
         />
-        <div className="queries">
+        <div className={styles["queries"]}>
           {faqs?.length > 0 ? (
             faqs?.map((query) => (
               <FaqCard
@@ -81,7 +81,7 @@ function AllFaqs({ setFlash }) {
               />
             ))
           ) : (
-            <div className="no-queries">
+            <div className={styles["no-queries"]}>
               <h3>No FAQs found</h3>
             </div>
           )}

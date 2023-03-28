@@ -1,11 +1,10 @@
-import "./user-details-form.styles.scss";
+import styles from "./user-details-form.module.scss";
 
 // packages
 import { useState } from "react";
 
 // components
 import Button from "../../button/button";
-import { useForm } from "react-hook-form";
 import { checkIfSubscribed, createUser } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
@@ -52,13 +51,17 @@ function UserDetailsForm({
   }
 
   return (
-    <form onSubmit={submitForm} id="user-input" encType="application/json">
-      <h1 className="title">Your Phone Number</h1>
-      <div className="inputs-container">
+    <form
+      onSubmit={submitForm}
+      id={styles["user-input"]}
+      encType="application/json"
+    >
+      <h1 className={styles["title"]}>Your Phone Number</h1>
+      <div className={styles["inputs-container"]}>
         <input
           required
           name="fname"
-          className="user-details-input"
+          className={styles["user-details-input"]}
           placeholder="First name"
           onInput={(e) =>
             (e.target.value = e.target.value.replace(/[^A-Za-z]/g, ""))
@@ -66,7 +69,7 @@ function UserDetailsForm({
         />
         <input
           required
-          className="user-details-input"
+          className={styles["user-details-input"]}
           pattern="[A-Za-z]+"
           name="lname"
           placeholder="Last name"
@@ -74,26 +77,24 @@ function UserDetailsForm({
             (e.target.value = e.target.value.replace(/[^A-Za-z]/g, ""))
           }
         />
-        <div className="input-container">
-          <input
-            required
-            className="user-details-input"
-            placeholder="Email"
-            type="email"
-            name="email"
-          />
-        </div>
+        <input
+          required
+          className={styles["user-details-input"]}
+          placeholder="Email"
+          type="email"
+          name="email"
+        />
         <input
           name="referralCode"
           placeholder="Referral Code"
-          className="user-details-input"
+          className={styles["user-details-input"]}
         />
       </div>
-      <p className="msg">It&#39;s okay, If you do not have any</p>
-      <Button className="user-form-btn" isLoading={isLoading}>
+      <p className={styles["msg"]}>It&#39;s okay, If you do not have any</p>
+      <Button className={styles["user-form-btn"]} isLoading={isLoading}>
         Continue
       </Button>
-      <p className="skip-now" onClick={closeModal}>
+      <p className={styles["skip-now"]} onClick={closeModal}>
         skip for now
       </p>
     </form>

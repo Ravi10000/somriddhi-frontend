@@ -1,4 +1,4 @@
-import "./admin.styles.scss";
+import styles from "./admin.module.scss";
 
 // react hooks
 import { useEffect, useState } from "react";
@@ -52,7 +52,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="admin-page">
+    <div className={styles["admin-page"]}>
       {modalOpen && (
         <AddBannerModal
           closeModal={closeModal}
@@ -60,7 +60,7 @@ export default function AdminPage() {
           setCategories={setCategories}
         />
       )}
-      <div className="content-container">
+      <div className={styles["content-container"]}>
         <SideBar
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
@@ -68,13 +68,13 @@ export default function AdminPage() {
           setIsMenuVisible={setIsMenuVisible}
           hideMenu={hideMenu}
         />
-        <div className="content">
+        <div className={styles["content"]}>
           <Nav
             selectedOption={selectedOption}
             showMenu={showMenu}
             isMenuVisible={isMenuVisible}
           />
-          <div className="main-content-container">
+          <div className={styles["main-content-container"]}>
             {selectedOption === "banners" && <AllBanners />}
             {selectedOption === "deals" && <AllDeals />}
             {selectedOption === "categories" && <AllCategories />}

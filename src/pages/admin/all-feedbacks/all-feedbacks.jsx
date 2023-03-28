@@ -1,4 +1,4 @@
-import "./all-feedbacks.styles.scss";
+import styles from "./all-feedbacks.module.scss";
 
 // react hooks
 import { useState, useEffect } from "react";
@@ -97,11 +97,13 @@ function AllFeedbacks({ setFlash }) {
   }
 
   return (
-    <div className="all-feedbacks">
-      <div className="select-feedbacks">
+    <div className={styles["all-feedbacks"]}>
+      <div className={styles["select-feedbacks"]}>
         {options?.map((item) => (
           <h4
-            className={`${selectedFeedbackList === item ? "active" : ""}`}
+            className={`${
+              selectedFeedbackList === item ? styles["active"] : ""
+            }`}
             onClick={() => {
               setSelectedFeedbackList(item);
             }}
@@ -111,7 +113,7 @@ function AllFeedbacks({ setFlash }) {
           </h4>
         ))}
       </div>
-      <div className="feedbacks-container">
+      <div className={styles["feedbacks-container"]}>
         {selectedFeedbackList === "all" &&
           feedbacks?.map((feedback) => {
             return (

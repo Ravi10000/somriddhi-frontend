@@ -9,7 +9,7 @@
     height: 50px;
     border-radius: 8px;
   }
-  h4{
+  h4 {
     text-transform: capitalize;
   }
   .details {
@@ -19,10 +19,21 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      .user-info {
+        span {
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: #41b079;
+          &.Inactive{
+            color: #f01c21;
+          }
+        }
+      }
       .actions {
         display: flex;
         gap: 10px;
-        .status-loader, .delete-loader{
+        .status-loader,
+        .delete-loader {
           width: 15px;
           height: 15px;
           border: 2px solid #f01c21;

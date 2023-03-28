@@ -1,33 +1,34 @@
 import React from "react";
-import "./nav.styles.scss";
-// import Person from "./person.png";
-// import Search from "./sea.png";
-// import Noti from "./noti.png";
+import styles from "./nav.module.scss";
 
 const nav = ({ selectedOption, showMenu, isMenuVisible }) => {
   return (
-    <div className="top-bar-container">
-      <div className="top-bar">
-        <div className="left">
-          <div className="hamburger" onClick={showMenu}>
-            <div className={`line ${isMenuVisible && "active"}`}></div>
+    <div className={styles["top-bar-container"]}>
+      <div className={styles["top-bar"]}>
+        <div className={styles["left"]}>
+          <div className={styles["hamburger"]} onClick={showMenu}>
+            <div
+              className={`${styles["line"]} ${
+                isMenuVisible && styles["active"]
+              }`}
+            ></div>
           </div>
-          <h3 className="selected-option">{selectedOption}</h3>
+          <h3 className={styles["selected-option"]}>{selectedOption}</h3>
         </div>
-        <div className="right">
-          <div className="icon search-icon">
+        <div className={styles["right"]}>
+          <div className={styles["icon"] + " " + styles["search-icon"]}>
             <img src="/search.png" alt="search" />
           </div>
-          <div className="icon notify-icon">
+          <div className={styles["icon"] + " " + styles["notify-icon"]}>
             <img src="/notify.png" alt="" />
           </div>
-          <div className="icon profile-icon">
-            <div className="user-details">
-              <img className="profile-pic" src="/person.png" alt="" />
-              <div className="name">Name</div>
+          <div className={styles["icon"] + " " + styles["profile-icon"]}>
+            <div className={styles["user-details"]}>
+              <img className={styles["profile-pic"]} src="/user.png" alt="" />
+              <div className={styles["name"]}>Name</div>
             </div>
             <img
-              className="drop-down-icon"
+              className={styles["drop-down-icon"]}
               src="/arrow-down.png"
               alt="show more"
             />

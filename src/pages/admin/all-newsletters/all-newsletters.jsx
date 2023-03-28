@@ -1,4 +1,4 @@
-import "./all-newsletters.styles.scss";
+import styles from "./all-newsletters.module.scss";
 
 import React, { useState, useEffect } from "react";
 import TitleSection from "../title-section/title-section";
@@ -18,7 +18,7 @@ export default function AllNewsletters() {
     })();
   }, []);
   return (
-    <div className="all-newsletters">
+    <div className={styles["all-newsletters"]}>
       <TitleSection
         noAddButton
         title="all subscriptions"
@@ -26,8 +26,8 @@ export default function AllNewsletters() {
           alert("add newsletters popup need to be here");
         }}
       />
-      <div className="newslettes-table-container">
-        <table className="subscription-table">
+      <div className={styles["newslettes-table-container"]}>
+        <table className={styles["subscription-table"]}>
           <thead>
             <tr>
               <th>Email</th>

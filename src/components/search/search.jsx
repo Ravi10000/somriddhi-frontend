@@ -1,12 +1,10 @@
-import './search.styles.scss';
-
-import React from 'react'
+import styles from "./search.module.scss";
 
 export default function Search() {
-    return (
-        <div className="search">
-            <img src="/search.png" alt="search" />
-            <input type="search" placeholder='Search For brand, category, coupon'/>
-        </div>
-    )
+  return (
+    <div className={styles["search"]}>
+      <img src="/search.png" alt="search" />
+      <input type="search" placeholder="Search For brand, category, coupon" />
+    </div>
+  );
 }

@@ -40,7 +40,7 @@ import { getUser } from "./api";
 function App({ setCurrentUser, flash, setFlash }) {
   const modal = useLoginModal();
 
-  // console.log({ modal });
+  console.log({ modal });
 
   const { pathname } = useLocation();
   // console.log({ pathname });

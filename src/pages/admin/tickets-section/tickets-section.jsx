@@ -1,4 +1,4 @@
-import "./tickets-section.styles.scss";
+import styles from "./tickets-section.module.scss";
 
 // react hooks
 import { useState, useEffect } from "react";
@@ -76,7 +76,7 @@ function TicketsSection({ setFlash }) {
   }, [selectedTickets]);
 
   return (
-    <div className="tickets-section">
+    <div className={styles["tickets-section"]}>
       {showReplyPopup && (
         <AddReplyPopup
           fetchTickets={fetchTickets}
@@ -85,11 +85,11 @@ function TicketsSection({ setFlash }) {
           setTicketToReply={setTicketToReply}
         />
       )}
-      <div className="select-tickets">
+      <div className={styles["select-tickets"]}>
         {options.map((item) => (
           <h4
             key={item}
-            className={`${selectedTickets === item ? "active" : ""}`}
+            className={`${selectedTickets === item ? styles["active"] : ""}`}
             onClick={() => {
               setSelectedTickets(item);
             }}
@@ -98,7 +98,7 @@ function TicketsSection({ setFlash }) {
           </h4>
         ))}
       </div>
-      <div className="tickets">
+      <div className={styles["tickets"]}>
         {selectedTickets === "active tickets" &&
           tickets?.map((ticket) => (
             <TicketCard

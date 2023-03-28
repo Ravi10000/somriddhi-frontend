@@ -1,4 +1,4 @@
-import "./all-customers.styles.scss";
+import styles from "./all-customers.module.scss";
 
 // react hooks
 import { useState, useEffect } from "react";
@@ -26,7 +26,7 @@ export default function AllCustomers() {
       {showAddCustomerPopup && (
         <AddCustomerPopup setShowPopup={setShowAddCustomerPopup} />
       )}
-      <div className="all-customers">
+      <div className={styles["all-customers"]}>
         <TitleSection
           title="all customers"
           uploadBtn
@@ -35,8 +35,8 @@ export default function AllCustomers() {
           }}
         />
         {/* <div className="customers-table-container"> */}
-        <div className="customers-table-container">
-          <table className="customers-table">
+        <div className={styles["customers-table-container"]}>
+          <table className={styles["customers-table"]}>
             <thead>
               <tr>
                 <th>Email</th>

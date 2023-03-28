@@ -1,7 +1,7 @@
-import "./coupon.styles.scss";
+import styles from "./coupon.module.scss";
 
 // packages
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // components
 import Button from "../../components/button/button";
@@ -111,17 +111,14 @@ function CouponPage({ currentUser }) {
 
   useEffect(() => {
     sendAnalytics();
-  }, []);
-
-  useEffect(() => {
     getDeal();
   }, []);
 
   return (
-    <div className="coupon-page">
-      <div className="head">
+    <div className={styles["coupon-page"]}>
+      <div className={styles["head"]}>
         <div
-          className="go-back link"
+          className={styles["go-back"] + " " + styles["link"]}
           onClick={() => {
             navigate(-1);
           }}
@@ -129,53 +126,56 @@ function CouponPage({ currentUser }) {
           <img src="/go-back.png" alt="go back" />
           <p>go back</p>
         </div>
-        <div className="share link">
+        <div className={styles["share"] + " " + styles["link"]}>
           <p>share</p>
           <img src="/share.png" alt="go back" />
         </div>
       </div>
-      <div className="coupon-container">
-        <div className="left">
+      <div className={styles["coupon-container"]}>
+        <div className={styles["left"]}>
           <h3>Deal Ends In</h3>
-          <div className="expires-in">
-            <div className="hh time">
-              <p className="highlight">{hoursLeft}</p>
+          <div className={styles["expires-in"]}>
+            <div className={styles["time"]}>
+              <p className={styles["highlight"]}>{hoursLeft}</p>
               <p>HH</p>
             </div>
-            <div className="mm time">
-              <p className="highlight">{minutesLeft}</p>
+            <div className={styles["time"]}>
+              <p className={styles["highlight"]}>{minutesLeft}</p>
               <p>MM</p>
             </div>
-            <div className="ss time">
-              <p className="highlight">{secondsLeft}</p>
+            <div className={styles["time"]}>
+              <p className={styles["highlight"]}>{secondsLeft}</p>
               <p>SS</p>
             </div>
           </div>
           {dealInfo.image && (
             <img
-              className="dealInfoImage"
+              className={styles["dealInfoImage"]}
               src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                 dealInfo.image
               }`}
+              onError={(e) => {
+                e && (e.target.src = "/no-photo.png");
+              }}
               alt="coupon image"
             />
           )}
         </div>
-        <div className="right">
+        <div className={styles["right"]}>
           <h3>Use Code</h3>
-          <div className="coupon-link-container">
+          <div className={styles["coupon-link-container"]}>
             <CouponCode couponCode={couponDetails?.couponCode} />
             <Button onClick={updateEndTime}>visit site</Button>
           </div>
-          <div className="info-container">
-            <div className="list">
+          <div className={styles["info-container"]}>
+            <div className={styles["list"]}>
               <h3>About Coupon</h3>
               <ul>
                 {/* {dealInfo.description &&
                   des.map((message, index) => <li>{message}</li>)} */}
               </ul>
             </div>
-            <div className="list">
+            <div className={styles["list"]}>
               <h3>About category</h3>
               <ul>
                 {/* {dealInfo.description && des.map((message, index) => ( */}
@@ -187,7 +187,7 @@ function CouponPage({ currentUser }) {
                 {/* ))} */}
               </ul>
             </div>
-            <div className="list">
+            <div className={styles["list"]}>
               <h3>how to get this offer</h3>
               <ul>
                 {info.map((message, index) => (
@@ -195,7 +195,7 @@ function CouponPage({ currentUser }) {
                 ))}
               </ul>
             </div>
-            <div className="list">
+            <div className={styles["list"]}>
               <h3>important information</h3>
               <ul>
                 <li>Free Shipping on all orders</li>

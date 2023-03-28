@@ -1,7 +1,5 @@
 import styles from "./popup-head.module.scss";
 
-import React from "react";
-
 export default function PopupHead({ title, setShowPopup }) {
   return (
     <div className={styles["head"]}>

@@ -1,4 +1,4 @@
-import "./title-section.styles.scss";
+import styles from "./title-section.module.scss";
 import React from "react";
 
 export default function TitleSection({
@@ -8,12 +8,12 @@ export default function TitleSection({
   uploadBtn,
 }) {
   return (
-    <div className="title-section">
-      <h3 className="title active">{title}</h3>
-      <div className="title-buttons">
+    <div className={styles["title-section"]}>
+      <h3 className={styles["title active"]}>{title}</h3>
+      <div className={styles["title-buttons"]}>
         {uploadBtn && (
-          <div className="upload-container">
-            <button className="upload">
+          <div className={styles["upload-container"]}>
+            <button className={styles["upload"]}>
               <img src="/upload.png" alt="upload button" />
               <p>Upload</p>
             </button>
@@ -21,7 +21,10 @@ export default function TitleSection({
           </div>
         )}
         {!noAddButton && (
-          <button className="add button" onClick={addFunction}>
+          <button
+            className={styles["add"] + " " + styles["button"]}
+            onClick={addFunction}
+          >
             <img src="/add.png" alt="add button" />
             <p>Add</p>
           </button>

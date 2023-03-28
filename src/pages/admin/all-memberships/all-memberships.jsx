@@ -1,4 +1,4 @@
-import "./all-memberships.styles.scss";
+import styles from "./all-memberships.module.scss";
 
 // react hooks
 import { useState, useEffect } from "react";
@@ -62,14 +62,14 @@ function AllMemberships({ setFlash }) {
         />
       )}
 
-      <div className="all-memberships">
+      <div className={styles["all-memberships"]}>
         <TitleSection
           title="all membershipss"
           addFunction={() => {
             setShowAddMembershipPopup(true);
           }}
         />
-        <div className="membership-cards-container">
+        <div className={styles["membership-cards-container"]}>
           {memberships?.map((membership) => (
             <MembershipCard
               key={membership?._id}

@@ -1,9 +1,8 @@
-import "./phone-form.styles.scss";
+import styles from "./phone-form.module.scss";
 
 // packages imports
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { sendOtp } from "../../../api/index";
-import axios from "axios";
 // components
 import Button from "../../button/button";
 import TextInput from "../../text-input/text-input";
@@ -68,14 +67,14 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
   }
   return (
     <form
-      className="phone-form"
+      className={styles["phone-form"]}
       encType="application/json"
       onSubmit={phoneFormSubmit}
     >
       <h1>Login</h1>
       <p>Enter your 10 digit phone number</p>
       <input
-        className="input"
+        className={styles["input"]}
         ref={phoneNumberRef}
         type="text"
         name="phone"
@@ -86,7 +85,6 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
           (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
         }
       />
-      {/* <TextInput label="Phone" name="phone" placeholder="Enter Phone Number" /> */}
       <Button disabled={!validInput} isLoading={isLoading}>
         Next
       </Button>

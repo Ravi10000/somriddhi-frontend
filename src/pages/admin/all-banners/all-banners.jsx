@@ -1,4 +1,4 @@
-import "./all-banners.styles.scss";
+import styles from "./all-banners.module.scss";
 // react hooks
 import { useState, useEffect } from "react";
 
@@ -59,15 +59,15 @@ function AllBanners({ setFlash }) {
           fetchBanners={fetchBanners}
         />
       )}
-      <div className="all-banners">
+      <div className={styles["all-banners"]}>
         <TitleSection
           title="all banners"
           addFunction={() => setShowAddBannerPopup(true)}
         />
-        <div className="banner-cards-container">
+        <div className={styles["banner-cards-container"]}>
           {banners?.map((banner) => (
             <BannerCard
-            key={banner?._id}
+              key={banner?._id}
               setShowPopup={setShowAddBannerPopup}
               setBannerToEdit={setBannerToEdit}
               banner={banner}

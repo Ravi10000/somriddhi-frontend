@@ -11,6 +11,11 @@ header {
     // height: fit-content;
     width: fit-content;
   }
+  // .buttons {
+  button {
+    width: max-content;
+  }
+  // }
   .logged-in {
     display: flex;
     background: #fff;
@@ -20,6 +25,7 @@ header {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    width: max-content;
     img {
       width: 13px;
       height: fit-content;

@@ -1,6 +1,6 @@
-import "./login-popup.styles.scss";
+import styles from "./login-popup.module.scss";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneNumberForm from "./phone-form/phone-form";
 import OtpForm from "./otp-form/otp-form";
 import UserDetailsForm from "./user-details-form/user-details-form";
@@ -14,10 +14,7 @@ const loginStages = ["phone-entry", "verify-otp", "user-details", "subscribe"];
 function LoginPopup({ closeModal }) {
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
   const [phone, setPhone] = useState("");
-  // const [otp, setOtp] = useState("");
-  // const [referralCode, setReferralCode] = useState("");
 
-  // console.log({ phoneNumber, otp });
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -44,8 +41,8 @@ function LoginPopup({ closeModal }) {
   }
   return (
     <Backdrop>
-      <div className="login">
-        <div className="go-back" onClick={closeModal}>
+      <div className={styles["login"]}>
+        <div className={styles["go-back"]} onClick={closeModal}>
           <img src="/go-back.png" alt="go back" />
           <p>Back</p>
         </div>
@@ -61,8 +58,6 @@ function LoginPopup({ closeModal }) {
             nextStage={nextStage}
             phone={phone}
             closeModal={closeModal}
-            // otp={otp}
-            // setOtp={setOtp}
           />
         )}
         {loginStages[currentLoginStage] === "user-details" && (
@@ -70,7 +65,6 @@ function LoginPopup({ closeModal }) {
             nextStage={nextStage}
             closeModal={closeModal}
             phone={phone}
-            // setReferralCode={setReferralCode}
           />
         )}
         {loginStages[currentLoginStage] === "subscribe" && (
@@ -78,7 +72,6 @@ function LoginPopup({ closeModal }) {
             nextStage={nextStage}
             closeModal={closeModal}
             phone={phone}
-            // setReferralCode={setReferralCode}
           />
         )}
       </div>

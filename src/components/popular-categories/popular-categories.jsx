@@ -1,7 +1,6 @@
-import "./popular-categories.styles.scss";
+import styles from "./popular-categories.module.scss";
 
 import React, { useEffect, useState } from "react";
-import categoriesList from "./popular-categories-list";
 import { getAllCategories } from "../../api/index.js";
 import { useNavigate } from "react-router-dom";
 
@@ -19,17 +18,20 @@ export default function PopulatCategories() {
     getAllCategoriesData();
   }, []);
   return (
-    <section className="popular-categories-section" id="popular-category">
-      <div className="container">
-        <div className="left">
+    <section
+      className={styles["popular-categories-section"]}
+      id="popular-category"
+    >
+      <div className={styles["container"]}>
+        <div className={styles["left"]}>
           <img src="/table-bg.png" alt="categories table background" />
         </div>
-        <div className="right">
+        <div className={styles["right"]}>
           <h2 className="_title">Popular Categories</h2>
-          <div className="categories-table">
+          <div className={styles["categories-table"]}>
             {categories.map((category, index) => (
               <div
-                className="category-name"
+                className={styles["category-name"]}
                 key={index}
                 onClick={() => {
                   navigate(`/category/${category?.name}`, {

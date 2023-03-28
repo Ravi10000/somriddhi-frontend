@@ -1,7 +1,7 @@
-import "./process-editable.styles.scss";
+import styles from "./process-editable.module.scss";
 
-import React, { useState, useEffect } from "react";
-import { createContent, getAllContent } from "../../../api";
+import { useState, useEffect } from "react";
+import { getAllContent } from "../../../api";
 import UpdateContentPopup from "../../../components/update-content-popup/update-content-popup";
 
 export default function ProcessEditable() {
@@ -21,7 +21,7 @@ export default function ProcessEditable() {
   }, []);
 
   return (
-    <section className="process-editable-section">
+    <section className={styles["process-editable-section"]}>
       {showContentPopup && (
         <UpdateContentPopup
           fetchAllContents={fetchAllContents}
@@ -29,18 +29,22 @@ export default function ProcessEditable() {
           content={contentToUpdate}
         />
       )}
-      <div className="process-cards-container">
-        <div className="process-card">
+      <div className={styles["process-cards-container"]}>
+        <div className={styles["process-card"]}>
           <div
-            className="edit-icon-container"
+            className={styles["edit-icon-container"]}
             onClick={() => {
               setContentToUpdate(contents?.[0]);
               setShowContentPopup(true);
             }}
           >
-            <img className="edit-icon" src="/edit.png" alt="edit img" />
+            <img
+              className={styles["edit-icon"]}
+              src="/edit.png"
+              alt="edit img"
+            />
           </div>
-          <div className="img-container">
+          <div className={styles["img-container"]}>
             <img
               src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                 contents?.[0]?.image
@@ -51,25 +55,29 @@ export default function ProcessEditable() {
               }}
             />
           </div>
-          <div className="title">
+          <div className={styles["title"]}>
             <h4>{contents?.[0]?.title}</h4>
           </div>
-          <div className="desc">
+          <div className={styles["desc"]}>
             <p>{contents?.[0]?.description}</p>
           </div>
-          <img className="arrow" src="/arrow.png" alt="" />
+          <img className={styles["arrow"]} src="/arrow.png" alt="" />
         </div>
-        <div className="process-card">
+        <div className={styles["process-card"]}>
           <div
-            className="edit-icon-container"
+            className={styles["edit-icon-container"]}
             onClick={() => {
               setContentToUpdate(contents?.[1]);
               setShowContentPopup(true);
             }}
           >
-            <img className="edit-icon" src="/edit.png" alt="edit img" />
+            <img
+              className={styles["edit-icon"]}
+              src="/edit.png"
+              alt="edit img"
+            />
           </div>
-          <div className="img-container">
+          <div className={styles["img-container"]}>
             <img
               src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                 contents?.[1]?.image
@@ -80,25 +88,33 @@ export default function ProcessEditable() {
               }}
             />
           </div>
-          <div className="title">
+          <div className={styles["title"]}>
             <h4>{contents?.[1]?.title}</h4>
           </div>
-          <div className="desc">
+          <div className={styles["desc"]}>
             <p>{contents?.[1]?.description}</p>
           </div>
-          <img className="arrow flip" src="/arrow-fliped.png" alt="" />
+          <img
+            className={`${styles.arrow} ${styles.flip}`}
+            src="/arrow-fliped.png"
+            alt=""
+          />
         </div>
-        <div className="process-card">
+        <div className={styles["process-card"]}>
           <div
-            className="edit-icon-container"
+            className={styles["edit-icon-container"]}
             onClick={() => {
               setContentToUpdate(contents?.[2]);
               setShowContentPopup(true);
             }}
           >
-            <img className="edit-icon" src="/edit.png" alt="edit img" />
+            <img
+              className={styles["edit-icon"]}
+              src="/edit.png"
+              alt="edit img"
+            />
           </div>
-          <div className="img-container">
+          <div className={styles["img-container"]}>
             <img
               src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                 contents?.[2]?.image
@@ -109,10 +125,10 @@ export default function ProcessEditable() {
               }}
             />
           </div>
-          <div className="title">
+          <div className={styles["title"]}>
             <h4>{contents?.[2]?.title}</h4>
           </div>
-          <div className="desc">
+          <div className={styles["desc"]}>
             <p>{contents?.[2]?.description}</p>
           </div>
         </div>

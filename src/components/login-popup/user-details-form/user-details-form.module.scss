@@ -1,0 +1,42 @@
+form#user-input {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  h1.title {
+    margin-bottom: 20px;
+  }
+  .inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    // outline: 2px solid red;
+    gap: 20px;
+
+    .user-details-input {
+      width: 100%;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 15px;
+      border: 2px solid #e1e5e8;
+      border-radius: 8px;
+    }
+  }
+  p {
+    text-align: center;
+    &.msg {
+      font-size: 0.9rem;
+      text-align: start;
+      margin: 5px 0 20px 10px;
+      color: #8f8f8f;
+    }
+    &.skip-now {
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+  }
+  .user-form-btn {
+    width: 100%;
+  }
+}

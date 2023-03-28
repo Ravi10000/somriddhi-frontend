@@ -12,7 +12,7 @@ export default function Coupons() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [deals, setDeals] = useState([]);
   const [categories, setCategories] = useState([]);
-  // console.log({ selectedCategory, categories, deals });
+  console.log({ selectedCategory, categories, deals });
 
   const fetchCategories = async () => {
     const response = await getAllCategories();

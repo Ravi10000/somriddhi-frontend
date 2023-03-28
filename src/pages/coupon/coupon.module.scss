@@ -55,6 +55,11 @@
           }
         }
       }
+      .dealInfoImage {
+        max-height: 400px;
+        max-width: 400px;
+        object-fit: contain;
+      }
     }
 
     .right {
@@ -98,12 +103,6 @@
   }
 }
 
-.dealInfoImage {
-  max-height: 400px;
-  max-width: 400px;
-  object-fit: contain;
-}
-
 @media (min-width: 700px) {
   .coupon-page {
     .coupon-container {
@@ -111,6 +110,7 @@
       place-items: center;
 
       .right {
+        padding-right: 20px;
         width: 80%;
         display: grid;
       }

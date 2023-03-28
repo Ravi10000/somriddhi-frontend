@@ -1,4 +1,4 @@
-import "./offers.styles.scss";
+import styles from "./offers.module.scss";
 
 // react hooks
 import { useEffect, useState } from "react";
@@ -44,8 +44,8 @@ export default function Offers() {
 
   const [selectedCategory, setSelectedCategory] = useState("popular coupons");
   return (
-    <section className="offers-section">
-      <div className="categories">
+    <section className={styles["offers-section"]}>
+      <div className={styles["categories"]}>
         {categories.map(({ name, img }) => (
           <Category
             key={name}
@@ -56,7 +56,7 @@ export default function Offers() {
           />
         ))}
       </div>
-      <div className="offer-carousel">
+      <div className={styles["offer-carousel"]}>
         <OffersSlider offers={deals} />
       </div>
     </section>
