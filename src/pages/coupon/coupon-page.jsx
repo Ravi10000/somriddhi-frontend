@@ -69,7 +69,11 @@ function CouponPage({ currentUser }) {
       formData.append("couponId", id);
       // currentUser && formData.append("userId", currentUser?._id);
       formData.append("deviceType", "Web");
-      formData.append("startDateTime", new Date(Date.now()).toString());
+      // formData.append("startDateTime", new Date(Date.now()).toString());
+      formData.append(
+        "startDateTime",
+        "Wed Apr 29 2023 11:44:34 GMT+0530 (India Standard Time)"
+      );
 
       try {
         // const { data } = await axios.get("https://geolocation-db.com/json");

@@ -7,6 +7,11 @@ import axios from "axios";
 
 export default function Analytics() {
   const [data, setData] = useState([["Category", "No. of users visited"]]);
+  // const [couponDataTitle, setCouponDataTitle] = useState([["Year"]]);
+  // const [couponData, setCouponData] = useState([0]);
+  const [barChartData, setBarChartData] = useState([[" "], [0]]);
+  const [couponCount, setCouponCount] = useState(0);
+
   const [loading, setLoading] = useState(false);
   const [categoryDataCount, setCategoryDataCount] = useState(0);
 
@@ -32,6 +37,33 @@ export default function Analytics() {
     }
   }
 
+  async function getCouponAnalytics() {
+    try {
+      const response = await axios.get(
+        "http://localhost:8001/api/analytic/coupon"
+      );
+      console.log({ response });
+      if (response.data.status === "success") {
+        const data = response.data.analyticData;
+        const couponValue = [" "];
+        const title = [" "];
+        const count = data.reduce((acc, curr) => acc + curr[1], 0);
+        setCouponCount(count);
+
+        data.forEach((item) => {
+          title.push(item[0]);
+          couponValue.push(item[1]);
+        });
+        setBarChartData([title, couponValue]);
+        console.log({ title, couponValue });
+        // setCouponDataTitle((prevData) => [...prevData, ...title]);
+        // setCouponData((prevData) => [...prevData, ...couponValue]);
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  }
+
   console.log({ loading });
   useEffect(() => {
     // setData([
@@ -42,6 +74,7 @@ export default function Analytics() {
     //   ["Watch TV", 2],
     //   ["Sleep", 7],
     // ]);
+    getCouponAnalytics();
     getCategeoryAnalytics();
   }, []);
   return (
@@ -50,13 +83,13 @@ export default function Analytics() {
       <div className={styles.chartsContainer}>
         <div className={styles.categoryChart}>
           <div className={styles.title}>
-            <h2>Category Analytics</h2>
+            <h2>Categories Analytics</h2>
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
-              <h3>No. of visits: {categoryDataCount}</h3>
+              <h3>{categoryDataCount}</h3>
             )}
-            <p>Popular Categories</p>
+            <p>Popular Categories Visits</p>
           </div>
           <div className={styles.chart}>
             {loading && <div className={styles.loader}></div>}
@@ -71,22 +104,22 @@ export default function Analytics() {
         </div>
         <div className={styles.categoryChart}>
           <div className={styles.title}>
-            <h2>Category Analytics</h2>
+            <h2>Popular Coupon Analytics</h2>
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
-              <h3>{categoryDataCount}</h3>
+              <h3>{couponCount}</h3>
             )}
-            <p>Popular Coupons</p>
+            <p>Popular Coupons Visits</p>
           </div>
           <div className={styles.chart}>
             {loading && <div className={styles.loader}></div>}
             <Chart
-              chartType="Line"
+              chartType="Bar"
               width="100%"
               height="400px"
-              data={data}
-              options={options}
+              data={barChartData}
+              // options={options}
             />
           </div>
         </div>
@@ -95,42 +128,17 @@ export default function Analytics() {
   );
 }
 
-export const data = [
-  [
-    { type: "date", label: "Day" },
-    "Average temperature",
-    "Average hours of daylight",
-  ],
-  [new Date(2014, 0), -0.5, 5.7],
-  [new Date(2014, 1), 0.4, 8.7],
-  [new Date(2014, 2), 0.5, 12],
-  [new Date(2014, 3), 2.9, 15.3],
-  [new Date(2014, 4), 6.3, 18.6],
-  [new Date(2014, 5), 9, 20.9],
-  [new Date(2014, 6), 10.6, 19.8],
-  [new Date(2014, 7), 10.3, 16.6],
-  [new Date(2014, 8), 7.4, 13.3],
-  [new Date(2014, 9), 4.4, 9.9],
-  [new Date(2014, 10), 1.1, 6.6],
-  [new Date(2014, 11), -0.2, 4.5],
+export const barChartData = [
+  ["Year", "Sales", "Expenses", "Profit"],
+  ["2023", 1000, 400, 200],
+  // ["2015", 1170, 460, 250],
+  // ["2016", 660, 1120, 300],
+  // ["2017", 1030, 540, 350],
 ];
 
-export const options = {
-  chart: {
-    title: "",
-  },
-  width: 900,
-  height: 500,
-  series: {
-    // Gives each series an axis name that matches the Y-axis below.
-    0: { axis: "Temps" },
-    1: { axis: "Daylight" },
-  },
-  axes: {
-    // Adds labels to each axis; they don't have to match the axis names.
-    y: {
-      Temps: { label: "No. of users visited" },
-      Daylight: { label: "Daylight" },
-    },
-  },
-};
+// export const options = {
+//   chart: {
+//     title: "Popular Coupons Visited",
+//     subtitle: "In year 2023",
+//   },
+// };
