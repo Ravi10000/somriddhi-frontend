@@ -81,7 +81,7 @@ export default function Analytics() {
     <div className={styles.analytics}>
       <TitleSection title="All Analytics" noAddButton />
       <div className={styles.chartsContainer}>
-        <div className={styles.categoryChart}>
+        <div className={styles.chartContainer}>
           <div className={styles.title}>
             <h2>Categories Analytics</h2>
             {loading ? (
@@ -102,9 +102,9 @@ export default function Analytics() {
             />
           </div>
         </div>
-        <div className={styles.categoryChart}>
+        <div className={styles.chartContainer}>
           <div className={styles.title}>
-            <h2>Popular Coupon Analytics</h2>
+            <h2>Popular Coupons Analytics</h2>
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
