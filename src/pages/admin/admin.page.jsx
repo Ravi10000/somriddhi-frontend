@@ -7,7 +7,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 import SideBar from "../../components/sidebar/sidebar";
 
-import Nav from "../../components/Nav/Nav";
+import TopBar from "../../components/topbar/topbar";
 import AddBannerModal from "../Banner/AddBannerModal";
 import AllBanners from "./all-banners/all-banners";
 import AllDeals from "./all-deals/all-deals";
@@ -70,7 +70,7 @@ export default function AdminPage() {
           hideMenu={hideMenu}
         />
         <div className={styles["content"]}>
-          <Nav
+          <TopBar
             selectedOption={selectedOption}
             showMenu={showMenu}
             isMenuVisible={isMenuVisible}

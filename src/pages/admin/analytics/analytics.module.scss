@@ -7,15 +7,12 @@
     width: 100%;
     display: grid;
     gap: 25px;
-    // outline: 2px solid red;
     .chartContainer {
       box-shadow: 0px 2.59535px 12.9767px rgba(0, 0, 0, 0.1);
-      // position: relative;
       border-radius: 8px;
       background: #fff;
       padding: 25px;
       width: 100%;
-      // margin: 10px;
       .title {
         display: grid;
         gap: 15px;
@@ -40,7 +37,6 @@
       }
       .chart {
         min-height: 300px;
-        // min-width: 200px;
         position: relative;
         .loader {
           position: absolute;

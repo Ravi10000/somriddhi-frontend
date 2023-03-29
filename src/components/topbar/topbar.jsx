@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import styles from "./nav.module.scss";
+import styles from "./topbar.module.scss";
+import Notification from "../notification/notification";
 
-const nav = ({ selectedOption, showMenu, isMenuVisible }) => {
+function TopBar({ selectedOption, showMenu, isMenuVisible }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const searchRef = useRef();
 
   useEffect(() => {
@@ -10,6 +12,9 @@ const nav = ({ selectedOption, showMenu, isMenuVisible }) => {
   }, [isSearchOpen]);
   return (
     <div className={styles["top-bar-container"]}>
+      {isNotificationOpen && (
+        <Notification setIsNotificationOpen={setIsNotificationOpen} />
+      )}
       <div className={styles["top-bar"]}>
         <div className={styles["left"]}>
           <div className={styles["hamburger"]} onClick={showMenu}>
@@ -47,7 +52,12 @@ const nav = ({ selectedOption, showMenu, isMenuVisible }) => {
               </div>
             )}
           </div>
-          <div className={styles["icon"] + " " + styles["notify-icon"]}>
+          <div
+            className={styles["icon"] + " " + styles["notify-icon"]}
+            onClick={() => {
+              setIsNotificationOpen(true);
+            }}
+          >
             <img src="/notify.png" alt="" />
           </div>
           <div className={styles["icon"] + " " + styles["profile-icon"]}>
@@ -65,6 +75,6 @@ const nav = ({ selectedOption, showMenu, isMenuVisible }) => {
       </div>
     </div>
   );
-};
+}
 
-export default nav;
+export default TopBar;
