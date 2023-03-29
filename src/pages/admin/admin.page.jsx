@@ -20,6 +20,7 @@ import TicketsSection from "./tickets-section/tickets-section";
 import AllFaqs from "./all-faqs/all-faqs";
 import AllFeedbacks from "./all-feedbacks/all-feedbacks";
 import menuList from "../../components/sidebar/menu-list";
+import Analytics from "./analytics/analytics";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -85,6 +86,7 @@ export default function AdminPage() {
             {selectedOption === "tickets" && <TicketsSection />}
             {selectedOption === "FAQs" && <AllFaqs />}
             {selectedOption === "feedbacks" && <AllFeedbacks />}
+            {selectedOption === "analytics" && <Analytics />}
           </div>
         </div>
       </div>

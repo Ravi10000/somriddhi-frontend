@@ -19,7 +19,7 @@
       align-items: center;
       gap: 30px;
       text-align: center;
-      max-width: 300px;
+      max-width: 270px;
       position: relative;
 
       img.arrow {
@@ -95,7 +95,6 @@
         }
         img.arrow.flip {
           top: 25px;
-          // width: 180px !important;
           left: auto;
           right: -100px;
           transform: rotate(0deg);
@@ -104,24 +103,3 @@
     }
   }
 }
-
-// @media (min-width: 700px) {
-//     .process-section {
-//         .process-cards-container {
-//             .process-card {
-//                 img.arrow {
-//                     width: 300px;
-//                     // top: 25px;
-//                     // right: -50%;
-//                     // transform: rotatex(180deg) scale(.75);
-//                 }
-
-//                 img.arrow.flip {
-//                     // top: 25px;
-//                     // right: -50%;
-//                     // transform: scale(.75);
-//                 }
-//             }
-//         }
-//     }
-// }

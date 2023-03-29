@@ -77,6 +77,13 @@
   .sidebar {
     position: static;
     height: fit-content;
+
+    // new
+    // position: sticky;
+    // left: 0;
+    // top: 0;
+    // overflow-y: scroll;
+
     .logo-and-close {
       justify-content: center;
       .close-btn {

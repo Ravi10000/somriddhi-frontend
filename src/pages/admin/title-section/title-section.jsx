@@ -9,7 +9,7 @@ export default function TitleSection({
 }) {
   return (
     <div className={styles["title-section"]}>
-      <h3 className={styles["title active"]}>{title}</h3>
+      <h3 className={styles["title"] + " " + styles["active"]}>{title}</h3>
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
           <div className={styles["upload-container"]}>
