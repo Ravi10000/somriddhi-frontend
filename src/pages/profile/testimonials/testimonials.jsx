@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getActiveFeedbacks } from "../../../api";
 
 import AddFeedbackPopup from "../../../components/add-feedback-popup/add-feedback-popup";
+import Button from "../../../components/button/button";
 export default function Testimonials() {
   const [reviews, setReviews] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -43,14 +44,14 @@ export default function Testimonials() {
         Billionaire tycoon Ratan Tata has also invested in CashKaro, because he
         also believes that Indians love to #GetMoreHamesha!
       </p>
-      <button
+      <Button
         onClick={() => {
           window.scrollTo(0, 0);
           setIsModelOpen(true);
         }}
       >
         Write a review
-      </button>
+      </Button>
       <div className="reviews">
         {reviews?.map(
           ({ username, createdAt, starRating, feedbackText }, index) => {

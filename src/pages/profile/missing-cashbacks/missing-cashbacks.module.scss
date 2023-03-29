@@ -12,7 +12,8 @@
     .buttons-container {
       display: flex;
       gap: 20px;
-      button:nth-child(2) {
+      .noBtn {
+        padding: 12px 15px;
         background: #fff;
         color: #f01c21;
         border: 2px solid #ececec;

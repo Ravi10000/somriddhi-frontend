@@ -1,4 +1,4 @@
-import "./settings.styles.scss";
+import styles from "./settings.module.scss";
 
 import React, { useState } from "react";
 import { createStructuredSelector } from "reselect";
@@ -45,13 +45,15 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
 
   const [view, setView] = useState("profile");
   return (
-    <div className="settings">
+    <div className={styles.settings}>
       <h2>Settings</h2>
-      <div className="view-selectors">
+      <div className={styles["view-selectors"]}>
         {viewList?.map((viewItem, index) => (
           <div
             key={index}
-            className={`selector ${view === viewItem && "active"}`}
+            className={`${styles.selector} ${
+              view === viewItem && styles.active
+            }`}
             onClick={() => {
               setView(viewItem);
             }}
@@ -63,7 +65,7 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
       {view === "payment" && (
         <form>
           <input type="text" placeholder="Edit your excel id" />
-          <button>Save Excel ID</button>
+          <button className={styles.btn}>Save Excel ID</button>
         </form>
       )}
       {view === "profile" && (
@@ -96,8 +98,8 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
               (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
             }
           />
-          <button>
-            Edit Profile {isLoading && <div className="loader"></div>}
+          <button className={styles.btn}>
+            Edit Profile {isLoading && <div className={styles.loader}></div>}
           </button>
         </form>
       )}

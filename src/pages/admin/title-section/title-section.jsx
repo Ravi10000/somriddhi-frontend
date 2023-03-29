@@ -13,7 +13,7 @@ export default function TitleSection({
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
           <div className={styles["upload-container"]}>
-            <button className={styles["upload"]}>
+            <button className={styles.upload + " " + styles.button}>
               <img src="/upload.png" alt="upload button" />
               <p>Upload</p>
             </button>

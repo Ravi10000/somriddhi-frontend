@@ -70,8 +70,10 @@ body {
 }
 
 button {
+  font-family: "Metropolis", sans-serif;
   border: none;
   cursor: pointer;
+  border-radius: 8px;
 }
 input {
   font-family: "Metropolis", sans-serif;

@@ -7,6 +7,7 @@ import Cross from "./cross.png";
 import Upload from "./upload.png";
 import { data } from "./Data";
 import { createNewBanner } from "../../api";
+// import Button from "../../components/button/button";
 
 export default function AddBannerModal({
   closeModal,
@@ -114,10 +115,9 @@ export default function AddBannerModal({
             />
           </form>
         </div>
-        <button onClick={addBanner} className="formButton">
-          {" "}
-          <span className="addBannerClass">Add Banner</span>{" "}
-        </button>
+        <Button onClick={addBanner} className="formButton">
+          <span className="addBannerClass">Add Banner</span>
+        </Button>
       </div>
     </div>
   );

@@ -1,6 +1,4 @@
 .settings {
-  // outline: 2px solid red;
-  // width: 100%;
   .view-selectors {
     border-bottom: 2px solid #ececec;
     display: flex;
@@ -42,11 +40,13 @@
         color: #091431;
       }
     }
-    button {
+    .btn {
       font-weight: 600;
       padding: 15px 30px;
       width: fit-content;
       background: #21aa27;
+      border-radius: 8px;
+      color: #fff;
       &.loader {
         width: 16px;
         height: 16px;

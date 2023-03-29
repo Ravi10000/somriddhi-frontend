@@ -2,6 +2,7 @@ import styles from "./add-ticket.module.scss";
 
 import React, { useState } from "react";
 import AddTicketPopup from "../../../components/add-ticket-popup/add-ticket-popup";
+import Button from "../../../components/button/button";
 
 export default function AddTicket() {
   const [showAddTicketPopup, setShowAddTicketPopup] = useState(false);
@@ -14,13 +15,13 @@ export default function AddTicket() {
           setShowSuccessMsg={setShowSuccessMsg}
         />
       )}
-      <button
+      <Button
         onClick={() => {
           setShowAddTicketPopup(true);
         }}
       >
         Add New Ticket
-      </button>
+      </Button>
       {showSuccessMsg && <h3>Ticket added successfully</h3>}
     </div>
   );

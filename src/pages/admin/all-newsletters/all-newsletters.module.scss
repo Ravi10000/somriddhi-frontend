@@ -1,7 +1,6 @@
 .all-newsletters {
-  // display: grid;
-  // place-items: center;
   .newslettes-table-container {
+    // width: max-content;
     width: 100vw;
     overflow-x: scroll;
     .subscription-table {
@@ -40,16 +39,22 @@
 
 @media (min-width: 500px) {
   .all-newsletters {
-    .subscription-table {
-      margin: 20px;
-      width: 80%;
+    .newslettes-table-container {
+      width: 95%;
+      overflow-x: hidden;
+      .subscription-table {
+        margin: 20px;
+        width: 100%;
+        // outline: 2px solid red;
+      }
     }
   }
 }
 @media (min-width: 800px) {
   .all-newsletters {
     .subscription-table {
-      width: 90%;
+      // width: 90%;
+      max-width: 1000px;
     }
   }
 }

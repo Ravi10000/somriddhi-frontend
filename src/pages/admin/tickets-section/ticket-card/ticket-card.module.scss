@@ -29,6 +29,11 @@
   .ticket-buttons {
     display: flex;
     gap: 20px;
+    button {
+      padding: 12px 15px;
+      color: #fff;
+      text-transform: capitalize;
+    }
     .resolve-btn {
       background: #41b079;
       &.loading {
