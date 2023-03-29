@@ -8,7 +8,7 @@ export default function SelectCategorySlider({
   selectedCategory,
   setSelectedCategory,
 }) {
-  const settings = {
+  let settings = {
     customPaging: function (i) {
       return <div className="dots"></div>;
     },
@@ -26,6 +26,8 @@ export default function SelectCategorySlider({
         settings: {
           slidesToShow: 7,
           slidesToScroll: 7,
+          dots: true,
+          infinite: categories.length > 7 ? true : false,
         },
       },
       {
@@ -33,6 +35,8 @@ export default function SelectCategorySlider({
         settings: {
           slidesToShow: 5,
           slidesToScroll: 5,
+          dots: true,
+          infinite: categories.length > 5 ? true : false,
         },
       },
       {
@@ -40,6 +44,8 @@ export default function SelectCategorySlider({
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
+          dots: true,
+          infinite: categories.length > 3 ? true : false,
         },
       },
     ],

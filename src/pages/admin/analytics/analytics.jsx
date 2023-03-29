@@ -42,7 +42,7 @@ export default function Analytics() {
       const response = await axios.get(
         "http://localhost:8001/api/analytic/coupon"
       );
-      console.log({ response });
+      // console.log({ response });
       if (response.data.status === "success") {
         const data = response.data.analyticData;
         const couponValue = [" "];
@@ -55,7 +55,7 @@ export default function Analytics() {
           couponValue.push(item[1]);
         });
         setBarChartData([title, couponValue]);
-        console.log({ title, couponValue });
+        // console.log({ title, couponValue });
         // setCouponDataTitle((prevData) => [...prevData, ...title]);
         // setCouponData((prevData) => [...prevData, ...couponValue]);
       }
@@ -64,7 +64,7 @@ export default function Analytics() {
     }
   }
 
-  console.log({ loading });
+  // console.log({ loading });
   useEffect(() => {
     // setData([
     //   ["Task", "Hours per Day"],

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
 import styles from "./topbar.module.scss";
+import React, { useState, useRef, useEffect } from "react";
 import Notification from "../notification/notification";
 
 function TopBar({ selectedOption, showMenu, isMenuVisible }) {

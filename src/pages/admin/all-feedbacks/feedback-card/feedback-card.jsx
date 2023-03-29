@@ -56,6 +56,7 @@ export default function FeedbackCard({
                 {isStatusChanging ? (
                   <div className={styles["status-loader"]}></div>
                 ) : (
+                  // <p>Hide</p>
                   <img src="/close.png" alt="" />
                 )}
               </button>

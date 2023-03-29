@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function Notification({ setIsNotificationOpen }) {
   const notificationRef = useRef(null);
+  const [list, setList] = React.useState([]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -25,6 +26,13 @@ export default function Notification({ setIsNotificationOpen }) {
           <img src="/close-red.png" alt="" />
         </button>
       </div>
+      {list?.length < 1 ? (
+        <div className={styles.noMessages}>
+          <p>you have no messages</p>
+        </div>
+      ) : (
+        <div className={styles.notificationList}></div>
+      )}
     </div>
   );
 }

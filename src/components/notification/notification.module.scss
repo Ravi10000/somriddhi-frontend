@@ -36,6 +36,16 @@
       }
     }
   }
+  .noMessages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    color: #454749;
+  }
 }
 
 @keyframes slideIn {
