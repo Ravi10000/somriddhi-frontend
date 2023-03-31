@@ -68,7 +68,7 @@ function MembershipSlider({ banners, currentUser }) {
                   banner?.image
                 }`}
                 onError={(e) => {
-                  e && (e.target.src = "/no-photo.png");
+                  e && (e.target.src = "/image-broke.png");
                 }}
                 alt={banner?.title}
               />

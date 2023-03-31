@@ -76,7 +76,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
                   banner.image
                 }`}
                 onError={(e) => {
-                  if (e) e.target.src = "/no-photo.png";
+                  if (e) e.target.src = "/image-broke.png";
                 }}
               />
               {/* </Link> */}

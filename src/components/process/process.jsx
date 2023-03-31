@@ -27,7 +27,7 @@ export default function Process() {
                 contents?.[0]?.image
               }`}
               onError={(e) => {
-                e && (e.target.src = "/no-photo.png");
+                e && (e.target.src = "/image-broke.png");
               }}
               alt="content image"
             />
@@ -43,7 +43,7 @@ export default function Process() {
                 contents?.[1]?.image
               }`}
               onError={(e) => {
-                e && (e.target.src = "/no-photo.png");
+                e && (e.target.src = "/image-broke.png");
               }}
               alt="content image"
             />
@@ -64,7 +64,7 @@ export default function Process() {
               }`}
               alt="content"
               onError={(e) => {
-                e && (e.target.src = "/no-photo.png");
+                e && (e.target.src = "/image-broke.png");
               }}
             />
           </div>

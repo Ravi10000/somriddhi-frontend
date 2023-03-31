@@ -26,7 +26,7 @@ export default function OfferCard({
         className="dealImage"
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${offer?.image}`}
         onError={(e) => {
-          if (e) e.target.src = "/no-photo.png";
+          if (e) e.target.src = "/image-broke.png";
         }}
         alt=""
       />

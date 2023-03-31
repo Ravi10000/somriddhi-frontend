@@ -57,7 +57,7 @@ function TicketsSection({ setFlash }) {
       response.data.status === "success" &&
         setFlash({
           type: "success",
-          message: `Ticket Staus Changed Successfully`,
+          message: `Ticket Status Changed Successfully`,
         });
       fetchTickets();
     } catch (error) {

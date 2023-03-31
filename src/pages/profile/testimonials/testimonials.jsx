@@ -30,19 +30,15 @@ export default function Testimonials() {
       )}
       <h2>Testimonials</h2>
       <p>
-        Lakhs of Indians visit CashKaro every day and make the most of our best
+        Lakhs of Indians visit Somriddhi every day and make the most of our best
         offers to get the best deals plus some extra Cashback, right into their
-        bank account. CashKaro reviews from these users show how our deals and
+        bank account. Somriddhi reviews from these users show how our deals and
         offers have held up over the years. These reviews are filled with
         appreciation from our users who are ecstatic about getting the best
-        discount coupons and extra Cashback, only through CashKaro. CashKaro is
-        the brainchild of Swati and Rohan Bhargava, who launched the platform
-        back in 2011 in the UK, bringing it to Indian customers in 2013. Since
-        its inception, CashKaro has distributed hundreds of crores in Cashback
-        to its customers and has contributed billions of dollars in GMV for
-        online retailers to become the undisputed king of Cashback in India.
-        Billionaire tycoon Ratan Tata has also invested in CashKaro, because he
-        also believes that Indians love to #GetMoreHamesha!
+        discount coupons and extra Cashback, only through Somriddhi.Since its
+        inception, Somriddhi has distributed hundreds of crores in Cashback to
+        its customers and has contributed billions of dollars in GMV for online
+        retailers to become the undisputed king of Cashback in India.
       </p>
       <Button
         onClick={() => {
@@ -62,9 +58,9 @@ export default function Testimonials() {
                   <img src="/reviewer.png" alt="reviewer" />
                   <div className="reviewer-details">
                     <h4 className="name">{username}</h4>
-                    {/* <p className="discount">
-                      Total Discount: <span>{discount}</span>
-                    </p> */}
+                    <p className="discount">
+                      Total Discount: <span>{0}</span>
+                    </p>
                   </div>
                 </div>
                 <div className="review">
