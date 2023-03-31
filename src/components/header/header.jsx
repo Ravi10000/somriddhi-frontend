@@ -14,7 +14,7 @@ function Header({ openModal, currentUser }) {
     <header>
       <img
         className={styles["logo"]}
-        src="/Somriddhi Final Logo-01.png"
+        src="/Somriddhi Final Logo-03.png"
         alt="logo"
       />
       <Search />

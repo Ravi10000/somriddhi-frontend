@@ -269,3 +269,6 @@ export const deleteContent = (id) =>
   });
 
 export const getAllContent = () => axios.get("/content");
+
+export const getAllExcelData = () =>
+  axios.get(`/getexceldata`, { headers: { Authorization } });
