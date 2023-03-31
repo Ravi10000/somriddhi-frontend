@@ -270,5 +270,12 @@ export const deleteContent = (id) =>
 
 export const getAllContent = () => axios.get("/content");
 
-export const getAllExcelData = () =>
-  axios.get(`/getexceldata`, { headers: { Authorization } });
+export const getAllExcelData = (formData) =>
+  axios.post(`/getexceldata`, formData, {
+    headers: { Authorization, "Content-Type": "multipart/form-data" },
+  });
+
+
+// export const getAllExcelData = () =>
+//   axios.get(`/getexceldata`, { headers: { Authorization } });
+

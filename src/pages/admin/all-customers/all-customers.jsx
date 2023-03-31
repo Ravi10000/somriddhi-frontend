@@ -19,8 +19,12 @@ export default function AllCustomers() {
       const response = await getAllUsers();
       setCustomers(response.data.user);
       console.log({ response });
+
+      const data = await getAllExcelData();
+      console.log('Data : ');
+      console.log(data);
     })();
-    getAllExcelData();
+    // getAllExcelData();
   }, []);
   return (
     <>
