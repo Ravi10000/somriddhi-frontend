@@ -9,33 +9,44 @@ export default function TitleSection({
 }) {
   const [file, setFile] = useState("");
   const handleInput = (e) => {
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
-    console.log(file)
-  }
+    console.log(file);
+  };
   const handleChange = (e) => {
-    console.log(file)
+    console.log(file);
     // console.log(e)
     // let file = e.target.files[0];
     // let formdata = new FormData();
     // formdata.append('file', file);
     // console.log(formdata);
-  }
+  };
   return (
     <div className={styles["title-section"]}>
       <h3 className={styles["title"] + " " + styles["active"]}>{title}</h3>
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
-          <>
-            <div className={styles["upload-container"]}>
+          <div className={styles["upload-forms-container"]}>
+            <form
+              encType="multipart/form-data"
+              className={styles["upload-container"]}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            >
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
                 <p>Payment File Upload</p>
               </button>
-              <form enctype="multipart/form-data" onChange={(e) => { handleChange(e) }} >
-                <input onChange={(e) => { handleInput(e) }} name="uploadFile" type="file" required />
-              </form>
-            </div>
+              <input
+                onChange={(e) => {
+                  handleInput(e);
+                }}
+                name="uploadFile"
+                type="file"
+                required
+              />
+            </form>
             <form className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
@@ -43,7 +54,7 @@ export default function TitleSection({
               </button>
               <input type="file" />
             </form>
-          </>
+          </div>
         )}
         {!noAddButton && (
           <button

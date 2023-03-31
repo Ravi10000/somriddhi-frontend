@@ -84,6 +84,9 @@ a {
   text-decoration: none;
   color: #fff;
 }
+img {
+  object-fit: none;
+}
 
 ._title {
   font-size: 1.5rem;
