@@ -153,6 +153,9 @@ export const editCategory = (formData) =>
   });
 export const deleteCategory = (id) =>
   axios.delete(`/category/${id}`, { headers: { Authorization } });
+export const getCategoryById = (id) => {
+  return axios.get(`/category/single/${id}`);
+};
 
 // NewLetter APIs
 export const getAllNewLetter = () =>

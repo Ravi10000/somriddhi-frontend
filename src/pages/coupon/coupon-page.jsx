@@ -10,7 +10,7 @@ import Button from "../../components/button/button";
 import couponDetails from "./coupon-details";
 import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
-import { getDealById } from "../../api";
+import { getDealById, getCategoryById } from "../../api";
 import axios from "axios";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
@@ -29,6 +29,7 @@ function CouponPage({ currentUser }) {
   const [dealInfo, setDealInfo] = useState([]);
   const [analyticId, setAnalyticId] = useState(null);
   const [couponDes, setCouponDes] = useState(null);
+  const [catDes, setCatDes] = useState(null);
 
 
   const info = [
@@ -43,6 +44,9 @@ function CouponPage({ currentUser }) {
     // console.log(response.data.data);
     setCouponDes(response.data.deal.description)
     setDealInfo(response.data.deal);
+    const responseCat = await getCategoryById(response.data.deal.categoryId);
+    console.log(responseCat.data.category.description);
+    setCatDes(responseCat.data.category.description);
     const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
         response?.data?.deal?.expiryDate
@@ -121,8 +125,9 @@ function CouponPage({ currentUser }) {
     if (!currentUser) {
       return modal.openModal();
     }
-    // navigate(`//${dealInfo?.url}`);
-    navigate(`/${id}&ascsubtag=${id}`);
+    // navigate(`${dealInfo?.url}&ascsubtag=${id}`);
+    window.location.href = `a`
+    // navigate(`/${id}&ascsubtag=${id}`);
     // window.location.replace(`http://localhost:30002/coupon/${id}&ascsubtag=${id}`);
     // navigate(`http://localhost:30002/coupon/${id}&ascsubtag=<_id>`);
   }
@@ -205,12 +210,15 @@ function CouponPage({ currentUser }) {
             <div className={styles["list"]}>
               <h3>About category</h3>
               <ul>
+                {
+                  <li>{catDes}</li>
+                }
                 {/* {dealInfo.description && des.map((message, index) => ( */}
-                <li>
+                {/* <li>
                   Started in the year 2018, Gizmore is Smart Accessories and
                   Audio brand in India, known for its fashionable product
                   styling
-                </li>
+                </li> */}
                 {/* ))} */}
               </ul>
             </div>
