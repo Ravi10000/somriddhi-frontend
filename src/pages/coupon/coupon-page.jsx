@@ -28,6 +28,8 @@ function CouponPage({ currentUser }) {
   const [secondsLeft, setSecondsLeft] = useState("00");
   const [dealInfo, setDealInfo] = useState([]);
   const [analyticId, setAnalyticId] = useState(null);
+  const [couponDes, setCouponDes] = useState(null);
+
 
   const info = [
     "Click on Orange button and visit Gizmore",
@@ -39,6 +41,7 @@ function CouponPage({ currentUser }) {
     const response = await getDealById(id);
     console.log({ response });
     // console.log(response.data.data);
+    setCouponDes(response.data.deal.description)
     setDealInfo(response.data.deal);
     const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
@@ -118,9 +121,17 @@ function CouponPage({ currentUser }) {
     if (!currentUser) {
       return modal.openModal();
     }
-    navigate(`//${dealInfo?.url}`);
+    // navigate(`//${dealInfo?.url}`);
+    navigate(`/${id}&ascsubtag=${id}`);
+    // window.location.replace(`http://localhost:30002/coupon/${id}&ascsubtag=${id}`);
+    // navigate(`http://localhost:30002/coupon/${id}&ascsubtag=<_id>`);
   }
 
+  // let currentFullUrl = window.location.href;
+  // let currentCouponUrl = currentFullUrl.split('/')[4];
+  // console.log(id);
+  // let couponDesArray = couponDes.split('.');
+  // console.log(couponDesArray);
   useEffect(() => {
     sendAnalytics();
     getDeal();
@@ -163,9 +174,8 @@ function CouponPage({ currentUser }) {
           {dealInfo.image && (
             <img
               className={styles["dealInfoImage"]}
-              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
-                dealInfo.image
-              }`}
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${dealInfo.image
+                }`}
               onError={(e) => {
                 e && (e.target.src = "/image-broke.png");
               }}
@@ -174,15 +184,20 @@ function CouponPage({ currentUser }) {
           )}
         </div>
         <div className={styles["right"]}>
-          <h3>Use Code</h3>
-          <div className={styles["coupon-link-container"]}>
-            <CouponCode couponCode={couponDetails?.couponCode} />
+          {/* <h3>Use Code</h3> */}
+          <div className={styles["coupon-link-containerTwo"]}>
+            {/* <CouponCode couponCode={couponDetails?.couponCode} /> */}
             <Button onClick={updateEndTime}>visit site</Button>
           </div>
           <div className={styles["info-container"]}>
             <div className={styles["list"]}>
               <h3>About Coupon</h3>
               <ul>
+                {
+                  <li>
+                    {couponDes}
+                  </li>
+                }
                 {/* {dealInfo.description &&
                   des.map((message, index) => <li>{message}</li>)} */}
               </ul>
