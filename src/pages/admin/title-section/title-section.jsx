@@ -44,19 +44,17 @@ export default function TitleSection({
       <h3 className={styles["title"] + " " + styles["active"]}>{title}</h3>
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
-          <>
+          <div>
 
             <div className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
                 <p>Payment File Upload</p>
               </button>
-              <form >
-                <input type="file" onChange={handleChange} />
+              <form enctype="multipart/form-data" onChange={(e) => { handleChange(e) }} >
+                <input onChange={(e) => { handleInput(e) }} name="uploadFile" type="file" required />
               </form>
             </div>
-
-
             <form className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />

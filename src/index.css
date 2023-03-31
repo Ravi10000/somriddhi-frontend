@@ -85,7 +85,7 @@ a {
   color: #fff;
 }
 img {
-  object-fit: none;
+  object-fit: cover;
 }
 
 ._title {
