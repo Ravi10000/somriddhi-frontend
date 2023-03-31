@@ -15,7 +15,7 @@ export default function MembershipCard({
         className={styles["membership-img"]}
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${membership?.image}`}
         onError={(e) => {
-          e && (e.target.src = "/no-photo.png");
+          e && (e.target.src = "/image-broke.png");
         }}
       />
       <div className={styles["membership-details"]}>

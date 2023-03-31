@@ -6,14 +6,19 @@ import TitleSection from "../title-section/title-section";
 import axios from "axios";
 
 export default function Analytics() {
-  const [data, setData] = useState([["Category", "No. of users visited"]]);
+  const [categoryChartData, setCategoryChartData] = useState([
+    ["Category", "No. of users visited"],
+  ]);
   // const [couponDataTitle, setCouponDataTitle] = useState([["Year"]]);
   // const [couponData, setCouponData] = useState([0]);
-  const [barChartData, setBarChartData] = useState([[" "], [0]]);
-  const [couponCount, setCouponCount] = useState(0);
+  const [couponsChartData, setCouponChartData] = useState([
+    ["coupons"],
+    [0, 10, 10],
+  ]);
+  const [couponVisitCount, setCouponVisitCount] = useState(0);
 
   const [loading, setLoading] = useState(false);
-  const [categoryDataCount, setCategoryDataCount] = useState(0);
+  const [categoryVisitCount, setCategoryVisitCount] = useState(0);
 
   async function getCategeoryAnalytics() {
     setLoading(true);
@@ -24,11 +29,11 @@ export default function Analytics() {
       console.log({ response });
 
       if (response.data.status === "success") {
-        const data = response.data.analyticData;
-        setData((prevData) => [...prevData, ...data]);
-        const dataCount = data.reduce((acc, curr) => acc + curr[1], 0);
-        console.log({ dataCount });
-        setCategoryDataCount(dataCount);
+        const categoryData = response.data.analyticData;
+        setCategoryChartData((prevData) => [...prevData, ...categoryData]);
+        const visitCount = categoryData.reduce((acc, curr) => acc + curr[1], 0);
+        console.log({ dataCount: visitCount });
+        setCategoryVisitCount(visitCount);
       }
     } catch (err) {
       console.log({ err });
@@ -44,17 +49,17 @@ export default function Analytics() {
       );
       // console.log({ response });
       if (response.data.status === "success") {
-        const data = response.data.analyticData;
+        const couponData = response.data.analyticData;
         const couponValue = [" "];
         const title = [" "];
-        const count = data.reduce((acc, curr) => acc + curr[1], 0);
-        setCouponCount(count);
+        const visitCount = couponData.reduce((acc, curr) => acc + curr[1], 0);
+        setCouponVisitCount(visitCount);
 
-        data.forEach((item) => {
+        couponData.forEach((item) => {
           title.push(item[0]);
           couponValue.push(item[1]);
         });
-        setBarChartData([title, couponValue]);
+        setCouponChartData([title, couponValue]);
         // console.log({ title, couponValue });
         // setCouponDataTitle((prevData) => [...prevData, ...title]);
         // setCouponData((prevData) => [...prevData, ...couponValue]);
@@ -87,7 +92,7 @@ export default function Analytics() {
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
-              <h3>{categoryDataCount}</h3>
+              <h3>{categoryVisitCount}</h3>
             )}
             <p>Popular Categories Visits</p>
           </div>
@@ -95,7 +100,7 @@ export default function Analytics() {
             {loading && <div className={styles.loader}></div>}
             <Chart
               chartType="PieChart"
-              data={data}
+              data={categoryChartData}
               width="100%"
               height="400px"
               legendToggle
@@ -108,7 +113,7 @@ export default function Analytics() {
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
-              <h3>{couponCount}</h3>
+              <h3>{couponVisitCount}</h3>
             )}
             <p>Popular Coupons Visits</p>
           </div>
@@ -118,7 +123,7 @@ export default function Analytics() {
               chartType="Bar"
               width="100%"
               height="400px"
-              data={barChartData}
+              data={couponsChartData}
               // options={options}
             />
           </div>

@@ -27,7 +27,7 @@ export default function DealCard({
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${deal?.image}`}
         alt="deal banner"
         onError={(e) => {
-          e && (e.target.src = "/no-photo.png");
+          e && (e.target.src = "/image-broke.png");
         }}
       />
       <div className={styles["deal-info"]}>

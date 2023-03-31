@@ -51,7 +51,7 @@ export default function ProcessEditable() {
               }`}
               alt=""
               onError={(e) => {
-                e && (e.target.src = "/no-photo.png");
+                e && (e.target.src = "/image-broke.png");
               }}
             />
           </div>
@@ -84,7 +84,7 @@ export default function ProcessEditable() {
               }`}
               alt=""
               onError={(e) => {
-                e && (e.target.src = "/no-photo.png");
+                e && (e.target.src = "/image-broke.png");
               }}
             />
           </div>
@@ -121,7 +121,7 @@ export default function ProcessEditable() {
               }`}
               alt=""
               onError={(e) => {
-                e && (e.target.src = "/no-photo.png");
+                e && (e.target.src = "/image-broke.png");
               }}
             />
           </div>
