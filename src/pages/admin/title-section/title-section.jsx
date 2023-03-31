@@ -1,69 +1,69 @@
 import styles from "./title-section.module.scss";
 import React, { useState } from "react";
+import { getAllExcelData } from "../../../api";
+import { setFlash } from "../../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-export default function TitleSection({
+function TitleSection({
   title,
   addFunction,
   noAddButton,
   uploadBtn,
+  setFlash,
 }) {
-  const [file, setFile] = useState("");
+  const handleChange = async (e) => {
+    const file = e.target.files[0];
+    const formdata = new FormData();
+    file && formdata.append("fileExcel", file);
+    // if (!(Object.keys(formdata).length === 0)) {}
+    try {
+      const response = await getAllExcelData(formdata);
+      console.log(response);
+    } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong",
+      });
+      console.log(error);
+    }
+  };
 
-  function submitForm(e) {
-    console.log('Hello')
-    const formData = new FormData(e.target);
-    console.log(formData)
-  }
-
-  // const handleInput = (e) => {
-  //   console.log(e.target.files[0])
-  //   setFile(e.target.files[0]);
-  //   console.log(file)
-  // }
-  const handleChange = (e) => {
-    // console.log(file)
-    // console.log(e)
-    let file = e.target.files[0];
-    let formdata = new FormData();
-    formdata.append('file', file);
-    console.log(formdata);
-  }
-
-  // const onChange = (e) => {
-  //   const storageRef = app.storage().ref();
-  //   const fileRef = storageRef.child(e.target.files[0].name);
-  //   fileRef
-  //     .put(e.target.files[0])
-  //     .then(() => {
-  //       console.log('Uploaded a file');
-  //     });
-  // }
   // file uploader npm
   return (
     <div className={styles["title-section"]}>
       <h3 className={styles["title"] + " " + styles["active"]}>{title}</h3>
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
+          // <div className={styles["upload-buttons-container"]}>
           <>
-
             <div className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
                 <p>Payment File Upload</p>
               </button>
-              <form >
-                <input type="file" onChange={handleChange} />
-              </form>
+              {/* <form enctype="multipart/form-data"> */}
+              <input
+                onChange={handleChange}
+                type="file"
+                accept=".xls, .xlsx, .csv"
+              />
+              {/* </form> */}
             </div>
+            <div className={styles["upload-container"]}>
+              {/* <form > */}
 
-
-            <form className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
                 <p>Payout File Upload</p>
               </button>
-              <input type="file" />
-            </form>
+              <input
+                type="file"
+                onChange={handleChange}
+                accept=".xls, .xlsx, .csv"
+              />
+              {/* </form> */}
+            </div>
+            {/* </div> */}
           </>
         )}
         {!noAddButton && (
@@ -76,6 +76,8 @@ export default function TitleSection({
           </button>
         )}
       </div>
-    </div >
+    </div>
   );
 }
+
+export default connect(null, { setFlash })(TitleSection);
