@@ -1,5 +1,6 @@
 import styles from "./title-section.module.scss";
 import React, { useState } from "react";
+import { getAllExcelData } from "../../../api";
 
 export default function TitleSection({
   title,
@@ -9,35 +10,13 @@ export default function TitleSection({
 }) {
   const [file, setFile] = useState("");
 
-  function submitForm(e) {
-    console.log('Hello')
-    const formData = new FormData(e.target);
-    console.log(formData)
-  }
-
-  // const handleInput = (e) => {
-  //   console.log(e.target.files[0])
-  //   setFile(e.target.files[0]);
-  //   console.log(file)
-  // }
   const handleChange = (e) => {
-    // console.log(file)
-    // console.log(e)
     let file = e.target.files[0];
     let formdata = new FormData();
-    formdata.append('file', file);
+    formdata.append("file", file);
     console.log(formdata);
-  }
+  };
 
-  // const onChange = (e) => {
-  //   const storageRef = app.storage().ref();
-  //   const fileRef = storageRef.child(e.target.files[0].name);
-  //   fileRef
-  //     .put(e.target.files[0])
-  //     .then(() => {
-  //       console.log('Uploaded a file');
-  //     });
-  // }
   // file uploader npm
   return (
     <div className={styles["title-section"]}>
@@ -45,23 +24,27 @@ export default function TitleSection({
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
           <div>
-
             <div className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
                 <p>Payment File Upload</p>
               </button>
-              <form enctype="multipart/form-data" onChange={(e) => { handleChange(e) }} >
-                <input onChange={(e) => { handleInput(e) }} name="uploadFile" type="file" required />
-              </form>
+              {/* <form enctype="multipart/form-data"> */}
+              <input
+                onChange={handleChange}
+                name="uploadFile"
+                type="file"
+                required
+              />
+              {/* </form> */}
             </div>
-            <form className={styles["upload-container"]}>
-              <button className={styles.upload + " " + styles.button}>
-                <img src="/upload.png" alt="upload button" />
-                <p>Payout File Upload</p>
-              </button>
-              <input type="file" />
-            </form>
+            {/* <form className={styles["upload-container"]}> */}
+            <button className={styles.upload + " " + styles.button}>
+              <img src="/upload.png" alt="upload button" />
+              <p>Payout File Upload</p>
+            </button>
+            <input type="file" />
+            {/* </form> */}
           </div>
         )}
         {!noAddButton && (
@@ -74,6 +57,6 @@ export default function TitleSection({
           </button>
         )}
       </div>
-    </div >
+    </div>
   );
 }
