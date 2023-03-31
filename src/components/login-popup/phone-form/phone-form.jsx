@@ -5,9 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import { sendOtp } from "../../../api/index";
 // components
 import Button from "../../button/button";
-import TextInput from "../../text-input/text-input";
 
-export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
+import { connect } from "react-redux";
+import { setFlash } from "../../../redux/flash/flash.actions";
+
+function PhoneNumberForm({ phone, setPhone, nextStage, setFlash }) {
   // const [phone, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [validInput, setValidInput] = useState(false);
@@ -49,12 +51,16 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
       const response = await sendOtp(formData);
       console.log({ response });
       if (response.data.status === "success") {
+        setFlash({
+          type: "success",
+          message: "OTP sent successfully",
+        });
         nextStage();
       }
-      setIsLoading(false);
-      console.log({ response });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
   function handleChange(e) {
@@ -91,3 +97,5 @@ export default function PhoneNumberForm({ phone, setPhone, nextStage }) {
     </form>
   );
 }
+
+export default connect(null, { setFlash })(PhoneNumberForm);

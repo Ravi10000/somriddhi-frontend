@@ -29,5 +29,17 @@
   .answer {
     padding: 15px;
     color: #616161;
+    animation: slideIn 0.2s ease-in-out;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translatey(-100%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translatey(0) scale(1);
   }
 }

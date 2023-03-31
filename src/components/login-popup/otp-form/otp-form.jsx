@@ -13,7 +13,7 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
   const [otp, setOtp] = useState("");
   const [validInput, setValidInput] = useState(false);
 
-  const [secondsLeft, setSecondsLeft] = useState(60);
+  const [secondsLeft, setSecondsLeft] = useState(120);
   const [isLoading, setIsLoading] = useState(false);
   const digit1Ref = useRef();
   const digit2Ref = useRef();

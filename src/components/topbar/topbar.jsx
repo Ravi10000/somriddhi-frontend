@@ -46,7 +46,12 @@ function TopBar({ selectedOption, showMenu, isMenuVisible }) {
                   type="search"
                   className={styles.searchBar}
                 />
-                <button className={styles.searchBtn}>
+                <button
+                  className={styles.searchBtn}
+                  onClick={() => {
+                    setIsSearchOpen(false);
+                  }}
+                >
                   <img src="/search.png" alt="search" />
                 </button>
               </div>

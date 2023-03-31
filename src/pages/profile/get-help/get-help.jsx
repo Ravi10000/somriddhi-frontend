@@ -43,13 +43,6 @@ export default function GetHelp() {
         <div className="popular-questions">
           {faqs?.map((faq, index) => (
             <Faq faq={faq} key={faq._id} />
-            // <div className="question" key={index}>
-            //   <p>{faq.question}</p>
-            //   <img src="/arrow-right.png" alt="ask question" />
-            //   <div className="answer">
-            //     <p>{faq.answer}</p>
-            //   </div>
-            // </div>
           ))}
         </div>
       </div>
