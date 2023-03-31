@@ -13,9 +13,9 @@ export default defineConfig({
       },
     },
     https: {
-      key: '/etc/pki/tls/private/somriddhi_store.key',
-      cert: '/etc/pki/tls/certs/somriddhi_store.crt',
-      ca: '/etc/pki/tls/certs/somriddhi_store.ca-bundle',
+      key:  fs.readFileSync('somriddhi_store.key'),
+      cert: fs.readFileSync('somriddhi_store.crt'),
+      ca: fs.readFileSync('somriddhi_store.ca-bundle'),
     }
   },
 });
