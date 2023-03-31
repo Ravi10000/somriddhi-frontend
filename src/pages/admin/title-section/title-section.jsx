@@ -1,20 +1,31 @@
 import styles from "./title-section.module.scss";
 import React, { useState } from "react";
 import { getAllExcelData } from "../../../api";
+import { setFlash } from "../../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-export default function TitleSection({
+function TitleSection({
   title,
   addFunction,
   noAddButton,
   uploadBtn,
+  setFlash,
 }) {
-  const [file, setFile] = useState("");
-
-  const handleChange = (e) => {
-    let file = e.target.files[0];
-    let formdata = new FormData();
-    formdata.append("file", file);
-    console.log(formdata);
+  const handleChange = async (e) => {
+    const file = e.target.files[0];
+    const formdata = new FormData();
+    file && formdata.append("fileExcel", file);
+    // if (!(Object.keys(formdata).length === 0)) {}
+    try {
+      const response = await getAllExcelData(formdata);
+      console.log(response);
+    } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong",
+      });
+      console.log(error);
+    }
   };
 
   // file uploader npm
@@ -23,7 +34,8 @@ export default function TitleSection({
       <h3 className={styles["title"] + " " + styles["active"]}>{title}</h3>
       <div className={styles["title-buttons"]}>
         {uploadBtn && (
-          <div>
+          // <div className={styles["upload-buttons-container"]}>
+          <>
             <div className={styles["upload-container"]}>
               <button className={styles.upload + " " + styles.button}>
                 <img src="/upload.png" alt="upload button" />
@@ -32,20 +44,27 @@ export default function TitleSection({
               {/* <form enctype="multipart/form-data"> */}
               <input
                 onChange={handleChange}
-                name="uploadFile"
                 type="file"
-                required
+                accept=".xls, .xlsx, .csv"
               />
               {/* </form> */}
             </div>
-            {/* <form className={styles["upload-container"]}> */}
-            <button className={styles.upload + " " + styles.button}>
-              <img src="/upload.png" alt="upload button" />
-              <p>Payout File Upload</p>
-            </button>
-            <input type="file" />
-            {/* </form> */}
-          </div>
+            <div className={styles["upload-container"]}>
+              {/* <form > */}
+
+              <button className={styles.upload + " " + styles.button}>
+                <img src="/upload.png" alt="upload button" />
+                <p>Payout File Upload</p>
+              </button>
+              <input
+                type="file"
+                onChange={handleChange}
+                accept=".xls, .xlsx, .csv"
+              />
+              {/* </form> */}
+            </div>
+            {/* </div> */}
+          </>
         )}
         {!noAddButton && (
           <button
@@ -60,3 +79,5 @@ export default function TitleSection({
     </div>
   );
 }
+
+export default connect(null, { setFlash })(TitleSection);
