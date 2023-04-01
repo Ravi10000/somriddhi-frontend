@@ -30,6 +30,7 @@ function CouponPage({ currentUser }) {
   const [analyticId, setAnalyticId] = useState(null);
   const [couponDes, setCouponDes] = useState(null);
   const [catDes, setCatDes] = useState(null);
+  const [catUrl, setCatUrl] = useState(null);
 
 
   const info = [
@@ -47,6 +48,7 @@ function CouponPage({ currentUser }) {
     const responseCat = await getCategoryById(response.data.deal.categoryId);
     console.log(responseCat.data.category.description);
     setCatDes(responseCat.data.category.description);
+    setCatUrl(response.data.deal.url);
     const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
         response?.data?.deal?.expiryDate
@@ -125,9 +127,14 @@ function CouponPage({ currentUser }) {
     if (!currentUser) {
       return modal.openModal();
     }
+    // const sym1 = '&';
     // navigate(`${dealInfo?.url}&ascsubtag=${id}`);
-    window.location.href = `a`
-    // navigate(`/${id}&ascsubtag=${id}`);
+    // const navigateLink = `${catUrl}${sym1}ascsubtag=${id}`
+    // console.log(navigateLink)
+    // location.href = 'https://' + navigateLink
+    // console.log(window.open(navigateLink, '_blank'));
+    const semi = ':';
+    navigate(`//https://${catUrl}&ascsubtag=${id}`);
     // window.location.replace(`http://localhost:30002/coupon/${id}&ascsubtag=${id}`);
     // navigate(`http://localhost:30002/coupon/${id}&ascsubtag=<_id>`);
   }
