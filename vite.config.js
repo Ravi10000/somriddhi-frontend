@@ -9,9 +9,9 @@ export default defineConfig({
     proxy: {
       "/api": {
         // target: "http://3.108.161.80:8002",
-        // target: "http://13.234.49.6:8001",
+        target: "http://13.234.49.6:8001",
 
-        target: "http://localhost:8001",
+        // target: "http://localhost:8001",
       },
     },
     // https: {
