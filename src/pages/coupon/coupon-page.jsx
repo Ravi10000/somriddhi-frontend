@@ -30,7 +30,7 @@ function CouponPage({ currentUser }) {
   const [analyticId, setAnalyticId] = useState(null);
   const [couponDes, setCouponDes] = useState(null);
   const [catDes, setCatDes] = useState(null);
-  const [catUrl, setCatUrl] = useState(null);
+  var [catUrl, setCatUrl] = useState(null);
 
 
   const info = [
@@ -133,9 +133,12 @@ function CouponPage({ currentUser }) {
     // console.log(navigateLink)
     // location.href = 'https://' + navigateLink
     // console.log(window.open(navigateLink, '_blank'));
-    const semi = ':';
-    navigate(`//https://${catUrl}&ascsubtag=${id}`);
-    // window.location.replace(`http://localhost:30002/coupon/${id}&ascsubtag=${id}`);
+    // console.log(catUrl);
+    if(catUrl.startsWith('\/\/')) catUrl = catUrl.substring(2).trim();
+    if(!catUrl.startsWith('https://')) catUrl = 'https://' + catUrl;
+    console.log(catUrl);
+
+    window.location.replace(`${catUrl}&ascsubtag=${id}`);
     // navigate(`http://localhost:30002/coupon/${id}&ascsubtag=<_id>`);
   }
 

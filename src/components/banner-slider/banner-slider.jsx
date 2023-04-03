@@ -18,7 +18,10 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
     if (!currentUser) {
       return modal.openModal();
     }
-    navigate(url);
+    if(url.startsWith('\/\/')) url = url.substring(2).trim();
+    console.log("Url: ",url);
+    // navigate(url);
+    window.location.replace(url);
   }
 
   const settings = {

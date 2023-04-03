@@ -12,7 +12,7 @@ import PopularMembership from "../../components/popular-membership/popular-membe
 import Process from "../../components/process/process";
 import ScrollToTop from "../../components/scrollToTop";
 
-export default function HomePage() {
+export default function xHomePage() {
   return (
     <div className="home-page" id="home">
       <ScrollToTop />

@@ -55,6 +55,12 @@
         }
       }
     }
+    .membership-link {
+      white-space: nowrap;
+      width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .membership-desc {
       color: #858997;
       line-height: 1.5rem;
