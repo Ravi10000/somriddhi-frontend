@@ -8,7 +8,7 @@ export default function Footer() {
         <footer className='footer-section'>
             <div className="container">
                 <div className="logo-and-download-links">
-                    <img className='logo-light' src="/Somriddhi Final Logo-02.png" alt="somriddihi logo" />
+                    <img className='logo-light' src="Somriddhi Final Logo-03.png" alt="somriddihi logo" />
                     <div className="buttons-container">
                         <button>
                             <img src="/playstore.png" alt="download from play sotre" />
