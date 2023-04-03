@@ -14,10 +14,10 @@ export default defineConfig({
         target: "http://localhost:8001",
       },
     },
-    https: {
-      key: fs.readFileSync("somriddhi_store.key"),
-      cert: fs.readFileSync("somriddhi_store.crt"),
-      ca: fs.readFileSync("somriddhi_store.ca-bundle"),
-    },
+    // https: {
+    //   key: fs.readFileSync("somriddhi_store.key"),
+    //   cert: fs.readFileSync("somriddhi_store.crt"),
+    //   ca: fs.readFileSync("somriddhi_store.ca-bundle"),
+    // },
   },
 });
