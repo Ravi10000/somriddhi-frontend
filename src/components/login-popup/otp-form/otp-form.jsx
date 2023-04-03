@@ -82,11 +82,12 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
         //   }
         //   return nextStage();
         // }
-        setIsLoading(false);
         // nextStage();
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
   async function resendOtp() {

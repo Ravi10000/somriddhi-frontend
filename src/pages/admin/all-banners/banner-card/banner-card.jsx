@@ -1,6 +1,6 @@
 import styles from "./banner-card.module.scss";
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 export default function BannerCard({
   banner,
   deleteBannerHandler,
@@ -26,12 +26,12 @@ export default function BannerCard({
             <img src="/date.png" alt="date" />
             <p>{expiryDate ? expiryDate : "unavailable"}</p>
           </div> */}
-            <a href={banner?.url} target="_blank" rel="noopener noreferrer">
+            <Link to={`//${banner?.url}`}>
               <div className={styles["info"] + " " + styles["banner-link"]}>
                 <img src="/link.png" alt="banner link" />
                 <p>{banner?.url}</p>
               </div>
-            </a>
+            </Link>
           </div>
           <div className={styles["actions"]}>
             <img
