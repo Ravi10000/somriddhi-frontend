@@ -1,6 +1,7 @@
 import styles from "./otp-form.module.scss";
 
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../button/button";
 // import { connect } from "react-redux";
 import { sendOtp, verifyOtp, checkIfSubscribed } from "../../../api/index";
@@ -8,7 +9,15 @@ import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { setFlash } from "../../../redux/flash/flash.actions";
 
-function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
+function OtpForm({
+  phone,
+  nextStage,
+  setCurrentUser,
+  closeModal,
+  setFlash,
+  admin,
+}) {
+  const navigate = useNavigate();
   const [isOtpValid, setIsOtpValid] = useState(true);
   const [otp, setOtp] = useState("");
   const [validInput, setValidInput] = useState(false);
@@ -59,6 +68,10 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
         const { user } = response.data;
         setCurrentUser(user);
         setFlash({ message: "Logged in successfully", type: "success" });
+        if (admin) {
+          navigate("/admin/banners");
+          return closeModal();
+        }
         if (!user?.email) {
           return nextStage();
         }

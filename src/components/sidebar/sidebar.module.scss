@@ -61,12 +61,11 @@
     .bottom-menu {
       .option.bottom {
         display: flex;
+        align-items: center;
         gap: 10px;
         .dot {
-          background: #545a6e;
-          height: 15px;
-          width: 15px;
-          border-radius: 50%;
+          height: 20px;
+          width: 20px;
         }
       }
     }

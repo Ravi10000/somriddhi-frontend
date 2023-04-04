@@ -11,7 +11,7 @@ import SubscribeForm from "../subscribe-form/subscribe-form";
 
 const loginStages = ["phone-entry", "verify-otp", "user-details", "subscribe"];
 
-function LoginPopup({ closeModal }) {
+function LoginPopup({ closeModal, admin }) {
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
   const [phone, setPhone] = useState("");
 
@@ -58,6 +58,7 @@ function LoginPopup({ closeModal }) {
             nextStage={nextStage}
             phone={phone}
             closeModal={closeModal}
+            admin={admin}
           />
         )}
         {loginStages[currentLoginStage] === "user-details" && (

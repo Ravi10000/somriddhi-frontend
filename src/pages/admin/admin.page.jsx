@@ -1,6 +1,5 @@
 import styles from "./admin.module.scss";
 
-
 // react hooks
 import { useEffect, useState } from "react";
 

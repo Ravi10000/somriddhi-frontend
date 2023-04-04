@@ -1,10 +1,11 @@
 import styles from "./sidebar.module.scss";
 
 // packages
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // utils
 import { topMenuOptions, bottomMenuOptions } from "./menu-list";
+import { logoutUser } from "../../api";
 
 function SideBar({
   isMenuVisible,
@@ -12,6 +13,7 @@ function SideBar({
   hideMenu,
   selectedOption,
 }) {
+  const navigate = useNavigate();
   function selectOption(item) {
     setIsMenuVisible(false);
     window.scrollTo(0, 0);
@@ -47,19 +49,27 @@ function SideBar({
         </div>
         <div className={styles["bottom-menu"]}>
           {bottomMenuOptions.map((item, index) => (
-            <Link to={`/admin/${item}`} key={index}>
-              <div
-                className={`${styles["option"]}  ${styles["bottom"]} ${
-                  selectedOption === item && styles["selected"]
-                }`}
-                onClick={() => {
-                  selectOption(item);
-                }}
-              >
-                <div className={styles["dot"]}></div>
-                <p>{item}</p>
-              </div>
-            </Link>
+            // <Link to={`/admin/${item}`} key={index}>
+            <div
+              style={{ color: item == "logout" ? "#e53b2c" : "#545a6e" }}
+              className={`${styles["option"]}  ${styles["bottom"]} ${
+                selectedOption === item && styles["selected"]
+              }`}
+              onClick={() => {
+                if (item === "logout") {
+                  logoutUser();
+                  return navigate("/");
+                }
+                selectOption(item);
+                navigate(`/admin/${item}`);
+              }}
+            >
+              {/* <div className={styles["dot"]}></div>
+               */}
+              <img className={styles["dot"]} src={`/${item}.png`} alt="" />
+              <p>{item}</p>
+            </div>
+            // </Link>
           ))}
         </div>
       </div>

@@ -7,7 +7,13 @@ import { useState, useEffect } from "react";
 import { useLoginModal } from "./context/login-modal-context";
 
 // packages
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  useParams,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -41,9 +47,7 @@ import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
-
   const { pathname } = useLocation();
-
   async function fetchUser() {
     try {
       const response = await getUser();
@@ -54,6 +58,7 @@ function App({ setCurrentUser, flash }) {
       console.log(err);
     }
   }
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -63,12 +68,14 @@ function App({ setCurrentUser, flash }) {
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
-      {!pathname.includes("/admin") && (
+      {!pathname.includes("/admin") ? (
         <>
           {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
           <Header openModal={modal.openModal} />
           <Navbar />
         </>
+      ) : (
+        modal.modalOpen && <LoginPopup closeModal={modal.closeModal} admin />
       )}
       <Routes>
         <Route path="/" exact element={<HomePage />} />
