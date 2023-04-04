@@ -118,16 +118,24 @@ function App({ setCurrentUser, flash }) {
           path="/profile"
           element={<Navigate to="/profile/my-earnings" replace />}
         />
-        <Route exact path="/profile/:tab" element={<ProfilePage />} />
-        {/* <Route
+        <Route
           exact
-          path="/profile"
+          path="/profile/:tab"
           element={
-            <ProtectedRoute openModal={openModal}>
+            <ProtectedRoute openModal={modal.openModal}>
               <ProfilePage />
             </ProtectedRoute>
           }
-        /> */}
+        />
+        <Route
+          exact
+          path="/profile"
+          element={
+            <ProtectedRoute openModal={modal.openModal}>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       {!pathname.includes("/admin") && <Footer />}
     </div>
