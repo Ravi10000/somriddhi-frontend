@@ -8,7 +8,7 @@ axios.defaults.baseURL = `${import.meta.env.VITE_REACT_APP_API_URL}/api`;
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE3ZjQwMjE1NGEzNWU4NTU3OWMyMDAiLCJpYXQiOjE2NzkyOTEzOTQsImV4cCI6MTY3OTg5NjE5NH0.79NZuV_0z-b6jyl2TlK7V5bjtzfJZVfyQtbB9VCN1aI";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEwNDZlMjQ2NjYzYWI3MTRiMWVhNzYiLCJpYXQiOjE2Nzk5MDAyMTgsImV4cCI6MTcxMjE0MjczMn0.lgH2-X2Kr5aeZfwXAKS1n3yWqAeCo9WqK59TzW5qCw4";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJiMDhjYTY5NzA5ZmMzYWJmZGMxYzgiLCJpYXQiOjE2ODA1NDE4OTksImV4cCI6MTcxMjA5OTQ5OX0.F4iWMmwRElmfW6cmhbXUhguri5XohqVV7gY7Iqg7JlM";
 const Authorization = `Bearer ${token}`;
 
 // console.log(localStorage.getItem("token"));
