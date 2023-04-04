@@ -6,12 +6,15 @@ import { Link, useNavigate } from "react-router-dom";
 // utils
 import { topMenuOptions, bottomMenuOptions } from "./menu-list";
 import { logoutUser } from "../../api";
+import { setCurrentUser } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
 
 function SideBar({
   isMenuVisible,
   setIsMenuVisible,
   hideMenu,
   selectedOption,
+  setCurrentUser,
 }) {
   const navigate = useNavigate();
   function selectOption(item) {
@@ -57,6 +60,7 @@ function SideBar({
               onClick={() => {
                 if (item === "logout") {
                   logoutUser();
+                  setCurrentUser(null);
                   return navigate("/");
                 }
                 selectOption(item);
@@ -80,4 +84,4 @@ function SideBar({
   );
 }
 
-export default SideBar;
+export default connect(null, { setCurrentUser })(SideBar);
