@@ -30,15 +30,16 @@ export default function AdminPage() {
   const [categories, setCategories] = useState("yes");
   const [selectedOption, setSelectedOption] = useState();
   const [admin, setAdmin] = useState(null);
+
   console.log({ params });
 
   useEffect(() => {
-    if (!menuList.includes(params.tab)) {
+    if (!menuList.includes(params?.tab)) {
       navigate("/admin/banners");
     } else {
       setSelectedOption(params.tab);
     }
-  }, [params]);
+  }, [params?.tab]);
 
   function closeModal() {
     setModalOpen(false);

@@ -72,10 +72,10 @@ function App({ setCurrentUser, flash }) {
       )}
       <Routes>
         <Route path="/" exact element={<HomePage />} />
-        {/* <Route
+        <Route
           path="/admin"
           element={<Navigate to="/admin/banners" replace />}
-        /> */}
+        />
 
         <Route
           path="/admin/:tab"

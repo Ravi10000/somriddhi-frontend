@@ -4,15 +4,16 @@ import AdminPage from "../admin/admin.page";
 import AdminLogin from "../admin-login/admin-login";
 
 export default function ProtectAdminRoute({ children }) {
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(true); // this should be false
   const params = useParams();
   const location = useLocation();
   console.log({ params, location });
-  // useEffect(() => {
-  //   localStorage.getItem("admin") &&
-  //     setAdmin(JSON.parse(localStorage.getItem("admin")));
-  // }, []);
 
-  return <></>;
-  // return <>{admin ? children : <AdminLogin />}</>;
+  useEffect(() => {
+    localStorage.getItem("admin") &&
+      setAdmin(JSON.parse(localStorage.getItem("admin")));
+  }, []);
+
+  // return <>protected route</>;
+  return <>{admin ? children : <AdminLogin />}</>;
 }
