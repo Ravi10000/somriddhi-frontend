@@ -5,7 +5,7 @@ import styles from "./admin-login.module.scss";
 
 import React from "react";
 
-export default function AdminLogin() {
+export default function AdminLogin({ setAdmin }) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   async function handleAdminLogin(e) {
@@ -16,6 +16,7 @@ export default function AdminLogin() {
     for (let entry of formData) {
       console.log(entry);
     }
+    setAdmin(true);
     setIsLoading(false);
     // const email = formData.get("email");
     // const password = formData.get("password");

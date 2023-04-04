@@ -74,7 +74,11 @@ function App({ setCurrentUser, flash }) {
         <Route path="/" exact element={<HomePage />} />
         <Route
           path="/admin"
-          element={<Navigate to="/admin/banners" replace />}
+          element={
+            <ProtectAdminRoute>
+              <Navigate to="/admin/banners" replace />
+            </ProtectAdminRoute>
+          }
         />
 
         <Route
