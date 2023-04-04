@@ -51,10 +51,9 @@ function SideBar({
           {bottomMenuOptions.map((item, index) => (
             // <Link to={`/admin/${item}`} key={index}>
             <div
-              style={{ color: item == "logout" ? "#e53b2c" : "#545a6e" }}
               className={`${styles["option"]}  ${styles["bottom"]} ${
                 selectedOption === item && styles["selected"]
-              }`}
+              } ${item === "logout" && styles["logout"]}`}
               onClick={() => {
                 if (item === "logout") {
                   logoutUser();
@@ -66,7 +65,11 @@ function SideBar({
             >
               {/* <div className={styles["dot"]}></div>
                */}
-              <img className={styles["dot"]} src={`/${item}.png`} alt="" />
+              <img
+                className={styles["dot"]}
+                src={`/${item}${selectedOption === item ? "-active" : ""}.png`}
+                alt=""
+              />
               <p>{item}</p>
             </div>
             // </Link>
