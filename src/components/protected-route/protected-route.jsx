@@ -4,17 +4,15 @@ import { Navigate, redirect } from "react-router-dom";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { useLoginModal } from "../../context/login-modal-context";
 
-function ProtectedRoute({ openModal, currentUser, children }) {
+function ProtectedRoute({ currentUser, children }) {
+  const modal = useLoginModal();
   useEffect(() => {
-    if (!currentUser) {
-      openModal();
-    }
-  });
-  if (!currentUser) {
-    return <Navigate to="/" replace />;
-  }
-  return children;
+    currentUser ? modal.closeModal() : modal.openModal();
+  }, [currentUser]);
+
+  return <>{currentUser && children}</>;
 }
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,

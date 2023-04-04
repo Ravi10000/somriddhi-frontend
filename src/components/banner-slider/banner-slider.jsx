@@ -6,6 +6,7 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { useLoginModal } from "../../context/login-modal-context";
+import axios from "axios";
 
 function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
   const navigate = useNavigate();
@@ -18,10 +19,10 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
     if (!currentUser) {
       return modal.openModal();
     }
-    if(url.startsWith('\/\/')) url = url.substring(2).trim();
-    console.log("Url: ",url);
+    if (url.startsWith("//")) url = url.substring(2).trim();
+    console.log("Url: ", url);
     // navigate(url);
-    window.location.replace(url);
+    // window.open(url);
   }
 
   const settings = {
@@ -63,6 +64,44 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
     ],
   };
 
+  async function sendBannerAnalytics(id, bannerUrl) {
+    console.log(currentUser);
+    if (!currentUser) {
+      return modal.openModal();
+    }
+    if (id) {
+      const formData = new FormData();
+      formData.append("couponId", id);
+      formData.append("userId", currentUser?._id);
+      formData.append("deviceType", "Web");
+      formData.append("couponType", "Banner");
+      formData.append("startDateTime", new Date(Date.now()).toString());
+
+      for (let entry of formData.entries()) {
+        console.log(entry);
+      }
+      try {
+        const response = await axios.post("/analytic/coupon", formData, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        });
+        console.log({ response });
+        if (response.data.status === "success") {
+          const analyticId = response.data.analyticId;
+          // setAnalyticId(response.data.analyticId);
+          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
+          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
+        }
+        console.log({ response });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
   return (
     <div className={styles["slider-container"]} style={membershipStyles}>
       <Slider {...settings}>
@@ -72,7 +111,8 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
               {/* <Link to={"//" + banner?.url}> */}
               <img
                 onClick={() => {
-                  checkLogin("//" + banner?.url);
+                  sendBannerAnalytics(banner?._id, banner?.url);
+                  // checkLogin("//" + banner?.url);
                 }}
                 className="bannerImageSet"
                 src={`${import.meta.env.VITE_REACT_APP_API_URL}/${

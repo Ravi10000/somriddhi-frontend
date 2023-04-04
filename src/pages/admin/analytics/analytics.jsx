@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import TitleSection from "../title-section/title-section";
 import axios from "axios";
+import { getCategoryAnalytics, getCouponAnalytics } from "../../../api";
 
 export default function Analytics() {
   const [categoryChartData, setCategoryChartData] = useState([
@@ -20,20 +21,18 @@ export default function Analytics() {
   const [loading, setLoading] = useState(false);
   const [categoryVisitCount, setCategoryVisitCount] = useState(0);
 
-  async function getCategeoryAnalytics() {
+  async function categoryAnalytics() {
     setLoading(true);
     try {
-      const response = await axios.get(
-        "http://localhost:8001/api/analytic/category"
-      );
+      const response = await getCategoryAnalytics();
       console.log({ response });
 
       if (response.data.status === "success") {
         const categoryData = response.data.analyticData;
         setCategoryChartData((prevData) => [...prevData, ...categoryData]);
-        const visitCount = categoryData.reduce((acc, curr) => acc + curr[1], 0);
-        console.log({ dataCount: visitCount });
-        setCategoryVisitCount(visitCount);
+        // const visitCount = categoryData.reduce((acc, curr) => acc + curr[1], 0);
+        // console.log({ dataCount: visitCount });
+        setCategoryVisitCount(response?.data?.totalCount);
       }
     } catch (err) {
       console.log({ err });
@@ -42,18 +41,17 @@ export default function Analytics() {
     }
   }
 
-  async function getCouponAnalytics() {
+  async function couponAnalytics() {
     try {
-      const response = await axios.get(
-        "http://localhost:8001/api/analytic/coupon"
-      );
+      const response = await getCouponAnalytics();
+      console.log({ response });
       // console.log({ response });
       if (response.data.status === "success") {
         const couponData = response.data.analyticData;
         const couponValue = [" "];
         const title = [" "];
-        const visitCount = couponData.reduce((acc, curr) => acc + curr[1], 0);
-        setCouponVisitCount(visitCount);
+        // const visitCount = couponData.reduce((acc, curr) => acc + curr[1], 0);
+        setCouponVisitCount(response.data.totalCount);
 
         couponData.forEach((item) => {
           title.push(item[0]);
@@ -79,12 +77,12 @@ export default function Analytics() {
     //   ["Watch TV", 2],
     //   ["Sleep", 7],
     // ]);
-    getCouponAnalytics();
-    getCategeoryAnalytics();
+    couponAnalytics();
+    categoryAnalytics();
   }, []);
   return (
     <div className={styles.analytics}>
-      <TitleSection title="All Analytics" noAddButton />
+      <TitleSection title="Analytics" noAddButton />
       <div className={styles.chartsContainer}>
         <div className={styles.chartContainer}>
           <div className={styles.title}>
@@ -94,7 +92,7 @@ export default function Analytics() {
             ) : (
               <h3>{categoryVisitCount}</h3>
             )}
-            <p>Popular Categories Visits</p>
+            <p>Total Categories Visits</p>
           </div>
           <div className={styles.chart}>
             {loading && <div className={styles.loader}></div>}
@@ -115,7 +113,7 @@ export default function Analytics() {
             ) : (
               <h3>{couponVisitCount}</h3>
             )}
-            <p>Popular Coupons Visits</p>
+            <p>Total Coupons Visits</p>
           </div>
           <div className={styles.chart}>
             {loading && <div className={styles.loader}></div>}

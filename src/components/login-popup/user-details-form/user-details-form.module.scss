@@ -2,6 +2,8 @@ form#user-input {
   margin: 0;
   padding: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   h1.title {
     margin-bottom: 20px;
   }
@@ -35,8 +37,5 @@ form#user-input {
       font-weight: 500;
       letter-spacing: 2px;
     }
-  }
-  .user-form-btn {
-    width: 100%;
   }
 }

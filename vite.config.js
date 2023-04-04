@@ -8,9 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://api.somriddhi.store:8001",
-
-        // target: "http://localhost:8001",
+        target: "https://api.somriddhi.store:8001"
       },
     },
     // https: {

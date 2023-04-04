@@ -91,7 +91,7 @@ function UserDetailsForm({
         />
       </div>
       <p className={styles["msg"]}>It&#39;s okay, If you do not have any</p>
-      <Button className={styles["user-form-btn"]} isLoading={isLoading}>
+      <Button isLoading={isLoading}>
         Continue
       </Button>
       <p className={styles["skip-now"]} onClick={closeModal}>

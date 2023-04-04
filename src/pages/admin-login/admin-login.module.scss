@@ -1,0 +1,34 @@
+.adminLogin {
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  .adminLoginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
+    .title {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      justify-content: flex-start;
+      // outline: 2px solid red;
+      width: 100%;
+      img {
+        width: 25px;
+      }
+      .close {
+        cursor: pointer;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .adminLogin {
+    width: 400px;
+  }
+}

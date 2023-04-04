@@ -7,7 +7,13 @@ import { useState, useEffect } from "react";
 import { useLoginModal } from "./context/login-modal-context";
 
 // packages
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  useParams,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -36,12 +42,12 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 
 // api calls
 import { getUser } from "./api";
+import AdminLogin from "./pages/admin-login/admin-login";
+import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
-
   const { pathname } = useLocation();
-
   async function fetchUser() {
     try {
       const response = await getUser();
@@ -52,6 +58,7 @@ function App({ setCurrentUser, flash }) {
       console.log(err);
     }
   }
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -61,20 +68,43 @@ function App({ setCurrentUser, flash }) {
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
-      {!pathname.includes("/admin") && (
+      {!pathname.includes("/admin") ? (
         <>
           {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
           <Header openModal={modal.openModal} />
           <Navbar />
         </>
+      ) : (
+        modal.modalOpen && <LoginPopup closeModal={modal.closeModal} admin />
       )}
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route
           path="/admin"
-          element={<Navigate to="/admin/banners" replace />}
+          element={
+            <ProtectAdminRoute>
+              <Navigate to="/admin/banners" replace />
+            </ProtectAdminRoute>
+          }
         />
-        <Route path="/admin/:tab" element={<AdminPage />} />
+
+        <Route
+          path="/admin/:tab"
+          element={
+            <ProtectAdminRoute>
+              <AdminPage />
+            </ProtectAdminRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectAdminRoute>
+              <AdminPage />
+            </ProtectAdminRoute>
+          }
+        />
+        {/* <Route path="/admin/:tab" element={<AdminPage />} /> */}
         <Route path="/coupon/:id" element={<CouponPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/category" element={<CategoryPage />} />
@@ -88,16 +118,24 @@ function App({ setCurrentUser, flash }) {
           path="/profile"
           element={<Navigate to="/profile/my-earnings" replace />}
         />
-        <Route exact path="/profile/:tab" element={<ProfilePage />} />
-        {/* <Route
+        <Route
           exact
-          path="/profile"
+          path="/profile/:tab"
           element={
-            <ProtectedRoute openModal={openModal}>
+            <ProtectedRoute openModal={modal.openModal}>
               <ProfilePage />
             </ProtectedRoute>
           }
-        /> */}
+        />
+        <Route
+          exact
+          path="/profile"
+          element={
+            <ProtectedRoute openModal={modal.openModal}>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       {!pathname.includes("/admin") && <Footer />}
     </div>
