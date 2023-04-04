@@ -24,6 +24,9 @@ const Authorization = `Bearer ${token}`;
 
 // Banner APIs
 export const getAllBanners = () => axios.get(`/banner`);
+export const getBannerById = (id) => {
+  return axios.get(`/banner/${id}`);
+};
 export const createNewBanner = (formData) => {
   return axios.post(`/banner`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
@@ -175,6 +178,10 @@ export const checkIfSubscribed = () => {
 export const getAllMemberships = () =>
   axios.get(`/membership`, { headers: { Authorization } });
 
+export const getMembershipById = (id) => {
+  return axios.get(`/membership/${id}`);
+};
+
 export const createNewMemberships = (formData) => {
   return axios.post(`/membership`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
@@ -278,7 +285,5 @@ export const getAllExcelData = (formData) =>
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
 
-
 // export const getAllExcelData = () =>
 //   axios.get(`/getexceldata`, { headers: { Authorization } });
-

@@ -10,7 +10,12 @@ import Button from "../../components/button/button";
 import couponDetails from "./coupon-details";
 import getRemaingTime from "../../utils/get-remaining-time";
 import CouponCode from "../../components/coupon-code/coupon-code";
-import { getDealById, getCategoryById } from "../../api";
+import {
+  getDealById,
+  getCategoryById,
+  getBannerById,
+  getMembershipById,
+} from "../../api";
 import axios from "axios";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
@@ -29,8 +34,9 @@ function CouponPage({ currentUser }) {
   const [minutesLeft, setMinutesLeft] = useState("00");
   const [secondsLeft, setSecondsLeft] = useState("00");
   const [dealInfo, setDealInfo] = useState([]);
+  console.log({ dealInfo });
   // const [id, setAnalyticId] = useState(null);
-  const [couponDes, setCouponDes] = useState(null);
+  // const [dealInfo?.description, setDealInfo?.description] = useState(null);
   const [catDes, setCatDes] = useState(null);
   var [catUrl, setCatUrl] = useState(null);
 
@@ -41,16 +47,47 @@ function CouponPage({ currentUser }) {
   ];
 
   async function getDeal() {
-    const response = await getDealById(couponId);
-    console.log({ response });
-    // console.log(response.data.data);
-    setCouponDes(response.data.deal.description);
-    setDealInfo(response.data.deal);
+    let response = {};
+    if (state?.couponType === "Coupon") {
+      try {
+        response = await getDealById(couponId);
+        console.log({ response });
+        // console.log(response.data.data);
+        // setDealInfo?.description(response.data.deal.description);
+        setDealInfo(response.data.deal);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (state?.couponType === "Banner") {
+      try {
+        response = await getBannerById(couponId);
+        console.log({ response });
+        setDealInfo(response.data.banner);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (state?.couponType === "Membership") {
+      try {
+        response = await getMembershipById(couponId);
+        console.log({ response });
+        setDealInfo(response.data.membership);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    const responseCat = await getCategoryById(response.data.deal.categoryId);
-    console.log(responseCat.data.category.description);
-    setCatDes(responseCat.data.category.description);
-    setCatUrl(response.data.deal.url);
+    if (!["Banner", "Membership"].includes(state?.couponType)) {
+      try {
+        const responseCat = await getCategoryById(
+          response?.data?.deal.categoryId
+        );
+        console.log(responseCat?.data?.category?.description);
+        setCatDes(responseCat?.data?.category?.description);
+        setCatUrl(response?.data?.deal?.url);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
@@ -64,10 +101,10 @@ function CouponPage({ currentUser }) {
       // minutesLeftRef.current = minutes;
       // secondsLeftRef.current = seconds;
     }, 1000);
-    console.log(Date.parse(response.data.deal.expiryDate));
-    console.log(Date.parse(new Date(Date.now())));
+    // console.log(Date.parse(response.data.deal.expiryDate));
+    // console.log(Date.parse(new Date(Date.now())));
     if (
-      Date.parse(response.data.deal.expiryDate) <
+      Date.parse(response?.data?.deal?.expiryDate) <
       Date.parse(new Date(Date.now()))
     ) {
       console.log("expired");
@@ -154,8 +191,8 @@ function CouponPage({ currentUser }) {
   // let currentFullUrl = window.location.href;
   // let currentCouponUrl = currentFullUrl.split('/')[4];
   // console.log(id);
-  // let couponDesArray = couponDes.split('.');
-  // console.log(couponDesArray);
+  // let dealInfo?.descriptionArray = dealInfo?.description.split('.');
+  // console.log(dealInfo?.descriptionArray);
   useEffect(() => {
     // sendAnalytics();
     getDeal();
@@ -218,7 +255,7 @@ function CouponPage({ currentUser }) {
             <div className={styles["list"]}>
               <h3>About Coupon</h3>
               <ul>
-                {<li>{couponDes}</li>}
+                {<li>{dealInfo?.description}</li>}
                 {/* {dealInfo.description &&
                   des.map((message, index) => <li>{message}</li>)} */}
               </ul>

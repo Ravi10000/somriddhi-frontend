@@ -36,7 +36,9 @@ export default function OfferCard({
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          navigate(`/coupon/${analyticId}`, { state: { couponId: id } });
+          navigate(`/coupon/${analyticId}`, {
+            state: { couponId: id, couponType: "Coupon" },
+          });
         }
         console.log({ response });
       } catch (error) {

@@ -91,7 +91,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
           navigate(`/coupon/${analyticId}`, {
-            state: { couponId: id, couponType: "banner" },
+            state: { couponId: id, couponType: "Banner" },
           });
         }
         console.log({ response });
