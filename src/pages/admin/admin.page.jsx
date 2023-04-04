@@ -1,9 +1,10 @@
 import styles from "./admin.module.scss";
 
+
 // react hooks
 import { useEffect, useState } from "react";
 
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import SideBar from "../../components/sidebar/sidebar";
 
@@ -29,7 +30,6 @@ export default function AdminPage() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [categories, setCategories] = useState("yes");
   const [selectedOption, setSelectedOption] = useState();
-  const [admin, setAdmin] = useState(null);
 
   console.log({ params });
 

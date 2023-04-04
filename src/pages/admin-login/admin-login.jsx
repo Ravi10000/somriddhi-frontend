@@ -2,11 +2,14 @@ import Backdrop from "../../components/backdrop/backdrop";
 import Button from "../../components/button/button";
 import TextInput from "../../components/text-input/text-input";
 import styles from "./admin-login.module.scss";
-
+import { useNavigate } from "react-router-dom";
 import React from "react";
+import { setFlash } from "../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-export default function AdminLogin({ setAdmin }) {
+function AdminLogin({ setAdmin, setFlash }) {
   const [isLoading, setIsLoading] = React.useState(false);
+  const navigate = useNavigate();
 
   async function handleAdminLogin(e) {
     setIsLoading(true);
@@ -16,7 +19,20 @@ export default function AdminLogin({ setAdmin }) {
     for (let entry of formData) {
       console.log(entry);
     }
-    setAdmin(true);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    if (email === "test@mail.in" && password === "password") {
+      setFlash({
+        type: "success",
+        message: "Admin Login Successful",
+      });
+      setAdmin(true);
+    } else {
+      setFlash({
+        type: "error",
+        message: "Admin Login Failed, Invalid Credentials",
+      });
+    }
     setIsLoading(false);
     // const email = formData.get("email");
     // const password = formData.get("password");
@@ -33,6 +49,14 @@ export default function AdminLogin({ setAdmin }) {
           <div className={styles.title}>
             <img src="/admin.png" alt="admin" />
             <h3>Admin Login</h3>
+            <img
+              className={styles.close}
+              src="/close.png"
+              alt=""
+              onClick={() => {
+                navigate("/");
+              }}
+            />
           </div>
           <TextInput
             label={"Email"}
@@ -52,3 +76,5 @@ export default function AdminLogin({ setAdmin }) {
     </Backdrop>
   );
 }
+
+export default connect(null, { setFlash })(AdminLogin);
