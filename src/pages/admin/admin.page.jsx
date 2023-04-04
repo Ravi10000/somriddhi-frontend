@@ -29,6 +29,8 @@ export default function AdminPage() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [categories, setCategories] = useState("yes");
   const [selectedOption, setSelectedOption] = useState();
+  const [admin, setAdmin] = useState(null);
+  console.log({ params });
 
   useEffect(() => {
     if (!menuList.includes(params.tab)) {

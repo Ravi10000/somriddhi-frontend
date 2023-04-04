@@ -1,0 +1,21 @@
+.adminLogin {
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  .adminLoginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
+    .title {
+      display: flex;
+      gap: 15px;
+      align-items: flex-end;
+      img {
+        width: 25px;
+      }
+    }
+  }
+}

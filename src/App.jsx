@@ -36,6 +36,8 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 
 // api calls
 import { getUser } from "./api";
+import AdminLogin from "./pages/admin-login/admin-login";
+import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
@@ -70,11 +72,28 @@ function App({ setCurrentUser, flash }) {
       )}
       <Routes>
         <Route path="/" exact element={<HomePage />} />
-        <Route
+        {/* <Route
           path="/admin"
           element={<Navigate to="/admin/banners" replace />}
+        /> */}
+
+        <Route
+          path="/admin/:tab"
+          element={
+            <ProtectAdminRoute>
+              <AdminPage />
+            </ProtectAdminRoute>
+          }
         />
-        <Route path="/admin/:tab" element={<AdminPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectAdminRoute>
+              <AdminPage />
+            </ProtectAdminRoute>
+          }
+        />
+        {/* <Route path="/admin/:tab" element={<AdminPage />} /> */}
         <Route path="/coupon/:id" element={<CouponPage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/category" element={<CategoryPage />} />
