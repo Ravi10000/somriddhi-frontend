@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import axios from "axios";
 
 function MembershipSlider({ banners, currentUser }) {
   const navigate = useNavigate();
@@ -18,11 +19,48 @@ function MembershipSlider({ banners, currentUser }) {
     if (!currentUser) {
       return modal.openModal();
     }
-    if(url.startsWith('\/\/')) url = url.substring(2).trim();
-    console.log("Url: ",url);
+    if (url.startsWith("//")) url = url.substring(2).trim();
+    console.log("Url: ", url);
     // navigate(url);
     window.location.replace(url);
   }
+  async function sendBannerAnalytics(id) {
+    if (!currentUser) {
+      return modal.openModal();
+    }
+    if (id) {
+      const formData = new FormData();
+      formData.append("couponId", id);
+      // currentUser && formData.append("userId", currentUser?._id);
+      formData.append("deviceType", "Web");
+      formData.append("couponType", "Membership");
+      formData.append("startDateTime", new Date(Date.now()).toString());
+
+      for (let entry of formData.entries()) {
+        console.log(entry);
+      }
+      try {
+        const response = await axios.post("/analytic/coupon", formData, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        });
+        console.log({ response });
+        if (response.data.status === "success") {
+          const analyticId = response.data.analyticId;
+          // setAnalyticId(response.data.analyticId);
+          navigate(`/coupon/${analyticId}`, {
+            state: { couponId: id, couponType: "Membership" },
+          });
+        }
+        console.log({ response });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
   const settings = {
     customPaging: function (i) {
       return <div className="dots">'</div>;
@@ -64,7 +102,8 @@ function MembershipSlider({ banners, currentUser }) {
               {/* <Link to={}> */}
               <img
                 onClick={() => {
-                  checkLogin("//" + banner?.url);
+                  // checkLogin("//" + banner?.url);
+                  sendBannerAnalytics(banner?._id);
                 }}
                 className="bannerImageSet"
                 src={`${import.meta.env.VITE_REACT_APP_API_URL}/${

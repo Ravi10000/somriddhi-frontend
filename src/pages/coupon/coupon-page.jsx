@@ -2,7 +2,7 @@ import styles from "./coupon.module.scss";
 
 // packages
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 // components
 import Button from "../../components/button/button";
 
@@ -19,6 +19,8 @@ import { useLoginModal } from "../../context/login-modal-context";
 
 function CouponPage({ currentUser }) {
   const modal = useLoginModal();
+  const { state } = useLocation();
+  const couponId = state?.couponId;
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,11 +29,10 @@ function CouponPage({ currentUser }) {
   const [minutesLeft, setMinutesLeft] = useState("00");
   const [secondsLeft, setSecondsLeft] = useState("00");
   const [dealInfo, setDealInfo] = useState([]);
-  const [analyticId, setAnalyticId] = useState(null);
+  // const [id, setAnalyticId] = useState(null);
   const [couponDes, setCouponDes] = useState(null);
   const [catDes, setCatDes] = useState(null);
   var [catUrl, setCatUrl] = useState(null);
-
 
   const info = [
     "Click on Orange button and visit Gizmore",
@@ -40,15 +41,17 @@ function CouponPage({ currentUser }) {
   ];
 
   async function getDeal() {
-    const response = await getDealById(id);
+    const response = await getDealById(couponId);
     console.log({ response });
     // console.log(response.data.data);
-    setCouponDes(response.data.deal.description)
+    setCouponDes(response.data.deal.description);
     setDealInfo(response.data.deal);
+
     const responseCat = await getCategoryById(response.data.deal.categoryId);
     console.log(responseCat.data.category.description);
     setCatDes(responseCat.data.category.description);
     setCatUrl(response.data.deal.url);
+
     const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
         response?.data?.deal?.expiryDate
@@ -72,61 +75,67 @@ function CouponPage({ currentUser }) {
     }
   }
 
-  async function sendAnalytics() {
-    if (id) {
-      const formData = new FormData();
-      formData.append("couponId", id);
-      // currentUser && formData.append("userId", currentUser?._id);
-      formData.append("deviceType", "Web");
-      // formData.append("startDateTime", new Date(Date.now()).toString());
-      formData.append(
-        "startDateTime",
-        "Wed Apr 29 2023 11:44:34 GMT+0530 (India Standard Time)"
-      );
+  // async function sendAnalytics() {
+  //   if (id) {
+  //     const formData = new FormData();
+  //     formData.append("couponId", id);
+  //     // currentUser && formData.append("userId", currentUser?._id);
+  //     formData.append("deviceType", "Web");
+  //     // formData.append("startDateTime", new Date(Date.now()).toString());
+  //     formData.append(
+  //       "startDateTime",
+  //       "Wed Apr 29 2023 11:44:34 GMT+0530 (India Standard Time)"
+  //     );
 
-      try {
-        // const { data } = await axios.get("https://geolocation-db.com/json");
-        // formData.append("ipAddress", data?.IPv4);
+  //     try {
+  //       // const { data } = await axios.get("https://geolocation-db.com/json");
+  //       // formData.append("ipAddress", data?.IPv4);
 
-        for (let entry of formData.entries()) {
-          console.log(entry);
-        }
+  //       for (let entry of formData.entries()) {
+  //         console.log(entry);
+  //       }
 
-        const response = await axios.post("/analytic/coupon", formData, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-            "Content-Type": "application/json",
-          },
-        });
-        if (response.data.status === "success") {
-          setAnalyticId(response.data.analyticId);
-        }
-        console.log({ response });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }
+  //       const response = await axios.post("/analytic/coupon", formData, {
+  //         headers: {
+  //           Authorization: "Bearer " + localStorage.getItem("token"),
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+  //       if (response.data.status === "success") {
+  //         setAnalyticId(response.data.analyticId);
+  //       }
+  //       console.log({ response });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // }
   async function updateEndTime() {
-    console.log({ analyticId });
-    if (analyticId) {
+    console.log({ analyticId: id });
+    if (!currentUser) {
+      return modal.openModal();
+    }
+    if (id) {
       try {
         const response = await axios.patch(
           `/analytic/coupon`,
           {
-            analyticId,
+            analyticId: id,
             endDateTime: new Date(Date.now()).toString(),
           },
           { headers: { "Content-Type": "application/json" } }
         );
         console.log({ response });
+        if (response.data.status === "success") {
+          console.log("updated");
+          const analyticId = response.data.analyticId;
+          navigate(`//${dealInfo?.url}/&ascsubtag=${analyticId}`);
+        }
       } catch (error) {
         console.log(error);
       }
     }
-    if (!currentUser) {
-      return modal.openModal();
-    }
+
     // const sym1 = '&';
     // navigate(`${dealInfo?.url}&ascsubtag=${id}`);
     // const navigateLink = `${catUrl}${sym1}ascsubtag=${id}`
@@ -134,11 +143,11 @@ function CouponPage({ currentUser }) {
     // location.href = 'https://' + navigateLink
     // console.log(window.open(navigateLink, '_blank'));
     // console.log(catUrl);
-    if(catUrl.startsWith('\/\/')) catUrl = catUrl.substring(2).trim();
-    if(!catUrl.startsWith('https://')) catUrl = 'https://' + catUrl;
-    console.log(catUrl);
+    // if (catUrl.startsWith("//")) catUrl = catUrl.substring(2).trim();
+    // if (!catUrl.startsWith("https://")) catUrl = "https://" + catUrl;
+    // console.log(catUrl);
 
-    window.location.replace(`${catUrl}&ascsubtag=${id}`);
+    // window.location.replace(`${catUrl}&ascsubtag=${id}`);
     // navigate(`http://localhost:30002/coupon/${id}&ascsubtag=<_id>`);
   }
 
@@ -148,7 +157,7 @@ function CouponPage({ currentUser }) {
   // let couponDesArray = couponDes.split('.');
   // console.log(couponDesArray);
   useEffect(() => {
-    sendAnalytics();
+    // sendAnalytics();
     getDeal();
   }, []);
 
@@ -189,8 +198,9 @@ function CouponPage({ currentUser }) {
           {dealInfo.image && (
             <img
               className={styles["dealInfoImage"]}
-              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${dealInfo.image
-                }`}
+              src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                dealInfo.image
+              }`}
               onError={(e) => {
                 e && (e.target.src = "/image-broke.png");
               }}
@@ -208,11 +218,7 @@ function CouponPage({ currentUser }) {
             <div className={styles["list"]}>
               <h3>About Coupon</h3>
               <ul>
-                {
-                  <li>
-                    {couponDes}
-                  </li>
-                }
+                {<li>{couponDes}</li>}
                 {/* {dealInfo.description &&
                   des.map((message, index) => <li>{message}</li>)} */}
               </ul>
@@ -220,9 +226,7 @@ function CouponPage({ currentUser }) {
             <div className={styles["list"]}>
               <h3>About category</h3>
               <ul>
-                {
-                  <li>{catDes}</li>
-                }
+                {<li>{catDes}</li>}
                 {/* {dealInfo.description && des.map((message, index) => ( */}
                 {/* <li>
                   Started in the year 2018, Gizmore is Smart Accessories and
