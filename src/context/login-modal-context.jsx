@@ -9,7 +9,7 @@ export default function LoginModalProvider({ children }) {
   const [modalOpen, setModalOpen] = useState(false);
   const closeModal = () => {
     setModalOpen(false);
-    navigate("/");
+    // navigate("/");
   };
   const openModal = () => setModalOpen(true);
 

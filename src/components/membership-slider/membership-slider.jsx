@@ -24,7 +24,7 @@ function MembershipSlider({ banners, currentUser }) {
     // navigate(url);
     window.location.replace(url);
   }
-  async function sendBannerAnalytics(id) {
+  async function sendBannerAnalytics(id, bannerUrl) {
     if (!currentUser) {
       return modal.openModal();
     }
@@ -50,9 +50,7 @@ function MembershipSlider({ banners, currentUser }) {
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          navigate(`/coupon/${analyticId}`, {
-            state: { couponId: id, couponType: "Membership" },
-          });
+          navigate("//" + bannerUrl);
         }
         console.log({ response });
       } catch (error) {
@@ -103,7 +101,7 @@ function MembershipSlider({ banners, currentUser }) {
               <img
                 onClick={() => {
                   // checkLogin("//" + banner?.url);
-                  sendBannerAnalytics(banner?._id);
+                  sendBannerAnalytics(banner?._id, banner?.url);
                 }}
                 className="bannerImageSet"
                 src={`${import.meta.env.VITE_REACT_APP_API_URL}/${

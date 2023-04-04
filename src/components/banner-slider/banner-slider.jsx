@@ -64,7 +64,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
     ],
   };
 
-  async function sendBannerAnalytics(id) {
+  async function sendBannerAnalytics(id, bannerUrl) {
     if (!currentUser) {
       return modal.openModal();
     }
@@ -90,9 +90,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          navigate(`/coupon/${analyticId}`, {
-            state: { couponId: id, couponType: "Banner" },
-          });
+          navigate("//" + bannerUrl);
         }
         console.log({ response });
       } catch (error) {
@@ -110,7 +108,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
               {/* <Link to={"//" + banner?.url}> */}
               <img
                 onClick={() => {
-                  sendBannerAnalytics(banner?._id);
+                  sendBannerAnalytics(banner?._id, banner?.url);
                   // checkLogin("//" + banner?.url);
                 }}
                 className="bannerImageSet"

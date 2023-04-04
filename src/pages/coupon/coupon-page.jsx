@@ -48,46 +48,55 @@ function CouponPage({ currentUser }) {
 
   async function getDeal() {
     let response = {};
-    if (state?.couponType === "Coupon") {
-      try {
-        response = await getDealById(couponId);
-        console.log({ response });
-        // console.log(response.data.data);
-        // setDealInfo?.description(response.data.deal.description);
-        setDealInfo(response.data.deal);
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (state?.couponType === "Banner") {
-      try {
-        response = await getBannerById(couponId);
-        console.log({ response });
-        setDealInfo(response.data.banner);
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (state?.couponType === "Membership") {
-      try {
-        response = await getMembershipById(couponId);
-        console.log({ response });
-        setDealInfo(response.data.membership);
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      response = await getDealById(couponId);
+      console.log({ response });
+      // console.log(response.data.data);
+      // setDealInfo?.description(response.data.deal.description);
+      setDealInfo(response.data.deal);
+    } catch (error) {
+      console.log(error);
     }
+    // if (state?.couponType === "Coupon") {
+    //   try {
+    //     response = await getDealById(couponId);
+    //     console.log({ response });
+    //     // console.log(response.data.data);
+    //     // setDealInfo?.description(response.data.deal.description);
+    //     setDealInfo(response.data.deal);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // } else if (state?.couponType === "Banner") {
+    //   try {
+    //     response = await getBannerById(couponId);
+    //     console.log({ response });
+    //     setDealInfo(response.data.banner);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // } else if (state?.couponType === "Membership") {
+    //   try {
+    //     response = await getMembershipById(couponId);
+    //     console.log({ response });
+    //     setDealInfo(response.data.membership);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
 
-    if (!["Banner", "Membership"].includes(state?.couponType)) {
-      try {
-        const responseCat = await getCategoryById(
-          response?.data?.deal.categoryId
-        );
-        console.log(responseCat?.data?.category?.description);
-        setCatDes(responseCat?.data?.category?.description);
-        setCatUrl(response?.data?.deal?.url);
-      } catch (error) {
-        console.log(error);
-      }
+    // if (!["Banner", "Membership"].includes(state?.couponType)) {
+    try {
+      const responseCat = await getCategoryById(
+        response?.data?.deal.categoryId
+      );
+      console.log(responseCat?.data?.category?.description);
+      setCatDes(responseCat?.data?.category?.description);
+      setCatUrl(response?.data?.deal?.url);
+    } catch (error) {
+      console.log(error);
     }
+    // }
 
     const timeLeftTimeer = setInterval(() => {
       let { hours, minutes, seconds } = getRemaingTime(
