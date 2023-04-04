@@ -34,7 +34,7 @@ function CouponPage({ currentUser }) {
   const [minutesLeft, setMinutesLeft] = useState("00");
   const [secondsLeft, setSecondsLeft] = useState("00");
   const [dealInfo, setDealInfo] = useState([]);
-  console.log({ dealInfo });
+  // console.log({ dealInfo });
   // const [id, setAnalyticId] = useState(null);
   // const [dealInfo?.description, setDealInfo?.description] = useState(null);
   const [catDes, setCatDes] = useState(null);
@@ -112,41 +112,6 @@ function CouponPage({ currentUser }) {
     }
   }
 
-  // async function sendAnalytics() {
-  //   if (id) {
-  //     const formData = new FormData();
-  //     formData.append("couponId", id);
-  //     // currentUser && formData.append("userId", currentUser?._id);
-  //     formData.append("deviceType", "Web");
-  //     // formData.append("startDateTime", new Date(Date.now()).toString());
-  //     formData.append(
-  //       "startDateTime",
-  //       "Wed Apr 29 2023 11:44:34 GMT+0530 (India Standard Time)"
-  //     );
-
-  //     try {
-  //       // const { data } = await axios.get("https://geolocation-db.com/json");
-  //       // formData.append("ipAddress", data?.IPv4);
-
-  //       for (let entry of formData.entries()) {
-  //         console.log(entry);
-  //       }
-
-  //       const response = await axios.post("/analytic/coupon", formData, {
-  //         headers: {
-  //           Authorization: "Bearer " + localStorage.getItem("token"),
-  //           "Content-Type": "application/json",
-  //         },
-  //       });
-  //       if (response.data.status === "success") {
-  //         setAnalyticId(response.data.analyticId);
-  //       }
-  //       console.log({ response });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // }
   async function updateEndTime() {
     console.log({ analyticId: id });
     if (!currentUser) {
