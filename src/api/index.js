@@ -287,3 +287,8 @@ export const getAllExcelData = (formData) =>
 
 // export const getAllExcelData = () =>
 //   axios.get(`/getexceldata`, { headers: { Authorization } });
+
+export const getCouponAnalytics = () =>
+  axios.get(`/analytic/coupon`, { headers: { Authorization } });
+export const getCategoryAnalytics = () =>
+  axios.get(`/analytic/category`, { headers: { Authorization } });

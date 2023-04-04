@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import TitleSection from "../title-section/title-section";
 import axios from "axios";
+import { getCategoryAnalytics, getCouponAnalytics } from "../../../api";
 
 export default function Analytics() {
   const [categoryChartData, setCategoryChartData] = useState([
@@ -20,12 +21,10 @@ export default function Analytics() {
   const [loading, setLoading] = useState(false);
   const [categoryVisitCount, setCategoryVisitCount] = useState(0);
 
-  async function getCategeoryAnalytics() {
+  async function categoryAnalytics() {
     setLoading(true);
     try {
-      const response = await axios.get(
-        "http://localhost:8001/api/analytic/category"
-      );
+      const response = await getCategoryAnalytics();
       console.log({ response });
 
       if (response.data.status === "success") {
@@ -42,11 +41,10 @@ export default function Analytics() {
     }
   }
 
-  async function getCouponAnalytics() {
+  async function couponAnalytics() {
     try {
-      const response = await axios.get(
-        "http://localhost:8001/api/analytic/coupon"
-      );
+      const response = await getCouponAnalytics();
+      console.log({ response });
       // console.log({ response });
       if (response.data.status === "success") {
         const couponData = response.data.analyticData;
@@ -79,8 +77,8 @@ export default function Analytics() {
     //   ["Watch TV", 2],
     //   ["Sleep", 7],
     // ]);
-    getCouponAnalytics();
-    getCategeoryAnalytics();
+    couponAnalytics();
+    categoryAnalytics();
   }, []);
   return (
     <div className={styles.analytics}>
