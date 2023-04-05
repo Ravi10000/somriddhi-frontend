@@ -54,6 +54,7 @@ function SideBar({
           {bottomMenuOptions.map((item, index) => (
             // <Link to={`/admin/${item}`} key={index}>
             <div
+              key={index}
               className={`${styles["option"]}  ${styles["bottom"]} ${
                 selectedOption === item && styles["selected"]
               } ${item === "logout" && styles["logout"]}`}

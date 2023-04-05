@@ -12,13 +12,20 @@ function TitleSection({
   setFlash,
 }) {
   const handlePaymentUpload = async (e) => {
+    console.log("triggered payment upload");
     const file = e.target.files[0];
     const formdata = new FormData();
     file && formdata.append("fileExcel", file);
-    // if (!(Object.keys(formdata).length === 0)) {}
     try {
       const response = await generateCashbacks(formdata);
       console.log(response);
+      if (response.data.status === "success") {
+        setFlash({
+          type: "success",
+          message: "Payments uploaded successfully",
+        });
+        // window.location.reload();
+      }
     } catch (error) {
       setFlash({
         type: "error",
@@ -29,13 +36,20 @@ function TitleSection({
   };
 
   const handlePayoutUpload = async (e) => {
+    console.log("triggered payout upload");
     const file = e.target.files[0];
     const formdata = new FormData();
     file && formdata.append("fileExcel", file);
-    // if (!(Object.keys(formdata).length === 0)) {}
     try {
       const response = await savePayouts(formdata);
       console.log(response);
+      if (response.data.status === "success") {
+        setFlash({
+          type: "success",
+          message: "Payouts uploaded successfully",
+        });
+        // window.location.reload();
+      }
     } catch (error) {
       setFlash({
         type: "error",
