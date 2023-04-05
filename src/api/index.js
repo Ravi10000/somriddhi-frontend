@@ -292,3 +292,8 @@ export const getCouponAnalytics = () =>
   axios.get(`/analytic/coupon`, { headers: { Authorization } });
 export const getCategoryAnalytics = () =>
   axios.get(`/analytic/category`, { headers: { Authorization } });
+
+export const getCashbackDetails = () =>
+  axios.get("/cashback/", {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });

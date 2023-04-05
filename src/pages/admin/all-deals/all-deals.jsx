@@ -80,13 +80,13 @@ function AllDeals({ setFlash }) {
           }}
         />
         <div className={styles["main-content"]}>
-          <div className={styles["filter-container"]}>
+          {/* <div className={styles["filter-container"]}> */}
             <FilterList
               showAll
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
             />
-          </div>
+          {/* </div> */}
           {deals?.length ? (
             <div className={styles["deals-container"]}>
               {deals?.map((deal) => (

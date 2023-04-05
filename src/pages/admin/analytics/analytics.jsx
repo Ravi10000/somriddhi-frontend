@@ -19,7 +19,7 @@ export default function Analytics() {
   // ]
 
   const [couponVisitCount, setCouponVisitCount] = useState(0);
-
+  console.log({ couponVisitCount });
   const [loading, setLoading] = useState(false);
   const [categoryVisitCount, setCategoryVisitCount] = useState(0);
 

@@ -25,7 +25,6 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
         console.log(pair[0] + ", " + pair[1]);
       }
       const response = await updateUser(currentUser._id, formData);
-      setIsLoading(false);
       console.log({ response });
       if (response.data.status === "success") {
         setCurrentUser(response.data.user);
@@ -40,6 +39,8 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
         message: "Something went wrong. Please try again later.",
       });
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 

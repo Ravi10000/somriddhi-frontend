@@ -41,8 +41,7 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { selectFlash } from "./redux/flash/flash.selectors";
 
 // api calls
-import { getUser } from "./api";
-import AdminLogin from "./pages/admin-login/admin-login";
+import { getCashbackDetails, getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 
 function App({ setCurrentUser, flash }) {

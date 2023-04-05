@@ -67,6 +67,8 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
             message: "Admin Logged in successfully",
           });
           return closeModal();
+        } else {
+          navigate("/profile");
         }
         setFlash({ message: "Logged in successfully", type: "success" });
         if (!user?.email) {

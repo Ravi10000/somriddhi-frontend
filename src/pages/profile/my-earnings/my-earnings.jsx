@@ -1,14 +1,36 @@
+import { getCashbackDetails } from "../../../api";
 import "./my-earnings.styles.scss";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function MyEarnings() {
+  const [totalCashback, setTotalCashback] = useState("-");
+  const [redemeedCashback, setRedemeedCashback] = useState("-");
+  const [redemableCashback, setRedemableCashback] = useState("-");
+
+  async function fetchEarnings() {
+    try {
+      const cashbackResponse = await getCashbackDetails();
+      if (cashbackResponse.data.status === "success") {
+        console.log({ cashbackResponse });
+        setTotalCashback(cashbackResponse.data.totalCashback);
+        setRedemeedCashback(cashbackResponse.data.redemeedCashback);
+        setRedemableCashback(cashbackResponse.data.redemableCashback);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchEarnings();
+  }, []);
   return (
     <div className="my-earnings">
       <h2>My Earnings</h2>
       <div className="earnings-section">
         <p>Total Earnings</p>
-        <h3>Rs. 5000</h3>
+        <h3>Rs. {totalCashback}</h3>
         <div className="dashed-line"></div>
         <p>
           Earnings will show here with 72 hours of your shopping via Somriddhi
@@ -27,7 +49,7 @@ export default function MyEarnings() {
         <div className="status-card">
           <div className="status-data">
             <img src="/redeemable-earnings.png" alt="request payment" />
-            <p>500</p>
+            <p>Rs. {redemableCashback}</p>
           </div>
           <h4>Redeemable Earnings</h4>
           {/* <div className="dashed-line"></div> */}
@@ -37,8 +59,11 @@ export default function MyEarnings() {
           </div>
         </div>
         <div className="status-card">
-          <img src="/my-orders.png" alt="request payment" />
-          <h4>My Orders</h4>
+          <div className="status-data">
+            <img src="/my-orders.png" alt="request payment" />
+            <p className="redemeed">Rs. {redemeedCashback}</p>
+          </div>
+          <h4>Redeemed Earnings</h4>
           {/* <div className="dashed-line"></div> */}
           <div className="link">
             <p>View More</p>
