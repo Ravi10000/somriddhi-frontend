@@ -22,7 +22,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
     if (url.startsWith("//")) url = url.substring(2).trim();
     console.log("Url: ", url);
     // navigate(url);
-    // window.location.replace(url);
+    // window.open(url);
   }
 
   const settings = {
@@ -65,13 +65,14 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
   };
 
   async function sendBannerAnalytics(id, bannerUrl) {
+    console.log(currentUser);
     if (!currentUser) {
       return modal.openModal();
     }
     if (id) {
       const formData = new FormData();
       formData.append("couponId", id);
-      // currentUser && formData.append("userId", currentUser?._id);
+      formData.append("userId", currentUser?._id);
       formData.append("deviceType", "Web");
       formData.append("couponType", "Banner");
       formData.append("startDateTime", new Date(Date.now()).toString());
@@ -90,7 +91,9 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          navigate("//" + bannerUrl);
+          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
+          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
         }
         console.log({ response });
       } catch (error) {

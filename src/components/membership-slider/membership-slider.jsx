@@ -14,16 +14,16 @@ function MembershipSlider({ banners, currentUser }) {
   const navigate = useNavigate();
   const modal = useLoginModal();
 
-  function checkLogin(url) {
-    console.log({ currentUser });
-    if (!currentUser) {
-      return modal.openModal();
-    }
-    if (url.startsWith("//")) url = url.substring(2).trim();
-    console.log("Url: ", url);
-    // navigate(url);
-    window.location.replace(url);
-  }
+  // function checkLogin(url) {
+  //   console.log({ currentUser });
+  //   if (!currentUser) {
+  //     return modal.openModal();
+  //   }
+    // if (url.startsWith("//")) url = url.substring(2).trim();
+    // console.log("Url: ", url);
+  //   // navigate(url);
+  //   window.location.replace(url);
+  // }
   async function sendBannerAnalytics(id, bannerUrl) {
     if (!currentUser) {
       return modal.openModal();
@@ -50,7 +50,9 @@ function MembershipSlider({ banners, currentUser }) {
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          navigate("//" + bannerUrl);
+          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
+          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
         }
         console.log({ response });
       } catch (error) {

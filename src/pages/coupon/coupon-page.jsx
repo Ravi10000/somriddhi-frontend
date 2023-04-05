@@ -140,7 +140,11 @@ function CouponPage({ currentUser }) {
         if (response.data.status === "success") {
           console.log("updated");
           const analyticId = response.data.analyticId;
-          navigate(`//${dealInfo?.url}/&ascsubtag=${analyticId}`);
+
+          var bannerUrl = dealInfo.url;
+          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
+          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
         }
       } catch (error) {
         console.log(error);
