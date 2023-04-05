@@ -68,14 +68,12 @@ function App({ setCurrentUser, flash }) {
       {flash && <Flash type={flash.type} message={flash.message} />}
       {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
-      {!pathname.includes("/admin") ? (
+      {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
+      {!pathname.includes("/admin") && (
         <>
-          {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
           <Header openModal={modal.openModal} />
           <Navbar />
         </>
-      ) : (
-        modal.modalOpen && <LoginPopup closeModal={modal.closeModal} admin />
       )}
       <Routes>
         <Route path="/" exact element={<HomePage />} />

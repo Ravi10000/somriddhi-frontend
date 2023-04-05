@@ -12,10 +12,12 @@ export default function Analytics() {
   ]);
   // const [couponDataTitle, setCouponDataTitle] = useState([["Year"]]);
   // const [couponData, setCouponData] = useState([0]);
-  const [couponsChartData, setCouponChartData] = useState([
-    ["coupons"],
-    [0, 10, 10],
-  ]);
+  const [couponsChartData, setCouponChartData] = useState(null);
+  // [
+  //   ["coupons", "one", "two"],
+  //   [0, 10, 10],
+  // ]
+
   const [couponVisitCount, setCouponVisitCount] = useState(0);
 
   const [loading, setLoading] = useState(false);
@@ -48,15 +50,22 @@ export default function Analytics() {
       // console.log({ response });
       if (response.data.status === "success") {
         const couponData = response.data.analyticData;
+
+        console.log({ couponData });
         const couponValue = [" "];
         const title = [" "];
         // const visitCount = couponData.reduce((acc, curr) => acc + curr[1], 0);
+        // setCouponVisitCount(visitCount);
         setCouponVisitCount(response.data.totalCount);
 
         couponData.forEach((item) => {
-          title.push(item[0]);
-          couponValue.push(item[1]);
+          if (item[0] === null) title.push("no title");
+          else title.push(item[0]);
+
+          if (item[1] === null) couponValue.push(0);
+          else couponValue.push(item[1]);
         });
+        console.log([title, couponValue]);
         setCouponChartData([title, couponValue]);
         // console.log({ title, couponValue });
         // setCouponDataTitle((prevData) => [...prevData, ...title]);
@@ -66,6 +75,8 @@ export default function Analytics() {
       console.log({ error });
     }
   }
+
+  console.log({ couponsChartData });
 
   // console.log({ loading });
   useEffect(() => {
@@ -107,7 +118,7 @@ export default function Analytics() {
         </div>
         <div className={styles.chartContainer}>
           <div className={styles.title}>
-            <h2>Popular Coupons Analytics</h2>
+            <h2>Top 10 Popular Coupons Analytics</h2>
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
@@ -131,17 +142,17 @@ export default function Analytics() {
   );
 }
 
-export const barChartData = [
-  ["Year", "Sales", "Expenses", "Profit"],
-  ["2023", 1000, 400, 200],
-  // ["2015", 1170, 460, 250],
-  // ["2016", 660, 1120, 300],
-  // ["2017", 1030, 540, 350],
-];
+// export const barChartData = [
+//   ["Year", "Sales", "Expenses", "Profit"],
+//   ["2023", 1000, 400, 200],
+//   // ["2015", 1170, 460, 250],
+//   // ["2016", 660, 1120, 300],
+//   // ["2017", 1030, 540, 350],
+// ];
 
-// export const options = {
-//   chart: {
-//     title: "Popular Coupons Visited",
-//     subtitle: "In year 2023",
-//   },
-// };
+// // export const options = {
+// //   chart: {
+// //     title: "Popular Coupons Visited",
+// //     subtitle: "In year 2023",
+// //   },
+// // };

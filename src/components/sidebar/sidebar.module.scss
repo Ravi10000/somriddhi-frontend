@@ -4,14 +4,18 @@
   flex-direction: column;
   justify-content: space-between;
   background: #fff;
-  min-height: 100vh;
-  position: absolute;
+  // min-height: 100vh;
+  max-height: 100vh;
+  height: 100%;
+  position: fixed;
   top: 0;
   left: -100%;
   z-index: 200;
   transition: all 0.2s ease-in-out;
   border: 2px solid #e6e8ea;
   border-top: none;
+  overflow-y: auto;
+  // overflow-y: scroll;
   &.visible {
     left: 0;
   }
@@ -41,7 +45,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 50px;
+    // gap: 50px;
     .option {
       transition: all 0.2s ease-in-out;
       cursor: pointer;
@@ -77,8 +81,10 @@
 
 @media (min-width: 800px) {
   .sidebar {
-    position: static;
-    height: fit-content;
+    position: sticky;
+    min-height: 100vh;
+    // overflow-y: scroll;
+    // height: fit-content;
 
     // new
     // position: sticky;
@@ -95,5 +101,11 @@
     .hamburger {
       display: none;
     }
+  }
+}
+
+@media (min-width: 1200px) {
+  .sidebar {
+    // overflow-y: unset;
   }
 }

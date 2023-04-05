@@ -9,14 +9,7 @@ import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { setFlash } from "../../../redux/flash/flash.actions";
 
-function OtpForm({
-  phone,
-  nextStage,
-  setCurrentUser,
-  closeModal,
-  setFlash,
-  admin,
-}) {
+function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
   const navigate = useNavigate();
   const [isOtpValid, setIsOtpValid] = useState(true);
   const [otp, setOtp] = useState("");
@@ -67,11 +60,15 @@ function OtpForm({
       } else if (response.data.status === "success") {
         const { user } = response.data;
         setCurrentUser(user);
-        setFlash({ message: "Logged in successfully", type: "success" });
-        if (admin) {
+        if (user?.usertype === "admin") {
           navigate("/admin/banners");
+          setFlash({
+            type: "success",
+            message: "Admin Logged in successfully",
+          });
           return closeModal();
         }
+        setFlash({ message: "Logged in successfully", type: "success" });
         if (!user?.email) {
           return nextStage();
         }

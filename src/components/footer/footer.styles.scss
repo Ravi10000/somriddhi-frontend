@@ -16,6 +16,8 @@
       place-items: center;
       .logo-light {
         height: 60px;
+        // width: auto;
+        object-fit: contain;
         width: fit-content;
       }
       .buttons-container {
