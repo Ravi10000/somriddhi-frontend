@@ -8,7 +8,7 @@ import TitleSection from "../title-section/title-section";
 import AddCustomerPopup from "../../../components/add-customer-popup/add-customer-popup";
 
 // utils
-import { getAllExcelData, getAllUsers } from "../../../api/index";
+import { generateCashbacks, getAllUsers } from "../../../api/index";
 
 export default function AllCustomers() {
   const [showAddCustomerPopup, setShowAddCustomerPopup] = useState(false);
@@ -20,7 +20,7 @@ export default function AllCustomers() {
       setCustomers(response.data.user);
       console.log({ response });
 
-      const data = await getAllExcelData();
+      const data = await generateCashbacks();
       console.log('Data : ');
       console.log(data);
     })();

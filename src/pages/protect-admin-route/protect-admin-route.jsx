@@ -8,24 +8,11 @@ import { createStructuredSelector } from "reselect";
 import { useLoginModal } from "../../context/login-modal-context";
 function ProtectAdminRoute({ children, currentUser }) {
   const modal = useLoginModal();
-  // const [admin, setAdmin] = useState(false); // this should be false
-  // const params = useParams();
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   currentUser?.usertype === "admin" && setAdmin(true);
-  //   console.log({ currentUser });
-  // }, [currentUser]);
-
-  // console.log({ params, location });
-
-  // useEffect(() => {
-  //   localStorage.getItem("admin") &&
-  //     setAdmin(JSON.parse(localStorage.getItem("admin")));
-  // }, []);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log({ userInProtectRoute: currentUser });
+    currentUser?.usertype === "customer" && navigate("/profile");
     currentUser?.usertype === "admin" ? modal.closeModal() : modal.openModal();
   }, [currentUser]);
 

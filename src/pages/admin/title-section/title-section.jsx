@@ -1,6 +1,6 @@
 import styles from "./title-section.module.scss";
 import React, { useState } from "react";
-import { getAllExcelData } from "../../../api";
+import { generateCashbacks, savePayouts } from "../../../api";
 import { setFlash } from "../../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 
@@ -11,13 +11,30 @@ function TitleSection({
   uploadBtn,
   setFlash,
 }) {
-  const handleChange = async (e) => {
+  const handlePaymentUpload = async (e) => {
     const file = e.target.files[0];
     const formdata = new FormData();
     file && formdata.append("fileExcel", file);
     // if (!(Object.keys(formdata).length === 0)) {}
     try {
-      const response = await getAllExcelData(formdata);
+      const response = await generateCashbacks(formdata);
+      console.log(response);
+    } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong",
+      });
+      console.log(error);
+    }
+  };
+
+  const handlePayoutUpload = async (e) => {
+    const file = e.target.files[0];
+    const formdata = new FormData();
+    file && formdata.append("fileExcel", file);
+    // if (!(Object.keys(formdata).length === 0)) {}
+    try {
+      const response = await savePayouts(formdata);
       console.log(response);
     } catch (error) {
       setFlash({
@@ -43,7 +60,7 @@ function TitleSection({
               </button>
               {/* <form enctype="multipart/form-data"> */}
               <input
-                onChange={handleChange}
+                onChange={handlePaymentUpload}
                 type="file"
                 accept=".xls, .xlsx, .csv"
               />
@@ -58,7 +75,7 @@ function TitleSection({
               </button>
               <input
                 type="file"
-                onChange={handleChange}
+                onChange={handlePayoutUpload}
                 accept=".xls, .xlsx, .csv"
               />
               {/* </form> */}

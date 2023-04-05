@@ -113,6 +113,13 @@ function AddMembershipPopup({
             maxLength="2"
             defaultValue={membersipToEdit?.cashbackPercent}
           />
+          <NumInput
+            label="Max Cashback"
+            name="maxCashback"
+            placeholder="Maximum Cashback"
+            // maxLength="2"
+            defaultValue={membersipToEdit?.cashbackPercent}
+          />
           <TextInput
             label="URL"
             name="url"

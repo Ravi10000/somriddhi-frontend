@@ -280,8 +280,13 @@ export const deleteContent = (id) =>
 
 export const getAllContent = () => axios.get("/content");
 
-export const getAllExcelData = (formData) =>
-  axios.post(`/getexceldata`, formData, {
+export const generateCashbacks = (formData) =>
+  axios.post(`/payment`, formData, {
+    headers: { Authorization, "Content-Type": "multipart/form-data" },
+  });
+
+export const savePayouts = (formData) =>
+  axios.post(`/payout`, formData, {
     headers: { Authorization, "Content-Type": "multipart/form-data" },
   });
 

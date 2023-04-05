@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import Backdrop from "../backdrop/backdrop";
 import PopupHead from "../popup-head/popup-head";
 import TextInput from "../text-input/text-input";
+import NumInput from "../num-input/num-input";
 import ImageInput from "../image-input/image-input";
 import LongTextInput from "../long-text-input/long-text-input";
 import Button from "../button/button";
@@ -104,6 +105,20 @@ function AddBannerPopup({
             name="url"
             placeholder="Paste Banner url"
             defaultValue={bannerToEdit?.url}
+          />
+          <NumInput
+            label="Cashback"
+            name="cashbackPercent"
+            placeholder="Cashback in percent"
+            maxLength="2"
+            defaultValue={bannerToEdit?.cashbackPercent || ""}
+          />
+          <NumInput
+            label="Max Cashback"
+            name="maxCashback"
+            placeholder="Maximum Cashback in percent"
+            // maxLength="5"
+            defaultValue={bannerToEdit?.maxCashback || ""}
           />
           <LongTextInput
             label="Description"

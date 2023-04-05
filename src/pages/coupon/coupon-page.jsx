@@ -28,6 +28,7 @@ function CouponPage({ currentUser }) {
   const couponId = state?.couponId;
 
   const { id } = useParams();
+  console.log({ id });
   const navigate = useNavigate();
   // states
   const [hoursLeft, setHoursLeft] = useState("00");
@@ -140,11 +141,13 @@ function CouponPage({ currentUser }) {
         if (response.data.status === "success") {
           console.log("updated");
           const analyticId = response.data.analyticId;
+          console.log("Analytic Id: ", analyticId);
 
           var bannerUrl = dealInfo.url;
-          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
-          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
-          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
+          if (bannerUrl.startsWith("//"))
+            bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl + "&ascsubtag=" + analyticId);
+          window.open(bannerUrl + "&ascsubtag=" + analyticId, "_blank");
         }
       } catch (error) {
         console.log(error);
