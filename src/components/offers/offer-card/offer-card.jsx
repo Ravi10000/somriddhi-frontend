@@ -58,9 +58,7 @@ export default function OfferCard({
       {...otherProps}
       style={forCoupons ? { border: "none" } : {}}
     >
-      <h4 className="title">
-        Upto {offer?.cashbackPercent}% off on Appliances
-      </h4>
+      <h4 className="title">{offer?.name}</h4>
       <img
         className="dealImage"
         src={`${import.meta.env.VITE_REACT_APP_API_URL}/${offer?.image}`}
@@ -69,7 +67,7 @@ export default function OfferCard({
         }}
         alt=""
       />
-      <p>Upto {offer?.cashbackPercent}% off on summer Appliances</p>
+      <p>{offer?.cashbackPercent}% off</p>
       {/* <Link
         to={"//" + offer?.url}
         className="btn"

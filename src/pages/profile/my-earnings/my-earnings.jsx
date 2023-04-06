@@ -1,4 +1,5 @@
 import { getCashbackDetails } from "../../../api";
+import RequestPaymentPopup from "../../../components/request-payment-popup/request-payment-popup";
 import "./my-earnings.styles.scss";
 
 import React, { useEffect, useState } from "react";
@@ -7,6 +8,7 @@ export default function MyEarnings() {
   const [totalCashback, setTotalCashback] = useState("-");
   const [redemeedCashback, setRedemeedCashback] = useState("-");
   const [redemableCashback, setRedemableCashback] = useState("-");
+  const [requestPaymentPopup, setRequestPaymentPopup] = useState(false);
 
   async function fetchEarnings() {
     try {
@@ -25,8 +27,15 @@ export default function MyEarnings() {
   useEffect(() => {
     fetchEarnings();
   }, []);
+  async function handleRequestPayment() {
+    setRequestPaymentPopup(true);
+  }
+
   return (
     <div className="my-earnings">
+      {requestPaymentPopup && (
+        <RequestPaymentPopup setShowPopup={setRequestPaymentPopup} />
+      )}
       <h2>My Earnings</h2>
       <div className="earnings-section">
         <p>Total Earnings</p>
@@ -37,7 +46,7 @@ export default function MyEarnings() {
         </p>
       </div>
       <div className="other-status">
-        <div className="status-card">
+        <div className="status-card" onClick={handleRequestPayment}>
           <img src="/request-payment.png" alt="request payment" />
           <h4>Request Payment</h4>
           {/* <div className="dashed-line"></div> */}

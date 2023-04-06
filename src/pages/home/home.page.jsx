@@ -11,12 +11,14 @@ import PopulatCategories from "../../components/popular-categories/popular-categ
 import PopularMembership from "../../components/popular-membership/popular-membership";
 import Process from "../../components/process/process";
 import ScrollToTop from "../../components/scrollToTop";
+import CustomCategories from "../../components/custom-categories/custom-categories";
 
-export default function xHomePage() {
+export default function HomePage() {
   return (
     <div className="home-page" id="home">
       <ScrollToTop />
       <Banner />
+      {/* <CustomCategories /> */}
       <Coupons />
       <Offers />
       <Deals />

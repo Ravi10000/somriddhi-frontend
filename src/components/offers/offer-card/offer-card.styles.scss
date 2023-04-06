@@ -8,26 +8,29 @@
   align-items: center;
   gap: 30px;
   text-align: center;
-  max-width: 300px;
+  width: 300px;
   white-space: normal;
   cursor: pointer;
   // outline: 2px solid red;
 
   h4 {
-    // pointer-events: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
     color: #3ba615;
     font-size: 1.2rem;
-    // width: 70;
   }
 
   // .btn {
   // width: 100%;
   // a {
-    // width: 100%;
-    button {
-      padding: 15px;
-      width: 100%;
-    }
+  // width: 100%;
+  button {
+    padding: 15px;
+    width: 100%;
+  }
   // }
   // }
 

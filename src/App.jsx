@@ -133,6 +133,7 @@ function App({ setCurrentUser, flash }) {
             </ProtectedRoute>
           }
         />
+        <Route path="/*" element={<Navigate to="/" replace />} />
       </Routes>
       {!pathname.includes("/admin") && <Footer />}
     </div>

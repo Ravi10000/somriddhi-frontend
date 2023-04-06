@@ -302,3 +302,12 @@ export const getCashbackDetails = () =>
   axios.get("/cashback/", {
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
+
+export const getRedeemableCashbacks = () =>
+  axios.get("/cashback/redeemable", {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+export const redeemCashback = (formData) =>
+  axios.post("/cashback/redeem", formData, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
