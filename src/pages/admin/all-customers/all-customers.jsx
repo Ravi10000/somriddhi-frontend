@@ -43,9 +43,9 @@ export default function AllCustomers() {
                 <th>Email</th>
                 <th>Phone No.</th>
                 <th>Joined on</th>
-                <th>Total Purchase</th>
-                <th>Total Payment</th>
-                <th>Total Payout</th>
+                <th>Total Earnings</th>
+                <th>Redeemed Earnings</th>
+                <th>Redeemable Earnings</th>
               </tr>
             </thead>
             <tbody>
