@@ -309,5 +309,8 @@ export const getRedeemableCashbacks = () =>
   });
 export const redeemCashback = (formData) =>
   axios.post("/cashback/redeem", formData, {
-    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });

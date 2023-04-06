@@ -46,7 +46,10 @@ export default function MyEarnings() {
         </p>
       </div>
       <div className="other-status">
-        <div className="status-card" onClick={handleRequestPayment}>
+        <div
+          className="status-card request-payment"
+          onClick={handleRequestPayment}
+        >
           <img src="/request-payment.png" alt="request payment" />
           <h4>Request Payment</h4>
           {/* <div className="dashed-line"></div> */}

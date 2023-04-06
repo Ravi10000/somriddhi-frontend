@@ -60,6 +60,9 @@
           width: 15px;
         }
       }
+      &.request-payment {
+        cursor: pointer;
+      }
     }
   }
 }

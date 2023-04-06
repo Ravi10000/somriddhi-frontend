@@ -50,9 +50,16 @@ function RequestPaymentPopup({ setShowPopup, setFlash }) {
       setIsLoading(true);
       const response = await redeemCashback(formData);
       console.log({ response });
+      if (response.data.status === "success") {
+        setFlash({
+          type: "success",
+          message: "Payment request submitted successfully",
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
+      setShowPopup(false);
       setIsLoading(false);
     }
   }
@@ -65,7 +72,7 @@ function RequestPaymentPopup({ setShowPopup, setFlash }) {
           <div className={styles.loaderContainer}>
             <div className={styles.loader}></div>
           </div>
-        ) : (
+        ) : redeemableCashbacks?.length > 0 ? (
           <form onSubmit={submitPaymentRequest} className={styles.form}>
             <div className={styles.redeemables}>
               <h3>Select Cashbacks To Redeem</h3>
@@ -73,7 +80,7 @@ function RequestPaymentPopup({ setShowPopup, setFlash }) {
                 <div className={styles.item} key={index}>
                   <label htmlFor={`${id}-${index}`}>Rs. {item?.amount}</label>
                   <input
-                    name={item?._id}
+                    name={index}
                     value={item?._id}
                     type="checkbox"
                     id={`${id}-${index}`}
@@ -81,10 +88,10 @@ function RequestPaymentPopup({ setShowPopup, setFlash }) {
                 </div>
               ))}
             </div>
-            <Button isLoading={isLoading} disabled={loadingData}>
-              Redeem
-            </Button>
+            <Button isLoading={isLoading}>Redeem</Button>
           </form>
+        ) : (
+          "No redeemable cashbacks found"
         )}
       </div>
     </Backdrop>
