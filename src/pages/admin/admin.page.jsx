@@ -21,6 +21,9 @@ import AllFaqs from "./all-faqs/all-faqs";
 import AllFeedbacks from "./all-feedbacks/all-feedbacks";
 import menuList from "../../components/sidebar/menu-list";
 import Analytics from "./analytics/analytics";
+import Tracking from "./tracking-details/tracking-details";
+import AllPayments from "./all-payments/all-payments";
+import AllPayouts from "./all-payouts/all-payouts";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -89,6 +92,9 @@ export default function AdminPage() {
             {selectedOption === "FAQs" && <AllFaqs />}
             {selectedOption === "feedbacks" && <AllFeedbacks />}
             {selectedOption === "analytics" && <Analytics />}
+            {selectedOption === "tracking details" && <Tracking />}
+            {selectedOption === "payment details" && <AllPayments />}
+            {selectedOption === "payout details" && <AllPayouts />}
           </div>
         </div>
       </div>

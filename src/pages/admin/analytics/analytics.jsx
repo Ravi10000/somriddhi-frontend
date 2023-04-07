@@ -18,8 +18,16 @@ export default function Analytics() {
   //   [0, 10, 10],
   // ]
 
-  const [couponVisitCount, setCouponVisitCount] = useState(0);
-  console.log({ couponVisitCount });
+  const [couponVisitCount, setCouponsCount] = useState(0);
+  // console.log({ couponVisitCount, couponsChartData });
+  const [bannersCount, setBannersCount] = useState(0);
+  const [bannerChartData, setBannerChartData] = useState([[" "], [" "]]);
+
+  const [membershipsCount, setMembershipsCount] = useState(0);
+  const [membershipChartData, setMembershipChartData] = useState([
+    ["Membership", "No. of users visited"],
+  ]);
+
   const [loading, setLoading] = useState(false);
   const [categoryVisitCount, setCategoryVisitCount] = useState(0);
 
@@ -32,8 +40,6 @@ export default function Analytics() {
       if (response.data.status === "success") {
         const categoryData = response.data.analyticData;
         setCategoryChartData((prevData) => [...prevData, ...categoryData]);
-        // const visitCount = categoryData.reduce((acc, curr) => acc + curr[1], 0);
-        // console.log({ dataCount: visitCount });
         setCategoryVisitCount(response?.data?.totalCount);
       }
     } catch (err) {
@@ -43,20 +49,18 @@ export default function Analytics() {
     }
   }
 
-  async function couponAnalytics() {
+  async function couponAnalytics(couponType, setCoupons, setCouponsCount) {
     try {
-      const response = await getCouponAnalytics();
+      const response = await getCouponAnalytics(couponType);
       console.log({ response });
-      // console.log({ response });
       if (response.data.status === "success") {
         const couponData = response.data.analyticData;
 
         console.log({ couponData });
         const couponValue = [" "];
         const title = [" "];
-        // const visitCount = couponData.reduce((acc, curr) => acc + curr[1], 0);
-        // setCouponVisitCount(visitCount);
-        setCouponVisitCount(response.data.totalCount);
+
+        setCouponsCount(response.data.totalCount);
 
         couponData.forEach((item) => {
           if (item[0] === null) title.push("no title");
@@ -66,19 +70,19 @@ export default function Analytics() {
           else couponValue.push(item[1]);
         });
         console.log([title, couponValue]);
-        setCouponChartData([title, couponValue]);
-        // console.log({ title, couponValue });
-        // setCouponDataTitle((prevData) => [...prevData, ...title]);
-        // setCouponData((prevData) => [...prevData, ...couponValue]);
+
+        if (couponType === "Membership") {
+          setCoupons((prevData) => [...prevData, ...couponData]);
+          return;
+        }
+
+        setCoupons([title, couponValue]);
       }
     } catch (error) {
       console.log({ error });
     }
   }
 
-  console.log({ couponsChartData });
-
-  // console.log({ loading });
   useEffect(() => {
     // setData([
     //   ["Task", "Hours per Day"],
@@ -88,7 +92,9 @@ export default function Analytics() {
     //   ["Watch TV", 2],
     //   ["Sleep", 7],
     // ]);
-    couponAnalytics();
+    couponAnalytics("Coupon", setCouponChartData, setCouponsCount);
+    couponAnalytics("Banner", setBannerChartData, setBannersCount);
+    couponAnalytics("Membership", setMembershipChartData, setMembershipsCount);
     categoryAnalytics();
   }, []);
   return (
@@ -97,7 +103,7 @@ export default function Analytics() {
       <div className={styles.chartsContainer}>
         <div className={styles.chartContainer}>
           <div className={styles.title}>
-            <h2>Categories Analytics</h2>
+            <h2>All Categories Analytics</h2>
             {loading ? (
               <div className={styles.loader}></div>
             ) : (
@@ -119,11 +125,7 @@ export default function Analytics() {
         <div className={styles.chartContainer}>
           <div className={styles.title}>
             <h2>Top 10 Popular Coupons Analytics</h2>
-            {loading ? (
-              <div className={styles.loader}></div>
-            ) : (
-              <h3>{couponVisitCount}</h3>
-            )}
+            <h3>{couponVisitCount}</h3>
             <p>Total Coupons Visits</p>
           </div>
           <div className={styles.chart}>
@@ -134,6 +136,41 @@ export default function Analytics() {
               height="400px"
               data={couponsChartData}
               // options={options}
+            />
+          </div>
+        </div>
+
+        <div className={styles.chartContainer}>
+          <div className={styles.title}>
+            <h2>Top 10 Banner Analytics</h2>
+            <h3>{bannersCount}</h3>
+            <p>Total Banner Visits</p>
+          </div>
+          <div className={styles.chart}>
+            {loading && <div className={styles.loader}></div>}
+            <Chart
+              chartType="Bar"
+              width="100%"
+              height="400px"
+              data={bannerChartData}
+              // options={options}
+            />
+          </div>
+        </div>
+        <div className={styles.chartContainer}>
+          <div className={styles.title}>
+            <h2>Top 10 Membership Analytics</h2>
+            <h3>{membershipsCount}</h3>
+            <p>Total Membership Visits</p>
+          </div>
+          <div className={styles.chart}>
+            {loading && <div className={styles.loader}></div>}
+            <Chart
+              chartType="PieChart"
+              data={membershipChartData}
+              width="100%"
+              height="400px"
+              legendToggle
             />
           </div>
         </div>

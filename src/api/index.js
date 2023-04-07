@@ -293,8 +293,8 @@ export const savePayouts = (formData) =>
 // export const getAllExcelData = () =>
 //   axios.get(`/getexceldata`, { headers: { Authorization } });
 
-export const getCouponAnalytics = () =>
-  axios.get(`/analytic/coupon`, { headers: { Authorization } });
+export const getCouponAnalytics = (couponType) =>
+  axios.get(`/analytic/coupon/${couponType}`, { headers: { Authorization } });
 export const getCategoryAnalytics = () =>
   axios.get(`/analytic/category`, { headers: { Authorization } });
 
@@ -314,3 +314,11 @@ export const redeemCashback = (formData) =>
       "Content-Type": "application/json",
     },
   });
+export const fetchAnalytics = () =>
+  axios.get(`/analytic`, { headers: { Authorization } });
+
+export const fetchAllPayments = () =>
+  axios.get(`/payment`, { headers: { Authorization } });
+
+export const fetchAllPayouts = () =>
+  axios.get(`/payout`, { headers: { Authorization } });

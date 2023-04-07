@@ -8,6 +8,9 @@ export const topMenuOptions = [
   "customers",
   "tickets",
   "analytics",
+  "tracking details",
+  "payment details",
+  "payout details",
 ];
 
 export const bottomMenuOptions = ["feedbacks", "FAQs", "logout"];
