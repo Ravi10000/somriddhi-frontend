@@ -53,7 +53,7 @@ export default function Coupons() {
   return (
     <section className="coupons-section" id="coupons">
       <div className="container">
-        <h2 className="_title ">Coupon By Categories</h2>
+        <h2 className="_title ">Coupons By Category</h2>
         <div className="container right-shift ">
           <div className="menu-carousel-container">
             <SelectCategorySlider

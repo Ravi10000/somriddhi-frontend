@@ -9,15 +9,12 @@ function CustomCategories() {
       >
         <div className={styles.card}>
           <img src="/offer1.png" alt="" />
-          <p>Sports</p>
         </div>
         <div className={styles.card}>
           <img src="/offer2.png" alt="" />
-          <p>Sports</p>
         </div>
         <div className={styles.card}>
           <img src="/offer3.png" alt="" />
-          <p>Sports</p>
         </div>
       </div>
     </section>

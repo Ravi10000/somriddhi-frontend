@@ -5,21 +5,39 @@
     display: flex;
     gap: 10px;
     width: fit-content;
-    animation: animate 10s linear infinite;
+    animation: animate 2s linear infinite;
     .card {
-      text-align: center;
-      p {
-        font-size: 20px;
-        font-weight: 600;
+      width: 200px;
+      img {
+        width: 100%;
+        height: fit-content;
+        object-fit: contain;
       }
     }
+  }
+}
+
+@media (min-width: 800px) {
+  .cardsContainer {
+    animation: animateOnDesktop 2s linear infinite;
   }
 }
 
 @keyframes animate {
   0% {
     // opacity: 0;
-    transform: translateX(70%);
+    transform: translateX(100%);
+  }
+  100% {
+    // opacity: 1;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes animateOnDesktop {
+  0% {
+    // opacity: 0;
+    transform: translateX(200%);
   }
   100% {
     // opacity: 1;
