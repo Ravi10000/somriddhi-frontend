@@ -105,7 +105,7 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
   return (
     <div className={styles["slider-container"]} style={membershipStyles}>
       <Slider {...settings}>
-        {banners.length > 0 &&
+        {banners?.length > 0 &&
           banners?.map((banner, index) => (
             <div className={styles["card-container"]} key={index}>
               {/* <Link to={"//" + banner?.url}> */}
