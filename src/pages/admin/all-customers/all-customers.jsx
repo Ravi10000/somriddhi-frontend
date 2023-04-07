@@ -17,7 +17,7 @@ export default function AllCustomers() {
   useEffect(() => {
     (async function () {
       const response = await getAllUsers();
-      setCustomers(response.data.user);
+      setCustomers(response.data.users);
       console.log({ response });
     })();
     // getAllExcelData();
@@ -49,31 +49,44 @@ export default function AllCustomers() {
               </tr>
             </thead>
             <tbody>
-              {customers?.map(
-                (
-                  {
-                    email,
-                    phone,
-                    createdAt,
-                    totalPurchase,
-                    totalPayment,
-                    totalPayout,
-                  },
-                  index
-                ) => {
-                  const joinedOn = new Date(createdAt).toDateString();
-                  return (
-                    <tr key={index}>
-                      <td>{email ? email : "<unavailable>"}</td>
-                      <td>{phone ? phone : "<unavailable>"}</td>
-                      <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
-                      <td>Rs. {totalPurchase ? totalPurchase : 0}</td>
-                      <td>Rs. {totalPayment ? totalPayment : 0}</td>
-                      <td>Rs. {totalPayout ? totalPayout : 0}</td>
-                    </tr>
-                  );
-                }
-              )}
+              {customers?.map((userDetails, index) => {
+                const joinedOn = new Date(
+                  userDetails?.user?.createdAt
+                ).toDateString();
+                return (
+                  <tr key={index}>
+                    <td>
+                      {userDetails?.user?.email
+                        ? userDetails?.user?.email
+                        : "<unavailable>"}
+                    </td>
+                    <td>
+                      {userDetails?.user?.phone
+                        ? userDetails?.user?.phone
+                        : "<unavailable>"}
+                    </td>
+                    <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
+                    <td>
+                      Rs.{" "}
+                      {userDetails?.earnings?.totalEarnings
+                        ? userDetails?.earnings?.totalEarnings
+                        : 0}
+                    </td>
+                    <td>
+                      Rs.{" "}
+                      {userDetails?.earnings?.redeemedEarnings
+                        ? userDetails?.earnings?.redeemedEarnings
+                        : 0}
+                    </td>
+                    <td>
+                      Rs.{" "}
+                      {userDetails?.earnings?.redeemableEarnings
+                        ? userDetails?.earnings?.redeemableEarnings
+                        : 0}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
