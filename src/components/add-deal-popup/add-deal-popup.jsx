@@ -114,14 +114,14 @@ function AddDealPopup({
           <NumInput
             label="Cashback"
             name="cashbackPercent"
-            placeholder="Cashback in percent"
+            placeholder="Cashback in %"
             maxLength="2"
             defaultValue={dealToUpdate?.cashbackPercent || ""}
           />
           <NumInput
             label="Max Cashback"
             name="maxCashback"
-            placeholder="Maximum Cashback in percent"
+            placeholder="Maximum Cashback Amount"
             // maxLength="5"
             defaultValue={dealToUpdate?.maxCashback || ""}
           />

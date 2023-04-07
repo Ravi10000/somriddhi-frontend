@@ -109,14 +109,14 @@ function AddBannerPopup({
           <NumInput
             label="Cashback"
             name="cashbackPercent"
-            placeholder="Cashback in percent"
+            placeholder="Cashback in %"
             maxLength="2"
             defaultValue={bannerToEdit?.cashbackPercent || ""}
           />
           <NumInput
             label="Max Cashback"
             name="maxCashback"
-            placeholder="Maximum Cashback in percent"
+            placeholder="Maximum Cashback Amount"
             // maxLength="5"
             defaultValue={bannerToEdit?.maxCashback || ""}
           />

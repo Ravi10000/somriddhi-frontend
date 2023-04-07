@@ -6,6 +6,7 @@
   background: #fff;
   // min-height: 100vh;
   max-height: 100vh;
+  min-width: 250px;
   height: 100%;
   position: fixed;
   top: 0;
@@ -15,7 +16,6 @@
   border: 2px solid #e6e8ea;
   border-top: none;
   overflow-y: auto;
-  // overflow-y: scroll;
   &.visible {
     left: 0;
   }

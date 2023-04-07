@@ -13,12 +13,20 @@ import { getAllUsers } from "../../../api/index";
 export default function AllCustomers() {
   const [showAddCustomerPopup, setShowAddCustomerPopup] = useState(false);
   const [customers, setCustomers] = useState([]);
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     (async function () {
-      const response = await getAllUsers();
-      setCustomers(response.data.users);
-      console.log({ response });
+      try {
+        setIsFetching(true);
+        const response = await getAllUsers();
+        setCustomers(response.data.users);
+        console.log({ response });
+      } catch (error) {
+        console.log({ error });
+      } finally {
+        setIsFetching(false);
+      }
     })();
     // getAllExcelData();
   }, []);
@@ -48,46 +56,52 @@ export default function AllCustomers() {
                 <th>Redeemable Earnings</th>
               </tr>
             </thead>
-            <tbody>
-              {customers?.map((userDetails, index) => {
-                const joinedOn = new Date(
-                  userDetails?.user?.createdAt
-                ).toDateString();
-                return (
-                  <tr key={index}>
-                    <td>
-                      {userDetails?.user?.email
-                        ? userDetails?.user?.email
-                        : "<unavailable>"}
-                    </td>
-                    <td>
-                      {userDetails?.user?.phone
-                        ? userDetails?.user?.phone
-                        : "<unavailable>"}
-                    </td>
-                    <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
-                    <td>
-                      Rs.{" "}
-                      {userDetails?.earnings?.totalEarnings
-                        ? userDetails?.earnings?.totalEarnings
-                        : 0}
-                    </td>
-                    <td>
-                      Rs.{" "}
-                      {userDetails?.earnings?.redeemedEarnings
-                        ? userDetails?.earnings?.redeemedEarnings
-                        : 0}
-                    </td>
-                    <td>
-                      Rs.{" "}
-                      {userDetails?.earnings?.redeemableEarnings
-                        ? userDetails?.earnings?.redeemableEarnings
-                        : 0}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
+            {isFetching ? (
+              <div className={styles.loaderContainer}>
+                <div className={styles.loader}></div>
+              </div>
+            ) : (
+              <tbody>
+                {customers?.map((userDetails, index) => {
+                  const joinedOn = new Date(
+                    userDetails?.user?.createdAt
+                  ).toDateString();
+                  return (
+                    <tr key={index}>
+                      <td>
+                        {userDetails?.user?.email
+                          ? userDetails?.user?.email
+                          : "<unavailable>"}
+                      </td>
+                      <td>
+                        {userDetails?.user?.phone
+                          ? userDetails?.user?.phone
+                          : "<unavailable>"}
+                      </td>
+                      <td>{joinedOn ? joinedOn : "<unavailable>"}</td>
+                      <td>
+                        Rs.{" "}
+                        {userDetails?.earnings?.totalEarnings
+                          ? userDetails?.earnings?.totalEarnings
+                          : 0}
+                      </td>
+                      <td>
+                        Rs.{" "}
+                        {userDetails?.earnings?.redeemedEarnings
+                          ? userDetails?.earnings?.redeemedEarnings
+                          : 0}
+                      </td>
+                      <td>
+                        Rs.{" "}
+                        {userDetails?.earnings?.redeemableEarnings
+                          ? userDetails?.earnings?.redeemableEarnings
+                          : 0}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            )}
           </table>
         </div>
         {/* </div> */}
