@@ -1,21 +1,16 @@
 import "./banner.styles.scss";
 // import Carousel from "../carousel/carousel";
 import React, { useEffect, useState } from "react";
-// import CustomCarousel, {
-//   CarouselItem,
-// } from "../custom-carousel/custom-carousel";
-import { getAllBanners, getAllDeals } from "../../api/index";
-// import { useNavigate } from "react-router-dom";
+import { fetchActiveBanners, getAllDeals } from "../../api/index";
 import BannerSlider from "../banner-slider/banner-slider";
 
 export default function Banner() {
-  // const listOfImages = ["/banner1.png", "/table-bg.png", "/banner1.png"];
   const [banners, setBanners] = useState([]);
 
   let bannerData;
   const allBannersData = async () => {
-    bannerData = await getAllBanners();
-    console.log(bannerData.data.data)
+    bannerData = await fetchActiveBanners();
+    console.log(bannerData.data.data);
     setBanners(bannerData.data.data);
   };
   useEffect(() => {

@@ -32,6 +32,25 @@
           text-transform: capitalize;
           font-size: 1.2rem;
           font-weight: 600;
+          display: flex;
+          gap: 5px;
+          align-items: center;
+          span {
+            cursor: pointer;
+            height: fit-content;
+            display: inline-block;
+            padding: 5px 15px;
+            margin: 0 0 5px 5px;
+            background: #e6fff2;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: 8px;
+            color: #41b079;
+            &.Inactive {
+              background: #ffe9e6;
+              color: #f01c21;
+            }
+          }
         }
         .info {
           overflow: hidden;

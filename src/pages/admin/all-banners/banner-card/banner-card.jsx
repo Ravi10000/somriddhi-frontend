@@ -6,8 +6,11 @@ export default function BannerCard({
   deleteBannerHandler,
   setBannerToEdit,
   setShowPopup,
+  changeStatus,
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isChangingStatus, setIsChangingStatus] = useState(false);
+
   return (
     <div className={styles["banner-card"]}>
       <img
@@ -21,7 +24,21 @@ export default function BannerCard({
       <div className={styles["banner-details"]}>
         <div className={styles["info-container"]}>
           <div className={styles["banner-info"]}>
-            <h5 className={styles["name"]}>{banner?.name}</h5>
+            <h5 className={styles["name"]}>
+              {banner?.name}{" "}
+              <span
+                className={styles[banner?.status]}
+                onClick={() => {
+                  changeStatus(
+                    banner?._id,
+                    banner?.status === "Active" ? "Inactive" : "Active",
+                    setIsChangingStatus
+                  );
+                }}
+              >
+                {isChangingStatus ? "updating..." : banner?.status}
+              </span>
+            </h5>
             {/* <div className="info expiry-date">
             <img src="/date.png" alt="date" />
             <p>{expiryDate ? expiryDate : "unavailable"}</p>

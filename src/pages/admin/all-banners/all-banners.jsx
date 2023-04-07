@@ -11,7 +11,11 @@ import AddBannerPopup from "../../../components/add-banner-popup/add-banner-popu
 import BannerCard from "./banner-card/banner-card";
 
 // api requests
-import { getAllBanners, deleteBanner } from "../../../api/index";
+import {
+  getAllBanners,
+  deleteBanner,
+  changeBannerStatus,
+} from "../../../api/index";
 
 // redux actions
 import { setFlash } from "../../../redux/flash/flash.actions";
@@ -20,7 +24,7 @@ function AllBanners({ setFlash }) {
   const [banners, setBanners] = useState([]);
   const [showAddBannerPopup, setShowAddBannerPopup] = useState(false);
   const [bannerToEdit, setBannerToEdit] = useState(null);
-  console.log({ bannerToEdit });
+
   async function fetchBanners() {
     try {
       const response = await getAllBanners();
@@ -49,6 +53,29 @@ function AllBanners({ setFlash }) {
     }
   }
 
+  async function changeStatus(bannerId, status, setIsChangingStatus) {
+    console.log("change status");
+    setIsChangingStatus(true);
+    const formData = new FormData();
+    formData.append("bannerId", bannerId);
+    formData.append("status", status);
+    try {
+      const response = await changeBannerStatus(formData);
+      console.log({ response });
+      if (response.data.status === "success") {
+        await fetchBanners();
+        setFlash({
+          type: "success",
+          message: response?.data?.message,
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsChangingStatus(false);
+    }
+  }
+
   return (
     <>
       {showAddBannerPopup && (
@@ -67,6 +94,7 @@ function AllBanners({ setFlash }) {
         <div className={styles["banner-cards-container"]}>
           {banners?.map((banner) => (
             <BannerCard
+              changeStatus={changeStatus}
               key={banner?._id}
               setShowPopup={setShowAddBannerPopup}
               setBannerToEdit={setBannerToEdit}

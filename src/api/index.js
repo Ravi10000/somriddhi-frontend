@@ -322,3 +322,13 @@ export const fetchAllPayments = () =>
 
 export const fetchAllPayouts = () =>
   axios.get(`/payout`, { headers: { Authorization } });
+
+export const fetchActiveBanners = () =>
+  axios.get("/banner/active", {
+    headers: { Authorization: "Bearer" + localStorage.getItem("token") },
+  });
+
+export const changeBannerStatus = (formData) =>
+  axios.post("/banner/changestatus", formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
