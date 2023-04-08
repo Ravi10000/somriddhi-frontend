@@ -42,51 +42,52 @@
             width: 25px;
           }
 
-          .store-details {
-            display: grid;
-            gap: 5px;
+          // .store-details {
+          //   display: grid;
+          //   gap: 5px;
 
-            p {
-              text-transform: capitalize;
-              font-size: 0.75rem;
-            }
+          //   p {
+          //     text-transform: capitalize;
+          //     font-size: 0.75rem;
+          //   }
 
-            h4 {
-              color: #091431;
-            }
-          }
+          //   h4 {
+          //     color: #091431;
+          //   }
+          // }
         }
       }
     }
 
     .menu {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      //   place-items: flex-start;
+      .menu-item {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          color: #f01c21;
+        }
+      }
     }
   }
 }
 
-@media (min-width: 700px) {
+@media (min-width: 500px) {
   .footer-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .container {
-      .logo-and-download-links {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+
+      .buttons-container {
         display: flex;
-        gap: 20px;
-        width: 100%;
         justify-content: space-around;
-
-        .buttons-container {
-          // display: flex;
-          justify-content: space-around;
-          flex-direction: row;
-          gap: 20px;
-        }
-      }
-
-      .menu {
-        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
       }
     }
   }
@@ -94,20 +95,16 @@
 
 @media (min-width: 1400px) {
   .footer-section {
-    display: grid;
-    place-content: center;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .container {
       max-width: fit-content;
       flex-direction: row;
 
       .logo-and-download-links {
-        width: fit-content;
         flex-direction: column;
-
-        .buttons-container {
-          flex-direction: column;
-        }
+        width: fit-content;
       }
     }
   }
