@@ -26,7 +26,13 @@ function SideBar({
       className={`${styles["sidebar"]} ${isMenuVisible && styles["visible"]}`}
     >
       <div className={styles["logo-and-close"]} onClick={hideMenu}>
-        <img src="/Somriddhi Final Logo-03.png" alt="somriddihi" />
+        <img
+          src="/Somriddhi Final Logo-03.png"
+          alt="somriddihi"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         <img
           className={styles["close-btn"]}
           src="/close-menu.png"

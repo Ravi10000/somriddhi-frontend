@@ -1,6 +1,7 @@
 .footer-section {
   color: #fff;
   margin-top: auto;
+  padding-top: 20px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -9,7 +10,9 @@
   .logo-and-download-links {
     display: grid;
     place-items: center;
+    padding: 20px;
     .logo-light {
+      cursor: pointer;
       height: 60px;
       object-fit: contain;
       width: fit-content;

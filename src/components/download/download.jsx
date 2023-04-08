@@ -14,7 +14,14 @@ export default function Download() {
           <div className="buttons-container">
             <button>
               <img src="/playstore.png" alt="download from play sotre" />
-              <div className="store-details">
+              <div
+                className="store-details"
+                onClick={() => {
+                  window.open(
+                    "https://play.google.com/store/apps/details?id=com.somriddhi.somriddhiaeps"
+                  );
+                }}
+              >
                 <p>Download From</p>
                 <h4>Play Store</h4>
               </div>
