@@ -14,30 +14,30 @@ function Footer({ currentUser }) {
   const navigate = useNavigate();
   return (
     <footer className="footer-section">
-      <div className="container">
-        <div className="logo-and-download-links">
-          <img
-            className="logo-light"
-            src="/footer-logo.png"
-            alt="somriddihi logo"
-          />
-          <div className="buttons-container">
-            <button>
-              <img src="/playstore.png" alt="download from play sotre" />
-              <div className="store-details">
-                <p>Download From</p>
-                <h4>Play Store</h4>
-              </div>
-            </button>
-            <button>
-              <img src="/applestore.png" alt="download from apple sotre" />
-              <div className="store-details">
-                <p>Download From</p>
-                <h4>Apple Store</h4>
-              </div>
-            </button>
-          </div>
+      <div className="logo-and-download-links">
+        <img
+          className="logo-light"
+          src="/Somriddhi Final Logo-03.png"
+          alt="somriddihi logo"
+        />
+        <div className="buttons-container">
+          <button>
+            <img src="/playstore.png" alt="download from play sotre" />
+            <div className="store-details">
+              <p>Download From</p>
+              <h4>Play Store</h4>
+            </div>
+          </button>
+          <button>
+            <img src="/applestore.png" alt="download from apple sotre" />
+            <div className="store-details">
+              <p>Download From</p>
+              <h4>Apple Store</h4>
+            </div>
+          </button>
         </div>
+      </div>
+      <div className="container">
         <div className="menu">
           <div
             className="menu-item"
@@ -48,10 +48,15 @@ function Footer({ currentUser }) {
             <img src="/nav-arrow.png" alt={"about"} />
             <p>About</p>
           </div>
-          {!currentUser && (
-            <div className="menu-item" onClick={modal.openModal}>
+          {currentUser && (
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/admin");
+              }}
+            >
               <img src="/nav-arrow.png" alt={"about"} />
-              <p>Login</p>
+              <p>Admin</p>
             </div>
           )}
           {/* {navList.map(({ title, navItems }) => (
