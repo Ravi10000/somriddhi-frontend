@@ -48,17 +48,15 @@ function Footer({ currentUser }) {
             <img src="/nav-arrow.png" alt={"about"} />
             <p>About</p>
           </div>
-          {currentUser && (
-            <div
-              className="menu-item"
-              onClick={() => {
-                navigate("/admin");
-              }}
-            >
-              <img src="/nav-arrow.png" alt={"about"} />
-              <p>Admin</p>
-            </div>
-          )}
+          <div
+            className="menu-item"
+            onClick={() => {
+              navigate("/admin");
+            }}
+          >
+            <img src="/nav-arrow.png" alt={"about"} />
+            <p>Admin</p>
+          </div>
           {/* {navList.map(({ title, navItems }) => (
             <NavMenu navTitle={title} navItems={navItems} key={title} />
           ))} */}

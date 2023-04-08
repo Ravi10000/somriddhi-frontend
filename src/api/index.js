@@ -1,63 +1,69 @@
 import axios from "axios";
 
 // const BASEURL = `${import.meta.env.VITE_REACT_APP_API_URL}`;
-// console.log(BASEURL);
-// const BASEURL = "http://3.108.161.80:8002";
 axios.defaults.baseURL = `${import.meta.env.VITE_REACT_APP_API_URL}/api`;
 // axios.defaults.withCredentials = true;
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE3ZjQwMjE1NGEzNWU4NTU3OWMyMDAiLCJpYXQiOjE2NzkyOTEzOTQsImV4cCI6MTY3OTg5NjE5NH0.79NZuV_0z-b6jyl2TlK7V5bjtzfJZVfyQtbB9VCN1aI";
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJiMDhjYTY5NzA5ZmMzYWJmZGMxYzgiLCJpYXQiOjE2ODA1NDE4OTksImV4cCI6MTcxMjA5OTQ5OX0.F4iWMmwRElmfW6cmhbXUhguri5XohqVV7gY7Iqg7JlM";
 const Authorization = `Bearer ${token}`;
 
-// console.log(localStorage.getItem("token"));
-// const localToken = localStorage.getItem("token");
-// const authLocal = localToken ? `Bearer ${localToken}` : "";
-// axios.interceptors.request.use(function (config, _onRejected) {
-//   // config.headers['Authorization'] = localStorage.getItem('token') || '';
-//   config.headers["Authorization"] =
-//     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDE3ZjQwMjE1NGEzNWU4NTU3OWMyMDAiLCJpYXQiOjE2NzkyOTEzOTQsImV4cCI6MTY3OTg5NjE5NH0.79NZuV_0z-b6jyl2TlK7V5bjtzfJZVfyQtbB9VCN1aI";
-
-//   return config;
-// });
-
 // Banner APIs
 export const getAllBanners = () => axios.get(`/banner`);
+
 export const getBannerById = (id) => {
   return axios.get(`/banner/${id}`);
 };
+
 export const createNewBanner = (formData) => {
   return axios.post(`/banner`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 export const editBanner = (formData) => {
   return axios.patch(`/banner`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 
 export const deleteBanner = (id) =>
   axios.delete(`/banner/${id}`, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 // FAQ APIs
 export const getAllFaqs = () =>
-  axios.get(`/faq`, { headers: { Authorization } });
+  axios.get(`/faq`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const addNewFaq = (formData) =>
   axios.post(`/faq`, formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 export const editFaq = (formData) =>
   axios.patch(`/faq`, formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 export const deleteFaq = (id) =>
-  axios.delete(`/faq/${id}`, { headers: { Authorization } });
+  axios.delete(`/faq/${id}`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 // users APIs
 export const getUser = () =>
@@ -66,8 +72,6 @@ export const getUser = () =>
   });
 
 export const createUser = (formData) => {
-  // console.log({ authLocal });
-  // console.log({ token: localStorage.getItem("token") });
   return axios.post(`/user`, formData, {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -97,12 +101,11 @@ export const logoutUser = async () => {
 };
 
 export const getAllUsers = () =>
-  axios.get(`/user`, { headers: { Authorization } });
+  axios.get(`/user`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export async function sendOtp(formData) {
-  // for (let entry of formData.entries()) {
-  //   console.log(entry);
-  // }
   const response = await axios.post(`/sendotp`, formData, {
     headers: { "Content-Type": "application/json" },
   });
@@ -113,18 +116,12 @@ export async function verifyOtp(formData) {
   const response = await axios.post(`verifyotp`, formData, {
     headers: { "Content-Type": "application/json" },
   });
-  // console.log("after verify otp", response);
   localStorage.setItem("token", response.data.token);
   return response;
 }
-// export async function updateUser(formData) {
-//   const response = await axios.patch("/user", formData);
-//   return response;
-// }
 
 // Deals APIs
 export const getAllDeals = (categoryId) => {
-  // console.log(`Get all deals ${categoryId}`);
   if (categoryId) return axios.get(`/deal/${categoryId}`);
   else return axios.get(`/deal`);
 };
@@ -133,42 +130,63 @@ export const getDealById = (id) => {
 };
 export const createNewDeal = (formData) =>
   axios.post(`/deal`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 export const updateDeal = (formData) =>
   axios.patch(`/deal`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 export const deleteDeal = (id) =>
   axios.delete(`/deal/${id}`, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 // Category APIs
 export const getAllCategories = () => axios.get(`/category`);
 export const createNewCategory = (formData) =>
   axios.post(`/category`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 export const editCategory = (formData) =>
   axios.patch(`/category`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 export const deleteCategory = (id) =>
-  axios.delete(`/category/${id}`, { headers: { Authorization } });
+  axios.delete(`/category/${id}`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+
 export const getCategoryById = (id) => {
   return axios.get(`/category/single/${id}`);
 };
 
 // NewLetter APIs
 export const getAllNewLetter = () =>
-  axios.get(`/newsletter`, { headers: { Authorization } });
+  axios.get(`/newsletter`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const createNewNewLetter = (data) =>
-  axios.post(`/newsletter`, data, { headers: { Authorization } });
+  axios.post(`/newsletter`, data, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const checkIfSubscribed = () => {
-  // console.log({ tokenOnCheckingSubscription: localStorage.getItem("token") });
   return axios.get(`/newsletter/check`, {
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
@@ -176,7 +194,9 @@ export const checkIfSubscribed = () => {
 
 // Membership APIs
 export const getAllMemberships = () =>
-  axios.get(`/membership`, { headers: { Authorization } });
+  axios.get(`/membership`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const getMembershipById = (id) => {
   return axios.get(`/membership/${id}`);
@@ -184,17 +204,25 @@ export const getMembershipById = (id) => {
 
 export const createNewMemberships = (formData) => {
   return axios.post(`/membership`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 export const updateMembership = (formData) => {
   return axios.patch(`/membership`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 
 export const deleteMembership = (id) =>
-  axios.delete(`/membership/${id}`, { headers: { Authorization } });
+  axios.delete(`/membership/${id}`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 // Feedback APIs
 export const createNewFeedback = (formData) => {
@@ -212,28 +240,40 @@ export const getAllFeedbacks = () => {
 };
 export const getActiveFeedbacks = () =>
   axios.get(`/feedback?status=Active`, {
-    headers: { Authorization },
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
 
 export const updateFeedbackStatus = (formData) =>
   axios.patch(`/feedback`, formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 export const deleteFeedback = (id) => {
   return axios.delete(`/feedback/${id}`, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 };
 
 export const getAllTickets = () =>
-  axios.get(`/ticket`, { headers: { Authorization } });
+  axios.get(`/ticket`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const getActiveTickets = () =>
-  axios.get(`/ticket?status=Active`, { headers: { Authorization } });
+  axios.get(`/ticket?status=Active`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const getResolvedTickets = () =>
-  axios.get(`/ticket?status=Inactive`, { headers: { Authorization } });
+  axios.get(`/ticket?status=Inactive`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const getMyTickets = () =>
   axios.get(`/mytickets`, {
@@ -251,50 +291,71 @@ export const addNewTicket = (formData) => {
 
 export const replyToTicket = (formData) => {
   return axios.post("/ticket/reply", formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 };
 
 export const updateTicketStatus = (formData) =>
   axios.patch(`/ticket/status`, formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 export const createUserByAdmin = (formData) =>
   axios.post("/newuser", formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 export const createContent = (formData) =>
   axios.post("/content", formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 export const updateContent = (formData) =>
   axios.patch(`/content`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 export const deleteContent = (id) =>
   axios.delete(`/content/${id}`, {
-    headers: { Authorization },
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
 
 export const getAllContent = () => axios.get("/content");
 
 export const generateCashbacks = (formData) =>
   axios.post(`/payment`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 
 export const savePayouts = (formData) =>
   axios.post(`/payout`, formData, {
-    headers: { Authorization, "Content-Type": "multipart/form-data" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "multipart/form-data",
+    },
   });
 
-// export const getAllExcelData = () =>
-//   axios.get(`/getexceldata`, { headers: { Authorization } });
-
 export const getCouponAnalytics = (couponType) =>
-  axios.get(`/analytic/coupon/${couponType}`, { headers: { Authorization } });
+  axios.get(`/analytic/coupon/${couponType}`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+
 export const getCategoryAnalytics = () =>
   axios.get(`/analytic/category`, { headers: { Authorization } });
 
@@ -315,13 +376,19 @@ export const redeemCashback = (formData) =>
     },
   });
 export const fetchAnalytics = () =>
-  axios.get(`/analytic`, { headers: { Authorization } });
+  axios.get(`/analytic`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const fetchAllPayments = () =>
-  axios.get(`/payment`, { headers: { Authorization } });
+  axios.get(`/payment`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const fetchAllPayouts = () =>
-  axios.get(`/payout`, { headers: { Authorization } });
+  axios.get(`/payout`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const fetchActiveBanners = () =>
   axios.get("/banner/active", {
@@ -330,10 +397,16 @@ export const fetchActiveBanners = () =>
 
 export const changeBannerStatus = (formData) =>
   axios.post("/banner/changestatus", formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
 
 export const changeBannerPriority = (formData) =>
   axios.post("/banner/changepriority", formData, {
-    headers: { Authorization, "Content-Type": "application/json" },
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
   });
