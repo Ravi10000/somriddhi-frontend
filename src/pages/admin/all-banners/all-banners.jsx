@@ -15,6 +15,7 @@ import {
   getAllBanners,
   deleteBanner,
   changeBannerStatus,
+  changeBannerPriority,
 } from "../../../api/index";
 
 // redux actions
@@ -29,7 +30,7 @@ function AllBanners({ setFlash }) {
     try {
       const response = await getAllBanners();
       console.log({ response });
-      setBanners(response.data.data);
+      if (response.data.status === "success") setBanners(response.data.banners);
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +51,33 @@ function AllBanners({ setFlash }) {
       setIsDeleting(false);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async function changePriority(bannerId, priority, setIsChangingPriority) {
+    setIsChangingPriority(true);
+    try {
+      const formData = new FormData();
+      formData.append("bannerId", bannerId);
+      formData.append("newPriorityOrder", priority);
+      const response = await changeBannerPriority(formData);
+
+      console.log({ response });
+      if (response.data.status === "success") {
+        setBanners(response?.data?.banners);
+        setFlash({
+          type: "success",
+          message: "Banner priority changed successfully",
+        });
+      }
+    } catch (error) {
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
+      console.log(error.message);
+    } finally {
+      setIsChangingPriority(false);
     }
   }
 
@@ -94,6 +122,7 @@ function AllBanners({ setFlash }) {
         <div className={styles["banner-cards-container"]}>
           {banners?.map((banner) => (
             <BannerCard
+              changePriority={changePriority}
               changeStatus={changeStatus}
               key={banner?._id}
               setShowPopup={setShowAddBannerPopup}

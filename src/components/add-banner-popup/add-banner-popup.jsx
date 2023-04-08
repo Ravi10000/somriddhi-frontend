@@ -29,6 +29,10 @@ function AddBannerPopup({
 }) {
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(
+    () => bannerToEdit?.status || "Active"
+  );
+  console.log({ selectedStatus });
 
   useEffect(() => {
     return () => {
@@ -44,6 +48,7 @@ function AddBannerPopup({
     // const img = formData.get("bannerPhoto");
     // !img?.name && formData.delete("bannerPhoto");
 
+    formData.append("status", selectedStatus);
     for (let key of formData.entries()) {
       console.log(key);
     }
@@ -120,11 +125,36 @@ function AddBannerPopup({
             // maxLength="5"
             defaultValue={bannerToEdit?.maxCashback || ""}
           />
+          <NumInput
+            label="Priority Order"
+            name="priorityOrder"
+            placeholder="Enter Priority Order"
+            defaultValue={bannerToEdit?.priorityOrder || ""}
+          />
           <LongTextInput
             label="Description"
             name="description"
             defaultValue={bannerToEdit?.description}
           />
+          <label htmlFor="status">Status: </label>
+          <div className="status-updater">
+            <div
+              className={`select-status ${
+                selectedStatus === "Active" && "active"
+              }`}
+              onClick={() => setSelectedStatus("Active")}
+            >
+              Active
+            </div>
+            <div
+              onClick={() => setSelectedStatus("Inactive")}
+              className={`select-status ${
+                selectedStatus === "Inactive" && "inactive"
+              }`}
+            >
+              Inactive
+            </div>
+          </div>
           <Button isLoading={isLoading}>
             {bannerToEdit ? "Update Banner" : "Add Banner"}
           </Button>

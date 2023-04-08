@@ -38,6 +38,9 @@ export default function BannerCard({
               >
                 {isChangingStatus ? "updating..." : banner?.status}
               </span>
+              <span className={styles[banner?.status]}>
+                {banner?.priorityOrder}
+              </span>
             </h5>
             {/* <div className="info expiry-date">
             <img src="/date.png" alt="date" />

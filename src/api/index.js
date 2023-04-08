@@ -332,3 +332,8 @@ export const changeBannerStatus = (formData) =>
   axios.post("/banner/changestatus", formData, {
     headers: { Authorization, "Content-Type": "application/json" },
   });
+
+export const changeBannerPriority = (formData) =>
+  axios.post("/banner/changepriority", formData, {
+    headers: { Authorization, "Content-Type": "application/json" },
+  });
