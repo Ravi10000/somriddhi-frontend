@@ -17,10 +17,10 @@ export default function Navbar() {
     { name: "deals", link: "/#deals" },
     { name: "categories", link: `/category` },
     { name: "contact us", link: "/#feedback-form" },
-    {
-      name: "wallet login",
-      link: `https://login.somriddhidigital.co.in/#/login`,
-    },
+    // {
+    //   name: "wallet login",
+    //   link: `https://login.somriddhidigital.co.in/#/login`,
+    // },
   ];
 
   return (
@@ -36,6 +36,17 @@ export default function Navbar() {
             {name}
           </HashLink>
         ))}
+        <div className={styles.wallet}>
+          <p>wallet login</p>
+          <div className={styles.walletMenu}>
+            <a href="https://agent.somriddhidigital.co.in/#/sign-in">
+              <p>Web Login</p>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.somriddhi.somriddhiaeps">
+              <p>Download App</p>
+            </a>
+          </div>
+        </div>
       </div>
     </nav>
   );
