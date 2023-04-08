@@ -71,6 +71,9 @@ export default function SelectCategorySlider({
                     src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                       category?.icon
                     }`}
+                    onError={(e) => {
+                      e && (e.target.src = "/image-broke.png");
+                    }}
                     alt="category"
                   />
                   <h5>{category?.name}</h5>

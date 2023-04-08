@@ -16,6 +16,9 @@ export default function CategoryCard({
         <img
           src={`${import.meta.env.VITE_REACT_APP_API_URL}/${category?.icon}`}
           alt={category?.name}
+          onError={(e) => {
+            e && (e.target.src = "/image-broke.png");
+          }}
         />
       </div>
       <p className={styles["name"]}>{category?.name}</p>
