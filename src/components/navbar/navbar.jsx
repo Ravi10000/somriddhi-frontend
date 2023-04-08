@@ -37,7 +37,7 @@ export default function Navbar() {
           </HashLink>
         ))}
         <div className={styles.wallet}>
-          <p>wallet login</p>
+          <p>Wallet Login</p>
           <div className={styles.walletMenu}>
             <a href="https://agent.somriddhidigital.co.in/#/sign-in">
               <p>Web Login</p>
