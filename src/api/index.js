@@ -410,3 +410,8 @@ export const changeBannerPriority = (formData) =>
       "Content-Type": "application/json",
     },
   });
+
+export const fetchMyCashbacks = () =>
+  axios.get("/cashback/mycashbacks", {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });

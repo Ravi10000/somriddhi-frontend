@@ -42,6 +42,14 @@
         p {
           text-transform: capitalize;
           font-weight: 500;
+          color: #ca8f21;
+
+          &.Paid {
+            color: #0aa06e;
+          }
+          &.Requested {
+            color: #fe9533;
+          }
         }
       }
     }
