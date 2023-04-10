@@ -5,6 +5,13 @@
     border-bottom: 2px solid #ececec;
   }
   .transactions-container {
+    .no-cashback {
+      width: 100%;
+      text-align: center;
+      padding: 50px;
+      font-weight: 500;
+      color: #8a8a8a;
+    }
     .transaction {
       padding: 20px;
       display: flex;
@@ -14,6 +21,7 @@
       &:last-child {
         border-bottom: none;
       }
+
       .company-info {
         display: flex;
         align-items: center;

@@ -22,27 +22,31 @@ export default function PaymentHistory() {
     <div className="payment-history">
       <h2>Payment History</h2>
       <div className="transactions-container">
-        {cashbackList?.map((cashback) => (
-          <div className="transaction" key={cashback?._id}>
-            <div className="company-info">
-              {/* <img src="/amazon-round.png" alt="amazon" /> */}
-              <div className="name">
-                <h4>Transaction Date</h4>
-                <p>{new Date(cashback?.createdAt).toDateString()}</p>
+        {cashbackList?.length < 0 ? (
+          <p className="no-cashback">No Cashback Found</p>
+        ) : (
+          cashbackList?.map((cashback) => (
+            <div className="transaction" key={cashback?._id}>
+              <div className="company-info">
+                {/* <img src="/amazon-round.png" alt="amazon" /> */}
+                <div className="name">
+                  <h4>Transaction Date</h4>
+                  <p>{new Date(cashback?.createdAt).toDateString()}</p>
+                </div>
+              </div>
+              <div className="price-and-status">
+                <h4>Rs. {cashback?.amount}</h4>
+                <p className={`${cashback?.status || ""}`}>
+                  {cashback?.status === "Unpaid"
+                    ? "Pending"
+                    : cashback?.status === "Paid"
+                    ? "Completed"
+                    : "Requested"}
+                </p>
               </div>
             </div>
-            <div className="price-and-status">
-              <h4>Rs. {cashback?.amount}</h4>
-              <p className={`${cashback?.status || ""}`}>
-                {cashback?.status === "Unpaid"
-                  ? "Pending"
-                  : cashback?.status === "Paid"
-                  ? "Completed"
-                  : "Requested"}
-              </p>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
