@@ -1,8 +1,11 @@
 import "./refer-earn.styles.scss";
 
 import React from "react";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-export default function ReferEarn() {
+function ReferEarn({ currentUser }) {
   return (
     <div className="refer-earn">
       <h2>Refer & Earn</h2>
@@ -27,7 +30,7 @@ export default function ReferEarn() {
         </div>
         <div className="social-links">
           <div className="handle">
-            <p>somriddhi/123</p>
+            <p>{currentUser?.referralCode}</p>
           </div>
           <div className="links">
             <img src="/share-btn.png" alt="" />
@@ -40,3 +43,9 @@ export default function ReferEarn() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(ReferEarn);

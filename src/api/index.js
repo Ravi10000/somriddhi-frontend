@@ -415,3 +415,9 @@ export const fetchMyCashbacks = () =>
   axios.get("/cashback/mycashbacks", {
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
+
+export const fetchReferredUsers = () => {
+  return axios.get("/user/referred", {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+};

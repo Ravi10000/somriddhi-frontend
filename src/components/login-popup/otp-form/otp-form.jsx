@@ -68,7 +68,7 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
           });
           return closeModal();
         } else {
-          navigate("/profile");
+          navigate("/");
         }
         setFlash({ message: "Logged in successfully", type: "success" });
         if (!user?.email) {

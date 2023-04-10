@@ -1,8 +1,11 @@
 import styles from "./topbar.module.scss";
 import React, { useState, useRef, useEffect } from "react";
 import Notification from "../notification/notification";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-function TopBar({ selectedOption, showMenu, isMenuVisible }) {
+function TopBar({ selectedOption, showMenu, isMenuVisible, currentUser }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const searchRef = useRef();
@@ -68,7 +71,12 @@ function TopBar({ selectedOption, showMenu, isMenuVisible }) {
           <div className={styles["icon"] + " " + styles["profile-icon"]}>
             <div className={styles["user-details"]}>
               <img className={styles["profile-pic"]} src="/user.png" alt="" />
-              <div className={styles["name"]}>Name</div>
+              <div className={styles["name"]}>
+                {currentUser?.fname || "Name"}
+              </div>
+              {/* <div className={styles.userOptions}>
+                <p>{currentUser?.fname + " " + currentUser?.lname}</p>
+              </div> */}
             </div>
             <img
               className={styles["drop-down-icon"]}
@@ -82,4 +90,7 @@ function TopBar({ selectedOption, showMenu, isMenuVisible }) {
   );
 }
 
-export default TopBar;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+export default connect(mapStateToProps)(TopBar);

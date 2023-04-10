@@ -1,9 +1,25 @@
 import styles from "./referral-network.module.scss";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../components/button/button";
+import { fetchReferredUsers } from "../../../api/index";
 
 export default function ReferralNetwork() {
+  const [referredUsers, setReferredUsers] = useState([]);
+  async function getReferredUsers() {
+    try {
+      const response = await fetchReferredUsers();
+      console.log({ response });
+      if (response.data.status === "success")
+        setReferredUsers(response.data.users);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getReferredUsers();
+  }, []);
   const arrayOfReferrals = [
     {
       name: "John Doe",
@@ -35,16 +51,18 @@ export default function ReferralNetwork() {
     <div className={styles["referral-network"]}>
       <h2>Referral Network</h2>
       <div className={styles["referral-list"]}>
-        {arrayOfReferrals.map(({ name, status, amount }, index) => (
+        {referredUsers?.map((user, index) => (
           <div className={styles["referral-item"]} key={index}>
             <div className={styles.left}>
               <img src="/refer.png" alt="" />
               <div className={styles["name-and-status"]}>
-                <h4>{name}</h4>
-                <p className={`${styles.status} ${styles[status]}`}>{status}</p>
+                <h4>{user?.phone}</h4>
+                <p className={`${styles.status} ${styles["completed"]}`}>
+                  Completed
+                </p>
               </div>
             </div>
-            {amount && <Button>{amount}</Button>}
+            {/* {amount && <Button>{amount}</Button>} */}
           </div>
         ))}
       </div>

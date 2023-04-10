@@ -23,7 +23,7 @@ function UserDetailsForm({
   async function submitForm(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    formData.append("usertype", "customer");
+    // formData.append("usertype", "customer");
     try {
       setIsLoading(true);
       const response = await createUser(formData);
@@ -85,15 +85,13 @@ function UserDetailsForm({
           name="email"
         />
         <input
-          name="referralCode"
+          name="referredBy"
           placeholder="Referral Code"
           className={styles["user-details-input"]}
         />
       </div>
       <p className={styles["msg"]}>It&#39;s okay, If you do not have any</p>
-      <Button isLoading={isLoading}>
-        Continue
-      </Button>
+      <Button isLoading={isLoading}>Continue</Button>
       <p className={styles["skip-now"]} onClick={closeModal}>
         skip for now
       </p>
