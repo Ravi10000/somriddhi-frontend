@@ -22,7 +22,7 @@ export default function PaymentHistory() {
     <div className="payment-history">
       <h2>Payment History</h2>
       <div className="transactions-container">
-        {cashbackList?.length < 0 ? (
+        {!(cashbackList?.length < 0) ? (
           <p className="no-cashback">No Cashback Found</p>
         ) : (
           cashbackList?.map((cashback) => (

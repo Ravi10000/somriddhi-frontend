@@ -3,6 +3,12 @@
     padding: 20px;
     border-bottom: 2px solid #ececec;
   }
+  .no-referral {
+    text-align: center;
+    padding: 50px;
+    font-weight: 500;
+    color: #8a8a8a;
+  }
   .referral-list {
     padding: 20px;
     display: grid;
@@ -17,6 +23,10 @@
         display: flex;
         align-items: center;
         gap: 20px;
+        img {
+          width: 30px;
+          height: fit-content;
+        }
         .name-and-status {
           display: grid;
           gap: 5px;
@@ -38,6 +48,11 @@
             // }
           }
         }
+      }
+      .check {
+        width: 15px;
+        margin-right: 10px;
+        height: fit-content;
       }
       button {
         height: fit-content;

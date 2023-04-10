@@ -33,6 +33,7 @@ import CategoryPage from "./pages/category/category-page";
 import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
 import ProfilePage from "./pages/profile/profile-page";
 import AdminPage from "./pages/admin/admin.page";
+import SearchPage from "./pages/search-page/search-page";
 import AboutPage from "./pages/about/about.page";
 
 // redux actions
@@ -134,6 +135,7 @@ function App({ setCurrentUser, flash }) {
             </ProtectedRoute>
           }
         />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/about" exact element={<AboutPage />} />
         <Route path="/*" element={<Navigate to="/" replace />} />
       </Routes>

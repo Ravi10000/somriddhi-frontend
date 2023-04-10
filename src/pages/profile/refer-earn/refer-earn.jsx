@@ -4,8 +4,17 @@ import React from "react";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { setFlash } from "../../../redux/flash/flash.actions";
 
-function ReferEarn({ currentUser }) {
+function ReferEarn({ currentUser, setFlash }) {
+  function copyToClipboard() {
+    setFlash({
+      type: "success",
+      message: "Coupon code copied to clipboard",
+    });
+    navigator.clipboard.writeText(currentUser?.referralCode);
+  }
+
   return (
     <div className="refer-earn">
       <h2>Refer & Earn</h2>
@@ -29,7 +38,7 @@ function ReferEarn({ currentUser }) {
           <img src="/earn-coupons-bg.png" alt="earn coupons" />
         </div>
         <div className="social-links">
-          <div className="handle">
+          <div className="handle" onClick={copyToClipboard}>
             <p>{currentUser?.referralCode}</p>
           </div>
           <div className="links">
@@ -48,4 +57,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(ReferEarn);
+export default connect(mapStateToProps, { setFlash })(ReferEarn);

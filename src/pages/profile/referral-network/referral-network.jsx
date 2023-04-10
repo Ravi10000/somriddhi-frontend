@@ -51,20 +51,25 @@ export default function ReferralNetwork() {
     <div className={styles["referral-network"]}>
       <h2>Referral Network</h2>
       <div className={styles["referral-list"]}>
-        {referredUsers?.map((user, index) => (
-          <div className={styles["referral-item"]} key={index}>
-            <div className={styles.left}>
-              <img src="/refer.png" alt="" />
-              <div className={styles["name-and-status"]}>
-                <h4>{user?.phone}</h4>
-                <p className={`${styles.status} ${styles["completed"]}`}>
-                  Completed
-                </p>
+        {!(referredUsers?.length > 0) ? (
+          <p className={styles["no-referral"]}>"No Referrals"</p>
+        ) : (
+          referredUsers?.map((user, index) => (
+            <div className={styles["referral-item"]} key={index}>
+              <div className={styles.left}>
+                <img src="/user.png" alt="" />
+                <div className={styles["name-and-status"]}>
+                  <h4>{user?.phone}</h4>
+                  <p className={`${styles.status} ${styles["completed"]}`}>
+                    Completed
+                  </p>
+                </div>
               </div>
+              <img className={styles.check} src="/check.png" alt="" />
+              {/* {amount && <Button>{amount}</Button>} */}
             </div>
-            {/* {amount && <Button>{amount}</Button>} */}
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
