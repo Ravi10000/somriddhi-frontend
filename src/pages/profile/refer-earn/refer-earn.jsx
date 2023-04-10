@@ -10,7 +10,7 @@ function ReferEarn({ currentUser, setFlash }) {
   function copyToClipboard() {
     setFlash({
       type: "success",
-      message: "Coupon code copied to clipboard",
+      message: "Referral code copied to clipboard",
     });
     navigator.clipboard.writeText(currentUser?.referralCode);
   }
