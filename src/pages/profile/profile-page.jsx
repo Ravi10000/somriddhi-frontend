@@ -57,6 +57,7 @@ function ProfilePage({ setCurrentUser, setFlash }) {
   function scrollToTop() {
     window.scrollTo(0, 0);
   }
+  console.log({ activeMenu });
 
   return (
     <div className="profile-page">
@@ -88,7 +89,7 @@ function ProfilePage({ setCurrentUser, setFlash }) {
                 {img && (
                   <img
                     src={
-                      activeMenu === name
+                      activeMenu === link
                         ? img.replace(".png", "-active.png")
                         : img
                     }

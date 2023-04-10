@@ -56,7 +56,7 @@ function Footer({ currentUser }) {
             }}
           >
             <img src="/nav-arrow.png" alt={"about"} />
-            <p>About</p>
+            <p>About Us</p>
           </div>
           <div
             className="menu-item"
@@ -65,7 +65,7 @@ function Footer({ currentUser }) {
             }}
           >
             <img src="/nav-arrow.png" alt={"about"} />
-            <p>Admin</p>
+            <p>Admin Login</p>
           </div>
           {/* {navList.map(({ title, navItems }) => (
             <NavMenu navTitle={title} navItems={navItems} key={title} />
