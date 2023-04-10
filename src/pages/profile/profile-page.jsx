@@ -57,8 +57,7 @@ function ProfilePage({ setCurrentUser, setFlash }) {
   function scrollToTop() {
     window.scrollTo(0, 0);
   }
-  console.log({ activeMenu });
-
+  
   return (
     <div className="profile-page">
       <div className="profile-container">
