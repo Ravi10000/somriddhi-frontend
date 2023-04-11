@@ -430,4 +430,12 @@ export const changeWalletId = (formData) =>
     },
   });
 
+export const sendCouponAnalytics = (formData) =>
+  axios.post("/analytic/coupon", formData, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  });
+
 export const searchCoupons = (query) => axios.get(`/search?query=${query}`);
