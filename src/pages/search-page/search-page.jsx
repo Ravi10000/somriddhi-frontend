@@ -1,7 +1,80 @@
 import styles from "./search-page.module.scss";
+import Search from "../../components/search/search";
+import { searchCoupons } from "../../api";
+import { useSearch } from "../../context/search.context";
+import { useEffect, useState, useDeferredValue } from "react";
+import OfferCard from "../../components/offers/offer-card/offer-card";
 
 function SearchPage() {
-  return <section>Search here...</section>;
+  const search = useSearch();
+  const searchTerm = useDeferredValue(search.searchTerm);
+
+  const [coupons, setCoupons] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  async function handleSearchCoupons() {
+    const response = await searchCoupons(search.searchTerm);
+    console.log({ response });
+    if (response?.data?.status === "success") {
+      setCoupons(response?.data?.deals);
+      setCategories(response?.data?.categories);
+    }
+  }
+  useEffect(() => {
+    handleSearchCoupons();
+  }, [searchTerm]);
+
+  console.log({ coupons });
+  return (
+    <>
+      {search?.searchTerm?.length === 0 ? (
+        <p className={styles.notFound}>
+          Type on the search box to search coupons / categories
+        </p>
+      ) : (
+        <section className={styles["search-page"]}>
+          <div className={styles.title}>
+            <p>
+              showing results for <span>{search?.searchTerm}</span>
+            </p>
+          </div>
+          <h4 className={styles.containerTitle}>Coupons</h4>
+          {coupons?.length > 0 ? (
+            <section className={styles.dealsContainer}>
+              {coupons?.map((coupon) => (
+                <OfferCard offer={coupon} key={coupon?._id} />
+              ))}
+            </section>
+          ) : (
+            <p className={styles.notFound}>No coupons found</p>
+          )}
+
+          <h4 className={styles.containerTitle}>Categories</h4>
+
+          {categories?.length > 0 ? (
+            <section className={styles.categoriesContainer}>
+              {categories?.map((category) => (
+                <div className={styles.categoryCard}>
+                  <img
+                    src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
+                      category?.icon
+                    }`}
+                    onError={(e) => {
+                      e && (e.target.src = "/image-broke.png");
+                    }}
+                    alt="category"
+                  />
+                  <h5>{category?.name}</h5>
+                </div>
+              ))}
+            </section>
+          ) : (
+            <p className={styles.notFound}>No categories found </p>
+          )}
+        </section>
+      )}
+    </>
+  );
 }
 
 export default SearchPage;

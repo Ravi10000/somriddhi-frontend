@@ -429,3 +429,5 @@ export const changeWalletId = (formData) =>
       "Content-Type": "application/json",
     },
   });
+
+export const searchCoupons = (query) => axios.get(`/search?query=${query}`);

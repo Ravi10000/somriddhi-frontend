@@ -1,8 +1,20 @@
 import styles from "./search.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useSearch } from "../../context/search.context";
+import { useEffect, useRef } from "react";
 
 export default function Search() {
+  const { searchTerm, setSearchTerm } = useSearch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  // const searchRef = useRef();
+  console.log({ pathname });
+  useEffect(() => {
+    if (pathname !== "/search") {
+      setSearchTerm("");
+      // searchRef.current.value = "";
+    }
+  }, [pathname]);
   return (
     <div
       className={styles["search"]}
@@ -11,7 +23,15 @@ export default function Search() {
       }}
     >
       <img src="/search.png" alt="search" />
-      <input type="search" placeholder="Search For brand, category, coupon" />
+      <input
+        // ref={searchRef}
+        type="search"
+        placeholder="Search For brand, category, coupon"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+      />
     </div>
   );
 }
