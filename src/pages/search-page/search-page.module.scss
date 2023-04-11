@@ -33,6 +33,10 @@
       text-align: center;
       padding: 20px;
       border-radius: 8px;
+      max-width: 100px;
+      p {
+        word-wrap: break-word;
+      }
       img {
         width: 25px;
         height: fit-content;

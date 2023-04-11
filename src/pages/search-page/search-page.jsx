@@ -10,15 +10,26 @@ function SearchPage() {
   const navigate = useNavigate();
   const search = useSearch();
   const searchTerm = useDeferredValue(search.searchTerm);
+  const [isSearching, setIsSearching] = useState(false);
 
   const [coupons, setCoupons] = useState([]);
   const [categories, setCategories] = useState([]);
 
   async function handleSearchCoupons() {
-    const response = await searchCoupons(search.searchTerm);
-    if (response?.data?.status === "success") {
-      setCoupons(response?.data?.deals);
-      setCategories(response?.data?.categories);
+    if (!searchTerm) return;
+    setIsSearching(true);
+    setCategories([]);
+    setCoupons([]);
+    try {
+      const response = await searchCoupons(searchTerm);
+      if (response?.data?.status === "success") {
+        setCoupons(response?.data?.deals);
+        setCategories(response?.data?.categories);
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsSearching(false);
     }
   }
   useEffect(() => {
@@ -46,7 +57,9 @@ function SearchPage() {
               ))}
             </section>
           ) : (
-            <p className={styles.notFound}>No coupons found</p>
+            <p className={styles.notFound}>
+              {isSearching ? "Searching..." : "No coupons found"}
+            </p>
           )}
 
           <h4 className={styles.containerTitle}>Categories</h4>
@@ -76,7 +89,9 @@ function SearchPage() {
               ))}
             </section>
           ) : (
-            <p className={styles.notFound}>No categories found </p>
+            <p className={styles.notFound}>
+              {isSearching ? "Searching..." : "No Categories found"}{" "}
+            </p>
           )}
         </section>
       )}
