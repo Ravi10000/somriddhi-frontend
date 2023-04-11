@@ -25,6 +25,10 @@
     grid-template-columns: 1fr 1fr;
     margin: 20px;
     .categoryCard {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
       background: #fff;
       text-align: center;
       padding: 20px;

@@ -4,8 +4,10 @@ import { searchCoupons } from "../../api";
 import { useSearch } from "../../context/search.context";
 import { useEffect, useState, useDeferredValue } from "react";
 import OfferCard from "../../components/offers/offer-card/offer-card";
+import { useNavigate } from "react-router-dom";
 
 function SearchPage() {
+  const navigate = useNavigate();
   const search = useSearch();
   const searchTerm = useDeferredValue(search.searchTerm);
 
@@ -14,7 +16,6 @@ function SearchPage() {
 
   async function handleSearchCoupons() {
     const response = await searchCoupons(search.searchTerm);
-    console.log({ response });
     if (response?.data?.status === "success") {
       setCoupons(response?.data?.deals);
       setCategories(response?.data?.categories);
@@ -24,7 +25,6 @@ function SearchPage() {
     handleSearchCoupons();
   }, [searchTerm]);
 
-  console.log({ coupons });
   return (
     <>
       {search?.searchTerm?.length === 0 ? (
@@ -54,7 +54,14 @@ function SearchPage() {
           {categories?.length > 0 ? (
             <section className={styles.categoriesContainer}>
               {categories?.map((category) => (
-                <div className={styles.categoryCard}>
+                <div
+                  className={styles.categoryCard}
+                  onClick={() => {
+                    navigate(`/category/${category?.name}`, {
+                      state: { category },
+                    });
+                  }}
+                >
                   <img
                     src={`${import.meta.env.VITE_REACT_APP_API_URL}/${
                       category?.icon
@@ -64,7 +71,7 @@ function SearchPage() {
                     }}
                     alt="category"
                   />
-                  <h5>{category?.name}</h5>
+                  <p>{category?.name}</p>
                 </div>
               ))}
             </section>
