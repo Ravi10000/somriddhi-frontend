@@ -9,11 +9,13 @@ export default function Search() {
   const [coupons, setCoupons] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isResultsVisible, setIsResultsVisible] = useState(false);
+  const [isSearching, setIsSearching] = useState(true);
   const navigate = useNavigate();
 
   const deferredSearchTerm = useDeferredValue(searchTerm);
+
   async function handleSearchCoupons() {
-    // setIsSearching(true);
+    setIsSearching(true);
     setIsResultsVisible(false);
     setCategories([]);
     setCoupons([]);
@@ -29,7 +31,7 @@ export default function Search() {
     } catch (error) {
       console.log(error.message);
     } finally {
-      // setIsSearching(false);
+      setIsSearching(false);
     }
   }
 
@@ -81,45 +83,51 @@ export default function Search() {
         <div className={styles.head} onClick={closeSearch}>
           <img src="/close.png" alt="" />
         </div>
-        {coupons?.length < 1 ? (
-          <p className={styles.notFound}>no coupons found</p>
+        {isSearching ? (
+          <p className={styles.message}>searching...</p>
         ) : (
-          <div className={styles.couponsContainer}>
-            {coupons?.map((coupon) => {
-              return (
-                <div
-                  key={coupon?._id}
-                  className={styles.coupon + " " + styles.card}
-                  onClick={() => sendAnalytics(coupon?._id)}
-                >
-                  <p>{coupon?.name}</p>
-                  <p className={styles.percent}>
-                    {coupon?.cashbackPercent} % off
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        )}
-        {categories?.length > 0 && (
-          <div className={styles.categoriesContainer}>
-            {categories?.map((category) => {
-              return (
-                <div
-                  key={category?._id}
-                  className={styles.category + " " + styles.card}
-                  onClick={() => {
-                    closeSearch();
-                    navigate(`/category/${category?.name}`, {
-                      state: { category },
-                    });
-                  }}
-                >
-                  <p>{category?.name}</p>
-                </div>
-              );
-            })}
-          </div>
+          <>
+            {coupons?.length < 1 ? (
+              <p className={styles.message}>no coupons found</p>
+            ) : (
+              <div className={styles.couponsContainer}>
+                {coupons?.map((coupon) => {
+                  return (
+                    <div
+                      key={coupon?._id}
+                      className={styles.coupon + " " + styles.card}
+                      onClick={() => sendAnalytics(coupon?._id)}
+                    >
+                      <p>{coupon?.name}</p>
+                      <p className={styles.percent}>
+                        {coupon?.cashbackPercent} % off
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {categories?.length > 0 && (
+              <div className={styles.categoriesContainer}>
+                {categories?.map((category) => {
+                  return (
+                    <div
+                      key={category?._id}
+                      className={styles.category + " " + styles.card}
+                      onClick={() => {
+                        closeSearch();
+                        navigate(`/category/${category?.name}`, {
+                          state: { category },
+                        });
+                      }}
+                    >
+                      <p>{category?.name}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </>
         )}
       </div>
       <img src="/search.png" alt="search" />
