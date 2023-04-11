@@ -421,3 +421,11 @@ export const fetchReferredUsers = () => {
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
 };
+
+export const changeWalletId = (formData) =>
+  axios.post("/user/walletId", formData, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  });
