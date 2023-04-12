@@ -1,7 +1,7 @@
 import styles from "./search.module.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 // import { useSearch } from "../../context/search.context";
-import { useEffect, useDeferredValue, useState } from "react";
+import { useEffect, useDeferredValue, useState, useRef } from "react";
 import { searchCoupons, sendCouponAnalytics } from "../../api";
 
 export default function Search() {
@@ -11,6 +11,7 @@ export default function Search() {
   const [isResultsVisible, setIsResultsVisible] = useState(false);
   const [isSearching, setIsSearching] = useState(true);
   const navigate = useNavigate();
+  const searchRef = useRef(null);
 
   const deferredSearchTerm = useDeferredValue(searchTerm);
 
@@ -70,11 +71,16 @@ export default function Search() {
   }
 
   useEffect(() => {
+    document.addEventListener("mousedown", (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        closeSearch();
+      }
+    });
     handleSearchCoupons();
-  }, [deferredSearchTerm]);
+  }, [deferredSearchTerm, searchRef]);
 
   return (
-    <div className={styles["search"]}>
+    <div className={styles["search"]} ref={searchRef}>
       <div
         className={`${styles.searchResults} ${
           isResultsVisible ? styles.show : ""

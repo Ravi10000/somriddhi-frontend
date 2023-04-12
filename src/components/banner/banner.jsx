@@ -10,7 +10,7 @@ export default function Banner() {
   let bannerData;
   const allBannersData = async () => {
     bannerData = await fetchActiveBanners();
-    console.log(bannerData.data.banners);
+    // console.log(bannerData.data.banners);
     setBanners(bannerData.data.banners);
   };
   useEffect(() => {

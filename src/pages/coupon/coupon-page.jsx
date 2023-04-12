@@ -28,7 +28,7 @@ function CouponPage({ currentUser }) {
   const couponId = state?.couponId;
 
   const { id } = useParams();
-  console.log({ id });
+  // console.log({ id });
   const navigate = useNavigate();
   // states
   const [hoursLeft, setHoursLeft] = useState("00");
@@ -51,7 +51,7 @@ function CouponPage({ currentUser }) {
     let response = {};
     try {
       response = await getDealById(couponId);
-      console.log({ response });
+      // console.log({ response });
       // console.log(response.data.data);
       // setDealInfo?.description(response.data.deal.description);
       setDealInfo(response.data.deal);
@@ -91,7 +91,7 @@ function CouponPage({ currentUser }) {
       const responseCat = await getCategoryById(
         response?.data?.deal.categoryId
       );
-      console.log(responseCat?.data?.category?.description);
+      // console.log(responseCat?.data?.category?.description);
       setCatDes(responseCat?.data?.category?.description);
       setCatUrl(response?.data?.deal?.url);
     } catch (error) {
@@ -123,7 +123,7 @@ function CouponPage({ currentUser }) {
   }
 
   async function updateEndTime() {
-    console.log({ analyticId: id });
+    // console.log({ analyticId: id });
     if (!currentUser) {
       return modal.openModal();
     }
