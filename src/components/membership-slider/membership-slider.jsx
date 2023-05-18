@@ -19,8 +19,8 @@ function MembershipSlider({ banners, currentUser }) {
   //   if (!currentUser) {
   //     return modal.openModal();
   //   }
-    // if (url.startsWith("//")) url = url.substring(2).trim();
-    // console.log("Url: ", url);
+  // if (url.startsWith("//")) url = url.substring(2).trim();
+  // console.log("Url: ", url);
   //   // navigate(url);
   //   window.location.replace(url);
   // }
@@ -50,9 +50,10 @@ function MembershipSlider({ banners, currentUser }) {
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
-          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
-          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
+          if (bannerUrl.startsWith("//"))
+            bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl + "&ascsubtag=" + analyticId);
+          window.open(bannerUrl + "&ascsubtag=" + analyticId, "_blank");
         }
         console.log({ response });
       } catch (error) {
