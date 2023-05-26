@@ -52,6 +52,7 @@ function App({ setCurrentUser, flash }) {
   async function fetchUser() {
     try {
       const response = await getUser();
+      console.log({ user: response });
       if (response.data.status === "success") {
         setCurrentUser(response.data.user);
       }
