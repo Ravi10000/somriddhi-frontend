@@ -439,3 +439,5 @@ export const sendCouponAnalytics = (formData) =>
   });
 
 export const searchCoupons = (query) => axios.get(`/search?query=${query}`);
+
+export const fetchAllGiftCards = async () => axios.get("/getgiftcards");

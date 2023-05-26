@@ -45,6 +45,7 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 // api calls
 import { getCashbackDetails, getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
+import GiftCardPage from "./pages/gift-card-page/gift-card-page";
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
@@ -139,6 +140,15 @@ function App({ setCurrentUser, flash }) {
         />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/about" exact element={<AboutPage />} />
+
+        <Route
+          path="/giftcard/:id"
+          element={
+            <ProtectedRoute openModal={modal.open}>
+              <GiftCardPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/*" element={<Navigate to="/" replace />} />
       </Routes>
       {!pathname.includes("/admin") && <Footer />}

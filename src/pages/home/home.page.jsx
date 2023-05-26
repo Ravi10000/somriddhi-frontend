@@ -12,12 +12,14 @@ import PopularMembership from "../../components/popular-membership/popular-membe
 import Process from "../../components/process/process";
 import ScrollToTop from "../../components/scrollToTop";
 import CustomCategories from "../../components/custom-categories/custom-categories";
+import GiftCardList from "../../components/gift-card/gift-card-list";
 
 export default function HomePage() {
   return (
     <div className="home-page" id="home">
       <ScrollToTop />
       <Banner />
+      <GiftCardList />
       {/* <CustomCategories /> */}
       <Coupons />
       <Offers />
