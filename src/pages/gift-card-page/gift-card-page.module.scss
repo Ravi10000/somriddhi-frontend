@@ -37,7 +37,7 @@
         gap: 10px;
         .inputContainer {
           display: flex;
-          //   justify-content: space-between;
+          flex-direction: column;
           align-items: center;
           gap: 20px;
           .quantityInput {
@@ -65,43 +65,49 @@
             border-radius: 5px;
             height: 40px;
             background: #fff;
-            width: 100%;
+            // width: 100%;
+            max-width: 300px;
             display: flex;
             align-items: center;
+            width: fit-content;
             flex-direction: row;
           }
         }
         button {
-          width: fit-content;
-        }
-      }
-      .list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: #fff;
-        //   margin: 25px 0;
-        padding: 20px;
-        line-height: 1.2rem;
-        width: 100vw;
-        max-width: 400px;
-
-        h3 {
-          text-transform: capitalize;
-          align-self: start;
-          margin-bottom: 10px;
-        }
-
-        ul {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          width: 80%;
-          list-style: filled circle;
+          // width: fit-content;
         }
       }
     }
   }
+}
+.list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 50px;
+  line-height: 1.2rem;
+  width: 100%;
+  max-width: 1000px;
+  align-self: center;
+
+  h3 {
+    text-transform: capitalize;
+    align-self: start;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    list-style: filled circle;
+  }
+}
+.description {
+  padding: 20px;
 }
 
 @media (min-width: 1000px) {
@@ -116,6 +122,7 @@
       align-items: flex-start;
       gap: 50px;
       .giftCardDetails {
+        align-self: flex-end;
         margin: 0;
       }
     }

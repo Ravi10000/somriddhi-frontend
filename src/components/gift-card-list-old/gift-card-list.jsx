@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import GiftCard from "./gift-card/gift-card";
 import { fetchAllGiftCards } from "../../api";
+// import GiftCardSlider from "../gift-card-slider/gift-card-slider";
 
 const giftCardsData = [
   {
@@ -37,6 +38,7 @@ const giftCardsData = [
 
 function GiftCardList() {
   const [giftCards, setGiftCards] = useState([]);
+  console.log({ giftCards });
   const imagesArray = [
     "/gift-cards/wedding.jpg",
     "/gift-cards/congratulations.png",
@@ -229,14 +231,16 @@ function GiftCardList() {
     <div className={styles.giftCardList}>
       <h2 className="_title ">Gift Cards</h2>
       <div className={styles.container}>
+        {/* <GiftCardSlider denominations={giftCards?.price?.denominations} /> */}
         {giftCards?.price?.denominations?.map((price, idx) => (
           <GiftCard
             key={idx}
             giftCard={{
               price,
-              image: imagesArray[Math.floor(Math.random() * 4)],
+              image:
+                imagesArray[Math.floor(Math.random() * imagesArray?.length)],
             }}
-          ></GiftCard>
+          />
           // <GiftCard key={giftCard?._id} giftCard={giftCard} />
         ))}
       </div>
