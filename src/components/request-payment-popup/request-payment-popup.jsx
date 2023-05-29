@@ -17,7 +17,7 @@ function RequestPaymentPopup({ setShowPopup, setFlash }) {
     setLoadingData(true);
     try {
       const response = await getRedeemableCashbacks();
-      console.log(response);
+      console.log({response});
       if (response.data.status === "success") {
         setRedeemableCashbacks(response.data.redeemableCashbacks);
       }

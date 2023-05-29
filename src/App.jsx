@@ -45,6 +45,8 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 // api calls
 import { getCashbackDetails, getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
+import GiftCardPage from "./pages/gift-card-page/gift-card-page";
+import CheckoutPage from "./pages/checkout/checkout";
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
@@ -52,6 +54,7 @@ function App({ setCurrentUser, flash }) {
   async function fetchUser() {
     try {
       const response = await getUser();
+      console.log({ user: response });
       if (response.data.status === "success") {
         setCurrentUser(response.data.user);
       }
@@ -61,6 +64,7 @@ function App({ setCurrentUser, flash }) {
   }
 
   useEffect(() => {
+    console.log(localStorage.getItem("token"));
     fetchUser();
   }, []);
 
@@ -137,6 +141,23 @@ function App({ setCurrentUser, flash }) {
         />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/about" exact element={<AboutPage />} />
+
+        <Route
+          path="/giftcard/:id"
+          element={
+            <ProtectedRoute openModal={modal.open}>
+              <GiftCardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute openModal={modal.open}>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/*" element={<Navigate to="/" replace />} />
       </Routes>
       {!pathname.includes("/admin") && <Footer />}

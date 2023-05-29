@@ -1,0 +1,53 @@
+.checkoutPage {
+  text-align: left;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    margin: 20px 0;
+  }
+  .subtitle {
+    margin: 20px 0 10px 0;
+  }
+  p {
+    font-size: 1.1rem;
+    span {
+      font-weight: 500;
+      color: #f01c21;
+    }
+  }
+  .container {
+    width: 100%;
+    max-width: 400px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .inputGroupsContainer {
+        .inputGroup {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .checkoutPage {
+    .container {
+      max-width: 800px;
+      .inputGroupsContainer {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .checkoutBtn {
+        align-self: flex-end;
+        width: fit-content;
+      }
+    }
+  }
+}

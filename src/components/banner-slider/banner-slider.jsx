@@ -50,8 +50,10 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
     dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    // slidesToShow: 2,
+    // slidesToScroll: 2,
     initialSlide: 0,
     responsive: [
       {

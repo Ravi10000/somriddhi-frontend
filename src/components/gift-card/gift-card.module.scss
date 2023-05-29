@@ -1,0 +1,61 @@
+.giftCard {
+  width: 100%;
+  max-width: 200px;
+  padding: 0 0 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px -3px #ddd;
+  cursor: pointer;
+
+  &.large {
+    max-width: 400px;
+    .titleAndPriceContainer {
+      padding: 10px 30px;
+      .titleContainer {
+        .title {
+          font-size: 1.2rem;
+        }
+      }
+      .price {
+        font-size: 1rem;
+      }
+    }
+    .endMessage {
+      font-size: 1rem;
+      padding-bottom: 10px;
+    }
+  }
+  .giftCardImg {
+    width: 100%;
+    height: fit-content;
+  }
+  .titleAndPriceContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #333333;
+
+    .titleContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      .logo {
+        height: 35px;
+        width: fit-content;
+      }
+    }
+    .price {
+      font-weight: 600;
+    }
+  }
+  .endMessage {
+    font-size: 0.5rem;
+    color: #333333;
+    text-align: center;
+    padding: 10px 0 0 0;
+  }
+}
