@@ -1,4 +1,14 @@
 .allGiftCards {
+  .head {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    .backArrow {
+      cursor: pointer;
+      height: 20px;
+      width: fit-content;
+    }
+  }
   .tableContainer {
     width: 100vw;
     overflow-x: scroll;
@@ -54,9 +64,19 @@
       tbody {
         tr {
           border-bottom: 2px solid #e6e8ea;
+          &:hover {
+            cursor: pointer;
+            background: #f6f6f6;
+          }
         }
       }
     }
+  }
+  .oneGiftCard {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 }
 

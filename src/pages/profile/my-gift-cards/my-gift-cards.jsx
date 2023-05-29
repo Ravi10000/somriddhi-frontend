@@ -2,7 +2,6 @@ import styles from "./my-gift-cards.module.scss";
 import { useEffect } from "react";
 import { getActivatedCards, getGiftCards } from "../../../api";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import GiftCard from "../../../components/gift-card/gift-card";
 import getRandomImage from "../../../data/gift-card-images";
 
@@ -13,7 +12,6 @@ function MyGiftCards() {
 
   const [isFetching, setIsFetching] = useState(false);
 
-  const navigate = useNavigate();
   console.log({ activatedCards });
 
   async function handleFetchGiftCards() {
@@ -99,6 +97,7 @@ function MyGiftCards() {
         <div className={styles.oneGiftCard}>
           {activatedCards?.map((card, index) => (
             <GiftCard
+              noImage
               key={index}
               large
               nonClickable
