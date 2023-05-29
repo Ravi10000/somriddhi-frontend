@@ -20,6 +20,7 @@ function MyGiftCards() {
     setIsFetching(true);
     try {
       const res = await getGiftCards();
+      console.log({ giftCArds: res });
       if (res.status === 200) {
         setGiftCards(res.data.myOrders);
       }

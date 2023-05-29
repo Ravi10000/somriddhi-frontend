@@ -49,7 +49,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash }) {
           </div>
           <div className={styles.cardInfo}>
             <p>
-              Card divin: <span>{giftCard?.cardPin}</span>{" "}
+              Card Pin: <span>{giftCard?.cardPin}</span>{" "}
             </p>
             <CopyToClipboard
               text={giftCard?.cardPin}

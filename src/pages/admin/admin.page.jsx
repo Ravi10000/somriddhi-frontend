@@ -24,6 +24,7 @@ import Analytics from "./analytics/analytics";
 import Tracking from "./tracking-details/tracking-details";
 import AllPayments from "./all-payments/all-payments";
 import AllPayouts from "./all-payouts/all-payouts";
+import AllGiftCards from "./all-gift-cards/all-gift-cards";
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -95,6 +96,7 @@ export default function AdminPage() {
             {selectedOption === "tracking details" && <Tracking />}
             {selectedOption === "payment details" && <AllPayments />}
             {selectedOption === "payout details" && <AllPayouts />}
+            {selectedOption === "gift cards" && <AllGiftCards />}
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ export const topMenuOptions = [
   "categories",
   "memberships",
   "newsletters",
+  "gift cards",
   "website content",
   "customers",
   "tickets",
