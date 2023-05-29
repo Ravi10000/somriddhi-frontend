@@ -64,8 +64,39 @@ function CheckoutPage() {
         name: "Gift Card",
         description: "Pay for your gift card",
         handler: async function (response) {
-          data.payment_id = response.razorpay_payment_id;
-          const giftCardRes = await addGiftCard(data);
+          console.log({ response });
+          const formData = {};
+          formData.address = {
+            salutation: data.salutation,
+            firstname: data.firstname,
+            lastname: data.lastname,
+            email: data.email,
+            telephone: data.telephone,
+            line1: data.line1,
+            line2: data.line2,
+            city: data.city,
+            region: data.region,
+            // state: data.state,
+            company: data.company,
+            country: data.country,
+            postcode: data.postcode,
+            gstn: data.gstn,
+            code: data.code,
+          };
+          formData.paymentId = response.razorpay_payment_id;
+          formData.unitPrice = state.price;
+          formData.totalAmount = state.total;
+          formData.qty = state.qty;
+          formData.billingAddress = {
+            ...formData.address,
+          };
+          formData.address.billToThis = true;
+
+          // data.paymentId = response.razorpay_payment_id;
+          // data.unitPrice = state.price;
+          // data.totalAmount = state.total;
+          // data.qty = state.qty;
+          const giftCardRes = await addGiftCard(formData);
           console.log({ giftCardRes });
           console.log({ razorpaySuccessResponse: response });
         },
@@ -94,97 +125,101 @@ function CheckoutPage() {
         </div>
         <form noValidate onSubmit={handleSubmit(handlePayment)}>
           <h3 className={styles.subtitle}>Billing Details</h3>
-          <TextInput
-            label="Mr/Mrs."
-            register={{
-              ...register("salutation", { required: "type Mr or Mrs." }),
-            }}
-          />
-          <TextInput
-            label="First Name"
-            register={{
-              ...register("firstname", { required: "first name required" }),
-            }}
-          />
-          <div>
-            <TextInput
-              label="Last Name"
-              register={{
-                ...register("lastname", { required: "last name required" }),
-              }}
-            />
-            <TextInput
-              label="Email"
-              register={{
-                ...register("email", { required: "email required" }),
-              }}
-            />
-            <NumInput
-              maxlength="10"
-              label="Phone"
-              register={{
-                ...register("telephone", { required: "phone required" }),
-              }}
-            />
-            <TextInput
-              label="Address Line 1"
-              register={{
-                ...register("line1", { required: "address required" }),
-              }}
-            />
-            <TextInput
-              label="Address Line 2"
-              register={{
-                ...register("line2"),
-              }}
-            />
-            <TextInput
-              label="City"
-              register={{
-                ...register("city", { required: "city required" }),
-              }}
-            />
+          <div className={styles.inputGroupsContainer}>
+            <div className={styles.inputGroup}>
+              <TextInput
+                label="Mr/Mrs."
+                register={{
+                  ...register("salutation", { required: "type Mr or Mrs." }),
+                }}
+              />
+              <TextInput
+                label="First Name"
+                register={{
+                  ...register("firstname", { required: "first name required" }),
+                }}
+              />
+              <TextInput
+                label="Last Name"
+                register={{
+                  ...register("lastname", { required: "last name required" }),
+                }}
+              />
+              <TextInput
+                label="Email"
+                register={{
+                  ...register("email", { required: "email required" }),
+                }}
+              />
+              <NumInput
+                maxlength="10"
+                label="Phone"
+                register={{
+                  ...register("telephone", { required: "phone required" }),
+                }}
+              />
+              <TextInput
+                label="Address Line 1"
+                register={{
+                  ...register("line1", { required: "address required" }),
+                }}
+              />
+              <TextInput
+                label="Address Line 2"
+                register={{
+                  ...register("line2"),
+                }}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <TextInput
+                label="City"
+                register={{
+                  ...register("city", { required: "city required" }),
+                }}
+              />
+              <TextInput
+                label="Region"
+                register={{
+                  ...register("region", { required: "region required" }),
+                }}
+              />
+              <TextInput
+                label="Country"
+                register={{
+                  ...register("country", { required: "country required" }),
+                }}
+              />
+              <NumInput
+                maxlength="6"
+                label="Pincode"
+                register={{
+                  ...register("postcode", { required: "pincode required" }),
+                }}
+              />
+              <TextInput
+                label="Company"
+                register={{
+                  ...register("company", { required: "company required" }),
+                }}
+              />
+              <TextInput
+                label="GST No."
+                register={{
+                  ...register("gstn", { required: "GST No. required" }),
+                }}
+              />
+              <TextInput
+                label="Code"
+                register={{
+                  ...register("code"),
+                }}
+              />
+            </div>
           </div>
-          <div>
-            <TextInput
-              label="Region"
-              register={{
-                ...register("region", { required: "region required" }),
-              }}
-            />
-            <TextInput
-              label="Country"
-              register={{
-                ...register("country", { required: "country required" }),
-              }}
-            />
-            <NumInput
-              maxlength="6"
-              label="Pincode"
-              register={{
-                ...register("postcode", { required: "pincode required" }),
-              }}
-            />
-            <TextInput
-              label="Company"
-              register={{
-                ...register("company", { required: "company required" }),
-              }}
-            />
-            <TextInput
-              label="GST No."
-              register={{
-                ...register("gstn", { required: "GST No. required" }),
-              }}
-            />
-            <TextInput
-              label="Code"
-              register={{
-                ...register("code"),
-              }}
-            />
+          <div className={styles.checkoutBtn}>
+            <Button>Checkout</Button>
           </div>
-          <Button>Checkout</Button>
         </form>
       </div>
     </div>

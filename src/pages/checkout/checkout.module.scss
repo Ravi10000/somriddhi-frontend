@@ -31,11 +31,25 @@
 @media (min-width: 800px) {
   .checkoutPage {
     .container {
-    //   gap: 25px;
-      width: 100%;
+      //   gap: 25px;
+      // width: 100%;
+      // max-width: 800px;
+      // display: grid;
       max-width: 800px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      .inputGroupsContainer {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        .inputGroup {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+      .checkoutBtn {
+        align-self: flex-end;
+        width: fit-content;
+      }
     }
   }
 }
