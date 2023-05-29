@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import styles from "./gift-card.module.scss";
+import { useNavigate } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { setFlash } from "../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-function GiftCard({ giftCard, large, nonClickable }) {
+function GiftCard({ giftCard, large, nonClickable, setFlash }) {
   const navigate = useNavigate();
   return (
     <div
@@ -27,13 +30,43 @@ function GiftCard({ giftCard, large, nonClickable }) {
       {!giftCard?.cardNumber ? (
         <p className={styles.endMessage}>Your personal message!</p>
       ) : (
-        <div className={styles.cardInfo}>
-          <p>Card Pin: {giftCard?.cardPin}</p>
-          <p>Card Number: {giftCard?.cardNumber}</p>
+        <div className={styles.cardInfoContainer}>
+          <div className={styles.cardInfo}>
+            <p>
+              Card Number: <span>{giftCard?.cardNumber}</span>{" "}
+            </p>
+            <CopyToClipboard
+              text={giftCard?.cardNumber}
+              onCopy={() =>
+                setFlash({
+                  message: "Card Number Copied to clipboard!",
+                  type: "success",
+                })
+              }
+            >
+              <img className={styles.copyIcon} src="/copy.svg" alt="" />
+            </CopyToClipboard>
+          </div>
+          <div className={styles.cardInfo}>
+            <p>
+              Card divin: <span>{giftCard?.cardPin}</span>{" "}
+            </p>
+            <CopyToClipboard
+              text={giftCard?.cardPin}
+              onCopy={() =>
+                setFlash({
+                  message: "Card Pin Copied to clipboard!",
+                  type: "success",
+                })
+              }
+            >
+              <img className={styles.copyIcon} src="/copy.svg" alt="" />
+            </CopyToClipboard>
+          </div>
         </div>
       )}
     </div>
   );
 }
 
-export default GiftCard;
+export default connect(null, { setFlash })(GiftCard);

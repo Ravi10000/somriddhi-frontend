@@ -9,12 +9,12 @@ import getRandomImage from "../../../data/gift-card-images";
 function MyGiftCards() {
   const [giftCards, setGiftCards] = useState([]);
   const [selectedGiftCard, setSelectedGiftCard] = useState(null);
-  const [activatedCard, setActivatedCard] = useState([]);
+  const [activatedCards, setActivatedCards] = useState([]);
 
   const [isFetching, setIsFetching] = useState(false);
 
   const navigate = useNavigate();
-  console.log({ activatedCard });
+  console.log({ activatedCards });
 
   async function handleFetchGiftCards() {
     setIsFetching(true);
@@ -30,12 +30,12 @@ function MyGiftCards() {
     }
   }
 
-  async function handleFetchGiftCard() {
+  async function handleFetchActivatedCards() {
     if (!selectedGiftCard) return;
     try {
       const res = await getActivatedCards(selectedGiftCard.orderId);
       if (res.status === 200) {
-        setActivatedCard(res.data.activatedCards.cards[0]);
+        setActivatedCards(res.data.activatedCards.cards);
       }
       console.log({ res });
     } catch (err) {
@@ -43,7 +43,7 @@ function MyGiftCards() {
     }
   }
   useEffect(() => {
-    handleFetchGiftCard();
+    handleFetchActivatedCards();
   }, [selectedGiftCard]);
 
   useEffect(() => {
@@ -96,16 +96,19 @@ function MyGiftCards() {
         </div>
       ) : (
         <div className={styles.oneGiftCard}>
-          <GiftCard
-            large
-            nonClickable
-            giftCard={{
-              price: selectedGiftCard?.unitPrice,
-              image: getRandomImage(),
-              cardNumber: activatedCard?.cardNumber,
-              cardPin: activatedCard?.cardPin,
-            }}
-          />
+          {activatedCards?.map((card, index) => (
+            <GiftCard
+              key={index}
+              large
+              nonClickable
+              giftCard={{
+                price: selectedGiftCard?.unitPrice,
+                image: getRandomImage(),
+                cardNumber: card?.cardNumber,
+                cardPin: card?.cardPin,
+              }}
+            />
+          ))}
           <div className={styles.details}>
             <p></p>
           </div>
