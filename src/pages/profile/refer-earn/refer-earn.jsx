@@ -1,8 +1,20 @@
 import "./refer-earn.styles.scss";
 
 import React from "react";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { setFlash } from "../../../redux/flash/flash.actions";
 
-export default function ReferEarn() {
+function ReferEarn({ currentUser, setFlash }) {
+  function copyToClipboard() {
+    setFlash({
+      type: "success",
+      message: "Referral code copied to clipboard",
+    });
+    navigator.clipboard.writeText(currentUser?.referralCode);
+  }
+
   return (
     <div className="refer-earn">
       <h2>Refer & Earn</h2>
@@ -26,8 +38,8 @@ export default function ReferEarn() {
           <img src="/earn-coupons-bg.png" alt="earn coupons" />
         </div>
         <div className="social-links">
-          <div className="handle">
-            <p>somriddhi/123</p>
+          <div className="handle" onClick={copyToClipboard}>
+            <p>{currentUser?.referralCode}</p>
           </div>
           <div className="links">
             <img src="/share-btn.png" alt="" />
@@ -40,3 +52,9 @@ export default function ReferEarn() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps, { setFlash })(ReferEarn);

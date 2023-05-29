@@ -1,28 +1,91 @@
 .search {
-    border: 2px solid #dedddd;
-    background: #EEEEEE;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    padding: 5px 20px;
-    gap: 10px;
+  border: 2px solid #dedddd;
+  background: #eeeeee;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  img {
+    width: 15px;
+  }
+  .message {
+    margin: 20px 0;
+    text-align: center;
+    padding: 25px;
+    color: #ccc;
+  }
+  input {
+    font-family: "Metropolis", sans-serif;
     width: 100%;
-    max-width: 600px;
+    padding: 5px 0px;
+    border: none;
+    background: #eeeeee;
+    // font-size: 1.2rem;
 
-    img {
-        width: 15px;
+    &:focus {
+      outline: none;
     }
-
-    input {
-        font-family: 'Metropolis', sans-serif;
-        width: 100%;
-        padding: 5px 0px;
-        border: none;
-        background: #EEEEEE;
-        // font-size: 1.2rem;
-
-        &:focus {
-            outline: none;
+  }
+  .searchResults {
+    position: absolute;
+    display: none;
+    top: 115%;
+    left: 0;
+    width: 100%;
+    z-index: 1000000000000;
+    background: #fff;
+    border-radius: 8px;
+    .head {
+      display: flex;
+      justify-content: flex-end;
+      img {
+        margin: 10px;
+        width: 25px;
+        height: fit-content;
+        transition: all 0.1s ease-in-out;
+        &:hover {
+          cursor: pointer;
+          background: #dedddd;
         }
+      }
     }
+    &.show {
+      transition: all 0.3s ease-in-out;
+      // animation: slideIn 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .card {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      &:hover {
+        cursor: pointer;
+        background: #f3f5f7;
+      }
+      .percent {
+        font-size: 0.8rem;
+        color: rgb(18, 176, 78);
+      }
+    }
+    .categoriesContainer {
+      border-top: 2px solid #dedddd;
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

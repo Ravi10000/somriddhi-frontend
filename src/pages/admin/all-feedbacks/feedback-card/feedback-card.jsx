@@ -23,8 +23,21 @@ export default function FeedbackCard({
           <div className={styles["user-info"]}>
             <h4>
               {feedback?.username} -
-              <span className={styles[feedback?.status]}>
-                {feedback?.status === "Active" ? " Public" : " Hidden"}
+              <span
+                className={styles[feedback?.status]}
+                onClick={() => {
+                  handleUpdateStatus(
+                    feedback?._id,
+                    feedback?.status === "Inactive" ? "Active" : "Inactive",
+                    setIsStatusChanging
+                  );
+                }}
+              >
+                {isStatusChanging
+                  ? "updating..."
+                  : feedback?.status === "Active"
+                  ? " Public"
+                  : " Hidden"}
               </span>
             </h4>
             <p>{date}</p>

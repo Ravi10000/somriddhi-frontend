@@ -67,7 +67,7 @@
       grid-template-columns: 30% 1fr;
       .category-container {
         .category-cards-container {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(1, 1fr);
         }
       }
     }
@@ -79,7 +79,7 @@
       grid-template-columns: 20% 1fr;
       .category-container {
         .category-cards-container {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     }
@@ -98,6 +98,11 @@
       width: 90%;
       max-width: 1200px;
       grid-template-columns: 20% 1fr;
+      .category-container {
+        .category-cards-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
     }
   }
 }

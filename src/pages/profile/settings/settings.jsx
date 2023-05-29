@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
-import { updateUser } from "../../../api";
+import { updateUser, changeWalletId } from "../../../api";
 import { setFlash } from "../../../redux/flash/flash.actions";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 
@@ -44,6 +44,28 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
     }
   }
 
+  async function handleChangeWalletId(e) {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const formData = new FormData(e.target);
+      const response = await changeWalletId(formData);
+      console.log({ response });
+      if (response.data.status === "success") {
+        setCurrentUser(response?.data?.user);
+        setFlash({
+          type: "success",
+          message: "Wallet Id Updated Successfully",
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setIsLoading(false);
+      1;
+    }
+  }
+
   const [view, setView] = useState("profile");
   return (
     <div className={styles.settings}>
@@ -64,9 +86,16 @@ function Settings({ currentUser, setCurrentUser, setFlash }) {
         ))}
       </div>
       {view === "payment" && (
-        <form>
-          <input type="text" placeholder="Edit your excel id" />
-          <button className={styles.btn}>Save Excel ID</button>
+        <form onSubmit={handleChangeWalletId}>
+          <input
+            type="text"
+            placeholder="Edit your wallet id"
+            name="walletId"
+            defaultValue={currentUser?.walletId}
+          />
+          <button className={styles.btn}>
+            Save Excel ID {isLoading && <div className={styles.loader}></div>}
+          </button>
         </form>
       )}
       {view === "profile" && (

@@ -1,0 +1,83 @@
+.search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  .title {
+    padding: 20px;
+    p span {
+      color: #f01c21;
+    }
+  }
+  .containerTitle {
+    margin: 20px 0;
+  }
+  .dealsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .categoriesContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px;
+    .categoryCard {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 100px;
+      p {
+        word-wrap: break-word;
+      }
+      img {
+        width: 25px;
+        height: fit-content;
+      }
+    }
+  }
+}
+.notFound {
+  margin: 20px 0;
+  text-align: center;
+  padding: 25px;
+  color: #ccc;
+}
+
+@media (min-width: 500px) {
+  .search-page {
+    .dealsContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .search-page {
+    .dealsContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .categoriesContainer {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .search-page {
+    .dealsContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .categoriesContainer {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+}

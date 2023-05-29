@@ -410,3 +410,32 @@ export const changeBannerPriority = (formData) =>
       "Content-Type": "application/json",
     },
   });
+
+export const fetchMyCashbacks = () =>
+  axios.get("/cashback/mycashbacks", {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+
+export const fetchReferredUsers = () => {
+  return axios.get("/user/referred", {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
+};
+
+export const changeWalletId = (formData) =>
+  axios.post("/user/walletId", formData, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  });
+
+export const sendCouponAnalytics = (formData) =>
+  axios.post("/analytic/coupon", formData, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  });
+
+export const searchCoupons = (query) => axios.get(`/search?query=${query}`);

@@ -3,6 +3,7 @@
 
   .container {
     display: grid;
+    gap: 20px;
     place-content: center;
 
     .left {
@@ -17,7 +18,9 @@
 
     .right {
       display: grid;
+      gap: 25px;
       place-items: center;
+      // outline: 2px solid royalblue;
 
       h2._title {
         margin: 0 0 15px 0;

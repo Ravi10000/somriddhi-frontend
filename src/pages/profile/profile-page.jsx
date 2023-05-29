@@ -88,7 +88,7 @@ function ProfilePage({ setCurrentUser, setFlash }) {
                 {img && (
                   <img
                     src={
-                      activeMenu === name
+                      activeMenu === link
                         ? img.replace(".png", "-active.png")
                         : img
                     }
