@@ -75,7 +75,7 @@ function GiftCardPage({ setFlash }) {
         </div>
         <div className={styles.content}>
           <div className={styles.giftCardContainer}>
-            <GiftCard giftCard={giftCard} large />
+            <GiftCard nonClickable giftCard={giftCard} large />
           </div>
           <div className={styles.giftCardDetails}>
             <div className={styles.buttonAndInput}>

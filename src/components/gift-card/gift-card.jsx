@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./gift-card.module.scss";
 
-function GiftCard({ giftCard, large }) {
+function GiftCard({ giftCard, large, nonClickable }) {
   const navigate = useNavigate();
   return (
     <div
       className={styles.giftCard + " " + (large ? styles.large : "")}
       onClick={() => {
+        if (nonClickable) return;
         navigate(`/giftcard/${giftCard?._id}`, { state: { giftCard } });
       }}
     >

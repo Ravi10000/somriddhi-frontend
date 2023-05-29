@@ -98,6 +98,7 @@ function MyGiftCards() {
         <div className={styles.oneGiftCard}>
           <GiftCard
             large
+            nonClickable
             giftCard={{
               price: selectedGiftCard?.unitPrice,
               image: getRandomImage(),
