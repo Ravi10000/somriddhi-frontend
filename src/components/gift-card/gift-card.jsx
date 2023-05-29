@@ -4,7 +4,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 
-function GiftCard({ giftCard, large, nonClickable, setFlash }) {
+function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
   const navigate = useNavigate();
   return (
     <div
@@ -14,7 +14,9 @@ function GiftCard({ giftCard, large, nonClickable, setFlash }) {
         navigate(`/giftcard/${giftCard?._id}`, { state: { giftCard } });
       }}
     >
-      <img className={styles.giftCardImg} src={giftCard?.image} alt="" />
+      {!noImage && (
+        <img className={styles.giftCardImg} src={giftCard?.image} alt="" />
+      )}
       <div className={styles.titleAndPriceContainer}>
         <div className={styles.titleContainer}>
           <img
