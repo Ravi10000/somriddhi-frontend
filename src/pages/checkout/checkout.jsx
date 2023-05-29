@@ -5,36 +5,31 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import Button from "../../components/button/button";
 import { addGiftCard } from "../../api";
-function CheckoutPage() {
+import { setFlash } from "../../redux/flash/flash.actions";
+import { connect } from "react-redux";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { createStructuredSelector } from "reselect";
+import { useEffect } from "react";
+
+function CheckoutPage({ currentUser, setFlash }) {
+  console.log({ currentUser });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      salutation: "Mr.",
-      firstname: "John",
-      lastname: "Doe",
-      email: "email@test.test",
-      telephone: "1234567890",
-      line1: "123, abc street",
-      line2: "xyz area",
-      city: "city",
-      state: "state",
-      country: "country",
-      region: "region",
-      postcode: "123456",
-      company: "company",
-      gstn: "1234567890",
-      code: "123456",
+      firstname: currentUser?.fname || "",
+      lastname: currentUser?.lname || "",
+      email: currentUser?.email || "",
+      telephone: currentUser?.phone || "",
     },
   });
   const { state } = useLocation();
   console.log({ state });
-
-  // const handleCheckout = (data) => {
-  //   console.log({ data });
-  // };
+  useEffect(() => {
+    console.log({ currentUser });
+  }, [currentUser]);
 
   async function loadScript(src) {
     return new Promise((resolve) => {
@@ -50,7 +45,7 @@ function CheckoutPage() {
     });
   }
 
-  async function handlePayment(data) {
+  async function handleCheckout(data) {
     try {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
@@ -71,34 +66,40 @@ function CheckoutPage() {
             firstname: data.firstname,
             lastname: data.lastname,
             email: data.email,
-            telephone: data.telephone,
+            telephone: "+91" + data.telephone,
+            country: "IN",
+            postcode: data.postcode,
+          };
+
+          formData.billingAddress = {
+            ...formData.address,
             line1: data.line1,
             line2: data.line2,
             city: data.city,
             region: data.region,
-            // state: data.state,
-            company: data.company,
-            country: data.country,
-            postcode: data.postcode,
-            gstn: data.gstn,
-            code: data.code,
           };
-          formData.paymentId = response.razorpay_payment_id;
-          formData.unitPrice = state.price;
-          formData.totalAmount = state.total;
-          formData.qty = state.qty;
-          formData.billingAddress = {
-            ...formData.address,
-          };
-          formData.address.billToThis = true;
 
-          // data.paymentId = response.razorpay_payment_id;
-          // data.unitPrice = state.price;
-          // data.totalAmount = state.total;
-          // data.qty = state.qty;
-          const giftCardRes = await addGiftCard(formData);
-          console.log({ giftCardRes });
-          console.log({ razorpaySuccessResponse: response });
+          formData.paymentid = response.razorpay_payment_id;
+          formData.unitPrice = parseInt(state.price);
+          formData.totalAmount = state.total;
+          formData.qty = parseInt(state.qty);
+          try {
+            const giftCardRes = await addGiftCard(formData);
+            console.log({ giftCardRes });
+            console.log({ razorpaySuccessResponse: response });
+            if (giftCardRes?.data?.status === "success") {
+              setFlash({
+                message: "Gift Card Purchase Successful",
+                type: "success",
+              });
+            }
+          } catch (err) {
+            setFlash({
+              message: "Gift Card Purchase Failed",
+              type: "error",
+            });
+            console.log(err);
+          }
         },
       };
       const payment = new window.Razorpay(options);
@@ -123,12 +124,12 @@ function CheckoutPage() {
             Order Total: <span> ₹{state?.total}</span>
           </p>
         </div>
-        <form noValidate onSubmit={handleSubmit(handlePayment)}>
+        <form onSubmit={handleSubmit(handleCheckout)}>
           <h3 className={styles.subtitle}>Billing Details</h3>
           <div className={styles.inputGroupsContainer}>
             <div className={styles.inputGroup}>
               <TextInput
-                label="Mr/Mrs."
+                label="Mr/Ms/Mrs"
                 register={{
                   ...register("salutation", { required: "type Mr or Mrs." }),
                 }}
@@ -158,6 +159,8 @@ function CheckoutPage() {
                   ...register("telephone", { required: "phone required" }),
                 }}
               />
+            </div>
+            <div className={styles.inputGroup}>
               <TextInput
                 label="Address Line 1"
                 register={{
@@ -170,8 +173,6 @@ function CheckoutPage() {
                   ...register("line2"),
                 }}
               />
-            </div>
-            <div className={styles.inputGroup}>
               <TextInput
                 label="City"
                 register={{
@@ -184,35 +185,11 @@ function CheckoutPage() {
                   ...register("region", { required: "region required" }),
                 }}
               />
-              <TextInput
-                label="Country"
-                register={{
-                  ...register("country", { required: "country required" }),
-                }}
-              />
               <NumInput
                 maxlength="6"
                 label="Pincode"
                 register={{
                   ...register("postcode", { required: "pincode required" }),
-                }}
-              />
-              <TextInput
-                label="Company"
-                register={{
-                  ...register("company", { required: "company required" }),
-                }}
-              />
-              <TextInput
-                label="GST No."
-                register={{
-                  ...register("gstn", { required: "GST No. required" }),
-                }}
-              />
-              <TextInput
-                label="Code"
-                register={{
-                  ...register("code"),
                 }}
               />
             </div>
@@ -226,4 +203,8 @@ function CheckoutPage() {
   );
 }
 
-export default CheckoutPage;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps, { setFlash })(CheckoutPage);
