@@ -451,3 +451,17 @@ export const addGiftCard = (formData) => {
     },
   });
 };
+
+export const getGiftCards = () =>
+  axios.get("/getmygiftcards", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  });
+
+export const getActivatedCards = (orderId) =>
+  axios.get("/getActivatedCards/" + orderId, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  });

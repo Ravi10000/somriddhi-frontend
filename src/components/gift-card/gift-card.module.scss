@@ -58,4 +58,10 @@
     text-align: center;
     padding: 10px 0 0 0;
   }
+  .cardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
 }

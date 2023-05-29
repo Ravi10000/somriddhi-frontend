@@ -8,6 +8,7 @@ import GiftCard from "../gift-card/gift-card";
 import { useState } from "react";
 import { useEffect } from "react";
 import { fetchAllGiftCards } from "../../api";
+import getRandomImage from "../../data/gift-card-images";
 
 export default function GiftCardSlider() {
   const [giftCards, setGiftCards] = useState([]);
@@ -23,16 +24,9 @@ export default function GiftCardSlider() {
       console.log(err);
     }
   }
-
   useEffect(() => {
     handleFetchGiftCards();
   }, []);
-  const imagesArray = [
-    "/gift-cards/wedding.jpg",
-    "/gift-cards/congratulations.png",
-    "/gift-cards/waytogo.png",
-    "/gift-cards/thank you.png",
-  ];
 
   const settings = {
     customPaging: function (i) {
@@ -98,10 +92,10 @@ export default function GiftCardSlider() {
               <GiftCard
                 giftCard={{
                   price,
-                  image:
-                    imagesArray[
-                      Math.floor(Math.random() * imagesArray?.length)
-                    ],
+                  image: getRandomImage(),
+                  // imagesArray[
+                  //   Math.floor(Math.random() * imagesArray?.length)
+                  // ],
                 }}
               />
             </div>

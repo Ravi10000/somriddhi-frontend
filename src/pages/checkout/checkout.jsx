@@ -2,7 +2,7 @@ import styles from "./checkout.module.scss";
 import NumInput from "../../components/num-input/num-input";
 import TextInput from "../../components/text-input/text-input";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/button/button";
 import { addGiftCard } from "../../api";
 import { setFlash } from "../../redux/flash/flash.actions";
@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 function CheckoutPage({ currentUser, setFlash }) {
   console.log({ currentUser });
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -87,11 +88,12 @@ function CheckoutPage({ currentUser, setFlash }) {
             const giftCardRes = await addGiftCard(formData);
             console.log({ giftCardRes });
             console.log({ razorpaySuccessResponse: response });
-            if (giftCardRes?.data?.status === "success") {
+            if (giftCardRes?.data?.status === "Success") {
               setFlash({
                 message: "Gift Card Purchase Successful",
                 type: "success",
               });
+              navigate("/profile/gift-cards");
             }
           } catch (err) {
             setFlash({
