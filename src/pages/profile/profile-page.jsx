@@ -27,6 +27,7 @@ import { setFlash } from "../../redux/flash/flash.actions";
 
 // utils
 import menuList from "./menu-list";
+import MyGiftCards from "./my-gift-cards/my-gift-cards";
 
 function ProfilePage({ setCurrentUser, setFlash }) {
   const params = useParams();
@@ -119,6 +120,7 @@ function ProfilePage({ setCurrentUser, setFlash }) {
           {activeMenu == "/get-help" && <GetHelp />}
           {activeMenu == "/settings" && <Settings />}
           {activeMenu == "/testimonials" && <Testimonials />}
+          {activeMenu == "/gift-cards" && <MyGiftCards />}
         </div>
       </div>
     </div>

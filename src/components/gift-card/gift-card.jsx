@@ -23,7 +23,14 @@ function GiftCard({ giftCard, large }) {
         <span className={styles.seperator}></span>
         <p className={styles.price}>₹ {giftCard?.price}</p>
       </div>
-      <p className={styles.endMessage}>Your personal message!</p>
+      {!giftCard?.cardNumber ? (
+        <p className={styles.endMessage}>Your personal message!</p>
+      ) : (
+        <div className={styles.cardInfo}>
+          <p>Card Pin: {giftCard?.cardPin}</p>
+          <p>Card Number: {giftCard?.cardNumber}</p>
+        </div>
+      )}
     </div>
   );
 }

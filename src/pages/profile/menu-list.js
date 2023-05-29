@@ -10,6 +10,11 @@ const menuList = [
     link: "/payment-history",
   },
   {
+    name: "gift cards",
+    img: "/profile-menu-icons/gift-cards.png",
+    link: "/gift-cards",
+  },
+  {
     name: "missing cashbacks",
     link: "/missing-cashbacks",
   },
