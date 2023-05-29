@@ -465,3 +465,10 @@ export const getActivatedCards = (orderId) =>
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   });
+
+export const getAllGiftCards = () =>
+  axios.get("/getallgiftcards", {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  });

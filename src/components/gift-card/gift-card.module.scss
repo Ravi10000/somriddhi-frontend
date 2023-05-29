@@ -58,10 +58,25 @@
     text-align: center;
     padding: 10px 0 0 0;
   }
-  .cardInfo {
+  .cardInfoContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px;
+    .cardInfo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      span {
+        color: #f01c21;
+      }
+      .copyIcon {
+        height: 20px;
+        width: fit-content;
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
   }
 }
