@@ -61,6 +61,9 @@ html {
   scroll-padding-top: 70px;
 }
 
+:root {
+  --mainBrandColor: #f01c21;
+}
 body {
   /* position: relative; */
   font-family: "Metropolis", sans-serif;
@@ -169,7 +172,7 @@ a {
   outline: none;
 }
 
-img{
+img {
   object-fit: contain;
 }
 /* *{

@@ -8,12 +8,14 @@ import { createStructuredSelector } from "reselect";
 import Button from "../button/button";
 import { useLoginModal } from "../../context/login-modal-context";
 import { useNavigate } from "react-router-dom";
+import TodquestMessage from "../todquest-message/todquest-message";
 
 function Footer({ currentUser }) {
   const modal = useLoginModal();
   const navigate = useNavigate();
   return (
     <footer className="footer-section">
+      <TodquestMessage />
       <div className="logo-and-download-links">
         <img
           className="logo-light"
