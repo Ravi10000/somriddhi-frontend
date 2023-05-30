@@ -40,11 +40,11 @@ function GiftCardPage({ setFlash }) {
   }, []);
 
   useEffect(() => {
-    if (quantity > 10) {
-      setQuantity(10);
+    if (quantity > 4) {
+      setQuantity(4);
       setFlash({
         type: "warning",
-        message: "You can only buy 10 gift cards at a time",
+        message: "You can only buy 4 gift cards at a time",
       });
     }
   }, [quantity]);
@@ -101,7 +101,7 @@ function GiftCardPage({ setFlash }) {
                     className={styles.quantityUpdateBtn}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (quantity < 10) setQuantity(quantity + 1);
+                      if (quantity < 4) setQuantity(quantity + 1);
                     }}
                   >
                     <img src="/plus.png" alt="" />
