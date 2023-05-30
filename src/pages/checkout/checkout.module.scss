@@ -4,6 +4,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+
+  .loaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 10px 20px 20px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 2px 4px 4px 5px rgba(57, 57, 57, 0.25);
+    h2 {
+      color: #f01c21;
+    }
+    .loader {
+      margin-top: 20px;
+      width: 35px;
+      height: 35px;
+      border: 3px solid #f01c21;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.75s linear infinite;
+    }
+  }
   h2 {
     margin: 20px 0;
   }
@@ -35,6 +59,11 @@
   }
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 @media (min-width: 800px) {
   .checkoutPage {
     .container {

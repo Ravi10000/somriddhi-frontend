@@ -9,9 +9,11 @@ import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Backdrop from "../../components/backdrop/backdrop";
 
 function CheckoutPage({ currentUser, setFlash }) {
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   console.log({ currentUser });
   const navigate = useNavigate();
   const {
@@ -47,6 +49,7 @@ function CheckoutPage({ currentUser, setFlash }) {
   }
 
   async function handleCheckout(data) {
+    setIsCheckingOut(true);
     try {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
@@ -89,6 +92,7 @@ function CheckoutPage({ currentUser, setFlash }) {
             console.log({ giftCardRes });
             console.log({ razorpaySuccessResponse: response });
             if (giftCardRes?.data?.status === "Success") {
+              setIsCheckingOut(false);
               setFlash({
                 message: "Gift Card Purchase Successful",
                 type: "success",
@@ -107,11 +111,25 @@ function CheckoutPage({ currentUser, setFlash }) {
       const payment = new window.Razorpay(options);
       payment.open();
     } catch (err) {
+      setFlash({
+        message: "Gift Card Purchase Failed",
+        type: "error",
+      });
       console.log(err);
     }
   }
   return (
     <div className={styles.checkoutPage}>
+      {isCheckingOut && (
+        <Backdrop>
+          <div className={styles.loaderContainer}>
+            <h2>Processing purchase </h2>
+            <h3>please wait, it might take a while</h3>
+            <h3>do not close this window.</h3>
+            <div className={styles.loader}></div>
+          </div>
+        </Backdrop>
+      )}
       <h2>Checkout Page</h2>
       <div className={styles.container}>
         <div className={styles.orderDetails}>
