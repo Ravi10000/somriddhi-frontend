@@ -72,6 +72,23 @@
       }
     }
   }
+  .loaderContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loader {
+      width: 35px;
+      height: 35px;
+      border: 3px solid #e53b2c;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.75s linear infinite;
+    }
+  }
   .oneGiftCard {
     padding: 20px;
     display: flex;

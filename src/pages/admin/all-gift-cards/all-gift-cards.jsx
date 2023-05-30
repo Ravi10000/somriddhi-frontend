@@ -222,6 +222,8 @@ function AllGiftCards() {
   const [giftCards, setGiftCards] = useState([]);
   const [selectedGiftCard, setSelectedGiftCard] = useState(null);
   const [activatedCards, setActivatedCards] = useState([]);
+  const [isFetchingActivatedCards, setIsFetchingActivatedCards] =
+    useState(false);
 
   console.log({ giftCards });
   async function handleFetchAllGiftCards() {
@@ -244,6 +246,7 @@ function AllGiftCards() {
   }
 
   async function handleFetchActivatedCards() {
+    setIsFetchingActivatedCards(true);
     if (!selectedGiftCard) return;
     try {
       const res = await getActivatedCards(selectedGiftCard.orderId);
@@ -253,6 +256,8 @@ function AllGiftCards() {
       console.log({ res });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsFetchingActivatedCards(false);
     }
   }
 
@@ -316,6 +321,10 @@ function AllGiftCards() {
               </tbody>
             )}
           </table>
+        </div>
+      ) : isFetchingActivatedCards ? (
+        <div className={styles.loaderContainer}>
+          <div className={styles.loader}></div>
         </div>
       ) : (
         <div className={styles.oneGiftCard}>
