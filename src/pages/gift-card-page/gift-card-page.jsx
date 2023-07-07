@@ -22,6 +22,9 @@ function GiftCardPage({ setFlash }) {
   const { id } = useParams();
   const { giftCard } = state;
   const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(
+    parseInt(giftCard?.price) * parseInt(quantity)
+  );
 
   async function handleFetchGiftCards() {
     try {
@@ -38,18 +41,18 @@ function GiftCardPage({ setFlash }) {
   useEffect(() => {
     handleFetchGiftCards();
   }, []);
-
+  console.log({ total });
+  console.log({ quantity });
   useEffect(() => {
-    if (quantity > 4) {
-      setQuantity(4);
-      setFlash({
-        type: "warning",
-        message: "You can only buy 4 gift cards at a time",
-      });
-    }
+    const newTotal = parseInt(giftCard?.price) * parseInt(quantity);
+    if (!(newTotal > 10000)) return setTotal(newTotal);
+    setFlash({
+      type: "warning",
+      message: "₹10000 is the maximum amount you can buy at once.",
+    });
+    setQuantity((prevQty) => prevQty - 1);
   }, [quantity]);
 
-  // console.log({ giftCard, pathname, id });
   useEffect(() => {
     if (contentRef.current)
       contentRef.current.innerHTML = giftCards?.tnc?.content;
@@ -85,23 +88,26 @@ function GiftCardPage({ setFlash }) {
                     className={styles.quantityUpdateBtn}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (quantity > 1) setQuantity(quantity - 1);
+                      if (quantity > 1)
+                        setQuantity((prevQuantity) => prevQuantity - 1);
                     }}
                   >
                     <img src="/minus.png" alt="" />
                   </button>
                   <NumInput
-                    // label="Quantity: "
                     placeholder="Quantity"
                     maxLength="2"
                     value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
+                    onChange={(e) => {
+                      if (!e.target.value) return setQuantity(1);
+                      setQuantity(parseInt(e.target.value));
+                    }}
                   />
                   <button
                     className={styles.quantityUpdateBtn}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (quantity < 4) setQuantity(quantity + 1);
+                      setQuantity((prevQuantity) => prevQuantity + 1);
                     }}
                   >
                     <img src="/plus.png" alt="" />
@@ -111,7 +117,8 @@ function GiftCardPage({ setFlash }) {
                   <p>Total: ₹ &nbsp;</p>
                   <p>
                     {quantity
-                      ? parseInt(giftCard?.price) * parseInt(quantity)
+                      ? // ? parseInt(giftCard?.price) * parseInt(quantity)
+                        total
                       : 0}
                   </p>
                 </div>
