@@ -17,10 +17,6 @@ export default function Navbar() {
     { name: "deals", link: "/#deals" },
     { name: "categories", link: `/category` },
     { name: "contact us", link: "/#feedback-form" },
-    // {
-    //   name: "wallet login",
-    //   link: `https://login.somriddhidigital.co.in/#/login`,
-    // },
   ];
 
   return (
