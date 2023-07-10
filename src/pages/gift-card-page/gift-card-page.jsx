@@ -96,10 +96,18 @@ function GiftCardPage({ setFlash }) {
                   </button>
                   <NumInput
                     placeholder="Quantity"
-                    maxLength="2"
                     value={quantity}
                     onChange={(e) => {
                       if (!e.target.value) return setQuantity(1);
+                      if (
+                        parseInt(e.target.value) * parseInt(giftCard?.price) >
+                        10000
+                      )
+                        return setFlash({
+                          type: "warning",
+                          message:
+                            "₹10000 is the maximum amount you can buy at once.",
+                        });
                       setQuantity(parseInt(e.target.value));
                     }}
                   />
