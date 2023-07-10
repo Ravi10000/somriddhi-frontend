@@ -74,7 +74,7 @@ function AboutPage() {
           cashback on a wide range of products and services.
         </p>
       </div>
-      <div className={styles.contactDetails}>
+      <div className={styles.contactDetails} id="contact-us">
         <h2>Contact Details</h2>
         <div className={styles.address}>
           <h3>Address</h3>

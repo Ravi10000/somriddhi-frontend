@@ -16,7 +16,8 @@ export default function Navbar() {
     { name: "home", link: "/" },
     { name: "deals", link: "/#deals" },
     { name: "categories", link: `/category` },
-    { name: "contact us", link: "/#feedback-form" },
+    // { name: "contact us", link: "/#feedback-form" },
+    { name: "contact us", link: "/about/#contact-us" },
   ];
 
   return (
@@ -27,9 +28,11 @@ export default function Navbar() {
             onClick={() => setActiveLink(link)}
             to={link}
             key={name}
-            className={`${activeLink === link && styles["active"]}`}
+            className={`${activeLink === link && styles["active"]} ${
+              styles.navLink
+            }`}
           >
-            {name}
+            <p>{name}</p>
           </HashLink>
         ))}
         <div className={styles.wallet}>
