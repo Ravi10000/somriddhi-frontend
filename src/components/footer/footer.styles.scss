@@ -62,7 +62,9 @@
     .menu {
       max-width: 500px;
       display: flex;
+      flex-direction: column;
       width: 100%;
+      align-items: center;
       justify-content: space-around;
       padding: 20px 0;
       margin: 0;
@@ -79,7 +81,7 @@
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 768px) {
   .footer-section {
     .logo-and-download-links {
       max-width: 1000px;
@@ -87,6 +89,11 @@
       width: 100%;
       max-width: 800px;
       justify-content: space-between;
+    }
+    .container {
+      .menu {
+        flex-direction: row;
+      }
     }
   }
 }

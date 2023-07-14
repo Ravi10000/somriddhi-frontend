@@ -51,59 +51,63 @@ function Footer({ currentUser }) {
       </div>
       <div className="container">
         <div className="menu">
-          <div
-            className="menu-item"
-            onClick={() => {
-              navigate("/about");
-            }}
-          >
-            <img src="/nav-arrow.png" alt={"about"} />
-            <p>About Us</p>
+          <div className="left-menu-items">
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
+              <img src="/nav-arrow.png" alt={"about"} />
+              <p>About Us</p>
+            </div>
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/terms-and-conditions");
+              }}
+            >
+              <img src="/nav-arrow.png" alt={"terms"} />
+              <p>Terms & Conditions</p>
+            </div>
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/terms-of-use");
+              }}
+            >
+              <img src="/nav-arrow.png" alt={"terms"} />
+              <p>Terms of Use</p>
+            </div>
           </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              navigate("/terms-and-conditions");
-            }}
-          >
-            <img src="/nav-arrow.png" alt={"terms"} />
-            <p>Terms & Conditions</p>
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              navigate("/terms-of-use");
-            }}
-          >
-            <img src="/nav-arrow.png" alt={"terms"} />
-            <p>Terms of Use</p>
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              navigate("/refund-policy");
-            }}
-          >
-            <img src="/nav-arrow.png" alt={"refund"} />
-            <p>Refund & Cancellation Policy</p>
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              navigate("/privacy-policy");
-            }}
-          >
-            <img src="/nav-arrow.png" alt={"privacy-policy"} />
-            <p>Privacy Policy</p>
-          </div>
-          <div
-            className="menu-item"
-            onClick={() => {
-              navigate("/admin");
-            }}
-          >
-            <img src="/nav-arrow.png" alt={"about"} />
-            <p>Admin Login</p>
+          <div className="right-menu-items">
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/refund-policy");
+              }}
+            >
+              <img src="/nav-arrow.png" alt={"refund"} />
+              <p>Refund & Cancellation Policy</p>
+            </div>
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/privacy-policy");
+              }}
+            >
+              <img src="/nav-arrow.png" alt={"privacy-policy"} />
+              <p>Privacy Policy</p>
+            </div>
+            <div
+              className="menu-item"
+              onClick={() => {
+                navigate("/admin");
+              }}
+            >
+              <img src="/nav-arrow.png" alt={"about"} />
+              <p>Admin Login</p>
+            </div>
           </div>
           {/* {navList.map(({ title, navItems }) => (
             <NavMenu navTitle={title} navItems={navItems} key={title} />
