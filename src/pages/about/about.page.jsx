@@ -30,47 +30,68 @@ function AboutPage() {
         </p>
         <p>
           We are affiliate partner of{" "}
-          <a href="https://amazon.in">www.amazon.in</a>, Flipkart ads to promote
-          their product and services through our web based services and app.
+          <a href="https://amazon.in" target="_blank">
+            www.amazon.in
+          </a>
+          , Flipkart ads to promote their product and services through our web
+          based services and app.
         </p>
         <p>
           We have launched our brand-new website&nbsp;
-          <a href="https://somriddhi.store/">somriddhi.store</a> which is a
-          cashback and coupons website that allows users to earn money back on
-          their online purchases. The website works by partnering with brands
-          who offer cashback to www.somriddhi.store users. When a user makes a
-          purchase through www.somriddhi.store , Amazon pays www.somriddhi.store
-          a commission, and www.somriddhi.store then pays the user a portion of
-          that commission as cashback.
+          <a href="https://somriddhi.store/" target="_blank">
+            somriddhi.store
+          </a>{" "}
+          which is a cashback and coupons website that allows users to earn
+          money back on their online purchases. The website works by partnering
+          with brands who offer cashback to www.somriddhi.store users. When a
+          user makes a purchase through www.somriddhi.store , Amazon pays
+          www.somriddhi.store a commission, and www.somriddhi.store then pays
+          the user a portion of that commission as cashback.
         </p>
         <p>
           Here are some of the key features of&nbsp;
-          <a href="https://somriddhi.store/">somriddhi.store</a>
+          <a href="https://somriddhi.store/" target="_blank">
+            somriddhi.store
+          </a>
         </p>
         <ul>
           <li>
             Cashback on a wide range of products and services:&nbsp;
-            <a href="https://somriddhi.store/">somriddhi.store</a> offers
-            cashback on a wide range of products and services, including
+            <a href="https://somriddhi.store/" target="_blank">
+              somriddhi.store
+            </a>{" "}
+            offers cashback on a wide range of products and services, including
             fashion, electronics, travel, and groceries.
           </li>
           <li>
-            Easy to use: <a href="https://somriddhi.store/"> somriddhi.store</a>
+            Easy to use:{" "}
+            <a href="https://somriddhi.store/" target="_blank">
+              {" "}
+              somriddhi.store
+            </a>
             is very easy to use. Simply sign up for an account, find the
             retailer you want to shop at, and click on the "Shop Now" button.
             You will then be redirected to the retailer's website, and you will
             earn cashback on your purchase.
           </li>
           <li>
-            Reliable: <a href="https://somriddhi.store/"> somriddhi.store</a> is
-            a reliable website, and it has a good track record of paying out
+            Reliable:{" "}
+            <a href="https://somriddhi.store/" target="_blank">
+              {" "}
+              somriddhi.store
+            </a>{" "}
+            is a reliable website, and it has a good track record of paying out
             cashback to its users.
           </li>
         </ul>
         <p>
           If you are looking for a way to save money on your online purchases,
-          then <a href="https://somriddhi.store/"> somriddhi.store</a> is a
-          great option. The website is easy to use, reliable, and it offers
+          then{" "}
+          <a href="https://somriddhi.store/" target="_blank">
+            {" "}
+            somriddhi.store
+          </a>{" "}
+          is a great option. The website is easy to use, reliable, and it offers
           cashback on a wide range of products and services.
         </p>
       </div>
@@ -88,18 +109,23 @@ function AboutPage() {
         </div>
         <div className={styles.mail}>
           <h4>Mail Id</h4>
-          <a href="mailto:store@somriddhidigital.com">
+          <a href="mailto:store@somriddhidigital.com" target="_blank">
             store@somriddhidigital.com
           </a>
         </div>
         <div className={styles.socialMedia}>
-          <a className={styles.socialLink} href="https://g.co/kgs/8jtZ7D">
+          <a
+            className={styles.socialLink}
+            href="https://g.co/kgs/8jtZ7D"
+            target="_blank"
+          >
             <HiLocationMarker />
             <p>Google Maps</p>
           </a>
           <a
             className={styles.socialLink}
             href="https://www.facebook.com/aessdpl"
+            target="_blank"
           >
             <BiLogoFacebook />
             <p>Facebook</p>
@@ -107,6 +133,7 @@ function AboutPage() {
           <a
             className={styles.socialLink}
             href="https://www.linkedin.com/company/somriddhi-digital-private-limited/mycompany/"
+            target="_blank"
           >
             <FaLinkedin />
             <p>LinkedIn</p>
@@ -114,11 +141,19 @@ function AboutPage() {
         </div>
         <div className={styles.supportPhone}>
           <h4>Support Mobile No.</h4>
-          <a className={styles.socialLink} href="tel:8100603096">
+          <a
+            className={styles.socialLink}
+            href="tel:8100603096"
+            target="_blank"
+          >
             <PiPhoneFill />
             <p>8100603096</p>
           </a>
-          <a className={styles.socialLink} href="tel:7439551839">
+          <a
+            className={styles.socialLink}
+            href="tel:7439551839"
+            target="_blank"
+          >
             <PiPhoneFill />
             <p>7439551839</p>
           </a>
@@ -128,6 +163,7 @@ function AboutPage() {
           <a
             className={styles.socialLink}
             href="mailto:store@somriddhidigital.com"
+            target="_blank"
           >
             <TbMailFilled />
             <p>store@somriddhidigital.com</p>
