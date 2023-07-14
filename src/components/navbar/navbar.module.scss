@@ -67,6 +67,44 @@ nav {
       }
     }
   }
+  .productsNavItem {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      .brandsMenu {
+        display: block;
+        &:hover {
+          .productsMenu {
+            display: block;
+          }
+        }
+      }
+    }
+    .brandsMenu,
+    .productsMenu {
+      display: none;
+      border-radius: 0.5rem;
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      background: #fff;
+      color: var(--text-clr);
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+      .brandName,
+      .productName {
+        padding: 20px 30px;
+        color: var(--text-clr);
+        height: 100%;
+        width: 100%;
+      }
+      &:hover {
+        background: whitesmoke;
+      }
+    }
+  }
 }
 
 @keyframes slideIn {

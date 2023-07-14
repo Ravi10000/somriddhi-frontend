@@ -5,7 +5,7 @@ import GiftCardSlider from "../gift-card-slider/gift-card-slider";
 
 export default function GiftCardList() {
   return (
-    <section className={styles["offers-section"]}>
+    <section className={styles["offers-section"]} id="gift-cards">
       <h2 className="_title">Gift Cards</h2>
       <div className={styles["offer-carousel"]}>
         <GiftCardSlider />

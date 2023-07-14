@@ -64,6 +64,7 @@ html {
 
 :root {
   --mainBrandColor: #f01c21;
+  --text-clr: #091431;
 }
 body {
   /* position: relative; */

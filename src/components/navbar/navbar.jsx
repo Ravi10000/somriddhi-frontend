@@ -5,6 +5,7 @@ import { HashLink } from "react-router-hash-link";
 
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("/");
+
   const location = useLocation();
 
   useEffect(() => {
@@ -35,6 +36,32 @@ export default function Navbar() {
             <p>{name}</p>
           </HashLink>
         ))}
+        <div
+          className={styles.productsNavItem}
+          onClick={() => {
+            // setShowBrandsMenu((prevState) => !prevState);
+          }}
+        >
+          <p>Products</p>
+          {showBrandsMenu && (
+            <div
+              className={styles.brandsMenu}
+              onClick={(e) => {
+                e.stopPropagation();
+                // setShowProductsMenu((prevState) => !prevState);
+              }}
+            >
+              <div className={styles.brandName}>Amazon</div>
+              {showProductsMenu && (
+                <div className={styles.productsMenu}>
+                  <HashLink to="/#gift-cards">
+                    <div className={styles.productName}>GiftCards</div>
+                  </HashLink>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
         <div className={styles.wallet}>
           <p>Wallet Login</p>
           <div className={styles.walletMenu}>
