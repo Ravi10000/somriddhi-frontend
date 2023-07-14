@@ -47,6 +47,10 @@ import { getCashbackDetails, getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 import GiftCardPage from "./pages/gift-card-page/gift-card-page";
 import CheckoutPage from "./pages/checkout/checkout";
+import TermsPage from "./pages/terms/terms";
+import RefundPolicyPage from "./pages/refund/refund";
+import PrivacyPolicyPage from "./pages/privacy-policy/privacy-policy";
+import TermsOfUsePage from "./pages/terms-of-use/terms-of-use";
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
@@ -141,6 +145,10 @@ function App({ setCurrentUser, flash }) {
         />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/about" exact element={<AboutPage />} />
+        <Route path="/terms-and-conditions" exact element={<TermsPage />} />
+        <Route path="/terms-of-use" exact element={<TermsOfUsePage />} />
+        <Route path="/refund-policy" exact element={<RefundPolicyPage />} />
+        <Route path="/privacy-policy" exact element={<PrivacyPolicyPage />} />
 
         <Route
           path="/giftcard/:id"

@@ -63,6 +63,42 @@ function Footer({ currentUser }) {
           <div
             className="menu-item"
             onClick={() => {
+              navigate("/terms-and-conditions");
+            }}
+          >
+            <img src="/nav-arrow.png" alt={"terms"} />
+            <p>Terms & Conditions</p>
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              navigate("/terms-of-use");
+            }}
+          >
+            <img src="/nav-arrow.png" alt={"terms"} />
+            <p>Terms of Use</p>
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              navigate("/refund-policy");
+            }}
+          >
+            <img src="/nav-arrow.png" alt={"refund"} />
+            <p>Refund & Cancellation Policy</p>
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
+              navigate("/privacy-policy");
+            }}
+          >
+            <img src="/nav-arrow.png" alt={"privacy-policy"} />
+            <p>Privacy Policy</p>
+          </div>
+          <div
+            className="menu-item"
+            onClick={() => {
               navigate("/admin");
             }}
           >

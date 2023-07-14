@@ -1,0 +1,36 @@
+.privacyPolicyPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  h1 {
+    text-align: center;
+  }
+  p {
+    font-size: 1rem;
+  }
+  section {
+    background: #fff;
+    border-radius: 0.5rem;
+    padding: 35px 45px;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    line-height: 1.4;
+    font-size: 1.1rem;
+    a {
+      word-break: break-all;
+      color: rgb(18, 143, 238);
+      text-decoration: none;
+    }
+    .content {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

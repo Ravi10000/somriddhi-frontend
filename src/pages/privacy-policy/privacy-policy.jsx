@@ -1,0 +1,596 @@
+import styles from "./privacy-policy.module.scss";
+import { Balancer } from "react-wrap-balancer";
+
+function PrivacyPolicyPage() {
+  return (
+    <div className={styles.privacyPolicyPage}>
+      <section>
+        <h1>
+          <Balancer>WEBSITE PRIVACY POLICY</Balancer>
+        </h1>
+        <h3>Scope</h3>
+        <p>
+          <a href="https://somriddhi.store" target="blank">
+            somriddhi.store
+          </a>{" "}
+          is an Internet based portal owned and operated by Somriddhi Digital
+          Pvt Ltd incorporated under the laws of India, having its registered
+          office at SOMRIDDHI DIGITAL PVT. LTD. ,CIN -
+          U72900WB2019PTC229953,Ecosuit Business Tower, Unit No 507 , 5 th Floor
+          ,Plot No. IID/22, Sector II , Biswa Bangla Sarani ,New Town, Kolkata -
+          700 156, India. Use of the Website is offered to you conditioned on
+          acceptance of all the terms, conditions and notices contained in these
+          Terms, along with any amendments made by Pine Labs at its sole
+          discretion and posted on the Website. This Privacy policy (“Privacy
+          Policy”) succinctly describes how we collect and use your information
+          through a variety of digital means. You are advised to read the
+          Privacy Policy carefully and provide your consent as appropriate when
+          accessing or using this website on any computer, mobile phone, tablet,
+          console or other device (collectively, “device”. This Privacy Policy
+          applies to current and former visitors of the Website. By way of the
+          Website, Pine Labs is inter alia engaged in the business of providing
+          to its customers including you, end to end stored value card solutions
+          by managing gift card, prepaid card and loyalty programs and
+          facilitating distribution of gift and prepaid cards through various
+          channels (collectively “Services”); This Privacy Policy is
+          incorporated into, and is subject to, the Terms of Use.
+        </p>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>
+              INFORMATION THAT IS OR MAY BE COLLECTED FROM YOU
+            </Balancer>
+          </h3>
+          <p>
+            We may automatically receive and collect certain anonymous
+            information in standard usage logs through our server, including
+            computer-identification information obtained from "cookies" sent to
+            your browser from various sources as detailed out in the Cookie
+            notice section. We may actively collect the following personally
+            identifiable information about you:
+          </p>
+          <ul>
+            <li>name including first and last name.</li>
+            <li>email address.</li>
+            <li>mobile phone number and contact details.</li>
+            <li>address and postal code.</li>
+            <li>opnions of features on this website.</li>
+            <li>IP address</li>
+            <li>product / service preference, and</li>
+            <li>
+              other information may be collected as per our registration process
+              and as stipulated by applicable law, ancillary to availing of the
+              different classes of Services provided by us. We may also actively
+              collect the following personal data as below:
+            </li>
+            <li>about the pages you visit/access on this Website</li>
+            <li>the links you click on this Website</li>
+            <li>
+              the number of times you access a particular page on this Website.
+              and
+            </li>
+            <li>the number of times you have interacted on this Website.</li>
+          </ul>
+        </div>
+        <p>
+          We may collect your name and billing address when you make payment for
+          the Services. All payment information barring the aforesaid (i.e. name
+          and address) will be obtained and processed by our online payment
+          partners and payment gateways. They have access to personal data
+          needed to perform their functions,but may not use it for other
+          purposes. Further, they must process the personal data in accordance
+          with this Privacy Policy and as permitted by applicable law. We may
+          work with third-party analytics services to help us understand how
+          this Website is being used, such as tracking the frequency and
+          duration of use of the Sites. We may use tracking tools including, but
+          not limited to, Google Analytics, Google Webmaster, browser cookies
+          and web beacons to collect information about your use of this Site.
+          These Analytics Tools may use cookies to collect information about the
+          content you view, what websites you visit immediately prior to and
+          after visiting this Site, and your system information and geographic
+          information. The information generated by these cookies about your use
+          of this Website will be transmitted to and stored by the applicable
+          analytics services. The information collected by these analytics
+          services allows us to analyse your use of this Site. The Analytics
+          Tools may also transfer this information to third parties where
+          required to do so by law, or where such third parties process the
+          information on their behalf. You may refuse the use of cookies by
+          selecting the appropriate settings on your browser, however, please
+          note that if you do this you may not be able to use the full
+          functionality of this Website.
+        </p>
+        <div className={styles.content}>
+          <h3>METHOD OF COLLECTING INFORMATION</h3>
+          <p>
+            We may collect information from you passively. We use tracking tools
+            including, but not limited to, Google Analytics, Google Webmaster,
+            browser cookies and web beacons for collecting information about
+            your usage of the Website. Our advertisers may collect anonymous
+            traffic information from their own assigned cookies to your browser.
+            This Website may contain links to other websites. We are not
+            responsible for the privacy practices of websites which we do not
+            own, manage or control. Please find more details about our Cookie
+            Policy here -{" "}
+            <a href="https://somriddhi.store/cookie-policy/" target="blank">
+              https://somriddhi.store/cookie-policy/
+            </a>
+          </p>
+          <p>
+            We may be utilizing a third-party prospecting service for sending
+            you emails relating to our product and services, if they had
+            discovered that your profile meets our usual customer profile. If
+            you prefer not to hear from us, simply notify us by clicking on the
+            “Opt -out” link in the email.
+          </p>
+          <p>
+            We may actively collect information from you on our webpage , during
+            registration/Login process for the purpose of Authentication,
+            Authorization and while availing of the different classes of
+            products/Services provided by us.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>
+              PURPOSE AND METHOD OF USING INFORMATION COLLECTED
+            </Balancer>
+          </h3>
+          <p>
+            The data protection laws require a legal basis for our use of
+            personal information. Our basis varies depending on the specific
+            purpose for which we use personal information. We use your personal
+            information in:
+          </p>
+          <ul>
+            <li>
+              Performance of a contract when we provide you with products or
+              services, or communicate with you about them. This includes when
+              we use your personal information to take and handle orders,
+              deliver products and services, and process payments.
+            </li>
+            <li>
+              Our legitimate business interests and the interests of our
+              customers when we improve our services (including when we use your
+              voice, e mail, mobile number to improve services), when we detect
+              and prevent fraud and abuse in order to protect the security of
+              our customers, ourselves, or others, and when we provide you with
+              interest-based advertising.
+            </li>
+            <li>
+              Your consent when we ask for your consent to process your personal
+              information for a specific purpose that we communicate to you.
+              When you consent to our processing your personal information for a
+              specified purpose, you may withdraw your consent at any time and
+              we will stop processing of your data for that purpose.
+            </li>
+            <li>
+              Compliance with a legal obligation when we use your personal
+              information to comply with laws.
+            </li>
+            <li>
+              These and other legal basis depending on the purpose communicated
+              to you for which we use personal information.
+            </li>
+          </ul>
+          <h4>
+            <Balancer>We use your personal data to:</Balancer>
+          </h4>
+          <ul>
+            <li>tailor-make our Website to suit your interest.</li>
+            <li>
+              carry out our obligations arising from any contracts entered into
+              between you and us and to provide you with the information and
+              Services that you request from us;
+            </li>
+            <li>
+              respond to your inquiries or to process your requests in relation
+              to your information;
+            </li>
+            <li>optimize the Website for you based on your usage pattern;</li>
+            <li>to get in touch with you when necessary;</li>
+            <li>carry out market research campaigns;</li>
+            <li>
+              to preserve social history as governed by existing law or policy.
+              and
+            </li>
+            <li>For auditing and logging purposes</li>
+          </ul>
+          <h4>
+            <Balancer>We use personal data internally to:</Balancer>
+          </h4>
+          <ul>
+            <li>
+              send you confirmations, notifications, acknowledgments and other
+              details pertaining to the Services you have placed on the Website;
+            </li>
+            <li>
+              administer our Website and for internal operations, including
+              troubleshooting, data analysis, testing, research, statistical and
+              survey purposes;
+            </li>
+            <li>
+              direct our efforts to improve features and facilities, including
+              privacy features; and
+            </li>
+            <li>send you materials regarding:</li>
+            <li>upcoming offers; and/or</li>
+            <li>
+              any information that we deem material in order for you to be a
+              fully informed user and customer of, and visitor to the Website.
+            </li>
+            <li>
+              Communicate with you about products, services, contests,
+              promotions, discounts, incentives, surveys, and rewards offered by
+              us and select partners;
+            </li>
+            <li>
+              Send you information we think you may find useful or which you
+              have requested from us about our products and services; Conduct
+              surveys and collect feedback about our Services
+            </li>
+          </ul>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>SHARING OF INFORMATION</Balancer>
+          </h3>
+          <p>
+            We will not use information collected by you, for any purpose other
+            than to complete a transaction with you. We do not rent, sell or
+            share your personal data and we will not disclose any of your
+            personally identifiable information to third parties unless:
+          </p>
+          <ul>
+            <li>we have your permission;</li>
+            <li>it is to provide and facilitate provision of the Services;</li>
+            <li>
+              it is to help investigate, prevent or take action regarding
+              unlawful and illegal activities; suspected fraud, potential threat
+              to the safety or security of any person, violations of our Terms
+              of Use or to defend against legal claims;
+            </li>
+            <li>it is with a successor to all or part of our business;</li>
+            <li>
+              special circumstances such as compliance with court orders,
+              requests/order, notices from legal authorities or law enforcement
+              agencies compel us to make such disclosure; and
+            </li>
+            <li>
+              it forms part of the anonymous information we share with our
+              sub-distributors and channel partners and/or advertisers on an
+              aggregate basis.
+            </li>
+          </ul>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>THIRD PARTY PLATFORMS</Balancer>
+          </h3>
+          <p>
+            You may be directed to third-party applications from our Website
+            which we do not control. This Privacy Policy solely and exclusively
+            governs your usage and experience of our Website. Accordingly, we
+            undertake no liability whatsoever as regards your usage of these
+            third-party applications and you may visit them at your own risk. We
+            strongly encourage that you read the privacy policies of any
+            third-party website / application you are directed to before using
+            the same.
+          </p>
+          <p>
+            If you choose to use chat rooms or other message areas or leave
+            feedback, we will collect that information you provide to us. We
+            retain this information as necessary to resolve disputes, provide
+            customer support and troubleshoot problems as permitted by law. This
+            Website and its contents do not give any party additional rights or
+            remedies and should not be construed as a binding agreement.
+          </p>
+          <p>
+            This section is to explain who will have access to your personal
+            data. Your personal data will only be seen or used by our employees
+            or third parties who have a legitimate business need to access your
+            personal data for the purposes set out in this Privacy Policy We may
+            communicate your personal data to the following categories of third
+            parties for the purposes mentioned but not limited to in this
+            notice:
+          </p>
+          <ul>
+            <li>service providers who provide us data centre services.</li>
+            <li>
+              authorized authorities, agencies, or administrations, as required
+              by applicable local law such as respective IOCs' of the country
+            </li>
+            <li>
+              email notification service providers, SMS service providers to
+              send transaction alerts to end customers
+            </li>
+            <li>CRM tools used for Customer grievances and support issues</li>
+            <li>Helpdesk and chat support tools</li>
+          </ul>
+          <p>
+            In case you require more specific details of this, you may write to
+            us at{" "}
+            <a href="mailto:store@somriddhidigital.com">
+              store@somriddhidigital.com
+            </a>
+            &nbsp; .com We may also pass aggregate information on the usage of
+            our Website (e.g., we might disclose the median ages of visitors to
+            our Website, or the numbers of visitors to our Website that come
+            from different geographic areas) to third parties, but this will not
+            include information that can be used to identify you personally. If
+            a business transfer or change of business ownership takes place or
+            is envisaged, we may transfer your personal data to the new owner
+            (or a prospective new owner). If this happens, you will be informed
+            of this transfer following the completion of such transfer or change
+            of business ownership.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>DUE DILIGENCE AND SAFEGUARDS</Balancer>
+          </h3>
+          <p>
+            Pine Labs uses reasonable physical, technical and administrative
+            measures to safeguard personal data you provide through the Website
+            or in connection with its Services. We apply these measures based on
+            the sensitivity of the personal data we collect, use, and store, and
+            the current state of technology.
+          </p>
+          <p>
+            We protect your personal data through technical and organizational
+            security measures to minimize risks associated with data loss,
+            misuse, unauthorized access, and unauthorize disclosure and
+            alteration.
+          </p>
+          <p>
+            Pine Labs is also certified under the international standards (ISO
+            27001) for information security and abides by the Reserve Bank of
+            India's master directions for Information Systems for Pre-Paid
+            Instrument Issuers.
+          </p>
+          <p>
+            We are also SOC1, Type 2 attested. Unfortunately, the transmission
+            of your personal data via the internet is not completely secure and
+            although we do our best to protect your personal data, we cannot
+            guarantee the security of your data transmitted to us over the
+            internet and you acknowledge that any transmission is at your own
+            risk. Pine Labs uses commercially reasonable efforts to evaluate the
+            data protection practices of third parties that process electronic
+            documents and files and will or may have access to or process
+            personal data. Pine Labs requires such third parties to provide, at
+            a minimum, the level of data protection required of Pine Labs under
+            applicable data protection laws and regulations, including, but not
+            limited to, the requirements to:
+          </p>
+          <ul>
+            <li>
+              Use commercially reasonable security measures in providing
+              services to Pine Labs to preserve the security, integrity, and
+              confidentiality of personal data, and to protect against
+              unauthorized access and anticipated threats or hazards to personal
+              data;
+            </li>
+            <li>
+              Use personal data only for Pine Labs to provide its services, and
+              not process personal data for any other purpose;
+            </li>
+            <li>
+              Handle and maintain personal data in compliance with applicable
+              data privacy and protection laws, rules, and regulations;
+            </li>
+            <li>
+              Comply with obligations as required by all applicable data privacy
+              and protection laws, rules, and regulations;
+            </li>
+            <li>
+              Immediately notify Pine Labs about any actual or potential
+              security breach affecting personal data processed on behalf of
+              Pine Labs;
+            </li>
+            <li>
+              Assist and support Pine Labs in dealing with requests from
+              governmental authorities, data controllers, data subjects or data
+              protection authorities, as applicable;
+            </li>
+            <li>
+              Not transfer personal data to a third country unless expressly
+              authorized to do so by Pine Las; and
+            </li>
+            <li>
+              Not engage another data processor without prior specific
+              authorization of Pine Labs.
+            </li>
+          </ul>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>
+              PROCEDURE FOR CORRECTING INACCURACIES IN THE INFORMATION
+            </Balancer>
+          </h3>
+          <p>
+            You may have certain rights related to your personal data , subject
+            to local & applicable data protection laws. These rights may
+            include:
+          </p>
+          <ul>
+            <li>
+              You can access and review personal data associated with your
+              account at any time by sending us an e-mail to submit this request
+              with us: e-mail ID:{" "}
+              <a href="mailto:store@somriddhidhital.com" target="blank">
+                store@somriddhidhital.com
+              </a>
+              &nbsp;
+            </li>
+            <li>
+              You also can request the following information: how we collect and
+              use your personal data and why; the categories of personal data
+              involved; the categories of recipients of your personal data ; how
+              we received your personal data and its source; our business
+              purpose for using your personal data ; and how long we use or
+              store your personal data or the manner in which we determine
+              relevant retention periods.{" "}
+            </li>
+            <li>
+              You have a right to correct your personal data by sending us an
+              e-mail to submit this request with us: e-mail ID: &nbsp;
+              <a href="mailto:store@somriddhidhital.com">
+                store@somriddhidhital.com
+              </a>
+              &nbsp;
+            </li>
+            <li>
+              In certain situations as per the applicable law, you can ask that
+              we delete/erase or stop using your personal data (and object to
+              use of your personal data ) or export your personal data . Please
+              send us an e-mail to submit this request with us: e-mail ID:
+              &nbsp;
+              <a href="mailto:store@somriddhidhital.com">
+                store@somriddhidhital.com
+              </a>
+              &nbsp;
+            </li>
+            <li>
+              Where we rely on your consent to process your personal data , you
+              have the right to decline consent and/or if provided, to withdraw
+              consent at any time. This will not affect the lawfulness of
+              processing prior to the withdrawal of your consent. At any time,
+              you can request that we stop using your personal data for direct
+              marketing purposes. See our Cookie notice, How can I control my
+              cookies section of our Privacy Policy for more information on your
+              choices.
+            </li>
+            <li>
+              You have a right to provide us with guidance on the use, storage,
+              and deletion of your personal data after your death.
+            </li>
+            <li>
+              You have a right to raise questions or complaints with your local
+              data protection authority at any time.
+            </li>
+          </ul>
+          <p>
+            We will take reasonable steps to verify your identity. If you have
+            an account with us, we may verify you through your login of your
+            account. If you do not have an account with us, we may seek a
+            confirmation by email or seek other identification information,
+            including government-issued identification, to verify your identity.
+          </p>
+          <p>
+            You may authorize an agent to make a request to us on your behalf
+            and we will verify the identity of your agent or authorized legal
+            representative by either seeking confirmation from you or documents
+            that establish the agent's authorization to act on your behalf.
+          </p>
+          <p>
+            Please note your rights and choices vary depending upon your
+            location. Certain personal data may be exempt from such requests
+            under applicable law. We need certain types of personal data so that
+            we can provide the Services to you. If you ask us to delete it, you
+            may no longer be able to access or use our Services. Please send an
+            e-mail to: &nbsp;
+            <a href="mailto:store@somriddhidhital.com">
+              store@somriddhidhital.com
+            </a>
+            &nbsp;
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>HOW LONG DO WE KEEP YOUR PERSONAL DATA?</Balancer>
+          </h3>
+          <p>
+            We will keep your personal data for no longer than necessary, for
+            the purposes we have set out above. We will retain your information
+            for as long as needed in order to provide the relevant Services to
+            you or perform any contract we have with you and for a limited
+            period afterwards in order to deal with any queries or complaints.
+            Any third parties that we engage will keep your data stored on their
+            systems for as long as is necessary to provide the relevant Services
+            to you or us. If we end our relationship with any third party
+            providers, we will make sure that they securely delete or return
+            your personal data to us. We may retain personal data about you for
+            statistical purposes (for example, to help us better advertise our
+            Services). Where data is retained for statistical purposes it will
+            always be anonymized, meaning that you will not be identifiable from
+            that data.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>POLICY UPDATES</Balancer>
+          </h3>
+          <p>
+            This Privacy Policy was last updated on 1/6/2023 We reserve the
+            right to change or update this policy at any time. Such changes
+            shall be effective immediately upon posting on this Website. Please
+            check it regularly on our Website(s) for any updates.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>ENFORCEMENT</Balancer>
+          </h3>
+          <p>
+            Any employee found to have violated this policy may be subject to
+            disciplinary action left to the sole discretion of the management of
+            the company.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>GRIEVANCE OFFICER</Balancer>
+          </h3>
+          <p>
+            In accordance with the Indian Information Technology Act, 2000 and
+            the rules made thereunder, the name and contact details of the
+            grievance redressal officer are provided below:{" "}
+            <strong>
+              Ms. Piyush Chakraborty, Ecosuit Business Tower, Unit No 507 , 5 th
+              Floor ,Plot No. IID/22, Sector II , Biswa Bangla Sarani ,New Town,
+              Kolkata - 700 156, India{" "}
+            </strong>
+            , Email:{" "}
+            <a href="mailto:legal@somriddhidgital.in">
+              legal@somriddhidgital.in
+            </a>
+            . If you have any other questions about this Privacy Policy or other
+            privacy concerns, you can also email us at
+            store@somriddhidigital.com.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>JURISDICTION</Balancer>
+          </h3>
+          <p>
+            If you choose to visit the Website, your visit and any dispute over
+            privacy is subject to this Privacy Policy and the Website's Terms of
+            Use. Regardless of where you live, you consent to have your personal
+            data transferred, processed and stored in India. In addition to the
+            foregoing, any disputes arising under this Privacy Policy shall be
+            governed by the laws of India and the courts at Bangalore shall have
+            exclusive jurisdiction.
+          </p>
+        </div>
+        <div className={styles.content}>
+          <h3>
+            <Balancer>TERMS OF USE</Balancer>
+          </h3>
+          <p>
+            Your use of and access of the Website including any disputes arising
+            therefrom, is subject to this Privacy Policy as well as our Terms of
+            Use. Please read our Terms of Use -&nbsp;
+            <a href="https://www.somriddhi.store/terms-of-use/" target="blank">
+              https://www.somriddhi.store/terms-of-use/
+            </a>{" "}
+            carefully in order to obtain information on the terms governing the
+            use of and access to the Website
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default PrivacyPolicyPage;
