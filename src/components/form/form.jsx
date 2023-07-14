@@ -54,7 +54,7 @@ function Form({ setFlash }) {
           <p className="subtitle">
             Be the first to get exclusive offers
             <br />
-            ands the latest news
+            and the latest news
           </p>
           <input
             ref={inputRef}

@@ -7,7 +7,7 @@ function TodquestMessage() {
       target="_blank"
       className={styles.msg}
     >
-      Made with ❤ by Todquest Enterprises
+      Powered By Todquest Enterprises
     </a>
   );
 }

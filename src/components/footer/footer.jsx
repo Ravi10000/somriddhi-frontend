@@ -16,39 +16,7 @@ function Footer({ currentUser }) {
   return (
     <footer className="footer-section">
       <TodquestMessage />
-      <div className="logo-and-download-links">
-        <img
-          className="logo-light"
-          src="/Somriddhi Final Logo-03.png"
-          alt="somriddihi logo"
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-        <div className="buttons-container">
-          <button>
-            <img src="/playstore.png" alt="download from play sotre" />
-            <div
-              className="store-details"
-              onClick={() => {
-                window.open(
-                  "https://play.google.com/store/apps/details?id=com.somriddhi.somriddhiaeps"
-                );
-              }}
-            >
-              <p>Download From</p>
-              <h4>Play Store</h4>
-            </div>
-          </button>
-          <button>
-            <img src="/applestore.png" alt="download from apple sotre" />
-            <div className="store-details">
-              <p>Download From</p>
-              <h4>Apple Store</h4>
-            </div>
-          </button>
-        </div>
-      </div>
+
       <div className="container">
         <div className="menu">
           <div className="left-menu-items">
@@ -114,6 +82,42 @@ function Footer({ currentUser }) {
           ))} */}
         </div>
       </div>
+      <div className="logo-and-download-links">
+        <img
+          className="logo-light"
+          src="/Somriddhi Final Logo-03.png"
+          alt="somriddihi logo"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <div className="buttons-container">
+          <button>
+            <img src="/playstore.png" alt="download from play sotre" />
+            <div
+              className="store-details"
+              onClick={() => {
+                window.open(
+                  "https://play.google.com/store/apps/details?id=com.somriddhi.somriddhiaeps"
+                );
+              }}
+            >
+              <p>Download From</p>
+              <h4>Play Store</h4>
+            </div>
+          </button>
+          <button>
+            <img src="/applestore.png" alt="download from apple sotre" />
+            <div className="store-details">
+              <p>Download From</p>
+              <h4>Apple Store</h4>
+            </div>
+          </button>
+        </div>
+      </div>
+      <p className="copyright">
+        &copy; copyright somriddhi digital | all rights reserved
+      </p>
     </footer>
   );
 }

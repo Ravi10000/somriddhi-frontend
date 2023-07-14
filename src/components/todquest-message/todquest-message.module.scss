@@ -3,8 +3,10 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
-  color: #000;
+  color: gray;
+  letter-spacing: 1px;
   z-index: 10000000000000000;
+  font-size: 0.8rem;
   &:hover {
     color: var(--mainBrandColor);
   }

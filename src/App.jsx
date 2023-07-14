@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // react hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useLoginModal } from "./context/login-modal-context";
 
 // packages
@@ -51,6 +51,8 @@ import TermsPage from "./pages/terms/terms";
 import RefundPolicyPage from "./pages/refund/refund";
 import PrivacyPolicyPage from "./pages/privacy-policy/privacy-policy";
 import TermsOfUsePage from "./pages/terms-of-use/terms-of-use";
+
+// const tourPage = lazy(() => import("./pages/terms-of-use/terms-of-use"));
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();

@@ -5,10 +5,15 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // resolve: {
+  //   alias: {
+  //     _src: "/src",
+  //   },
+  // },
   server: {
     proxy: {
       "/api": {
-        target: "https://api.somriddhi.store:8001"
+        target: "https://api.somriddhi.store:8001",
         // target: "https://localhost:8001"
       },
     },
