@@ -43,24 +43,20 @@ export default function Navbar() {
           }}
         >
           <p>Products</p>
-          {showBrandsMenu && (
-            <div
-              className={styles.brandsMenu}
-              onClick={(e) => {
-                e.stopPropagation();
-                // setShowProductsMenu((prevState) => !prevState);
-              }}
-            >
-              <div className={styles.brandName}>Amazon</div>
-              {showProductsMenu && (
-                <div className={styles.productsMenu}>
-                  <HashLink to="/#gift-cards">
-                    <div className={styles.productName}>GiftCards</div>
-                  </HashLink>
-                </div>
-              )}
+          <div
+            className={styles.brandsMenu}
+            onClick={(e) => {
+              e.stopPropagation();
+              // setShowProductsMenu((prevState) => !prevState);
+            }}
+          >
+            <div className={styles.brandName}>Amazon</div>
+            <div className={styles.productsMenu}>
+              <HashLink to="/#gift-cards">
+                <div className={styles.productName}>GiftCards</div>
+              </HashLink>
             </div>
-          )}
+          </div>
         </div>
         <div className={styles.wallet}>
           <p>Wallet Login</p>

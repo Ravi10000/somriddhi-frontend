@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host --port 3002",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host --port 3002",
     "push": "git push -u origin master",
     "pull": "git pull origin master"
   },
