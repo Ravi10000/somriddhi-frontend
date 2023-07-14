@@ -69,10 +69,16 @@
       padding: 20px 0;
       margin: 0;
       gap: 20px;
+      > div {
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+      }
       .menu-item {
         display: flex;
         align-items: center;
         cursor: pointer;
+
         &:hover {
           color: #f01c21;
         }
