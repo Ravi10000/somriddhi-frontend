@@ -102,6 +102,10 @@ nav {
         width: 100%;
         animation: slideIn 0.3s ease-in-out;
       }
+      .productName {
+        background: #fffeee;
+        border-radius: .5rem;
+      }
       &:hover {
         background: whitesmoke;
       }
