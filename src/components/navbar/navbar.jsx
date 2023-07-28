@@ -58,7 +58,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-        <div className={styles.wallet}>
+        {/* <div className={styles.wallet}>
           <p>Wallet Login</p>
           <div className={styles.walletMenu}>
             <a href="https://agent.somriddhidigital.co.in/#/sign-in">
@@ -68,7 +68,7 @@ export default function Navbar() {
               <p>Download App</p>
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

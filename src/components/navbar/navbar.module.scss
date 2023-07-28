@@ -93,12 +93,14 @@ nav {
       background: #fff;
       color: var(--text-clr);
       box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+      animation: slideIn 0.3s ease-in-out;
       .brandName,
       .productName {
         padding: 20px 30px;
         color: var(--text-clr);
         height: 100%;
         width: 100%;
+        animation: slideIn 0.3s ease-in-out;
       }
       &:hover {
         background: whitesmoke;

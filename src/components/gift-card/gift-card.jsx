@@ -21,7 +21,8 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
         <div className={styles.titleContainer}>
           <img
             className={styles.logo}
-            src="/Somriddhi Final Logo-03.png"
+            // src="/Somriddhi Final Logo-03.png"
+            src="/amazon.png"
             alt=""
           />
           <h5 className={styles.title}>{/*giftCard?.title*/}Gift Card</h5>
