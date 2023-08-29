@@ -93,9 +93,10 @@ function BannerSlider({ banners, ForMemberships, currentUser, openModal }) {
         if (response.data.status === "success") {
           const analyticId = response.data.analyticId;
           // setAnalyticId(response.data.analyticId);
-          if (bannerUrl.startsWith("//")) bannerUrl = bannerUrl.substring(2).trim();
-          console.log("Url: ", bannerUrl+"&ascsubtag="+analyticId);
-          window.open(bannerUrl+"&ascsubtag="+analyticId,"_blank");
+          if (bannerUrl.startsWith("//"))
+            bannerUrl = bannerUrl.substring(2).trim();
+          console.log("Url: ", bannerUrl + "&ascsubtag=" + analyticId);
+          window.open(bannerUrl + "&ascsubtag=" + analyticId, "_blank");
         }
         console.log({ response });
       } catch (error) {

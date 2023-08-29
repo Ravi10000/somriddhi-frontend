@@ -2,120 +2,62 @@ import styles from "./checkout.module.scss";
 import NumInput from "../../components/num-input/num-input";
 import TextInput from "../../components/text-input/text-input";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Button from "../../components/button/button";
-import { addGiftCard } from "../../api";
 import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Backdrop from "../../components/backdrop/backdrop";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { initiateTransaction } from "../../api/transaction";
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-  console.log({ currentUser });
-  const navigate = useNavigate();
+
+  const checkoutSchema = z.object({
+    mobile: z
+      .string()
+      .min(10, "Moblie Number Should be 10 digits")
+      .max(10, "Mobile Number Should be 10 digits"),
+    email: z.string().email("Invalid Email"),
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
+    resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      firstname: currentUser?.fname || "",
-      lastname: currentUser?.lname || "",
       email: currentUser?.email || "",
-      telephone: currentUser?.phone || "",
+      mobile: currentUser?.phone || "",
     },
   });
   const { state } = useLocation();
   console.log({ state });
-  useEffect(() => {
-    console.log({ currentUser });
-  }, [currentUser]);
-
-  async function loadScript(src) {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
 
   async function handleCheckout(data) {
+    console.log({ data });
     setIsCheckingOut(true);
     try {
-      const res = await loadScript(
-        "https://checkout.razorpay.com/v1/checkout.js"
+      data.amount = state?.total;
+      const { data: transactionData } = await initiateTransaction(data);
+      console.log({ transactionData });
+      window.open(
+        `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${data.mobile}&email=${
+          data.email
+        }&amount=${data.amount}&request_id=${transactionData.transaction._id}`
       );
-      if (!res) return console.log("failed to load script");
-
-      const options = {
-        key: import.meta.env.VITE_RAZOR_PAY_KEY_ID,
-        currency: "INR",
-        amount: state.total * 100,
-        name: "Gift Card",
-        description: "Pay for your gift card",
-        handler: async function (response) {
-          console.log({ response });
-          const formData = {};
-          formData.address = {
-            salutation: data.salutation,
-            firstname: data.firstname,
-            lastname: data.lastname,
-            email: data.email,
-            telephone: "+91" + data.telephone,
-            country: "IN",
-            postcode: data.postcode,
-          };
-
-          formData.billingAddress = {
-            ...formData.address,
-            line1: data.line1,
-            line2: data.line2,
-            city: data.city,
-            region: data.region,
-          };
-
-          formData.paymentid = response.razorpay_payment_id;
-          formData.unitPrice = parseInt(state.price);
-          formData.totalAmount = state.total;
-          formData.qty = parseInt(state.qty);
-          try {
-            const giftCardRes = await addGiftCard(formData);
-            console.log({ giftCardRes });
-            console.log({ razorpaySuccessResponse: response });
-            if (giftCardRes?.data?.status === "Success") {
-              setIsCheckingOut(false);
-              setFlash({
-                message: "Gift Card Purchase Successful",
-                type: "success",
-              });
-              navigate("/profile/gift-cards");
-            }
-          } catch (err) {
-            setFlash({
-              message: "Gift Card Purchase Failed",
-              type: "error",
-            });
-            console.log(err);
-          }
-        },
-      };
-      const payment = new window.Razorpay(options);
-      payment.open();
     } catch (err) {
       setFlash({
         message: "Gift Card Purchase Failed",
         type: "error",
       });
       console.log(err);
+    } finally {
+      setIsCheckingOut(false);
     }
   }
   return (
@@ -147,72 +89,23 @@ function CheckoutPage({ currentUser, setFlash }) {
         <form onSubmit={handleSubmit(handleCheckout)}>
           <h3 className={styles.subtitle}>Billing Details</h3>
           <div className={styles.inputGroupsContainer}>
-            <div className={styles.inputGroup}>
-              <TextInput
-                label="Mr/Ms/Mrs"
-                register={{
-                  ...register("salutation", { required: "type Mr or Mrs." }),
-                }}
-              />
-              <TextInput
-                label="First Name"
-                register={{
-                  ...register("firstname", { required: "first name required" }),
-                }}
-              />
-              <TextInput
-                label="Last Name"
-                register={{
-                  ...register("lastname", { required: "last name required" }),
-                }}
-              />
-              <TextInput
-                label="Email"
-                register={{
-                  ...register("email", { required: "email required" }),
-                }}
-              />
-              <NumInput
-                maxlength="10"
-                label="Phone"
-                register={{
-                  ...register("telephone", { required: "phone required" }),
-                }}
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <TextInput
-                label="Address Line 1"
-                register={{
-                  ...register("line1", { required: "address required" }),
-                }}
-              />
-              <TextInput
-                label="Address Line 2"
-                register={{
-                  ...register("line2"),
-                }}
-              />
-              <TextInput
-                label="City"
-                register={{
-                  ...register("city", { required: "city required" }),
-                }}
-              />
-              <TextInput
-                label="Region"
-                register={{
-                  ...register("region", { required: "region required" }),
-                }}
-              />
-              <NumInput
-                maxlength="6"
-                label="Pincode"
-                register={{
-                  ...register("postcode", { required: "pincode required" }),
-                }}
-              />
-            </div>
+            <TextInput
+              label="Email"
+              register={{
+                ...register("email", { required: "email required" }),
+              }}
+              error={errors?.email?.message}
+            />
+            <NumInput
+              maxLength="10"
+              label="Phone"
+              register={{
+                ...register("mobile", { required: "mobile no. required" }),
+              }}
+              error={errors?.mobile?.message}
+            />
+            <div className={styles.inputGroup}></div>
+            <div className={styles.inputGroup}></div>
           </div>
           <div className={styles.checkoutBtn}>
             <Button>Checkout</Button>

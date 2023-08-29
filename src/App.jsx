@@ -70,7 +70,6 @@ function App({ setCurrentUser, flash }) {
   }
 
   useEffect(() => {
-    console.log(localStorage.getItem("token"));
     fetchUser();
   }, []);
 

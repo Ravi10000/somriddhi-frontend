@@ -3,9 +3,9 @@ import axios from "axios";
 // const BASEURL = `${import.meta.env.VITE_REACT_APP_API_URL}`;
 axios.defaults.baseURL = `${import.meta.env.VITE_REACT_APP_API_URL}/api`;
 // axios.defaults.withCredentials = true;
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJiMDhjYTY5NzA5ZmMzYWJmZGMxYzgiLCJpYXQiOjE2ODA1NDE4OTksImV4cCI6MTcxMjA5OTQ5OX0.F4iWMmwRElmfW6cmhbXUhguri5XohqVV7gY7Iqg7JlM";
-const Authorization = `Bearer ${token}`;
+// const token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJiMDhjYTY5NzA5ZmMzYWJmZGMxYzgiLCJpYXQiOjE2ODA1NDE4OTksImV4cCI6MTcxMjA5OTQ5OX0.F4iWMmwRElmfW6cmhbXUhguri5XohqVV7gY7Iqg7JlM";
+// const Auth = `Bearer ${token}`;
 
 // Banner APIs
 export const getAllBanners = () => axios.get(`/banner`);
@@ -357,7 +357,9 @@ export const getCouponAnalytics = (couponType) =>
   });
 
 export const getCategoryAnalytics = () =>
-  axios.get(`/analytic/category`, { headers: { Authorization } });
+  axios.get(`/analytic/category`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
 
 export const getCashbackDetails = () =>
   axios.get("/cashback/", {
