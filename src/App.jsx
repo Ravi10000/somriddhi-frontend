@@ -3,17 +3,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // react hooks
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useLoginModal } from "./context/login-modal-context";
 
 // packages
-import {
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-  useParams,
-} from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -26,16 +20,6 @@ import LoginPopup from "./components/login-popup/login-popup";
 import Flash from "./components/flash/flash";
 import ProtectedRoute from "./components/protected-route/protected-route";
 
-// pages
-import HomePage from "./pages/home/home.page";
-import CouponPage from "./pages/coupon/coupon-page";
-import CategoryPage from "./pages/category/category-page";
-import CouponsClaimedPage from "./pages/coupon-claimed/coupon-claimed-page";
-import ProfilePage from "./pages/profile/profile-page";
-import AdminPage from "./pages/admin/admin.page";
-import SearchPage from "./pages/search-page/search-page";
-import AboutPage from "./pages/about/about.page";
-
 // redux actions
 import { setCurrentUser } from "./redux/user/user.actions";
 
@@ -43,16 +27,32 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { selectFlash } from "./redux/flash/flash.selectors";
 
 // api calls
-import { getCashbackDetails, getUser } from "./api";
+import { getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
-import GiftCardPage from "./pages/gift-card-page/gift-card-page";
-import CheckoutPage from "./pages/checkout/checkout";
-import TermsPage from "./pages/terms/terms";
-import RefundPolicyPage from "./pages/refund/refund";
-import PrivacyPolicyPage from "./pages/privacy-policy/privacy-policy";
-import TermsOfUsePage from "./pages/terms-of-use/terms-of-use";
-
-// const tourPage = lazy(() => import("./pages/terms-of-use/terms-of-use"));
+import LoadingPage from "./pages/loading/loading";
+const GiftCardPage = lazy(() =>
+  import("./pages/gift-card-page/gift-card-page")
+);
+const CheckoutPage = lazy(() => import("./pages/checkout/checkout"));
+const TermsPage = lazy(() => import("./pages/terms/terms"));
+const RefundPolicyPage = lazy(() => import("./pages/refund/refund"));
+const PrivacyPolicyPage = lazy(() =>
+  import("./pages/privacy-policy/privacy-policy")
+);
+const TermsOfUsePage = lazy(() => import("./pages/terms-of-use/terms-of-use"));
+const HomePage = lazy(() => import("./pages/home/home.page"));
+const CouponPage = lazy(() => import("./pages/coupon/coupon-page"));
+const CategoryPage = lazy(() => import("./pages/category/category-page"));
+const CouponsClaimedPage = lazy(() =>
+  import("./pages/coupon-claimed/coupon-claimed-page")
+);
+const ProfilePage = lazy(() => import("./pages/profile/profile-page"));
+const AdminPage = lazy(() => import("./pages/admin/admin.page"));
+const SearchPage = lazy(() => import("./pages/search-page/search-page"));
+const AboutPage = lazy(() => import("./pages/about/about.page"));
+const PaymentStatusPage = lazy(() =>
+  import("./pages/payment-status/payment-status")
+);
 
 function App({ setCurrentUser, flash }) {
   const modal = useLoginModal();
@@ -76,7 +76,6 @@ function App({ setCurrentUser, flash }) {
   return (
     <div className={styles["App"]} id="App">
       {flash && <Flash type={flash.type} message={flash.message} />}
-      {/* <Flash type={"error"} message={"successfully logged in"} /> */}
       <ScrollToTop />
       {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
       {!pathname.includes("/admin") && (
@@ -85,90 +84,93 @@ function App({ setCurrentUser, flash }) {
           <Navbar />
         </>
       )}
-      <Routes>
-        <Route path="/" exact element={<HomePage />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectAdminRoute>
-              <Navigate to="/admin/banners" replace />
-            </ProtectAdminRoute>
-          }
-        />
+      <Suspense fallback={<LoadingPage />}>
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectAdminRoute>
+                <Navigate to="/admin/banners" replace />
+              </ProtectAdminRoute>
+            }
+          />
 
-        <Route
-          path="/admin/:tab"
-          element={
-            <ProtectAdminRoute>
-              <AdminPage />
-            </ProtectAdminRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectAdminRoute>
-              <AdminPage />
-            </ProtectAdminRoute>
-          }
-        />
-        {/* <Route path="/admin/:tab" element={<AdminPage />} /> */}
-        <Route path="/coupon/:id" element={<CouponPage />} />
-        <Route path="/category/:categoryId" element={<CategoryPage />} />
-        <Route path="/category" element={<CategoryPage />} />
-        <Route
-          exact
-          path="/coupon-claimed/:id"
-          element={<CouponsClaimedPage />}
-        />
-        <Route
-          exact
-          path="/profile"
-          element={<Navigate to="/profile/my-earnings" replace />}
-        />
-        <Route
-          exact
-          path="/profile/:tab"
-          element={
-            <ProtectedRoute openModal={modal.openModal}>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          exact
-          path="/profile"
-          element={
-            <ProtectedRoute openModal={modal.openModal}>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/about" exact element={<AboutPage />} />
-        <Route path="/terms-and-conditions" exact element={<TermsPage />} />
-        <Route path="/terms-of-use" exact element={<TermsOfUsePage />} />
-        <Route path="/refund-policy" exact element={<RefundPolicyPage />} />
-        <Route path="/privacy-policy" exact element={<PrivacyPolicyPage />} />
+          <Route
+            path="/admin/:tab"
+            element={
+              <ProtectAdminRoute>
+                <AdminPage />
+              </ProtectAdminRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectAdminRoute>
+                <AdminPage />
+              </ProtectAdminRoute>
+            }
+          />
+          {/* <Route path="/admin/:tab" element={<AdminPage />} /> */}
+          <Route path="/coupon/:id" element={<CouponPage />} />
+          <Route path="/category/:categoryId" element={<CategoryPage />} />
+          <Route path="/category" element={<CategoryPage />} />
+          <Route
+            exact
+            path="/coupon-claimed/:id"
+            element={<CouponsClaimedPage />}
+          />
+          <Route
+            exact
+            path="/profile"
+            element={<Navigate to="/profile/my-earnings" replace />}
+          />
+          <Route
+            exact
+            path="/profile/:tab"
+            element={
+              <ProtectedRoute openModal={modal.openModal}>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/profile"
+            element={
+              <ProtectedRoute openModal={modal.openModal}>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/about" exact element={<AboutPage />} />
+          <Route path="/terms-and-conditions" exact element={<TermsPage />} />
+          <Route path="/terms-of-use" exact element={<TermsOfUsePage />} />
+          <Route path="/refund-policy" exact element={<RefundPolicyPage />} />
+          <Route path="/privacy-policy" exact element={<PrivacyPolicyPage />} />
 
-        <Route
-          path="/giftcard/:id"
-          element={
-            <ProtectedRoute openModal={modal.open}>
-              <GiftCardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute openModal={modal.open}>
-              <CheckoutPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/*" element={<Navigate to="/" replace />} />
-      </Routes>
+          <Route
+            path="/giftcard/:id"
+            element={
+              <ProtectedRoute openModal={modal.open}>
+                <GiftCardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute openModal={modal.open}>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/payment-status/:id" element={<PaymentStatusPage />} />
+          <Route path="/*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
       {!pathname.includes("/admin") && <Footer />}
     </div>
   );

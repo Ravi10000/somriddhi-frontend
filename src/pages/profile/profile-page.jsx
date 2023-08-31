@@ -1,22 +1,26 @@
 import "./profile-page.styles.scss";
 // react hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 
 // packages
 import { connect } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 // components
-import MyEarnings from "./my-earnings/my-earnings";
-import PaymentHistory from "./payment-history/payment-history";
-import ReferEarn from "./refer-earn/refer-earn";
-import ReferralNetwork from "./referral-network/referral-network";
-import GetHelp from "./get-help/get-help";
-import Settings from "./settings/settings";
-import MissingCashbacks from "./missing-cashbacks/missing-cashbacks";
-import Testimonials from "./testimonials/testimonials";
-import AddTicket from "./add-ticket/add-ticket";
-import ListTickets from "./list-tickets/list-tickets";
+const MyEarnings = lazy(() => import("./my-earnings/my-earnings"));
+const PaymentHistory = lazy(() => import("./payment-history/payment-history"));
+const ReferEarn = lazy(() => import("./refer-earn/refer-earn"));
+const ReferralNetwork = lazy(() =>
+  import("./referral-network/referral-network")
+);
+const GetHelp = lazy(() => import("./get-help/get-help"));
+const Settings = lazy(() => import("./settings/settings"));
+const MissingCashbacks = lazy(() =>
+  import("./missing-cashbacks/missing-cashbacks")
+);
+const Testimonials = lazy(() => import("./testimonials/testimonials"));
+const AddTicket = lazy(() => import("./add-ticket/add-ticket"));
+const ListTickets = lazy(() => import("./list-tickets/list-tickets"));
 
 // api calls
 import { logoutUser } from "../../api";
@@ -28,6 +32,8 @@ import { setFlash } from "../../redux/flash/flash.actions";
 // utils
 import menuList from "./menu-list";
 import MyGiftCards from "./my-gift-cards/my-gift-cards";
+import { Suspense } from "react";
+import LoadingPage from "../loading/loading";
 
 function ProfilePage({ setCurrentUser, setFlash }) {
   const params = useParams();
@@ -109,19 +115,21 @@ function ProfilePage({ setCurrentUser, setFlash }) {
         >
           <div className={`line ${isMenuActive && "active"}`}></div>
         </div>
-        <div className="right">
-          {activeMenu == "/my-earnings" && <MyEarnings />}
-          {activeMenu == "/payment-history" && <PaymentHistory />}
-          {activeMenu == "/missing-cashbacks" && <MissingCashbacks />}
-          {activeMenu == "/add-new-tickets" && <AddTicket />}
-          {activeMenu == "/check-old-tickets" && <ListTickets />}
-          {activeMenu == "/refer-earn" && <ReferEarn />}
-          {activeMenu == "/referral-network" && <ReferralNetwork />}
-          {activeMenu == "/get-help" && <GetHelp />}
-          {activeMenu == "/settings" && <Settings />}
-          {activeMenu == "/testimonials" && <Testimonials />}
-          {activeMenu == "/gift-cards" && <MyGiftCards />}
-        </div>
+        <Suspense fallback={<LoadingPage />}>
+          <div className="right">
+            {activeMenu == "/my-earnings" && <MyEarnings />}
+            {activeMenu == "/payment-history" && <PaymentHistory />}
+            {activeMenu == "/missing-cashbacks" && <MissingCashbacks />}
+            {activeMenu == "/add-new-tickets" && <AddTicket />}
+            {activeMenu == "/check-old-tickets" && <ListTickets />}
+            {activeMenu == "/refer-earn" && <ReferEarn />}
+            {activeMenu == "/referral-network" && <ReferralNetwork />}
+            {activeMenu == "/get-help" && <GetHelp />}
+            {activeMenu == "/settings" && <Settings />}
+            {activeMenu == "/testimonials" && <Testimonials />}
+            {activeMenu == "/gift-cards" && <MyGiftCards />}
+          </div>
+        </Suspense>
       </div>
     </div>
   );

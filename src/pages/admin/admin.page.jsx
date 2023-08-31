@@ -1,30 +1,33 @@
 import styles from "./admin.module.scss";
 
 // react hooks
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 
+import { Suspense } from "react";
+import LoadingPage from "../loading/loading";
 import SideBar from "../../components/sidebar/sidebar";
 
 import TopBar from "../../components/topbar/topbar";
 import AddBannerModal from "../Banner/AddBannerModal";
-import AllBanners from "./all-banners/all-banners";
-import AllDeals from "./all-deals/all-deals";
-import AllCategories from "./all-categories/all-categories";
-import AllMemberships from "./all-memberships/all-memberships";
-import AllNewsletters from "./all-newsletters/all-newsletters";
-import WebsiteContent from "./website-content/website-content";
-import AllCustomers from "./all-customers/all-customers";
-import TicketsSection from "./tickets-section/tickets-section";
-import AllFaqs from "./all-faqs/all-faqs";
-import AllFeedbacks from "./all-feedbacks/all-feedbacks";
 import menuList from "../../components/sidebar/menu-list";
-import Analytics from "./analytics/analytics";
-import Tracking from "./tracking-details/tracking-details";
-import AllPayments from "./all-payments/all-payments";
-import AllPayouts from "./all-payouts/all-payouts";
-import AllGiftCards from "./all-gift-cards/all-gift-cards";
+
+const AllBanners = lazy(() => import("./all-banners/all-banners"));
+const AllDeals = lazy(() => import("./all-deals/all-deals"));
+const AllCategories = lazy(() => import("./all-categories/all-categories"));
+const AllMemberships = lazy(() => import("./all-memberships/all-memberships"));
+const AllNewsletters = lazy(() => import("./all-newsletters/all-newsletters"));
+const WebsiteContent = lazy(() => import("./website-content/website-content"));
+const AllCustomers = lazy(() => import("./all-customers/all-customers"));
+const TicketsSection = lazy(() => import("./tickets-section/tickets-section"));
+const AllFaqs = lazy(() => import("./all-faqs/all-faqs"));
+const AllFeedbacks = lazy(() => import("./all-feedbacks/all-feedbacks"));
+const Analytics = lazy(() => import("./analytics/analytics"));
+const Tracking = lazy(() => import("./tracking-details/tracking-details"));
+const AllPayments = lazy(() => import("./all-payments/all-payments"));
+const AllPayouts = lazy(() => import("./all-payouts/all-payouts"));
+const AllGiftCards = lazy(() => import("./all-gift-cards/all-gift-cards"));
 
 export default function AdminPage() {
   const navigate = useNavigate();
@@ -81,23 +84,25 @@ export default function AdminPage() {
             showMenu={showMenu}
             isMenuVisible={isMenuVisible}
           />
-          <div className={styles["main-content-container"]}>
-            {selectedOption === "banners" && <AllBanners />}
-            {selectedOption === "deals" && <AllDeals />}
-            {selectedOption === "categories" && <AllCategories />}
-            {selectedOption === "memberships" && <AllMemberships />}
-            {selectedOption === "newsletters" && <AllNewsletters />}
-            {selectedOption === "website content" && <WebsiteContent />}
-            {selectedOption === "customers" && <AllCustomers />}
-            {selectedOption === "tickets" && <TicketsSection />}
-            {selectedOption === "FAQs" && <AllFaqs />}
-            {selectedOption === "feedbacks" && <AllFeedbacks />}
-            {selectedOption === "analytics" && <Analytics />}
-            {selectedOption === "tracking details" && <Tracking />}
-            {selectedOption === "payment details" && <AllPayments />}
-            {selectedOption === "payout details" && <AllPayouts />}
-            {selectedOption === "gift cards" && <AllGiftCards />}
-          </div>
+          <Suspense fallback={<LoadingPage />}>
+            <div className={styles["main-content-container"]}>
+              {selectedOption === "banners" && <AllBanners />}
+              {selectedOption === "deals" && <AllDeals />}
+              {selectedOption === "categories" && <AllCategories />}
+              {selectedOption === "memberships" && <AllMemberships />}
+              {selectedOption === "newsletters" && <AllNewsletters />}
+              {selectedOption === "website content" && <WebsiteContent />}
+              {selectedOption === "customers" && <AllCustomers />}
+              {selectedOption === "tickets" && <TicketsSection />}
+              {selectedOption === "FAQs" && <AllFaqs />}
+              {selectedOption === "feedbacks" && <AllFeedbacks />}
+              {selectedOption === "analytics" && <Analytics />}
+              {selectedOption === "tracking details" && <Tracking />}
+              {selectedOption === "payment details" && <AllPayments />}
+              {selectedOption === "payout details" && <AllPayouts />}
+              {selectedOption === "gift cards" && <AllGiftCards />}
+            </div>
+          </Suspense>
         </div>
       </div>
     </div>

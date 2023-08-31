@@ -9,3 +9,5 @@ export const initiateTransaction = async (transaction) =>
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   });
+
+export const fetchTransaction = async (id) => axios.get(`/transaction/${id}`);
