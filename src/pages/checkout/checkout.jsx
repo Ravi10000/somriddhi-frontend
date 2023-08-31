@@ -51,6 +51,8 @@ function CheckoutPage({ currentUser, setFlash }) {
     setIsCheckingOut(true);
     try {
       data.amount = state?.total;
+      data.quantity = state?.qty;
+      data.unitPrice = state?.price;
       const { data: transactionData } = await initiateTransaction(data);
       console.log({ transactionData });
       window.open(
