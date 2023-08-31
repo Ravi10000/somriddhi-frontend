@@ -23,6 +23,14 @@ function CheckoutPage({ currentUser, setFlash }) {
       .min(10, "Moblie Number Should be 10 digits")
       .max(10, "Mobile Number Should be 10 digits"),
     email: z.string().email("Invalid Email"),
+    salutation: z.string().nonempty("Salutation is required"),
+    firstname: z.string().nonempty("First Name is required"),
+    lastname: z.string(),
+    line1: z.string().nonempty("Address Line 1 is required"),
+    line2: z.string(),
+    city: z.string().nonempty("City is required"),
+    region: z.string().nonempty("Region is required"),
+    postcode: z.string().nonempty("Pincode is required"),
   });
   const {
     register,
@@ -86,26 +94,84 @@ function CheckoutPage({ currentUser, setFlash }) {
             Order Total: <span> ₹{state?.total}</span>
           </p>
         </div>
-        <form onSubmit={handleSubmit(handleCheckout)}>
+        <form onSubmit={handleSubmit(handleCheckout)} noValidate>
           <h3 className={styles.subtitle}>Billing Details</h3>
           <div className={styles.inputGroupsContainer}>
-            <TextInput
-              label="Email"
-              register={{
-                ...register("email", { required: "email required" }),
-              }}
-              error={errors?.email?.message}
-            />
-            <NumInput
-              maxLength="10"
-              label="Phone"
-              register={{
-                ...register("mobile", { required: "mobile no. required" }),
-              }}
-              error={errors?.mobile?.message}
-            />
-            <div className={styles.inputGroup}></div>
-            <div className={styles.inputGroup}></div>
+            <div className={styles.inputGroup}>
+              <TextInput
+                label="Mr/Ms/Mrs"
+                register={{
+                  ...register("salutation"),
+                }}
+                error={errors?.salutation?.message}
+              />
+              <TextInput
+                label="First Name"
+                register={{
+                  ...register("firstname"),
+                }}
+                error={errors?.firstname?.message}
+              />
+              <TextInput
+                label="Last Name"
+                register={{
+                  ...register("lastname"),
+                }}
+                error={errors?.lastname?.message}
+              />
+              <TextInput
+                label="Email"
+                register={{
+                  ...register("email"),
+                }}
+                error={errors?.email?.message}
+              />
+              <NumInput
+                maxLength="10"
+                label="Phone"
+                register={{
+                  ...register("mobile"),
+                }}
+                error={errors?.mobile?.message}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <TextInput
+                label="Address Line 1"
+                register={{
+                  ...register("line1"),
+                }}
+                error={errors?.line1?.message}
+              />
+              <TextInput
+                label="Address Line 2"
+                register={{
+                  ...register("line2"),
+                }}
+              />
+              <TextInput
+                label="City"
+                register={{
+                  ...register("city"),
+                }}
+                error={errors?.city?.message}
+              />
+              <TextInput
+                label="Region"
+                register={{
+                  ...register("region"),
+                }}
+                error={errors?.region?.message}
+              />
+              <NumInput
+                maxlength="6"
+                label="Postcode / Pincode"
+                register={{
+                  ...register("postcode"),
+                }}
+                error={errors?.postcode?.message}
+              />
+            </div>
           </div>
           <div className={styles.checkoutBtn}>
             <Button>Checkout</Button>

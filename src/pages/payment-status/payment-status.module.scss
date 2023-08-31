@@ -1,0 +1,53 @@
+.paymentStatus {
+  position: fixed;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.response {
+  border-radius: 15px;
+  padding: 50px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 15px 15px 33px 0px rgba(35, 45, 51, 0.17);
+  &.success {
+    .statusIcon {
+      color: #4caf50;
+    }
+  }
+  &.error {
+    .statusIcon {
+      color: #f44336;
+    }
+  }
+  &.pending {
+    .statusIcon {
+      color: #ff9800;
+    }
+  }
+  .statusIcon {
+    height: 150px;
+    width: fit-content;
+  }
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 10px;
+    p {
+      text-align: start;
+      word-break: break-all;
+      &:nth-child(2n) {
+        font-weight: 500;
+      }
+    }
+  }
+}
