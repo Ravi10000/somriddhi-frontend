@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview --host --port 3002",
     "push": "git push -u origin master",
+    "postpush": "git push github master",
     "pull": "git pull origin master"
   },
   "dependencies": {
