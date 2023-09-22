@@ -16,7 +16,7 @@ import { initiateTransaction } from "../../api/transaction";
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-
+  const [isPhonePe, setIsPhonePe] = useState(false);
   const checkoutSchema = z.object({
     mobile: z
       .string()
@@ -35,7 +35,7 @@ function CheckoutPage({ currentUser, setFlash }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -44,7 +44,7 @@ function CheckoutPage({ currentUser, setFlash }) {
     },
   });
   const { state } = useLocation();
-  console.log({ state });
+  console.log({ isPhonePe });
 
   async function handleCheckout(data) {
     console.log({ data });
@@ -53,8 +53,15 @@ function CheckoutPage({ currentUser, setFlash }) {
       data.amount = state?.total;
       data.quantity = state?.qty;
       data.unitPrice = state?.price;
+      data.method = isPhonePe ? "phonepe" : "yespay";
+      console.log({ data });
+      console.log({ isPhonePe });
       const { data: transactionData } = await initiateTransaction(data);
       console.log({ transactionData });
+      if (isPhonePe && transactionData.redirectUrl) {
+        window.open(transactionData.redirectUrl, "_blank");
+        return;
+      }
       window.open(
         `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${data.mobile}&email=${
           data.email
@@ -68,6 +75,7 @@ function CheckoutPage({ currentUser, setFlash }) {
       console.log(err);
     } finally {
       setIsCheckingOut(false);
+      setIsPhonePe(false);
     }
   }
   return (
@@ -177,6 +185,15 @@ function CheckoutPage({ currentUser, setFlash }) {
           </div>
           <div className={styles.checkoutBtn}>
             <Button>Checkout</Button>
+            <button
+              className={styles.phonepeBtn}
+              onClick={() => {
+                if (isValid) setIsPhonePe(true);
+              }}
+            >
+              <p>Checkout</p>
+              <img src="/phonepe-icon.svg" alt="phonepe" />
+            </button>
           </div>
         </form>
       </div>

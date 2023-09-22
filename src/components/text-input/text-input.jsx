@@ -5,9 +5,11 @@ import React, { useId } from "react";
 export default function TextInput({ label, error, register, ...otherProps }) {
   const id = useId();
   return (
-    <div>
-      <div className={styles["input-container"]}>
-        <label htmlFor={id}>{label}</label>
+    <div className={styles["input-container"]}>
+      <div className={styles.input}>
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
         <input
           id={id}
           className={styles["text-input"]}
@@ -16,7 +18,7 @@ export default function TextInput({ label, error, register, ...otherProps }) {
           {...otherProps}
         />
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 }

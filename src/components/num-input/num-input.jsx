@@ -1,13 +1,14 @@
 import styles from "./num-input.module.scss";
-
 import React, { useId } from "react";
 
 export default function NumInput({ label, error, register, ...otherProps }) {
   const id = useId();
   return (
-    <div>
+    <div className={styles.inputContainer}>
       <div className={styles["num-input-container"]}>
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
         <input
           required
           id={id}
@@ -20,7 +21,7 @@ export default function NumInput({ label, error, register, ...otherProps }) {
           {...otherProps}
         />
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 }
