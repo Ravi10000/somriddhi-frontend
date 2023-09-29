@@ -59,7 +59,7 @@ function MyGiftCards() {
             alt=""
           />
         )}
-        <span>My Gift Cards</span>
+        <span>My Amazon Shopping Vouchers</span>
       </h2>
       {!selectedGiftCard ? (
         <div className={styles.tableContainer}>

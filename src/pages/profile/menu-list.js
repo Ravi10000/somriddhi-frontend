@@ -10,7 +10,7 @@ const menuList = [
     link: "/payment-history",
   },
   {
-    name: "gift cards",
+    name: "Amazon Shopping Vouchers",
     img: "/profile-menu-icons/gift-cards.png",
     link: "/gift-cards",
   },

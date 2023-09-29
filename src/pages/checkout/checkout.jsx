@@ -95,10 +95,10 @@ function CheckoutPage({ currentUser, setFlash }) {
         <div className={styles.orderDetails}>
           <h3 className={styles.subtitle}>Order Details</h3>
           <p>
-            Gift Card Quantity: <span>{state?.qty}</span>
+            Amazon Shopping Voucher Quantity: <span>{state?.qty}</span>
           </p>
           <p>
-            Gift Card Price: <span>₹{state?.price}</span>
+            Amazon Shopping Voucher Price: <span>₹{state?.price}</span>
           </p>
           <p>
             Order Total: <span> ₹{state?.total}</span>
