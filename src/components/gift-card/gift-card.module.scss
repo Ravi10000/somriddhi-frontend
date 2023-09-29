@@ -10,13 +10,18 @@
   &.large {
     max-width: 400px;
     .titleAndPriceContainer {
-      padding: 10px 30px;
+      // padding: 10px 20px;
       .titleContainer {
         .title {
           font-size: 1.2rem;
         }
+        .logo {
+          width: 200px;
+          height: fit-content;
+        }
       }
       .price {
+        padding-right: 20px;
         font-size: 1rem;
       }
     }
@@ -44,11 +49,17 @@
       align-items: center;
       gap: 5px;
       .logo {
-        height: 1rem;
-        width: fit-content;
+        // height: 1rem;
+        width: 100px;
+        margin-left: -10px;
+        height: fit-content;
+      }
+      .title {
+        font-weight: 500;
       }
     }
     .price {
+      // padding-right: px;
       font-weight: 600;
     }
   }

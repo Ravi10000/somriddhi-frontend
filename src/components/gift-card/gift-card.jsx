@@ -15,17 +15,23 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
       }}
     >
       {!noImage && (
-        <img className={styles.giftCardImg} src={giftCard?.image} alt="" />
+        // <img className={styles.giftCardImg} src={giftCard?.image} alt="" />
+        <img
+          className={styles.giftCardImg}
+          src="/gift-card-amazon.png"
+          alt=""
+        />
       )}
       <div className={styles.titleAndPriceContainer}>
         <div className={styles.titleContainer}>
           <img
             className={styles.logo}
             // src="/Somriddhi Final Logo-03.png"
-            src="/amazon.png"
+            // src="/amazon.png"
+            src="/amazon-shoping-voucher-logo.png"
             alt=""
           />
-          <h5 className={styles.title}>{/*giftCard?.title*/}Gift Card</h5>
+          {/* <h5 className={styles.title}>giftCard?.titleShopping Card</h5> */}
         </div>
         <span className={styles.seperator}></span>
         <p className={styles.price}>₹ {giftCard?.price}</p>
