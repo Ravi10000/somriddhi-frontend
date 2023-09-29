@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
+import { currencyFormator } from "../../utils/currency-formator";
 
 function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
   const navigate = useNavigate();
+  const price = currencyFormator(giftCard?.price);
+
   return (
     <div
       className={styles.giftCard + " " + (large ? styles.large : "")}
@@ -34,7 +37,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
           {/* <h5 className={styles.title}>giftCard?.titleShopping Card</h5> */}
         </div>
         <span className={styles.seperator}></span>
-        <p className={styles.price}>₹ {giftCard?.price}</p>
+        <p className={styles.price}>{currencyFormator(giftCard?.price)}</p>
       </div>
       {!giftCard?.cardNumber ? (
         <p className={styles.endMessage}>Your personal message!</p>
