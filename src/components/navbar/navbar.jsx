@@ -54,7 +54,7 @@ export default function Navbar() {
             <div className={styles.productsMenu}>
               <HashLink to="/#gift-cards">
                 <div className={styles.productName}>Amazon Shopping Vouchers</div>
-              </HashLink>
+              </HashLink>   
             </div>
           </div>
         </div>

@@ -103,3 +103,27 @@
     }
   }
 }
+
+.pincodeContainer {
+  position: relative;
+  .loader {
+    position: absolute;
+    right: 15px;
+    // top: 63%;
+    --offset: 11.5px; // label and gap (16px + 5px) / 2
+    top: calc(50% + var(--offset));
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    border: 2px solid red;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.65s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}

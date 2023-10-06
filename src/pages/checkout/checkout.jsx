@@ -8,33 +8,44 @@ import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Backdrop from "../../components/backdrop/backdrop";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { initiateTransaction } from "../../api/transaction";
+import { getPincodeDetails } from "../../api";
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isPhonePe, setIsPhonePe] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const checkoutSchema = z.object({
     mobile: z
       .string()
       .min(10, "Moblie Number Should be 10 digits")
       .max(10, "Mobile Number Should be 10 digits"),
     email: z.string().email("Invalid Email"),
-    salutation: z.string().nonempty("Salutation is required"),
+    // salutation: z.string().nonempty("Salutation is required"),
     firstname: z.string().nonempty("First Name is required"),
     lastname: z.string(),
     line1: z.string().nonempty("Address Line 1 is required"),
     line2: z.string(),
-    city: z.string().nonempty("City is required"),
-    region: z.string().nonempty("Region is required"),
-    postcode: z.string().nonempty("Pincode is required"),
+    district: z.string(),
+    // .nonempty("City is required"),
+    state: z.string(),
+    // .nonempty("Region is required"),
+    postcode: z
+      .string()
+      .min(6, { message: "postcode have to be 6 digits" })
+      .max(6, { message: "postcode have to be 6 digits" })
+      .nonempty("Pincode is required"),
   });
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
+    setError,
     formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(checkoutSchema),
@@ -43,8 +54,8 @@ function CheckoutPage({ currentUser, setFlash }) {
       mobile: currentUser?.phone || "",
     },
   });
+  const postcode = watch("postcode");
   const { state } = useLocation();
-  console.log({ isPhonePe });
 
   async function handleCheckout(data) {
     console.log({ data });
@@ -78,6 +89,33 @@ function CheckoutPage({ currentUser, setFlash }) {
       setIsPhonePe(false);
     }
   }
+
+  async function searchPincode() {
+    setIsSearching(true);
+    try {
+      const res = await getPincodeDetails(postcode);
+      const details = res?.data?.[0]?.PostOffice?.[0];
+      console.log({ details });
+      if (!details) {
+        setError("postcode", { message: "Invalid Pincode" });
+        setValue("district", "");
+        setValue("state", "");
+        return;
+      }
+      setError("postcode", null);
+      setValue("district", details?.District);
+      setValue("state", details?.State);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsSearching(false);
+    }
+  }
+
+  useEffect(() => {
+    if (postcode?.length === 6) searchPincode();
+  }, [postcode]);
+
   return (
     <div className={styles.checkoutPage}>
       {isCheckingOut && (
@@ -108,13 +146,13 @@ function CheckoutPage({ currentUser, setFlash }) {
           <h3 className={styles.subtitle}>Billing Details</h3>
           <div className={styles.inputGroupsContainer}>
             <div className={styles.inputGroup}>
-              <TextInput
+              {/* <TextInput
                 label="Mr/Ms/Mrs"
                 register={{
                   ...register("salutation"),
                 }}
                 error={errors?.salutation?.message}
-              />
+              /> */}
               <TextInput
                 label="First Name"
                 register={{
@@ -159,27 +197,30 @@ function CheckoutPage({ currentUser, setFlash }) {
                   ...register("line2"),
                 }}
               />
+              <div className={styles.pincodeContainer}>
+                <NumInput
+                  maxlength="6"
+                  label="Postcode / Pincode"
+                  register={{
+                    ...register("postcode"),
+                  }}
+                  error={errors?.postcode?.message}
+                />
+                {isSearching && <div className={styles.loader}></div>}
+              </div>
               <TextInput
-                label="City"
+                label="District"
                 register={{
-                  ...register("city"),
+                  ...register("district"),
                 }}
-                error={errors?.city?.message}
+                error={errors?.district?.message}
               />
               <TextInput
-                label="Region"
+                label="State"
                 register={{
-                  ...register("region"),
+                  ...register("state"),
                 }}
-                error={errors?.region?.message}
-              />
-              <NumInput
-                maxlength="6"
-                label="Postcode / Pincode"
-                register={{
-                  ...register("postcode"),
-                }}
-                error={errors?.postcode?.message}
+                error={errors?.state?.message}
               />
             </div>
           </div>

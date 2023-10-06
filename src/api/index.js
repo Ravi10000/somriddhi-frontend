@@ -474,3 +474,6 @@ export const getAllGiftCards = () =>
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   });
+
+export const getPincodeDetails = (pincode) =>
+  axios.get(`https://api.postalpincode.in/pincode/${pincode}`);
