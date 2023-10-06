@@ -54,12 +54,18 @@ function CheckoutPage({ currentUser, setFlash }) {
       mobile: currentUser?.phone || "",
     },
   });
+  const [postcodeError, setPostcodeError] = useState(null);
   const postcode = watch("postcode");
   const { state } = useLocation();
 
   async function handleCheckout(data) {
     console.log({ data });
+    if (postcodeError) {
+      setError("postcode", { message: postcodeError });
+      return;
+    }
     setIsCheckingOut(true);
+
     try {
       data.amount = state?.total;
       data.quantity = state?.qty;
@@ -98,11 +104,13 @@ function CheckoutPage({ currentUser, setFlash }) {
       console.log({ details });
       if (!details) {
         setError("postcode", { message: "Invalid Pincode" });
+        setPostcodeError("Invalid Pincode");
         setValue("district", "");
         setValue("state", "");
         return;
       }
       setError("postcode", null);
+      setPostcodeError(null);
       setValue("district", details?.District);
       setValue("state", details?.State);
     } catch (err) {
@@ -199,7 +207,7 @@ function CheckoutPage({ currentUser, setFlash }) {
               />
               <div className={styles.pincodeContainer}>
                 <NumInput
-                  maxlength="6"
+                  maxLength="6"
                   label="Postcode / Pincode"
                   register={{
                     ...register("postcode"),
