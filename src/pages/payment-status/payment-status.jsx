@@ -28,7 +28,8 @@ function PaymentStatusPage() {
           handleFetchTransaction();
         }, 5000);
       } else if (res?.data?.transaction?.status === "paid") {
-        const orderResponse = await handlePlaceOrder();
+        console.log("placing order...");
+        const orderResponse = await handlePlaceOrder(res?.data?.transaction);
         console.log({ orderResponse });
       }
       setResponse(res.data);
@@ -43,27 +44,27 @@ function PaymentStatusPage() {
     handleFetchTransaction();
   }, []);
 
-  async function handlePlaceOrder() {
+  async function handlePlaceOrder(transaction) {
     try {
       const {
         line1,
         line2,
-        city,
-        region,
+        state,
+        district,
         postcode,
         firstname,
         lastname,
-        salutation,
+        // salutation,
         quantity,
         unitPrice,
         amount,
-      } = response?.transaction;
-      let paymentMethod = response?.transaction?.method;
+      } = transaction;
+      let paymentMethod = transaction?.method;
       let paymentDetails = {};
       if (paymentMethod === "yespay") {
-        paymentDetails = JSON.parse(response?.transaction?.yesPayResponse); //yesPayResponse
+        paymentDetails = JSON.parse(transaction?.yesPayResponse); //yesPayResponse
       } else if (paymentMethod === "phonepe") {
-        paymentDetails = JSON.parse(response?.transaction?.phonePeResponse); //phonePeResponse
+        paymentDetails = JSON.parse(transaction?.phonePeResponse); //phonePeResponse
       }
       console.log({ paymentDetails });
       const paymentid =
@@ -73,7 +74,8 @@ function PaymentStatusPage() {
           : paymentDetails?.data
               ?.transactionId; /* according to phone pe response */
       const requestData = {
-        address: `${salutation} ${firstname} ${lastname}, ${line1}, ${line2}, ${city}, ${region}, ${postcode}`,
+        // TODO: update request as per checkout form
+        address: `${firstname} ${lastname}, ${line1}, ${line2}, ${city}, ${region}, ${postcode}`,
         totalAmount: amount,
         unitPrice: unitPrice,
         qty: quantity,
