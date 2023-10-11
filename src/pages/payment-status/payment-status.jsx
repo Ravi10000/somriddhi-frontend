@@ -20,6 +20,17 @@ function PaymentStatusPage() {
     try {
       const res = await fetchTransaction(id);
       console.log({ res });
+      if (
+        res?.data?.transaction?.status === "pending" ||
+        res?.data?.transaction?.status === "initiated"
+      ) {
+        setTimeout(() => {
+          handleFetchTransaction();
+        }, 5000);
+      } else if (res?.data?.transaction?.status === "paid") {
+        const orderResponse = await handlePlaceOrder();
+        console.log({ orderResponse });
+      }
       setResponse(res.data);
     } catch (err) {
       console.log(err);
@@ -47,9 +58,20 @@ function PaymentStatusPage() {
         unitPrice,
         amount,
       } = response?.transaction;
-      const yesPayResponse = JSON.parse(response?.transaction?.yesPayResponse);
-      console.log({ yesPayResponse });
-      const paymentid = yesPayResponse?.transaction_details?.transaction_no;
+      let paymentMethod = response?.transaction?.method;
+      let paymentDetails = {};
+      if (paymentMethod === "yespay") {
+        paymentDetails = JSON.parse(response?.transaction?.yesPayResponse); //yesPayResponse
+      } else if (paymentMethod === "phonepe") {
+        paymentDetails = JSON.parse(response?.transaction?.phonePeResponse); //phonePeResponse
+      }
+      console.log({ paymentDetails });
+      const paymentid =
+        paymentMethod === "yespay"
+          ? paymentDetails?.transaction_details
+              ?.transaction_no /* according to yespay response */
+          : paymentDetails?.data
+              ?.transactionId; /* according to phone pe response */
       const requestData = {
         address: `${salutation} ${firstname} ${lastname}, ${line1}, ${line2}, ${city}, ${region}, ${postcode}`,
         totalAmount: amount,
@@ -65,11 +87,11 @@ function PaymentStatusPage() {
     }
   }
   console.log(response?.transaction?.status);
-  useEffect(() => {
-    if (response?.transaction?.status === "paid") {
-      // handlePlaceOrder();
-    }
-  }, [response]);
+  // useEffect(() => {
+  //   if (response?.transaction?.status === "paid") {
+  //     // handlePlaceOrder();
+  //   }
+  // }, [response]);
   return (
     <div className={styles.paymentStatus}>
       {isFetching ? (

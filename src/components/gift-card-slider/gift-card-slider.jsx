@@ -16,9 +16,9 @@ export default function GiftCardSlider() {
   async function handleFetchGiftCards() {
     try {
       const response = await fetchAllGiftCards();
-      console.log({ response });
+      console.log({ data: response?.data?.data });
       if ((response.status = "Success")) {
-        setGiftCards(response.data.data);
+        setGiftCards(response?.data?.data || []);
       }
     } catch (err) {
       console.log(err);
