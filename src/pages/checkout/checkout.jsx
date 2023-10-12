@@ -67,12 +67,12 @@ function CheckoutPage({ currentUser, setFlash }) {
     setIsCheckingOut(true);
 
     try {
-      data.amount = 1;
-      data.quantity = 1;
-      data.unitPrice = 1;
-      // data.amount = state?.total;
-      // data.quantity = state?.qty;
-      // data.unitPrice = state?.price;
+      // data.amount = 1;
+      // data.quantity = 1;
+      // data.unitPrice = 1;
+      data.amount = state?.total;
+      data.quantity = state?.qty;
+      data.unitPrice = state?.price;
       data.method = isPhonePe ? "phonepe" : "yespay";
       console.log({ data });
       console.log({ isPhonePe });

@@ -21,8 +21,8 @@ function GiftCardPage({ setFlash }) {
   const navigate = useNavigate();
   const { state, pathname } = useLocation();
   const { id } = useParams();
-  // const { giftCard } = state;
-  const giftCard = { price: 1, _id: 1 };
+  const { giftCard } = state;
+  // const giftCard = { price: 1, _id: 1 };
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(
     parseInt(giftCard?.price) * parseInt(quantity)
