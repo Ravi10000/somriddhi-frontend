@@ -46,50 +46,50 @@ function PaymentStatusPage() {
 
   async function handlePlaceOrder(transaction) {
     console.log({ transaction });
-    // try {
-    //   const {
-    //     line1,
-    //     line2,
-    //     state,
-    //     district,
-    //     postcode,
-    //     firstname,
-    //     lastname,
-    //     // salutation,
-    //     quantity,
-    //     unitPrice,
-    //     amount,
-    //   } = transaction;
-    //   let paymentMethod = transaction?.method;
-    //   let paymentDetails = {};
-    //   if (paymentMethod === "yespay") {
-    //     paymentDetails = JSON.parse(transaction?.yesPayResponse); //yesPayResponse
-    //   } else if (paymentMethod === "phonepe") {
-    //     paymentDetails = JSON.parse(transaction?.phonePeResponse); //phonePeResponse
-    //   }
-    //   console.log({ paymentDetails });
-    //   const paymentid =
-    //     paymentMethod === "yespay"
-    //       ? paymentDetails?.transaction_details
-    //           ?.transaction_no /* according to yespay response */
-    //       : paymentDetails?.data
-    //           ?.transactionId; /* according to phone pe response */
-    //   const requestData = {
-    //     // TODO: update request as per checkout form
-    //     address: `${firstname} ${lastname}, ${line1}, ${
-    //       line2 ? line2 : ""
-    //     }, ${district}, ${state}, ${postcode}`,
-    //     totalAmount: amount,
-    //     qty: quantity,
-    //     unitPrice,
-    //     paymentid,
-    //   };
-    //   requestData.billingAddress = requestData.address;
-    //   const orderResponse = await orderGiftCard(requestData);
-    //   console.log({ orderResponse });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const {
+        line1,
+        line2,
+        state,
+        district,
+        postcode,
+        firstname,
+        lastname,
+        // salutation,
+        quantity,
+        unitPrice,
+        amount,
+      } = transaction;
+      let paymentMethod = transaction?.method;
+      let paymentDetails = {};
+      if (paymentMethod === "yespay") {
+        paymentDetails = JSON.parse(transaction?.yesPayResponse); //yesPayResponse
+      } else if (paymentMethod === "phonepe") {
+        paymentDetails = JSON.parse(transaction?.phonePeResponse); //phonePeResponse
+      }
+      console.log({ paymentDetails });
+      const paymentid =
+        paymentMethod === "yespay"
+          ? paymentDetails?.transaction_details
+              ?.transaction_no /* according to yespay response */
+          : paymentDetails?.data
+              ?.transactionId; /* according to phone pe response */
+      const requestData = {
+        // TODO: update request as per checkout form
+        address: `${firstname} ${lastname}, ${line1}, ${
+          line2 ? line2 : ""
+        }, ${district}, ${state}, ${postcode}`,
+        totalAmount: amount,
+        qty: quantity,
+        unitPrice,
+        paymentid,
+      };
+      requestData.billingAddress = requestData.address;
+      const orderResponse = await orderGiftCard(requestData);
+      console.log({ orderResponse });
+    } catch (err) {
+      console.log(err);
+    }
   }
   console.log(response?.transaction?.status);
   // useEffect(() => {
