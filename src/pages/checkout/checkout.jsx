@@ -30,9 +30,9 @@ function CheckoutPage({ currentUser, setFlash }) {
     lastname: z.string(),
     line1: z.string().nonempty("Address Line 1 is required"),
     line2: z.string(),
-    district: z.string(),
+    district: z.string().nonempty("District is required"),
     // .nonempty("City is required"),
-    state: z.string(),
+    state: z.string().nonempty("State is required"),
     // .nonempty("Region is required"),
     postcode: z
       .string()
@@ -67,9 +67,12 @@ function CheckoutPage({ currentUser, setFlash }) {
     setIsCheckingOut(true);
 
     try {
-      data.amount = state?.total;
-      data.quantity = state?.qty;
-      data.unitPrice = state?.price;
+      data.amount = 1;
+      data.quantity = 1;
+      data.unitPrice = 1;
+      // data.amount = state?.total;
+      // data.quantity = state?.qty;
+      // data.unitPrice = state?.price;
       data.method = isPhonePe ? "phonepe" : "yespay";
       console.log({ data });
       console.log({ isPhonePe });
