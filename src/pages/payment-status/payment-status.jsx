@@ -75,11 +75,13 @@ function PaymentStatusPage() {
               ?.transactionId; /* according to phone pe response */
       const requestData = {
         // TODO: update request as per checkout form
-        address: `${firstname} ${lastname}, ${line1}, ${line2}, ${city}, ${region}, ${postcode}`,
+        address: `${firstname} ${lastname}, ${line1}, ${
+          line2 ? line2 : ""
+        }, ${district}, ${state}, ${postcode}`,
         totalAmount: amount,
-        unitPrice: unitPrice,
         qty: quantity,
-        paymentid: paymentid,
+        unitPrice,
+        paymentid,
       };
       requestData.billingAddress = requestData.address;
       const orderResponse = await orderGiftCard(requestData);
