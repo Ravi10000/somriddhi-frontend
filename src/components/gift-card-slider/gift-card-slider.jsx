@@ -16,6 +16,22 @@ export default function GiftCardSlider() {
   async function handleFetchGiftCards() {
     try {
       const response = await fetchAllGiftCards();
+      response.data.data.price.denominations = [
+        "1",
+        "10",
+        "100",
+        "500",
+        "1000",
+        "2000",
+        "3000",
+        "4000",
+        "5000",
+        "6000",
+        "7000",
+        "8000",
+        "9000",
+        "10000",
+      ];
       console.log({ data: response?.data?.data });
       if ((response.status = "Success")) {
         setGiftCards(response?.data?.data || []);
