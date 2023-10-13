@@ -12,6 +12,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
   return (
     <div
       className={styles.giftCard + " " + (large ? styles.large : "")}
+      style={{ cursor: nonClickable ? "default" : "pointer" }}
       onClick={() => {
         if (nonClickable) return;
         navigate(`/giftcard/${giftCard?._id}`, { state: { giftCard } });

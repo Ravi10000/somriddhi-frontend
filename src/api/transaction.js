@@ -1,7 +1,6 @@
 import axios from "axios";
 
 axios.defaults.baseURL = `${import.meta.env.VITE_REACT_APP_API_URL}/api`;
-
 export const initiateTransaction = async (transaction) =>
   axios.post("/transaction", transaction, {
     headers: {
@@ -10,7 +9,12 @@ export const initiateTransaction = async (transaction) =>
     },
   });
 
-export const fetchTransaction = async (id) => axios.get(`/transaction/${id}`);
+export const fetchTransaction = async (id) =>
+  axios.get(`/transaction/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
 export const orderGiftCard = async (giftCardDetails) =>
   axios.post("/addgiftcards", giftCardDetails, {

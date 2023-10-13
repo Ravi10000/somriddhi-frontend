@@ -6,6 +6,7 @@ import { BiSolidErrorCircle } from "react-icons/bi";
 import { MdPending } from "react-icons/md";
 import { BsCheck2Circle } from "react-icons/bs";
 import { MdSmsFailed } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function PaymentStatusPage() {
   const [isFetching, setIsFetching] = useState(false);
@@ -143,6 +144,9 @@ function ResponseUI({ response }) {
           <p>{response?.transaction?.unitPrice}</p>
           <p>Total Amount :</p>
           <p>{response?.transaction?.amount}</p>
+          <Link to="https://somriddhi.store/profile/gift-cards">
+            see my giftcards
+          </Link>
         </div>
       </div>
     );
