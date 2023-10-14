@@ -34,6 +34,8 @@ function PaymentStatusPage() {
           res?.data?.transaction?._id
         );
         console.log({ orderResponse });
+        if (orderResponse?.status?.toLowerCase() === "success")
+          return navigate("/profile/gift-cards");
       }
       setResponse(res.data);
     } catch (err) {
