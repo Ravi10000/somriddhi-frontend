@@ -8,8 +8,6 @@ import { useRef } from "react";
 import { useEffect } from "react";
 // import useRazorpay from "react-razorpay";
 // import Razorpay from "razorpay";
-
-import axios from "axios";
 import { fetchAllGiftCards } from "../../api";
 import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
@@ -19,14 +17,13 @@ function GiftCardPage({ setFlash }) {
   const contentRef = useRef();
   const [giftCards, setGiftCards] = useState([]);
   const navigate = useNavigate();
-  const { state, pathname } = useLocation();
-  const { id } = useParams();
-  const { giftCard } = state;
+  const { pathname } = useLocation();
+  let { price } = useParams();
+  price = parseInt(price);
+  // const { giftCard } = state;
   // const giftCard = { price: 1, _id: 1 };
   const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(
-    parseInt(giftCard?.price) * parseInt(quantity)
-  );
+  const [total, setTotal] = useState(parseInt(price) * parseInt(quantity));
 
   async function handleFetchGiftCards() {
     try {
@@ -46,7 +43,7 @@ function GiftCardPage({ setFlash }) {
   console.log({ total });
   console.log({ quantity });
   useEffect(() => {
-    const newTotal = parseInt(giftCard?.price) * parseInt(quantity);
+    const newTotal = parseInt(price) * parseInt(quantity);
     if (!(newTotal > 10000)) return setTotal(newTotal);
     setFlash({
       type: "warning",
@@ -80,7 +77,7 @@ function GiftCardPage({ setFlash }) {
         </div>
         <div className={styles.content}>
           <div className={styles.giftCardContainer}>
-            <GiftCard nonClickable giftCard={giftCard} large />
+            <GiftCard nonClickable giftCard={{ price }} large />
           </div>
           <div className={styles.giftCardDetails}>
             <div className={styles.buttonAndInput}>
@@ -101,10 +98,7 @@ function GiftCardPage({ setFlash }) {
                     value={quantity}
                     onChange={(e) => {
                       if (!e.target.value) return setQuantity(1);
-                      if (
-                        parseInt(e.target.value) * parseInt(giftCard?.price) >
-                        10000
-                      )
+                      if (parseInt(e.target.value) * parseInt(price) > 10000)
                         return setFlash({
                           type: "warning",
                           message:
@@ -127,7 +121,7 @@ function GiftCardPage({ setFlash }) {
                   <p>Total: &nbsp;</p>
                   <p>
                     {quantity
-                      ? // ? parseInt(giftCard?.price) * parseInt(quantity)
+                      ? // ? parseInt(price) * parseInt(quantity)
                         currencyFormator(total)
                       : 0}
                   </p>
@@ -139,8 +133,8 @@ function GiftCardPage({ setFlash }) {
                   navigate("/checkout", {
                     state: {
                       qty: quantity,
-                      price: giftCard?.price,
-                      total: parseInt(giftCard?.price) * parseInt(quantity),
+                      price: price,
+                      total: parseInt(price) * parseInt(quantity),
                     },
                   })
                 }

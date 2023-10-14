@@ -152,7 +152,7 @@ function App({ setCurrentUser, flash }) {
           <Route path="/privacy-policy" exact element={<PrivacyPolicyPage />} />
 
           <Route
-            path="/giftcard/:id"
+            path="/giftcard/:price"
             element={
               <ProtectedRoute openModal={modal.open}>
                 <GiftCardPage />
