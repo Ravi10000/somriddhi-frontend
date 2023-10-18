@@ -4,10 +4,12 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { setFlash } from "../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 import { currencyFormator } from "../../utils/currency-formator";
+import { AiOutlineShareAlt } from "react-icons/ai";
+import { MdRedeem } from "react-icons/md";
 
 function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
   const navigate = useNavigate();
-  const price = currencyFormator(giftCard?.price);
+  // const price = currencyFormator(giftCard?.price);
 
   return (
     <div
@@ -76,6 +78,26 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
             >
               <img className={styles.copyIcon} src="/copy.svg" alt="" />
             </CopyToClipboard>
+          </div>
+          <div className={styles.actions}>
+            <button
+              className={styles.button}
+              onClick={() =>
+                window.open(
+                  // `https://www.amazon.in/gp/css/gc/payment?ie=UTF8&amp;actionType=add&amp;claimCode=${giftCard?.cardPin}&amp;ref_=gc_ya_subnav_balance&amp;txtLeftButton=ApplytoYourAccount`,
+                  `https://www.amazon.in/apay-products/apv/landing?voucherCode=${giftCard?.cardPin}`,
+                  "__blank"
+                )
+              }
+            >
+              Redeem <MdRedeem className={styles.icon} />
+            </button>
+            <button
+              className={styles.button}
+              onClick={() => giftCard?.setSelectedGiftcard(giftCard)}
+            >
+              Share <AiOutlineShareAlt className={styles.icon} />
+            </button>
           </div>
         </div>
       )}

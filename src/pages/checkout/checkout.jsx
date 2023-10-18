@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { initiateTransaction } from "../../api/transaction";
 import { getPincodeDetails } from "../../api";
+import { Link } from "react-router-dom";
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -39,6 +40,9 @@ function CheckoutPage({ currentUser, setFlash }) {
       .min(6, { message: "postcode have to be 6 digits" })
       .max(6, { message: "postcode have to be 6 digits" })
       .nonempty("Pincode is required"),
+    tos: z
+      .boolean()
+      .refine((val) => val, { message: "Please accept terms of services" }),
   });
   const {
     register,
@@ -234,6 +238,20 @@ function CheckoutPage({ currentUser, setFlash }) {
                 error={errors?.state?.message}
               />
             </div>
+          </div>
+          <div className={styles.tosCheckbox}>
+            <div className={styles.checkbox}>
+              <input type="checkbox" id="tos" {...register("tos")} />
+              <label htmlFor="tos">
+                I confirm that I have read and agree to Somriddhi's{" "}
+                <Link to="/terms-and-conditions" className={styles.tosLink}>
+                  Terms of Services
+                </Link>
+              </label>
+            </div>
+            {errors?.tos?.message && (
+              <p className={styles.tosError}>{errors?.tos?.message}</p>
+            )}
           </div>
           <div className={styles.checkoutBtn}>
             <Button>Checkout</Button>

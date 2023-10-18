@@ -92,3 +92,25 @@
     }
   }
 }
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  .button {
+    background: var(--mainBrandColor);
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid var(--mainBrandColor);
+    &:nth-child(2) {
+      background: #fff;
+      color: var(--mainBrandColor);
+    }
+  }
+  .icon {
+    height: 20px;
+    width: fit-content;
+  }
+}

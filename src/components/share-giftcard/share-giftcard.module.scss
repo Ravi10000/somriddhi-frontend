@@ -1,0 +1,14 @@
+.popup {
+  background: #fff;
+  height: fit-content;
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 10px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

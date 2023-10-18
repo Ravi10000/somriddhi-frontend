@@ -80,6 +80,26 @@
     }
   }
 }
+.tosCheckbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .checkbox {
+    accent-color: #f01c21;
+    display: flex;
+    gap: 10px;
+  }
+  .tosLink {
+    color: #f01c21;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .tosError {
+    margin-left: 25px;
+    color: #706f6f;
+    font-size: 0.9rem;
+  }
+}
 
 @keyframes spin {
   to {

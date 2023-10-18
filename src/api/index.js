@@ -2,6 +2,7 @@ import axios from "axios";
 
 // const BASEURL = `${import.meta.env.VITE_REACT_APP_API_URL}`;
 axios.defaults.baseURL = `${import.meta.env.VITE_REACT_APP_API_URL}/api`;
+export default axios;
 // axios.defaults.withCredentials = true;
 // const token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDJiMDhjYTY5NzA5ZmMzYWJmZGMxYzgiLCJpYXQiOjE2ODA1NDE4OTksImV4cCI6MTcxMjA5OTQ5OX0.F4iWMmwRElmfW6cmhbXUhguri5XohqVV7gY7Iqg7JlM";

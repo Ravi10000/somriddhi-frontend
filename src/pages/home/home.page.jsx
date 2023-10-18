@@ -190,11 +190,11 @@ export default function HomePage() {
   return (
     <div className="home-page" id="home">
       <ScrollToTop />
-      <Banner />
       {/* <GiftCardList /> */}
       {/* <GiftCardSlider denominations={giftCards?.denominations} /> */}
       {/* <CustomCategories /> */}
       <GiftCardList />
+      <Banner />
       <Coupons />
       <Offers />
       <Deals />

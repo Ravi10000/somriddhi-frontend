@@ -1,4 +1,4 @@
-import "./coupons.styles.scss";
+import styles from "./coupons.styles.module.scss";
 
 // packages
 import { useState, useEffect } from "react";
@@ -51,22 +51,22 @@ export default function Coupons() {
   }, [selectedCategory]);
 
   return (
-    <section className="coupons-section" id="coupons">
-      <div className="container">
-        <h2 className="_title ">Coupons By Category</h2>
-        <div className="container right-shift ">
-          <div className="menu-carousel-container">
+    <section className={styles["coupons-section"]} id="coupons">
+      <div className={styles.container}>
+        <h2 className={styles._title}>Coupons By Category</h2>
+        <div className={styles["container-inner"]}>
+          <div className={styles["menu-carousel-container"]}>
             <SelectCategorySlider
               categories={categories}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
             />
           </div>
-          <div className="coupons-carousel-container">
+          <div className={styles["coupons-carousel-container"]}>
             {deals?.length > 0 ? (
               <DealsSlider deals={deals} forCoupons />
             ) : (
-              <p className="no-deals">
+              <p className={styles["no-deals"]}>
                 We have no {selectedCategory?.name} coupons for now!
               </p>
             )}

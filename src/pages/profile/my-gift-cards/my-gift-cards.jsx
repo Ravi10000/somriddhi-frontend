@@ -4,11 +4,13 @@ import { getActivatedCards, getGiftCards } from "../../../api";
 import { useState } from "react";
 import GiftCard from "../../../components/gift-card/gift-card";
 import getRandomImage from "../../../data/gift-card-images";
+import ShareGiftcard from "../../../components/share-giftcard/share-giftcard";
 
 function MyGiftCards() {
   const [giftCards, setGiftCards] = useState([]);
   const [selectedGiftCard, setSelectedGiftCard] = useState(null);
   const [activatedCards, setActivatedCards] = useState([]);
+  const [selectedGiftcard, setSelectedGiftcard] = useState(null);
 
   const [isFetching, setIsFetching] = useState(false);
 
@@ -50,6 +52,12 @@ function MyGiftCards() {
   }, []);
   return (
     <div className={styles.myGiftCards}>
+      {selectedGiftcard && (
+        <ShareGiftcard
+          setShowPopup={setSelectedGiftcard}
+          giftcard={selectedGiftCard}
+        />
+      )}
       <h2 className={styles.title}>
         {selectedGiftCard && (
           <img
@@ -72,6 +80,7 @@ function MyGiftCards() {
                 <th>Quantity</th>
                 <th>Total Amount</th>
                 <th>Status</th>
+                <th>View</th>
               </tr>
             </thead>
             {isFetching ? (
@@ -87,6 +96,9 @@ function MyGiftCards() {
                     <td>&times; {giftCard.qty}</td>
                     <td>{giftCard.totalAmount}</td>
                     <td>{giftCard.status}</td>
+                    <td>
+                      <button className={styles.view}>view</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -97,7 +109,7 @@ function MyGiftCards() {
         <div className={styles.oneGiftCard}>
           {activatedCards?.map((card, index) => (
             <GiftCard
-              noImage
+              // noImage
               key={index}
               large
               nonClickable
@@ -106,6 +118,7 @@ function MyGiftCards() {
                 image: getRandomImage(),
                 cardNumber: card?.cardNumber,
                 cardPin: card?.cardPin,
+                setSelectedGiftcard,
               }}
             />
           ))}

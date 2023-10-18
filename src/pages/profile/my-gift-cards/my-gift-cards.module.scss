@@ -83,6 +83,13 @@
     flex-wrap: wrap;
   }
 }
+
+.view {
+  background: var(--mainBrandColor);
+  color: #fff;
+  padding: 10px 20px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

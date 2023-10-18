@@ -1,5 +1,5 @@
-import FLASH_ACTION_TYPES from "./flash.types";
 
+import FLASH_ACTION_TYPES from "./flash.types";
 export const setFlash = (flash) => ({
   type: FLASH_ACTION_TYPES.SET_FLASH,
   payload: flash,
