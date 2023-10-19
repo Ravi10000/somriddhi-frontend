@@ -2,7 +2,7 @@ import styles from "./navbar.module.scss";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-
+import { BiSolidDownArrow } from "react-icons/bi";
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("/");
 
@@ -36,43 +36,26 @@ export default function Navbar() {
             <p>{name}</p>
           </HashLink>
         ))}
-        <div
-          className={styles.productsNavItem}
-          onClick={() => {
-            // setShowBrandsMenu((prevState) => !prevState);
-          }}
-        >
+        <div className={styles.productsNavItem} onClick={() => {}}>
           <p>Products</p>
           <div
             className={styles.brandsMenu}
             onClick={(e) => {
               e.stopPropagation();
-              // setShowProductsMenu((prevState) => !prevState);
             }}
           >
-            {/* <div className={styles.optionsContainer}> */}
-            <div className={styles.brandName}>Amazon</div>
-            <div className={styles.productsMenu}>
-              <HashLink to="/#gift-cards">
-                <div className={styles.productName}>
-                  Amazon Shopping Vouchers
-                </div>
-              </HashLink>
+            <div className={styles.brandName}>
+              <p>Amazon</p> <BiSolidDownArrow className={styles.icon} />
             </div>
-            {/* </div> */}
+            <div className={styles.productsMenuContainer}>
+              <div className={styles.productsMenu}>
+                <HashLink to="/#gift-cards">
+                  <p className={styles.productName}>Amazon Shopping Vouchers</p>
+                </HashLink>
+              </div>
+            </div>
           </div>
         </div>
-        {/* <div className={styles.wallet}>
-          <p>Wallet Login</p>
-          <div className={styles.walletMenu}>
-            <a href="https://agent.somriddhidigital.co.in/#/sign-in">
-              <p>Web Login</p>
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.somriddhi.somriddhiaeps">
-              <p>Download App</p>
-            </a>
-          </div>
-        </div> */}
       </div>
     </nav>
   );

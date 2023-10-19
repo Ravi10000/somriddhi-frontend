@@ -92,12 +92,23 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
             >
               Redeem <MdRedeem className={styles.icon} />
             </button>
-            <button
+            {/* <button
               className={styles.button}
               onClick={() => giftCard?.setSelectedGiftcard(giftCard)}
             >
               Share <AiOutlineShareAlt className={styles.icon} />
-            </button>
+            </button> */}
+          </div>
+          <div
+            className={styles.sendCheckboxContainer}
+            onClick={() => giftCard?.setSelectedGiftcard(giftCard)}
+          >
+            <input
+              className={styles.checkbox}
+              type="checkbox"
+              id="share-giftcard"
+            />
+            <label htmlFor="share-giftcard">Send to Someone</label>
           </div>
         </div>
       )}
