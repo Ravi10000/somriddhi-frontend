@@ -36,9 +36,9 @@ function ShareGiftcard({ setShowPopup, giftcard, setFlash, currentUser }) {
   } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      receiverName: "test name",
-      receiverPhone: "9560863067",
-      receiverEmail: "ravisince2k@gmail.com",
+      // receiverName: "test name",
+      // receiverPhone: "9560863067",
+      // receiverEmail: "ravisince2k@gmail.com",
       senderName: currentUser?.fname
         ? currentUser?.fname + " " + currentUser?.lname
         : "",
