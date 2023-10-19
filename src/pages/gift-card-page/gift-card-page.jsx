@@ -14,7 +14,6 @@ import { connect } from "react-redux";
 import { currencyFormator } from "../../utils/currency-formator";
 
 function GiftCardPage({ setFlash }) {
-  const contentRef = useRef();
   const [giftCards, setGiftCards] = useState([]);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -24,11 +23,26 @@ function GiftCardPage({ setFlash }) {
   // const giftCard = { price: 1, _id: 1 };
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(parseInt(price) * parseInt(quantity));
+  const tncRef = useRef();
+  const descriptionRef = useRef();
+  const tncLinkRef = useRef();
 
   async function handleFetchGiftCards() {
     try {
       const response = await fetchAllGiftCards();
       console.log({ response });
+      const description = response?.data?.data?.description;
+      const tnc = response?.data?.data?.tnc;
+      console.log({ description });
+      console.log({ tnc });
+      if (descriptionRef?.current)
+        descriptionRef.current.innerHTML = description;
+      if (tncRef?.current) tncRef.current.innerHTML = tnc?.content;
+      if (tncRef?.current) {
+        tncLinkRef.current.innerHTML = tnc?.link;
+        tncLinkRef.current.href = response?.data?.data?.tnc?.link;
+      }
+
       if ((response.status = "Success")) {
         setGiftCards(response.data.data);
       }
@@ -146,26 +160,17 @@ function GiftCardPage({ setFlash }) {
         </div>
       </div>
       <div className={styles.list}>
-        {/* <h3>About Gift Card</h3> */}
         <h3>About Amazon Shopping Voucher</h3>
-        <div className={styles.description} ref={contentRef}>
-          <b>Disclaimer: </b>
-          <p>
-            Amazon Shopping Vouchers are prepaid payment instruments (“ASVs”)
-            issued by Pine Labs Private Limited (“Pine Labs”) under the brand
-            name of [Qwikcilver]. To add your ASV to your Amazon account, visit
-            www.amazon.in/vouchers, enter the voucher code in “Add New” section
-            and click on the Add button. ASV may be used only towards the
-            purchase of eligible products on Amazon.in. The ASVs, including any
-            unused ASV balance, expire one year from the date of issuance of the
-            ASV. ASVs cannot be transferred for value or redeemed for cash. Pine
-            Labs and Amazon Seller Services Private Limited(“Amazon”) or their
-            affiliates are not responsible if an ASV is lost, stolen, destroyed
-            or used without permission. For complete terms and conditions, see
-            www.amazon.in/voucherstnc. Amazon and the Amazon logo are trademarks
-            of Amazon or its affiliates. Qwikcilver mark and the Qwikcilver logo
-            are trademarks of Pine Labs.
-          </p>
+        <div className={styles.description} ref={descriptionRef}>
+          {/* <div ref={descriptionRef}></div> */}
+        </div>
+      </div>
+      <div className={styles.list}>
+        <h3>Terms and Conditions</h3>
+        <div className={styles.description}>
+          <div ref={tncRef}></div>
+          Read More: &nbsp;
+          <a ref={tncLinkRef} target="_blank" rel="noopener noreferrer" style={{color: "red"}}></a>
         </div>
       </div>
     </>

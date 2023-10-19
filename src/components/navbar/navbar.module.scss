@@ -75,9 +75,15 @@ nav {
     cursor: pointer;
     &:hover {
       .brandsMenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
         display: block;
         &:hover {
           .productsMenu {
+            position: absolute;
+            top: 100%;
+            // left: 100%;
             display: block;
           }
         }
@@ -85,15 +91,18 @@ nav {
     }
     .brandsMenu,
     .productsMenu {
+      border: 1px solid rgba(128, 128, 128, 0.457);
       display: none;
-      border-radius: 0.5rem;
-      top: 80%;
-      left: 50%;
+      border-radius: 2px;
+      top: 0%;
+      left: 100%;
       position: absolute;
       background: #fff;
       color: var(--text-clr);
       box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
       animation: slideIn 0.3s ease-in-out;
+      width: fit-content;
+      white-space: nowrap;
       .brandName,
       .productName {
         padding: 20px 30px;
@@ -101,17 +110,19 @@ nav {
         height: 100%;
         width: 100%;
         animation: slideIn 0.3s ease-in-out;
-      }
-      .productName {
-        background: #fffeee;
-        border-radius: 0.5rem;
+        background: #fff;
+        border-radius: 2px;
+        &:hover {
+          background: #81d5ff86;
+        }
       }
       &:hover {
-        background: whitesmoke;
+        background: #81d5ff86;
       }
     }
     .productsMenu {
-      left: -50%;
+      top: -50%;
+      outline: 2px solid red;
     }
   }
 }

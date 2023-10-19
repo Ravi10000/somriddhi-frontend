@@ -168,20 +168,29 @@ function CheckoutPage({ currentUser, setFlash }) {
                 }}
                 error={errors?.salutation?.message}
               /> */}
-              <TextInput
-                label="First Name"
-                register={{
-                  ...register("firstname"),
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
                 }}
-                error={errors?.firstname?.message}
-              />
-              <TextInput
-                label="Last Name"
-                register={{
-                  ...register("lastname"),
-                }}
-                error={errors?.lastname?.message}
-              />
+              >
+                <TextInput
+                  inputStyle={{ width: "100%" }}
+                  label="First Name"
+                  register={{
+                    ...register("firstname"),
+                  }}
+                  error={errors?.firstname?.message}
+                />
+                <TextInput
+                  inputStyle={{ width: "100%" }}
+                  label="Last Name"
+                  register={{
+                    ...register("lastname"),
+                  }}
+                  error={errors?.lastname?.message}
+                />
+              </div>
               <TextInput
                 label="Email"
                 register={{
@@ -197,6 +206,17 @@ function CheckoutPage({ currentUser, setFlash }) {
                 }}
                 error={errors?.mobile?.message}
               />
+              <div className={styles.pincodeContainer}>
+                <NumInput
+                  maxLength="6"
+                  label="Postcode / Pincode"
+                  register={{
+                    ...register("postcode"),
+                  }}
+                  error={errors?.postcode?.message}
+                />
+                {isSearching && <div className={styles.loader}></div>}
+              </div>
             </div>
             <div className={styles.inputGroup}>
               <TextInput
@@ -212,17 +232,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                   ...register("line2"),
                 }}
               />
-              <div className={styles.pincodeContainer}>
-                <NumInput
-                  maxLength="6"
-                  label="Postcode / Pincode"
-                  register={{
-                    ...register("postcode"),
-                  }}
-                  error={errors?.postcode?.message}
-                />
-                {isSearching && <div className={styles.loader}></div>}
-              </div>
+
               <TextInput
                 label="District"
                 register={{

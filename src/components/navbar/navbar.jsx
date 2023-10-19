@@ -50,12 +50,16 @@ export default function Navbar() {
               // setShowProductsMenu((prevState) => !prevState);
             }}
           >
+            {/* <div className={styles.optionsContainer}> */}
             <div className={styles.brandName}>Amazon</div>
             <div className={styles.productsMenu}>
               <HashLink to="/#gift-cards">
-                <div className={styles.productName}>Amazon Shopping Vouchers</div>
-              </HashLink>   
+                <div className={styles.productName}>
+                  Amazon Shopping Vouchers
+                </div>
+              </HashLink>
             </div>
+            {/* </div> */}
           </div>
         </div>
         {/* <div className={styles.wallet}>
