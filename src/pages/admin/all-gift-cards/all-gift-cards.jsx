@@ -5,16 +5,79 @@ import { useEffect } from "react";
 import { getActivatedCards, getAllGiftCards } from "../../../api";
 import GiftCard from "../../../components/gift-card/gift-card";
 import getRandomImage from "../../../data/gift-card-images";
+import TextInput from "../../../components/text-input/text-input";
+import { TbDiscount2 } from "react-icons/tb";
+import {
+  fetchGiftcardDiscount,
+  manageGiftcardDiscount,
+} from "../../../api/giftcard.req";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { setFlash } from "../../../redux/flash/flash.actions";
+import { connect } from "react-redux";
 
-function AllGiftCards() {
+function AllGiftCards({ setFlash }) {
   const [isFetching, setIsFetching] = useState(false);
   const [giftCards, setGiftCards] = useState([]);
   const [selectedGiftCard, setSelectedGiftCard] = useState(null);
   const [activatedCards, setActivatedCards] = useState([]);
   const [isFetchingActivatedCards, setIsFetchingActivatedCards] =
     useState(false);
+  const [isChanging, setIsChanging] = useState(true);
+  const [giftcardDiscount, setGiftcardDiscount] = useState(0);
 
-  console.log({ giftCards });
+  async function handleFetchGiftcardDiscount() {
+    try {
+      const res = await fetchGiftcardDiscount();
+      console.log({ res });
+      const discountPercentage = res?.data?.discount?.discountPercentage;
+      if (discountPercentage) {
+        console.log({ discountPercentage });
+        setGiftcardDiscount(parseFloat(discountPercentage));
+      }
+    } catch (err) {
+      console.log({ err });
+    } finally {
+      setIsChanging(false);
+    }
+  }
+
+  function handleFloatInputChange(e) {
+    const percentage = e.target.value;
+    if (percentage?.length < 1) return setGiftcardDiscount(0);
+    const validNumber = /^\d*\.?\d*$/.test(percentage);
+    if (!validNumber) return;
+    if (
+      percentage?.length > 1 &&
+      percentage?.[0] === "0" &&
+      percentage?.[1] !== "."
+    )
+      return setGiftcardDiscount(percentage?.slice(1));
+
+    if (isNaN(percentage)) setGiftcardDiscount(0);
+    setGiftcardDiscount(percentage);
+  }
+
+  async function handleDiscountChange() {
+    try {
+      setIsChanging(true);
+      const res = await manageGiftcardDiscount(parseFloat(giftcardDiscount));
+      console.log({ res });
+      if (res?.data?.status === "success") {
+        setFlash({
+          type: "success",
+          message: "Discount percentage updated successfully",
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      setFlash({
+        type: "error",
+        message: "Something went wrong, please try again",
+      });
+    } finally {
+      setIsChanging(false);
+    }
+  }
   async function handleFetchAllGiftCards() {
     setIsFetching(true);
     try {
@@ -56,11 +119,12 @@ function AllGiftCards() {
 
   useEffect(() => {
     handleFetchAllGiftCards();
+    handleFetchGiftcardDiscount();
   }, []);
 
   return (
     <div className={styles.allGiftCards}>
-      <div className={styles.head}>
+      <form className={styles.head}>
         {selectedGiftCard && (
           <img
             onClick={() => setSelectedGiftCard(null)}
@@ -69,8 +133,42 @@ function AllGiftCards() {
             alt=""
           />
         )}
-        <TitleSection title="all gift cards" noAddButton />
-      </div>
+        <TitleSection
+          title="all gift cards"
+          noAddButton
+          customUI={
+            <div className={styles.percentageContainer}>
+              <TbDiscount2 className={styles.icon} />
+              <input
+                type="text"
+                className={styles.percentageInput}
+                value={giftcardDiscount}
+                onChange={handleFloatInputChange}
+                // onChange={(e) => {
+                //   if (e.target.value?.length < 1) return setGiftcardDiscount(0);
+                //   if (e.target.value?.length > 1 && e.target.value[0] === "0")
+                //     return setGiftcardDiscount(
+                //       parseFloat(e.target.value.slice(1))
+                //     );
+                //   setGiftcardDiscount(parseFloat(e.target.value));
+                // }}
+                maxLength={4}
+                inputMode="numeric"
+              />
+              <button
+                className={styles.setPercentageBtn}
+                onClick={handleDiscountChange}
+              >
+                {isChanging ? (
+                  <div className={styles.loader}></div>
+                ) : (
+                  <BsFillArrowRightCircleFill className={styles.goBtn} />
+                )}
+              </button>
+            </div>
+          }
+        />
+      </form>
       {!selectedGiftCard ? (
         <div className={styles.tableContainer}>
           <table className={styles.table}>
@@ -140,4 +238,4 @@ function AllGiftCards() {
   );
 }
 
-export default AllGiftCards;
+export default connect(null, { setFlash })(AllGiftCards);

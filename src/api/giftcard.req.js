@@ -6,3 +6,12 @@ export const sendGiftcard = (data) =>
   });
 
 export const fetchGiftcardDiscount = () => axios.get("/giftcard/discount");
+
+export const manageGiftcardDiscount = (discountPercentage) =>
+  axios.post(
+    "/giftcard/discount",
+    { discountPercentage },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );

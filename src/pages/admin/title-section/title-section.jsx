@@ -10,6 +10,7 @@ function TitleSection({
   noAddButton,
   uploadBtn,
   setFlash,
+  customUI,
 }) {
   const handlePaymentUpload = async (e) => {
     console.log("triggered payment upload");
@@ -106,6 +107,7 @@ function TitleSection({
             <p>Add</p>
           </button>
         )}
+        {customUI && customUI}
       </div>
     </div>
   );

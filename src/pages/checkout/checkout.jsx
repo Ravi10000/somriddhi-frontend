@@ -66,7 +66,7 @@ function CheckoutPage({ currentUser, setFlash }) {
   const { state } = useLocation();
   const discountAmount = !giftcardDiscount
     ? 0
-    : (state?.total / 100) * giftcardDiscount;
+    : parseFloat((state?.total / 100) * giftcardDiscount).toFixed(2);
   const orderTotal = state?.total - discountAmount;
   async function handleCheckout(data) {
     console.log({ data });
@@ -178,10 +178,11 @@ function CheckoutPage({ currentUser, setFlash }) {
           </p>
           {!!giftcardDiscount && (
             <p>
-              Discount Applied:{" "}
+              Discount Applied &nbsp;&#x28;
+              {giftcardDiscount}%&#x29; OFF
               <span className={styles.discountAmount}>
                 {" "}
-                - ₹{(state?.total / 100) * giftcardDiscount}
+                - ₹{discountAmount}
               </span>
             </p>
           )}
