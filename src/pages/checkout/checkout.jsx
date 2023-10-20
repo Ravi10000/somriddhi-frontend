@@ -302,7 +302,7 @@ function CheckoutPage({ currentUser, setFlash }) {
             )}
           </div>
           <div className={styles.checkoutBtn}>
-            <Button>Checkout</Button>
+            {/* <Button>Checkout</Button> */}
             <button
               className={styles.phonepeBtn}
               onClick={() => {
