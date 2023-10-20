@@ -36,9 +36,12 @@
   }
   p {
     font-size: 1.1rem;
-    span {
+    span.total {
       font-weight: 500;
       color: #f01c21;
+    }
+    span.discountAmount {
+      color: #0aaf83;
     }
   }
   .container {
@@ -104,6 +107,31 @@
     margin-left: 25px;
     color: #706f6f;
     font-size: 0.9rem;
+  }
+}
+.orderDetails {
+  p {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.discountCard {
+  width: 100%;
+  background: #c7f9cc77;
+  // background: #c7f9cc7a;
+  color: #0aaf83;
+  border-radius: 5px;
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  span {
+    height: 25px;
+    width: 25px;
+    border: 1px solid #0aaf83;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
   }
 }
 

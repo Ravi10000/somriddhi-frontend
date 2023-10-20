@@ -15,11 +15,14 @@ import { z } from "zod";
 import { initiateTransaction } from "../../api/transaction";
 import { getPincodeDetails } from "../../api";
 import { Link } from "react-router-dom";
+import { fetchGiftcardDiscount } from "../../api/giftcard.req";
+import { BsCheck2 } from "react-icons/bs";
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isPhonePe, setIsPhonePe] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [giftcardDiscount, setGiftcardDiscount] = useState(0);
   const checkoutSchema = z.object({
     mobile: z
       .string()
@@ -61,7 +64,10 @@ function CheckoutPage({ currentUser, setFlash }) {
   const [postcodeError, setPostcodeError] = useState(null);
   const postcode = watch("postcode");
   const { state } = useLocation();
-
+  const discountAmount = !giftcardDiscount
+    ? 0
+    : (state?.total / 100) * giftcardDiscount;
+  const orderTotal = state?.total - discountAmount;
   async function handleCheckout(data) {
     console.log({ data });
     if (postcodeError) {
@@ -71,9 +77,7 @@ function CheckoutPage({ currentUser, setFlash }) {
     setIsCheckingOut(true);
 
     try {
-      // data.amount = 1;
-      // data.quantity = 1;
-      // data.unitPrice = 1;
+      data.discountedAmount = orderTotal;
       data.amount = state?.total;
       data.quantity = state?.qty;
       data.unitPrice = state?.price;
@@ -127,6 +131,25 @@ function CheckoutPage({ currentUser, setFlash }) {
     }
   }
 
+  async function handleFetchGiftcardDiscount() {
+    try {
+      const res = await fetchGiftcardDiscount();
+      console.log({ res });
+      const discountPercentage = res?.data?.discount?.discountPercentage;
+      if (discountPercentage) {
+        console.log({ discountPercentage });
+        setGiftcardDiscount(parseFloat(discountPercentage));
+      }
+    } catch (err) {
+      console.log({ err });
+    }
+  }
+
+  useEffect(() => {
+    if (parseFloat(state?.total) < 2) return;
+    handleFetchGiftcardDiscount();
+  }, []);
+
   useEffect(() => {
     if (postcode?.length === 6) searchPincode();
   }, [postcode]);
@@ -153,21 +176,23 @@ function CheckoutPage({ currentUser, setFlash }) {
           <p>
             Amazon Shopping Voucher Price: <span>₹{state?.price}</span>
           </p>
+          {!!giftcardDiscount && (
+            <p>
+              Discount Applied:{" "}
+              <span className={styles.discountAmount}>
+                {" "}
+                - ₹{(state?.total / 100) * giftcardDiscount}
+              </span>
+            </p>
+          )}
           <p>
-            Order Total: <span> ₹{state?.total}</span>
+            Order Total: <span className={styles.total}> ₹{orderTotal}</span>
           </p>
         </div>
         <form onSubmit={handleSubmit(handleCheckout)} noValidate>
           <h3 className={styles.subtitle}>Billing Details</h3>
           <div className={styles.inputGroupsContainer}>
             <div className={styles.inputGroup}>
-              {/* <TextInput
-                label="Mr/Ms/Mrs"
-                register={{
-                  ...register("salutation"),
-                }}
-                error={errors?.salutation?.message}
-              /> */}
               <div
                 style={{
                   display: "flex",
@@ -249,6 +274,18 @@ function CheckoutPage({ currentUser, setFlash }) {
               />
             </div>
           </div>
+          {!!giftcardDiscount && (
+            <div className={styles.discountCard}>
+              <span>
+                <BsCheck2 />
+              </span>
+              <p>
+                Discount Applied ₹{discountAmount}
+                &nbsp;&#x28;
+                {giftcardDiscount}%&#x29; OFF
+              </p>
+            </div>
+          )}
           <div className={styles.tosCheckbox}>
             <div className={styles.checkbox}>
               <input type="checkbox" id="tos" {...register("tos")} />
