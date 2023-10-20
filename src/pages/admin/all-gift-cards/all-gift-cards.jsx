@@ -14,6 +14,7 @@ import {
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { setFlash } from "../../../redux/flash/flash.actions";
 import { connect } from "react-redux";
+import { AiOutlinePercentage } from "react-icons/ai";
 
 function AllGiftCards({ setFlash }) {
   const [isFetching, setIsFetching] = useState(false);
@@ -137,34 +138,39 @@ function AllGiftCards({ setFlash }) {
           title="all gift cards"
           noAddButton
           customUI={
-            <div className={styles.percentageContainer}>
-              <TbDiscount2 className={styles.icon} />
-              <input
-                type="text"
-                className={styles.percentageInput}
-                value={giftcardDiscount}
-                onChange={handleFloatInputChange}
-                // onChange={(e) => {
-                //   if (e.target.value?.length < 1) return setGiftcardDiscount(0);
-                //   if (e.target.value?.length > 1 && e.target.value[0] === "0")
-                //     return setGiftcardDiscount(
-                //       parseFloat(e.target.value.slice(1))
-                //     );
-                //   setGiftcardDiscount(parseFloat(e.target.value));
-                // }}
-                maxLength={4}
-                inputMode="numeric"
-              />
-              <button
-                className={styles.setPercentageBtn}
-                onClick={handleDiscountChange}
-              >
-                {isChanging ? (
-                  <div className={styles.loader}></div>
-                ) : (
-                  <BsFillArrowRightCircleFill className={styles.goBtn} />
-                )}
-              </button>
+            <div className={styles.discountWithLabel}>
+              <label htmlFor="discount-input">Change Discount</label>
+              <div className={styles.percentageContainer}>
+                {/* <TbDiscount2 className={styles.icon} /> */}
+                <AiOutlinePercentage className={styles.icon} />
+                <input
+                  id="discount-input"
+                  type="text"
+                  className={styles.percentageInput}
+                  value={giftcardDiscount}
+                  onChange={handleFloatInputChange}
+                  // onChange={(e) => {
+                  //   if (e.target.value?.length < 1) return setGiftcardDiscount(0);
+                  //   if (e.target.value?.length > 1 && e.target.value[0] === "0")
+                  //     return setGiftcardDiscount(
+                  //       parseFloat(e.target.value.slice(1))
+                  //     );
+                  //   setGiftcardDiscount(parseFloat(e.target.value));
+                  // }}
+                  maxLength={4}
+                  inputMode="numeric"
+                />
+                <button
+                  className={styles.setPercentageBtn}
+                  onClick={handleDiscountChange}
+                >
+                  {isChanging ? (
+                    <div className={styles.loader}></div>
+                  ) : (
+                    <BsFillArrowRightCircleFill className={styles.goBtn} />
+                  )}
+                </button>
+              </div>
             </div>
           }
         />

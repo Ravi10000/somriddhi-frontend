@@ -49,7 +49,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
         <div className={styles.cardInfoContainer}>
           <div className={styles.cardInfo}>
             <p>
-              Card Number: <span>{giftCard?.cardNumber}</span>{" "}
+              Voucher ID: <span>{giftCard?.cardNumber}</span>{" "}
             </p>
             <CopyToClipboard
               text={giftCard?.cardNumber}
@@ -65,7 +65,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
           </div>
           <div className={styles.cardInfo}>
             <p>
-              Card Pin: <span>{giftCard?.cardPin}</span>{" "}
+              Gift Card Code: <span>{giftCard?.cardPin}</span>{" "}
             </p>
             <CopyToClipboard
               text={giftCard?.cardPin}

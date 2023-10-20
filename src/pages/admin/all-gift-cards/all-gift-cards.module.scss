@@ -139,6 +139,11 @@
   top: calc(50% + var(--offset));
   color: var(--mainBrandColor);
 }
+.discountWithLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
 
 @keyframes spin {
   0% {
