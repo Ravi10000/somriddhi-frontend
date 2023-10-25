@@ -17,10 +17,13 @@ import { getPincodeDetails } from "../../api";
 import { Link } from "react-router-dom";
 import { fetchGiftcardDiscount } from "../../api/giftcard.req";
 import { BsCheck2 } from "react-icons/bs";
+import PaymentGatways from "../../components/payment-gateways/payment-gateways";
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [isPhonePe, setIsPhonePe] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [showPaymentGateway, setShowPaymentGateway] = useState(false);
+  // const [is]
   const [isSearching, setIsSearching] = useState(false);
   const [giftcardDiscount, setGiftcardDiscount] = useState(0);
   const checkoutSchema = z.object({
@@ -81,12 +84,12 @@ function CheckoutPage({ currentUser, setFlash }) {
       data.amount = state?.total;
       data.quantity = state?.qty;
       data.unitPrice = state?.price;
-      data.method = isPhonePe ? "phonepe" : "yespay";
+      data.method = paymentMethod;
       console.log({ data });
-      console.log({ isPhonePe });
+      console.log({ isPhonePe: paymentMethod });
       const { data: transactionData } = await initiateTransaction(data);
       console.log({ transactionData });
-      if (isPhonePe && transactionData.redirectUrl) {
+      if (paymentMethod && transactionData.redirectUrl) {
         window.open(transactionData.redirectUrl, "_blank");
         return;
       }
@@ -103,7 +106,7 @@ function CheckoutPage({ currentUser, setFlash }) {
       console.log(err);
     } finally {
       setIsCheckingOut(false);
-      setIsPhonePe(false);
+      setPaymentMethod(null);
     }
   }
 
@@ -191,6 +194,13 @@ function CheckoutPage({ currentUser, setFlash }) {
           </p>
         </div>
         <form onSubmit={handleSubmit(handleCheckout)} noValidate>
+          {showPaymentGateway && (
+            <PaymentGatways
+              isValid={isValid}
+              setPaymentMethod={setPaymentMethod}
+              close={() => setShowPaymentGateway(false)}
+            />
+          )}
           <h3 className={styles.subtitle}>Billing Details</h3>
           <div className={styles.inputGroupsContainer}>
             <div className={styles.inputGroup}>
@@ -302,16 +312,33 @@ function CheckoutPage({ currentUser, setFlash }) {
             )}
           </div>
           <div className={styles.checkoutBtn}>
-            {/* <Button>Checkout</Button> */}
-            <button
+            <Button
+              onClick={(e) => {
+                if (!isValid) return;
+                e.preventDefault();
+                setShowPaymentGateway(true);
+              }}
+            >
+              Checkout
+            </Button>
+            {/* <button
               className={styles.phonepeBtn}
               onClick={() => {
-                if (isValid) setIsPhonePe(true);
+                if (isValid) setPaymentMethod("phonepe");
               }}
             >
               <p>Checkout</p>
-              <img src="/phonepe-icon.svg" alt="phonepe" />
+              <img src="/phonepe-icon-sm.svg" alt="phonepe" />
             </button>
+            <button
+              className={styles.upiBtn}
+              onClick={() => {
+                if (isValid) setPaymentMethod("upigateway");
+              }}
+            >
+              <p>Checkout</p>
+              <img src="/upigateway-icon.svg" alt="" />
+            </button> */}
           </div>
         </form>
       </div>

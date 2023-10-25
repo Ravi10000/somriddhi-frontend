@@ -1,0 +1,61 @@
+.paymentGateways {
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 450px;
+  .gatewayList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .upiBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 20px;
+    color: #097ae6;
+    font-weight: bold;
+    border: 1px solid #097ae6;
+    background: #fff;
+    width: 100%;
+    img {
+      height: 20px;
+      width: fit-content;
+    }
+  }
+  .phonepeBtn {
+    background: #fff;
+    border: 1px solid #5f259f;
+    color: #5f259f;
+    font-weight: 700;
+    padding: 20px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    img {
+      height: 20px;
+      width: fit-content;
+    }
+  }
+  .close {
+    width: fit-content;
+    align-self: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    background: rgb(252, 215, 215);
+    .icon {
+      color: var(--mainBrandColor);
+    }
+  }
+}

@@ -77,7 +77,7 @@
       justify-content: center;
       width: 100%;
       img {
-        height: 30px;
+        height: 20px;
         width: fit-content;
       }
     }
@@ -132,6 +132,20 @@
     border-radius: 50%;
     display: grid;
     place-content: center;
+  }
+}
+.upiBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  color: #097ae6;
+  font-weight: bold;
+  border: 1px solid #097ae6;
+  background: #fff;
+  img {
+    height: 20px;
+    width: fit-content;
   }
 }
 

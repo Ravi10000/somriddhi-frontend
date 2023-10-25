@@ -2,7 +2,7 @@ import "./backdrop.styles.scss";
 
 import React, { useEffect, useRef } from "react";
 
-export default function Backdrop({ children }) {
+export default function Backdrop({ children, close }) {
   const backdropRef = useRef(null);
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -13,7 +13,13 @@ export default function Backdrop({ children }) {
   }, []);
 
   return (
-    <div className="popup-backdrop" ref={backdropRef}>
+    <div
+      className="popup-backdrop"
+      ref={backdropRef}
+      onClick={() => {
+        if (close) close();
+      }}
+    >
       {children}
     </div>
   );
