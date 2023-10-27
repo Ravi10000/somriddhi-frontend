@@ -92,6 +92,14 @@
     }
   }
 }
+.goToAmazonLink {
+  color: var(--mainBrandColor);
+  font-weight: 500;
+  cursor: pointer;
+  // width: 100%;
+  // margin: 10px 0;
+  // text-align: center;
+}
 .actions {
   display: flex;
   align-items: center;

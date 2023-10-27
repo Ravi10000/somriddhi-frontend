@@ -71,7 +71,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
               text={giftCard?.cardPin}
               onCopy={() =>
                 setFlash({
-                  message: "Card Pin Copied to clipboard!",
+                  message: "Voucher Code Copied to clipboard!",
                   type: "success",
                 })
               }
@@ -80,7 +80,24 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
             </CopyToClipboard>
           </div>
           <div className={styles.actions}>
-            <button
+            <CopyToClipboard
+              text={giftCard?.cardPin}
+              onCopy={() => {
+                setFlash({
+                  message: "Voucher Code Copied to clipboard!",
+                  type: "success",
+                });
+                setTimeout(() => {
+                  open(
+                    `https://www.amazon.in/apay-products/apv/landing`,
+                    "__blank"
+                  );
+                }, 1000);
+              }}
+            >
+              <p className={styles.goToAmazonLink}>Claim Your Voucher</p>
+            </CopyToClipboard>
+            {/* <button
               className={styles.button}
               onClick={() =>
                 window.open(
@@ -91,7 +108,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
               }
             >
               Redeem <MdRedeem className={styles.icon} />
-            </button>
+            </button> */}
             {/* <button
               className={styles.button}
               onClick={() => giftCard?.setSelectedGiftcard(giftCard)}

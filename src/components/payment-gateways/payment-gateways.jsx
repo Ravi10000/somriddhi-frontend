@@ -20,7 +20,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
             <p>Checkout With </p>
             <img src="/phonepe-icon-sm.svg" alt="phonepe" />
           </button>
-          <button
+          {/* <button
             className={styles.upiBtn}
             onClick={() => {
               if (isValid) setPaymentMethod("upigateway");
@@ -28,9 +28,10 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
           >
             <p>Checkout With </p>
             <img src="/upigateway-icon.svg" alt="" />
-          </button>
+          </button> */}
         </div>
         <button className={styles.close} onClick={() => close()}>
+          Cancel
           <IoCloseSharp className={styles.icon} />
         </button>
       </div>

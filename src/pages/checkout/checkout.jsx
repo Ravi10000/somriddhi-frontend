@@ -54,6 +54,7 @@ function CheckoutPage({ currentUser, setFlash }) {
     register,
     handleSubmit,
     watch,
+    trigger,
     setValue,
     setError,
     formState: { errors, isValid },
@@ -89,7 +90,7 @@ function CheckoutPage({ currentUser, setFlash }) {
       console.log({ isPhonePe: paymentMethod });
       const { data: transactionData } = await initiateTransaction(data);
       console.log({ transactionData });
-      if (paymentMethod && transactionData.redirectUrl) {
+      if (transactionData?.redirectUrl) {
         window.open(transactionData.redirectUrl, "_blank");
         return;
       }
@@ -159,16 +160,6 @@ function CheckoutPage({ currentUser, setFlash }) {
 
   return (
     <div className={styles.checkoutPage}>
-      {isCheckingOut && (
-        <Backdrop>
-          <div className={styles.loaderContainer}>
-            <h2>Processing purchase </h2>
-            <h3>please wait, it might take a while</h3>
-            <h3>do not close this window.</h3>
-            <div className={styles.loader}></div>
-          </div>
-        </Backdrop>
-      )}
       <h2>Checkout Page</h2>
       <div className={styles.container}>
         <div className={styles.orderDetails}>
@@ -177,7 +168,8 @@ function CheckoutPage({ currentUser, setFlash }) {
             Amazon Shopping Voucher Quantity: <span>{state?.qty}</span>
           </p>
           <p>
-            Amazon Shopping Voucher Price: <span>₹{state?.price}</span>
+            Amazon Shopping Voucher Price:{" "}
+            <span>₹{parseInt(state?.price) * parseInt(state?.qty)}</span>
           </p>
           {!!giftcardDiscount && (
             <p>
@@ -314,10 +306,12 @@ function CheckoutPage({ currentUser, setFlash }) {
           <div className={styles.checkoutBtn}>
             <Button
               onClick={(e) => {
+                trigger();
                 if (!isValid) return;
-                e.preventDefault();
+                // e.preventDefault();
                 setShowPaymentGateway(true);
               }}
+              type="button"
             >
               Checkout
             </Button>
@@ -342,6 +336,16 @@ function CheckoutPage({ currentUser, setFlash }) {
           </div>
         </form>
       </div>
+      {isCheckingOut && (
+        <Backdrop>
+          <div className={styles.loaderContainer}>
+            <h2>Processing purchase </h2>
+            <h3>please wait, it might take a while</h3>
+            <h3>do not close this window.</h3>
+            <div className={styles.loader}></div>
+          </div>
+        </Backdrop>
+      )}
     </div>
   );
 }

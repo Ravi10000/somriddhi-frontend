@@ -15,7 +15,7 @@ function Footer({ currentUser }) {
   const navigate = useNavigate();
   return (
     <footer className="footer-section">
-      <TodquestMessage />
+      {/* <TodquestMessage /> */}
 
       <div className="container">
         <div className="menu">
