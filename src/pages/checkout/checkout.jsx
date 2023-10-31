@@ -87,18 +87,19 @@ function CheckoutPage({ currentUser, setFlash }) {
       data.unitPrice = state?.price;
       data.method = paymentMethod;
       console.log({ data });
-      console.log({ isPhonePe: paymentMethod });
+      console.log({ paymentMethod });
+
       const { data: transactionData } = await initiateTransaction(data);
       console.log({ transactionData });
       if (transactionData?.redirectUrl) {
-        window.open(transactionData.redirectUrl, "_blank");
+        window.open(transactionData?.redirectUrl, "_blank");
         return;
       }
-      window.open(
-        `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${data.mobile}&email=${
-          data.email
-        }&amount=${data.amount}&request_id=${transactionData.transaction._id}`
-      );
+      // window.open(
+      //   `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${data.mobile}&email=${
+      //     data.email
+      //   }&amount=${data.amount}&request_id=${transactionData.transaction._id}`
+      // );
     } catch (err) {
       setFlash({
         message: "Gift Card Purchase Failed",
