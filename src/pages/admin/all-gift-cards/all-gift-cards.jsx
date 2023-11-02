@@ -15,6 +15,13 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { setFlash } from "../../../redux/flash/flash.actions";
 import { connect } from "react-redux";
 import { AiOutlinePercentage } from "react-icons/ai";
+import CustomDatePicker from "../../../components/custom-date-picker/custom-date-picker";
+import Button from "../../../components/button/button";
+import dayjs from "dayjs";
+import { currencyFormator } from "../../../utils/currency-formator";
+import { GoDownload } from "react-icons/go";
+import jsonToExcel from "../../../utils/jsonToExcel";
+import { MdDownloadDone } from "react-icons/md";
 
 function AllGiftCards({ setFlash }) {
   const [isFetching, setIsFetching] = useState(false);
@@ -25,6 +32,10 @@ function AllGiftCards({ setFlash }) {
     useState(false);
   const [isChanging, setIsChanging] = useState(true);
   const [giftcardDiscount, setGiftcardDiscount] = useState(0);
+
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
   async function handleFetchGiftcardDiscount() {
     try {
@@ -82,7 +93,7 @@ function AllGiftCards({ setFlash }) {
   async function handleFetchAllGiftCards() {
     setIsFetching(true);
     try {
-      const res = await getAllGiftCards();
+      const res = await getAllGiftCards(fromDate, toDate);
       console.log({ res });
       if (res.status === 200) {
         const parsedData = res.data.giftCards.map((item, idx) => {
@@ -123,17 +134,37 @@ function AllGiftCards({ setFlash }) {
     handleFetchGiftcardDiscount();
   }, []);
 
+  function downloadReport() {
+    const giftcardJSON = giftCards.map((giftcard) => ({
+      "Order ID": giftcard.orderId,
+      "Transaction ID": giftcard.transaction,
+      "Unit Price": currencyFormator(giftcard.unitPrice),
+      Quantity: giftcard.qty,
+      "Total Amount": currencyFormator(giftcard.totalAmount),
+      Date: dayjs(giftcard.createdAt).format("YYYY-MM-DD"),
+    }));
+    jsonToExcel(giftcardJSON);
+    setIsDownloaded(true);
+    setFlash({
+      type: "success",
+      message: "SVC Report downloaded successfully",
+    });
+    setTimeout(() => {
+      setIsDownloaded(false);
+    }, 3000);
+  }
+
   return (
     <div className={styles.allGiftCards}>
       <form className={styles.head}>
-        {selectedGiftCard && (
+        {/* {selectedGiftCard && (
           <img
             onClick={() => setSelectedGiftCard(null)}
             className={styles.backArrow}
             src="/arrow-left-primary.png"
             alt=""
           />
-        )}
+        )} */}
         <TitleSection
           title="all gift cards"
           noAddButton
@@ -175,19 +206,59 @@ function AllGiftCards({ setFlash }) {
           }
         />
       </form>
+      <div className={styles.rangeAndDownload}>
+        <h3>Select Date Range: </h3>
+        <div className={styles.selectRange}>
+          <div className={styles.datePickers}>
+            <CustomDatePicker
+              label="From"
+              date={fromDate}
+              setDate={setFromDate}
+            />
+            <CustomDatePicker label="To" date={toDate} setDate={setToDate} />
+          </div>
+          <Button
+            onClick={() => {
+              if (
+                fromDate &&
+                toDate &&
+                dayjs(fromDate).isAfter(dayjs(toDate))
+              ) {
+                return setFlash({
+                  type: "error",
+                  message: "From date cannot be after To date",
+                });
+              }
+              handleFetchAllGiftCards();
+            }}
+          >
+            Search
+          </Button>
+        </div>
+        <Button onClick={downloadReport}>
+          Download Report{" "}
+          {!isDownloaded ? (
+            <GoDownload style={{ height: "20px", width: "fit-content" }} />
+          ) : (
+            <MdDownloadDone style={{ height: "20px", width: "fit-content" }} />
+          )}
+        </Button>
+      </div>
       {!selectedGiftCard ? (
         <div className={styles.tableContainer}>
-          <table className={styles.table}>
+          <table className={styles.table} style={{ maxWidth: "fit-content" }}>
             <thead>
               <tr>
                 <th>Order ID</th>
-                <th>User Name</th>
-                <th>User Email</th>
-                <th>User Phone No.</th>
+                {/* <th>User Name</th> */}
+                <th>Transaction ID</th>
+                {/* <th>User Email</th> */}
+                {/* <th>User Phone No.</th> */}
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Total Amount</th>
-                <th>Status</th>
+                <th>Date</th>
+                {/* <th>Status</th> */}
               </tr>
             </thead>
             {isFetching ? (
@@ -197,18 +268,21 @@ function AllGiftCards({ setFlash }) {
             ) : (
               <tbody>
                 {giftCards?.map((giftCard, index) => (
-                  <tr key={index} onClick={() => setSelectedGiftCard(giftCard)}>
+                  // <tr key={index} onClick={() => setSelectedGiftCard(giftCard)}>
+                  <tr key={giftCard._id}>
                     <td>{giftCard.orderId}</td>
-                    <td>
+                    {/* <td>
                       {giftCard.requestBody.address.firstname}{" "}
                       {giftCard.requestBody.address.lastname}
-                    </td>
-                    <td>{giftCard.requestBody.address.email}</td>
-                    <td>{giftCard.requestBody.address.telephone}</td>
-                    <td>{giftCard.unitPrice}</td>
+                    </td> */}
+                    <td>{giftCard?.transaction}</td>
+                    {/* <td>{giftCard.requestBody.address.email}</td> */}
+                    {/* <td>{giftCard.requestBody.address.telephone}</td> */}
+                    <td>{currencyFormator(giftCard.unitPrice)}</td>
                     <td>&times; {giftCard.qty}</td>
-                    <td>{giftCard.totalAmount}</td>
-                    <td>{giftCard.status}</td>
+                    <td>{currencyFormator(giftCard.totalAmount)}</td>
+                    <td>{dayjs(giftCard.createdAt).format("YYYY-MM-DD")}</td>
+                    {/* <td>{giftCard.status}</td> */}
                   </tr>
                 ))}
               </tbody>

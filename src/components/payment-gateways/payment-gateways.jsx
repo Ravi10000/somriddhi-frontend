@@ -26,8 +26,8 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
               if (isValid) setPaymentMethod("upigateway");
             }}
           >
-            <p>Checkout With </p>
-            <img src="/upigateway-icon.svg" alt="" />
+            {/* <p>Checkout With </p> */}
+            <img src="/UPI.svg" alt="" />
           </button>
         </div>
         <button className={styles.close} onClick={() => close()}>

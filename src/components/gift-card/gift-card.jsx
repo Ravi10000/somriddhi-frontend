@@ -88,10 +88,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
                   type: "success",
                 });
                 setTimeout(() => {
-                  open(
-                    `https://www.amazon.in/apay-products/apv/landing`,
-                    "__blank"
-                  );
+                  open(`https://www.amazon.in/vouchers`, "__blank");
                 }, 1000);
               }}
             >

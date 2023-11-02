@@ -469,12 +469,15 @@ export const getActivatedCards = (orderId) =>
     },
   });
 
-export const getAllGiftCards = () =>
-  axios.get("/getallgiftcards", {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
-  });
+export const getAllGiftCards = (from, to) =>
+  axios.get(
+    `/getallgiftcards?${from ? `from=${from}&` : ""}${to ? `to=${to}` : ""}`,
+    {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    }
+  );
 
 export const getPincodeDetails = (pincode) =>
   axios.get(`https://api.postalpincode.in/pincode/${pincode}`);
