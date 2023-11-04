@@ -137,6 +137,12 @@ function AllGiftCards({ setFlash }) {
   function downloadReport() {
     const giftcardJSON = giftCards.map((giftcard) => ({
       "Order ID": giftcard.orderId,
+      "User Name":
+        giftcard.requestBody.address.firstname +
+        " " +
+        giftcard.requestBody.address.lastname,
+      "User Email": giftcard.requestBody.address.email,
+      "Phone Number": giftcard.requestBody.address.telephone,
       "Transaction ID": giftcard.transaction,
       "Unit Price": currencyFormator(giftcard.unitPrice),
       Quantity: giftcard.qty,
@@ -250,10 +256,10 @@ function AllGiftCards({ setFlash }) {
             <thead>
               <tr>
                 <th>Order ID</th>
-                {/* <th>User Name</th> */}
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>User Phone No.</th>
                 <th>Transaction ID</th>
-                {/* <th>User Email</th> */}
-                {/* <th>User Phone No.</th> */}
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Total Amount</th>
@@ -271,13 +277,13 @@ function AllGiftCards({ setFlash }) {
                   // <tr key={index} onClick={() => setSelectedGiftCard(giftCard)}>
                   <tr key={giftCard._id}>
                     <td>{giftCard.orderId}</td>
-                    {/* <td>
+                    <td>
                       {giftCard.requestBody.address.firstname}{" "}
                       {giftCard.requestBody.address.lastname}
-                    </td> */}
+                    </td>
+                    <td>{giftCard.requestBody.address.email}</td>
+                    <td>{giftCard.requestBody.address.telephone}</td>
                     <td>{giftCard?.transaction}</td>
-                    {/* <td>{giftCard.requestBody.address.email}</td> */}
-                    {/* <td>{giftCard.requestBody.address.telephone}</td> */}
                     <td>{currencyFormator(giftCard.unitPrice)}</td>
                     <td>&times; {giftCard.qty}</td>
                     <td>{currencyFormator(giftCard.totalAmount)}</td>
