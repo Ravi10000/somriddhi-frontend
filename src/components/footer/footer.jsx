@@ -67,7 +67,7 @@ function Footer({ currentUser }) {
               <img src="/nav-arrow.png" alt={"privacy-policy"} />
               <p>Privacy Policy</p>
             </div>
-            <div
+            {/* <div
               className="menu-item"
               onClick={() => {
                 navigate("/admin");
@@ -75,7 +75,7 @@ function Footer({ currentUser }) {
             >
               <img src="/nav-arrow.png" alt={"about"} />
               <p>Admin Login</p>
-            </div>
+            </div> */}
           </div>
           {/* {navList.map(({ title, navItems }) => (
             <NavMenu navTitle={title} navItems={navItems} key={title} />
