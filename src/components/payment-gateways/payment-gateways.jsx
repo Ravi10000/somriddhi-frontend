@@ -14,7 +14,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
           <button
             className={styles.phonepeBtn}
             onClick={() => {
-              if (isValid) setPaymentMethod("phonepe");
+              setPaymentMethod("phonepe");
             }}
           >
             <p>Checkout With </p>
@@ -23,7 +23,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
           <button
             className={styles.upiBtn}
             onClick={() => {
-              if (isValid) setPaymentMethod("upigateway");
+              setPaymentMethod("upigateway");
             }}
           >
             {/* <p>Checkout With </p> */}

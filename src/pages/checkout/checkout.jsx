@@ -23,7 +23,6 @@ function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [showPaymentGateway, setShowPaymentGateway] = useState(false);
-  // const [is]
   const [isSearching, setIsSearching] = useState(false);
   const [giftcardDiscount, setGiftcardDiscount] = useState(0);
   const checkoutSchema = z.object({
@@ -101,11 +100,19 @@ function CheckoutPage({ currentUser, setFlash }) {
       //   }&amount=${data.amount}&request_id=${transactionData.transaction._id}`
       // );
     } catch (err) {
+      console.log({ err });
+      console.log({ data: err?.response?.data });
+      if (err?.response?.data?.message === "limit exceeded") {
+        setFlash({
+          type: "warning",
+          message: err?.response?.data?.flashMessage,
+        });
+        return;
+      }
       setFlash({
         message: "Gift Card Purchase Failed",
         type: "error",
       });
-      console.log(err);
     } finally {
       setIsCheckingOut(false);
       setPaymentMethod(null);

@@ -15,10 +15,18 @@ import { currencyFormator } from "../../utils/currency-formator";
 
 function GiftCardPage({ setFlash }) {
   const [giftCards, setGiftCards] = useState([]);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
   let { price } = useParams();
   price = parseInt(price);
+
+  const [qtyLimit, setQtyLimit] = useState(() => {
+    if (price <= 2000) return 5;
+    if (price <= 5000) return 2;
+    if (price <= 10000) return 1;
+    if (price > 10000) return 0;
+  });
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   // const { giftCard } = state;
   // const giftCard = { price: 1, _id: 1 };
   const [quantity, setQuantity] = useState(1);
@@ -54,16 +62,26 @@ function GiftCardPage({ setFlash }) {
   useEffect(() => {
     handleFetchGiftCards();
   }, []);
-  console.log({ total });
-  console.log({ quantity });
   useEffect(() => {
+    if (quantity > qtyLimit) {
+      setFlash({
+        type: "warning",
+        message: `You can buy maximum ${qtyLimit} ${currencyFormator(
+          price
+        )} vouchers.`,
+      });
+      setQuantity(qtyLimit);
+      return;
+    }
     const newTotal = parseInt(price) * parseInt(quantity);
     if (!(newTotal > 10000)) return setTotal(newTotal);
-    setFlash({
-      type: "warning",
-      message: "₹10000 is the maximum amount you can buy at once.",
-    });
-    setQuantity((prevQty) => prevQty - 1);
+    // const newTotal = parseInt(price) * parseInt(quantity);
+    // if (!(newTotal > 10000)) return setTotal(newTotal);
+    // setFlash({
+    //   type: "warning",
+    //   message: "₹10000 is the maximum amount you can buy at once.",
+    // });
+    // setQuantity((prevQty) => prevQty - 1);
   }, [quantity]);
 
   // useEffect(() => {
@@ -170,7 +188,12 @@ function GiftCardPage({ setFlash }) {
         <div className={styles.description}>
           <div ref={tncRef}></div>
           Read More: &nbsp;
-          <a ref={tncLinkRef} target="_blank" rel="noopener noreferrer" style={{color: "red"}}></a>
+          <a
+            ref={tncLinkRef}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "red" }}
+          ></a>
         </div>
       </div>
     </>
