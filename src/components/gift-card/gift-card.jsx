@@ -43,9 +43,7 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
         <span className={styles.seperator}></span>
         <p className={styles.price}>{currencyFormator(giftCard?.price)}</p>
       </div>
-      {!giftCard?.cardNumber ? (
-        <p className={styles.endMessage}>Your personal message!</p>
-      ) : (
+      {!giftCard?.cardNumber && (
         <div className={styles.cardInfoContainer}>
           <div className={styles.cardInfo}>
             <p>

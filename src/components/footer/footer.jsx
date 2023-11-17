@@ -116,7 +116,7 @@ function Footer({ currentUser }) {
         </div>
       </div>
       <p className="copyright">
-        &copy; copyright somriddhi digital | all rights reserved
+        &copy; Copyright - Somriddhi Digital Pvt Ltd | All rights reserved
       </p>
     </footer>
   );
