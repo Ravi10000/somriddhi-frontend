@@ -179,14 +179,21 @@ function GiftCardPage({ setFlash }) {
       </div>
       <div className={styles.list}>
         <h3>About Amazon Shopping Voucher</h3>
-        <div className={styles.description} ref={descriptionRef}>
+        <div
+          className={styles.description}
+          ref={descriptionRef}
+          style={{ fontSize: "16px", fontWeight: "normal" }}
+        >
           {/* <div ref={descriptionRef}></div> */}
         </div>
       </div>
       <div className={styles.list}>
         <h3>Terms and Conditions</h3>
         <div className={styles.description}>
-          <div ref={tncRef}></div>
+          <div
+            ref={tncRef}
+            style={{ fontSize: "16px", fontWeight: "normal" }}
+          ></div>
           Read More: &nbsp;
           <a
             ref={tncLinkRef}

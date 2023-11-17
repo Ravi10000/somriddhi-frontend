@@ -275,6 +275,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                   ...register("district"),
                 }}
                 error={errors?.district?.message}
+                readOnly
               />
               <TextInput
                 label="State"
@@ -282,6 +283,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                   ...register("state"),
                 }}
                 error={errors?.state?.message}
+                readOnly
               />
             </div>
           </div>

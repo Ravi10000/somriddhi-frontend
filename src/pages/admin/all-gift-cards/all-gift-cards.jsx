@@ -22,10 +22,14 @@ import { currencyFormator } from "../../../utils/currency-formator";
 import { GoDownload } from "react-icons/go";
 import jsonToExcel from "../../../utils/jsonToExcel";
 import { MdDownloadDone } from "react-icons/md";
+import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 
 function AllGiftCards({ setFlash }) {
   const [isFetching, setIsFetching] = useState(false);
   const [giftCards, setGiftCards] = useState([]);
+  const [skip, setSkip] = useState(0);
+  const [totalGiftcards, setTotalGiftcards] = useState(0);
+  console.table({ totalGiftcards, skip });
   const [selectedGiftCard, setSelectedGiftCard] = useState(null);
   const [activatedCards, setActivatedCards] = useState([]);
   const [isFetchingActivatedCards, setIsFetchingActivatedCards] =
@@ -91,9 +95,10 @@ function AllGiftCards({ setFlash }) {
     }
   }
   async function handleFetchAllGiftCards() {
+    console.log({ skip });
     setIsFetching(true);
     try {
-      const res = await getAllGiftCards(fromDate, toDate);
+      const res = await getAllGiftCards(fromDate, toDate, skip);
       console.log({ res });
       if (res.status === 200) {
         const parsedData = res.data.giftCards.map((item, idx) => {
@@ -101,6 +106,33 @@ function AllGiftCards({ setFlash }) {
           return item;
         });
         setGiftCards(parsedData);
+        setSkip(Math.min(25, res.data.giftcardsCount));
+        setTotalGiftcards(res.data.giftcardsCount);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsFetching(false);
+    }
+  }
+  async function handleFetchNextGiftCards() {
+    if (skip >= totalGiftcards) {
+      return setFlash({
+        type: "warning",
+        message: "No more giftcards to fetch",
+      });
+    }
+    setIsFetching(true);
+    try {
+      const res = await getAllGiftCards(fromDate, toDate, skip);
+      console.log({ res });
+      if (res.status === 200) {
+        const parsedData = res.data.giftCards.map((item, idx) => {
+          item.requestBody = JSON.parse(item.requestBody);
+          return item;
+        });
+        setGiftCards(parsedData);
+        setSkip((ps) => Math.min(parseInt(ps) + 25, totalGiftcards));
       }
     } catch (err) {
       console.log(err);
@@ -134,31 +166,45 @@ function AllGiftCards({ setFlash }) {
     handleFetchGiftcardDiscount();
   }, []);
 
-  function downloadReport() {
-    const giftcardJSON = giftCards.map((giftcard) => ({
-      "Order ID": giftcard.orderId,
-      "User Name":
-        giftcard.requestBody.address.firstname +
-        " " +
-        giftcard.requestBody.address.lastname,
-      "User Email": giftcard.requestBody.address.email,
-      "Phone Number": giftcard.requestBody.address.telephone,
-      "Transaction ID": giftcard.transaction,
-      "Unit Price": currencyFormator(giftcard.unitPrice),
-      Quantity: giftcard.qty,
-      "Total Amount": currencyFormator(giftcard.totalAmount),
-      Date: dayjs(giftcard.createdAt).format("YYYY-MM-DD"),
-    }));
-    jsonToExcel(giftcardJSON);
-    setIsDownloaded(true);
-    setFlash({
-      type: "success",
-      message: "SVC Report downloaded successfully",
-    });
-    setTimeout(() => {
-      setIsDownloaded(false);
-    }, 3000);
+  async function downloadReport() {
+    try {
+      const res = await getAllGiftCards(fromDate, toDate, 0, 0);
+      const giftCards = res?.data?.giftCards.map((item, idx) => {
+        item.requestBody = JSON.parse(item.requestBody);
+        return item;
+      });
+      const giftcardJSON = giftCards.map((giftcard) => ({
+        "Order ID": giftcard.orderId,
+        "User Name":
+          giftcard.requestBody.address.firstname +
+          " " +
+          giftcard.requestBody.address.lastname,
+        "User Email": giftcard.requestBody.address.email,
+        "Phone Number": giftcard.requestBody.address.telephone,
+        "Transaction ID": giftcard.transaction,
+        "Unit Price": currencyFormator(giftcard.unitPrice),
+        Quantity: giftcard.qty,
+        "Total Amount": currencyFormator(giftcard.totalAmount),
+        Date: dayjs(giftcard.createdAt).format("YYYY-MM-DD"),
+      }));
+      jsonToExcel(giftcardJSON);
+      setIsDownloaded(true);
+      setFlash({
+        type: "success",
+        message: "SVC Report downloaded successfully",
+      });
+      setTimeout(() => {
+        setIsDownloaded(false);
+      }, 3000);
+    } catch (err) {}
   }
+
+  useEffect(() => {
+    console.table({ fromDate, toDate, skip });
+    if (fromDate || toDate) {
+      setSkip(0);
+    }
+  }, [fromDate, toDate]);
 
   return (
     <div className={styles.allGiftCards}>
@@ -214,112 +260,157 @@ function AllGiftCards({ setFlash }) {
       </form>
       <div className={styles.rangeAndDownload}>
         <h3>Select Date Range: </h3>
-        <div className={styles.selectRange}>
-          <div className={styles.datePickers}>
-            <CustomDatePicker
-              label="From"
-              date={fromDate}
-              setDate={setFromDate}
-            />
-            <CustomDatePicker label="To" date={toDate} setDate={setToDate} />
+        <div className={styles["download_flex_box"]}>
+          <div className={styles.selectRange}>
+            <div className={styles.datePickers}>
+              <CustomDatePicker
+                label="From"
+                date={fromDate}
+                setDate={setFromDate}
+              />
+              <CustomDatePicker label="To" date={toDate} setDate={setToDate} />
+            </div>
+            <Button
+              onClick={() => {
+                if (
+                  fromDate &&
+                  toDate &&
+                  dayjs(fromDate).isAfter(dayjs(toDate))
+                ) {
+                  return setFlash({
+                    type: "error",
+                    message: "From date cannot be after To date",
+                  });
+                }
+                handleFetchAllGiftCards();
+              }}
+            >
+              Search
+            </Button>
           </div>
-          <Button
-            onClick={() => {
-              if (
-                fromDate &&
-                toDate &&
-                dayjs(fromDate).isAfter(dayjs(toDate))
-              ) {
-                return setFlash({
-                  type: "error",
-                  message: "From date cannot be after To date",
-                });
-              }
-              handleFetchAllGiftCards();
-            }}
-          >
-            Search
+          <Button onClick={downloadReport}>
+            Download Report{" "}
+            {!isDownloaded ? (
+              // <GoDownload style={{ height: "20px", width: "fit-content" }} />
+              <GoDownload />
+            ) : (
+              <MdDownloadDone
+              // style={{ height: "20px", width: "fit-content" }}
+              />
+            )}
           </Button>
         </div>
-        <Button onClick={downloadReport}>
-          Download Report{" "}
-          {!isDownloaded ? (
-            <GoDownload style={{ height: "20px", width: "fit-content" }} />
-          ) : (
-            <MdDownloadDone style={{ height: "20px", width: "fit-content" }} />
-          )}
-        </Button>
       </div>
-      {!selectedGiftCard ? (
-        <div className={styles.tableContainer}>
-          <table className={styles.table} style={{ maxWidth: "fit-content" }}>
-            <thead>
-              <tr>
-                <th>Order ID</th>
-                <th>User Name</th>
-                <th>User Email</th>
-                <th>User Phone No.</th>
-                <th>Transaction ID</th>
-                <th>Unit Price</th>
-                <th>Quantity</th>
-                <th>Total Amount</th>
-                <th>Date</th>
-                {/* <th>Status</th> */}
-              </tr>
-            </thead>
-            {isFetching ? (
-              <div className={styles.loaderContainer}>
-                <div className={styles.loader}></div>
-              </div>
-            ) : (
-              <tbody>
-                {giftCards?.map((giftCard, index) => (
-                  // <tr key={index} onClick={() => setSelectedGiftCard(giftCard)}>
-                  <tr key={giftCard._id}>
-                    <td>{giftCard.orderId}</td>
-                    <td>
-                      {giftCard.requestBody.address.firstname}{" "}
-                      {giftCard.requestBody.address.lastname}
-                    </td>
-                    <td>{giftCard.requestBody.address.email}</td>
-                    <td>{giftCard.requestBody.address.telephone}</td>
-                    <td>{giftCard?.transaction}</td>
-                    <td>{currencyFormator(giftCard.unitPrice)}</td>
-                    <td>&times; {giftCard.qty}</td>
-                    <td>{currencyFormator(giftCard.totalAmount)}</td>
-                    <td>{dayjs(giftCard.createdAt).format("YYYY-MM-DD")}</td>
-                    {/* <td>{giftCard.status}</td> */}
-                  </tr>
-                ))}
-              </tbody>
-            )}
-          </table>
-        </div>
-      ) : isFetchingActivatedCards ? (
-        <div className={styles.loaderContainer}>
-          <div className={styles.loader}></div>
-        </div>
-      ) : (
-        <div className={styles.oneGiftCard}>
-          {activatedCards?.map((card, index) => (
-            <GiftCard
-              noImage
-              key={index}
-              large
-              nonClickable
-              giftCard={{
-                price: selectedGiftCard?.unitPrice,
-                image: getRandomImage(),
-                cardNumber: card?.cardNumber,
-                cardPin: card?.cardPin,
-              }}
-            />
-          ))}
-          <div className={styles.details}>
-            <p></p>
-          </div>
-        </div>
-      )}
+      {/* {!selectedGiftCard ? ( */}
+      <div className={styles.tableContainer}>
+        <table className={styles.table} style={{ maxWidth: "fit-content" }}>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>User Phone No.</th>
+              <th>Transaction ID</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total Amount</th>
+              <th>Date</th>
+              {/* <th>Status</th> */}
+            </tr>
+          </thead>
+          {isFetching ? (
+            <div className={styles.loaderContainer}>
+              <div className={styles.loader}></div>
+            </div>
+          ) : (
+            <tbody>
+              {giftCards?.map((giftCard, index) => (
+                // <tr key={index} onClick={() => setSelectedGiftCard(giftCard)}>
+                <tr key={giftCard._id}>
+                  <td>{giftCard.orderId}</td>
+                  <td>
+                    {giftCard.requestBody.address.firstname}{" "}
+                    {giftCard.requestBody.address.lastname}
+                  </td>
+                  <td>{giftCard.requestBody.address.email}</td>
+                  <td>{giftCard.requestBody.address.telephone}</td>
+                  <td>{giftCard?.transaction}</td>
+                  <td>{currencyFormator(giftCard.unitPrice)}</td>
+                  <td>&times; {giftCard.qty}</td>
+                  <td>{currencyFormator(giftCard.totalAmount)}</td>
+                  <td>{dayjs(giftCard.createdAt).format("YYYY-MM-DD")}</td>
+                  {/* <td>{giftCard.status}</td> */}
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+      </div>
+      <div
+        className="__pagination"
+        style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          paddingRight: "20px",
+          marginBottom: "20px",
+        }}
+      >
+        <button
+          style={{
+            padding: "10px 15px 10px 15px",
+            backgroundColor: "lightgray",
+            display: "grid",
+            placeContent: "center",
+          }}
+        >
+          <GrLinkPrevious />
+        </button>
+        {!isFetching ? (
+          <>
+            {skip - 25 + 1}-{skip - 25 + giftCards?.length} of {totalGiftcards}
+          </>
+        ) : (
+          "_ - _ of _"
+        )}
+        <button
+          style={{
+            padding: "10px 15px 10px 15px",
+            backgroundColor: "lightgray",
+            display: "grid",
+            placeContent: "center",
+          }}
+          onClick={handleFetchNextGiftCards}
+        >
+          <GrLinkNext />
+        </button>
+      </div>
+      {/* // ) : isFetchingActivatedCards ? (
+      //   <div className={styles.loaderContainer}>
+      //     <div className={styles.loader}></div>
+      //   </div>
+      // ) : (
+      //   <div className={styles.oneGiftCard}>
+      //     {activatedCards?.map((card, index) => (
+      //       <GiftCard
+      //         noImage
+      //         key={index}
+      //         large
+      //         nonClickable
+      //         giftCard={{
+      //           price: selectedGiftCard?.unitPrice,
+      //           image: getRandomImage(),
+      //           cardNumber: card?.cardNumber,
+      //           cardPin: card?.cardPin,
+      //         }}
+      //       />
+      //     ))}
+      //     <div className={styles.details}>
+      //       <p></p>
+      //     </div>
+      //   </div>
+      // )} */}
     </div>
   );
 }

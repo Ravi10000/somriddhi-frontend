@@ -469,9 +469,11 @@ export const getActivatedCards = (orderId) =>
     },
   });
 
-export const getAllGiftCards = (from, to) =>
+export const getAllGiftCards = (from, to, skip, limit) =>
   axios.get(
-    `/getallgiftcards?${from ? `from=${from}&` : ""}${to ? `to=${to}` : ""}`,
+    `/getallgiftcards?${from ? `from=${from}&` : ""}${to ? `to=${to}&` : ""}${
+      skip ? `skip=${skip}&` : ""
+    }${limit || limit == 0 ? `limit=${limit}&` : ""}`,
     {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
