@@ -29,7 +29,12 @@ function GiftCard({ giftCard, large, nonClickable, setFlash, noImage }) {
           alt=""
         />
       )}
-      <div className={styles.titleAndPriceContainer}>
+      <div
+        className={styles.titleAndPriceContainer}
+        style={{
+          ...(giftCard?.cardNumber && { borderBottom: "1px solid #ddd" }),
+        }}
+      >
         <div className={styles.titleContainer}>
           <img
             className={styles.logo}
