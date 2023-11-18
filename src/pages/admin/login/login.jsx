@@ -34,7 +34,7 @@ function AdminLoginPage({ setCurrentUser, currentUser, setFlash }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
     // defaultValues: {
@@ -111,7 +111,11 @@ function AdminLoginPage({ setCurrentUser, currentUser, setFlash }) {
             <p>forgot password?</p>
           </button>
         </div>
-        <Button style={{ width: "100%" }} form="admin-login">
+        <Button
+          style={{ width: "100%" }}
+          form="admin-login"
+          isLoading={isSubmitting}
+        >
           <span>Login</span>
           <BiLogInCircle />
         </Button>

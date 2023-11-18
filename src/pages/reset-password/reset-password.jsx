@@ -47,9 +47,9 @@ function ResetPasswordPage({ setFlash }) {
       console.log({ res });
       setFlash({
         type: "success",
-        message: "Password reset link sent to email",
+        message: "Password reset successfully",
       });
-      close();
+      navigate("/admin/login");
     } catch (err) {
       console.log({ err });
       setFlash({
