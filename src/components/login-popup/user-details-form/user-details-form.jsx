@@ -9,6 +9,10 @@ import { checkIfSubscribed, createUser } from "../../../api/index";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { setFlash } from "../../../redux/flash/flash.actions";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import TextInput from "../../text-input/text-input";
 
 function UserDetailsForm({
   nextStage,
@@ -19,10 +23,47 @@ function UserDetailsForm({
   setFlash,
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [entity, setEntity] = useState("individual");
+  const schema = z
+    .object({
+      fname: z.string().nonempty({ message: "First Name is required" }),
+      lname: z.string().nonempty({ message: "Last Name is required" }),
+      email: z
+        .string()
+        .nonempty({ message: "Email is required" })
+        .email("Invalid Email"),
+      entity: z.string().nonempty({ message: "Entity is required" }),
+      panNo: z.string().optional(),
+      referredBy: z.string().optional(),
+    })
+    .refine(
+      (data) => {
+        let isBusiness = entity === "business";
+        if (!isBusiness) return true;
+        console.log({ data });
+        let isValidPan = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(
+          data?.panNo?.toUpperCase()
+        );
+        console.log({ isValidPan });
+        return isValidPan;
+      },
+      {
+        message: "invalid PAN No.",
+        path: ["panNo"],
+      }
+    );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(schema) });
+  console.log({ errors });
+  console.log({ entity });
 
-  async function submitForm(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
+  async function udpateUserDetails(formData) {
+    console.table(formData);
+    // const formData = new FormData(e.target);
+    // formData.append("entity", entity);
     // formData.append("usertype", "customer");
     try {
       setIsLoading(true);
@@ -52,38 +93,86 @@ function UserDetailsForm({
 
   return (
     <form
-      onSubmit={submitForm}
+      onSubmit={handleSubmit(udpateUserDetails)}
       id={styles["user-input"]}
-      encType="application/json"
+      noValidate
     >
       <h1 className={styles["title"]}>Your Phone Number</h1>
       <div className={styles["inputs-container"]}>
-        <input
-          required
-          name="fname"
+        <TextInput
           className={styles["user-details-input"]}
           placeholder="First name"
           onInput={(e) =>
             (e.target.value = e.target.value.replace(/[^A-Za-z]/g, ""))
           }
+          register={{ ...register("fname") }}
+          error={errors?.fname?.message}
         />
-        <input
-          required
+        <TextInput
           className={styles["user-details-input"]}
-          pattern="[A-Za-z]+"
-          name="lname"
           placeholder="Last name"
           onInput={(e) =>
             (e.target.value = e.target.value.replace(/[^A-Za-z]/g, ""))
           }
+          register={{ ...register("lname") }}
+          error={errors?.lname?.message}
         />
-        <input
-          required
+        <TextInput
           className={styles["user-details-input"]}
           placeholder="Email"
-          type="email"
-          name="email"
+          register={{ ...register("email") }}
+          error={errors?.email?.message}
         />
+        <div className={styles.entityRadioButtons}>
+          <label
+            htmlFor="individual"
+            className={`${styles.radioContainer} ${
+              entity === "individual" && styles.active
+            }`}
+            onClick={() => setEntity("individual")}
+          >
+            <input
+              type="radio"
+              id="individual"
+              checked={entity === "individual"}
+              className={styles.radio}
+              readOnly
+              value="individual"
+              {...register("entity")}
+            />
+            <p>Individual</p>
+          </label>
+          <label
+            htmlFor="business"
+            className={`${styles.radioContainer} ${
+              entity === "business" && styles.active
+            }`}
+            onClick={() => setEntity("business")}
+          >
+            <input
+              type="radio"
+              id="business"
+              className={styles.radio}
+              checked={entity === "business"}
+              value="business"
+              readOnly
+              {...register("entity")}
+            />
+            <p>Business</p>
+          </label>
+        </div>
+        {entity === "business" && (
+          <TextInput
+            inputStyle={{ textTransform: "uppercase" }}
+            className={styles["user-details-input"]}
+            placeholder="PAN No.*"
+            // maxLength="10"
+            // minLength="10"
+            register={{ ...register("panNo") }}
+            error={errors?.panNo?.message}
+            // pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+          />
+        )}
         <input
           name="referredBy"
           placeholder="Referral Code"

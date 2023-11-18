@@ -7,6 +7,7 @@ export const useLoginModal = () => useContext(LoginModalContext);
 export default function LoginModalProvider({ children }) {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(true);
   const closeModal = () => {
     setModalOpen(false);
     // navigate("/");

@@ -140,6 +140,31 @@ function AllGiftCards({ setFlash }) {
       setIsFetching(false);
     }
   }
+  async function handleFetchPrevGiftCards() {
+    if (skip === 25) {
+      return setFlash({
+        type: "warning",
+        message: "No Previos giftcards to fetch",
+      });
+    }
+    setIsFetching(true);
+    try {
+      const res = await getAllGiftCards(fromDate, toDate, skip - 25);
+      console.log({ res });
+      if (res.status === 200) {
+        const parsedData = res.data.giftCards.map((item, idx) => {
+          item.requestBody = JSON.parse(item.requestBody);
+          return item;
+        });
+        setGiftCards(parsedData);
+        setSkip(skip - 25);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsFetching(false);
+    }
+  }
 
   async function handleFetchActivatedCards() {
     setIsFetchingActivatedCards(true);
@@ -364,12 +389,13 @@ function AllGiftCards({ setFlash }) {
             display: "grid",
             placeContent: "center",
           }}
+          onClick={handleFetchPrevGiftCards}
         >
           <GrLinkPrevious />
         </button>
         {!isFetching ? (
           <>
-            {skip - 25 + 1}-{skip - 25 + giftCards?.length} of {totalGiftcards}
+            {skip - giftCards?.length + 1}-{skip} of {totalGiftcards}
           </>
         ) : (
           "_ - _ of _"

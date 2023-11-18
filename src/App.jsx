@@ -21,7 +21,7 @@ import Flash from "./components/flash/flash";
 import ProtectedRoute from "./components/protected-route/protected-route";
 
 // redux actions
-import { setCurrentUser } from "./redux/user/user.actions";
+import { setCurrentUser, setIsFetching } from "./redux/user/user.actions";
 
 // redux selectors
 import { selectFlash } from "./redux/flash/flash.selectors";
@@ -30,6 +30,7 @@ import { selectFlash } from "./redux/flash/flash.selectors";
 import { getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 import LoadingPage from "./pages/loading/loading";
+import AdminLoginPage from "./pages/admin/login/login";
 const GiftCardPage = lazy(() =>
   import("./pages/gift-card-page/gift-card-page")
 );
@@ -54,18 +55,21 @@ const PaymentStatusPage = lazy(() =>
   import("./pages/payment-status/payment-status")
 );
 
-function App({ setCurrentUser, flash }) {
+function App({ setCurrentUser, setIsFetching, flash }) {
   const modal = useLoginModal();
   const { pathname } = useLocation();
   async function fetchUser() {
     try {
+      setIsFetching(true);
       const response = await getUser();
       console.log({ user: response });
       if (response.data.status === "success") {
-        setCurrentUser(response.data.user);
+        await setCurrentUser(response.data.user);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsFetching(false);
     }
   }
 
@@ -90,22 +94,15 @@ function App({ setCurrentUser, flash }) {
           <Route
             path="/admin"
             element={
-              <ProtectAdminRoute>
-                <Navigate to="/admin/banners" replace />
-              </ProtectAdminRoute>
+              // <ProtectAdminRoute>
+              <Navigate to="/admin/banners" replace />
+              // </ProtectAdminRoute>
             }
           />
 
+          <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route
             path="/admin/:tab"
-            element={
-              <ProtectAdminRoute>
-                <AdminPage />
-              </ProtectAdminRoute>
-            }
-          />
-          <Route
-            path="/admin"
             element={
               <ProtectAdminRoute>
                 <AdminPage />
@@ -182,6 +179,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setIsFetching: (isFetching) => dispatch(setIsFetching(isFetching)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,7 +1,7 @@
 import UserActionTypes from "./user.types";
 const initialState = {
   currentUser: null,
-  isFetching: false,
+  isFetching: true,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -10,6 +10,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         currentUser: action.payload,
+      };
+    case UserActionTypes.SET_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.payload,
       };
     default:
       return state;

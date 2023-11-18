@@ -12,6 +12,7 @@ import SubscribeForm from "../subscribe-form/subscribe-form";
 const loginStages = ["phone-entry", "verify-otp", "user-details", "subscribe"];
 
 function LoginPopup({ closeModal, admin }) {
+  // const [currentLoginStage, setCurrentLoginStage] = useState(0);
   const [currentLoginStage, setCurrentLoginStage] = useState(0);
   const [phone, setPhone] = useState("");
 

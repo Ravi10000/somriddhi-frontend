@@ -60,16 +60,16 @@ function OtpForm({ phone, nextStage, setCurrentUser, closeModal, setFlash }) {
       } else if (response.data.status === "success") {
         const { user } = response.data;
         setCurrentUser(user);
-        if (user?.usertype === "admin") {
-          navigate("/admin/banners");
-          setFlash({
-            type: "success",
-            message: "Admin Logged in successfully",
-          });
-          return closeModal();
-        } else {
-          navigate("/");
-        }
+        // if (user?.usertype === "admin") {
+        //   navigate("/admin/banners");
+        //   setFlash({
+        //     type: "success",
+        //     message: "Admin Logged in successfully",
+        //   });
+        //   return closeModal();
+        // } else {
+        //   navigate("/");
+        // }
         setFlash({ message: "Logged in successfully", type: "success" });
         if (!user?.email) {
           return nextStage();

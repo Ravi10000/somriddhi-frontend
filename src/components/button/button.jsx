@@ -3,6 +3,7 @@ export default function Button({
   children,
   disabled,
   isLoading,
+  style,
   ...otherProps
 }) {
   return (
@@ -10,6 +11,7 @@ export default function Button({
       className={`${styles.button} ${
         (disabled || isLoading) && styles.disabled
       }`}
+      style={style}
       disabled={disabled || isLoading}
       {...otherProps}
     >

@@ -2,25 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import AdminPage from "../admin/admin.page";
 import AdminLogin from "../admin-login/admin-login";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import {
+  selectCurrentUser,
+  selectIsFetching,
+} from "../../redux/user/user.selectors";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { useLoginModal } from "../../context/login-modal-context";
-function ProtectAdminRoute({ children, currentUser }) {
+import LoadingPage from "../loading/loading";
+function ProtectAdminRoute({ children, currentUser, isFetching }) {
   const modal = useLoginModal();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log({ userInProtectRoute: currentUser });
-    currentUser?.usertype === "customer" && navigate("/profile");
-    currentUser?.usertype === "admin" ? modal.closeModal() : modal.openModal();
-  }, [currentUser]);
+    console.log({ currentUser, isFetching });
+    !isFetching &&
+      currentUser?.usertype !== "admin" &&
+      navigate("/admin/login");
+  }, [currentUser, isFetching]);
 
-  // return <>protected route</>;
-  return <>{currentUser?.usertype === "admin" && children}</>;
+  return <>{currentUser?.usertype === "admin" ? children : <LoadingPage />}</>;
 }
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  isFetching: selectIsFetching,
 });
 export default connect(mapStateToProps, null)(ProtectAdminRoute);

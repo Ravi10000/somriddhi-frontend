@@ -23,8 +23,10 @@ form#user-input {
       border-radius: 8px;
     }
   }
-  p {
+  .skip-now {
     text-align: center;
+  }
+  p {
     &.msg {
       font-size: 0.9rem;
       text-align: start;
@@ -37,5 +39,32 @@ form#user-input {
       font-weight: 500;
       letter-spacing: 2px;
     }
+  }
+}
+
+.entityRadioButtons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  width: 100%;
+  .entityLabel {
+    text-align: start;
+    width: fit-content;
+  }
+}
+.radioContainer {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: 2px solid transparent;
+  input[type="radio"] {
+    pointer-events: none;
+    accent-color: var(--mainBrandColor);
+  }
+  &.active {
+    border-color: var(--mainBrandColor);
   }
 }

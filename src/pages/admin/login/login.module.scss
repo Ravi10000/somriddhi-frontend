@@ -1,0 +1,30 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  .icon {
+    height: 35px;
+    width: fit-content;
+  }
+}
+
+.box {
+  padding: 30px 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+.inputs {
+  margin-block: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
