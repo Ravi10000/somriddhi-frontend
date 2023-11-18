@@ -11,9 +11,11 @@ import { connect } from "react-redux";
 import { setFlash } from "../../../redux/flash/flash.actions";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
+import { RiLockPasswordLine } from "react-icons/ri";
+import ForgotPasswordPopup from "../../../components/forgot-password-popup/forgot-password-popup";
 
 const schema = z.object({
   userId: z
@@ -28,6 +30,7 @@ const schema = z.object({
 
 function AdminLoginPage({ setCurrentUser, currentUser, setFlash }) {
   const navigate = useNavigate();
+  const [showforgotPassword, setShowForgotPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -71,6 +74,12 @@ function AdminLoginPage({ setCurrentUser, currentUser, setFlash }) {
 
   return (
     <div className={styles.container}>
+      {showforgotPassword && (
+        <ForgotPasswordPopup
+          close={() => setShowForgotPassword(false)}
+          setFlash={setFlash}
+        />
+      )}
       <section className={styles.box}>
         <div className={styles.head}>
           <MdAdminPanelSettings className={styles.icon} />
@@ -83,7 +92,7 @@ function AdminLoginPage({ setCurrentUser, currentUser, setFlash }) {
           onSubmit={handleSubmit(handleLogin)}
         >
           <TextInput
-            label="User ID"
+            label="User ID / Email"
             autoComplete="user id"
             register={{ ...register("userId") }}
             error={errors?.userId?.message}
@@ -96,6 +105,12 @@ function AdminLoginPage({ setCurrentUser, currentUser, setFlash }) {
             error={errors?.password?.message}
           />
         </form>
+        <div className={styles.forgotPassword}>
+          <button onClick={() => setShowForgotPassword(true)}>
+            <RiLockPasswordLine />
+            <p>forgot password?</p>
+          </button>
+        </div>
         <Button style={{ width: "100%" }} form="admin-login">
           <span>Login</span>
           <BiLogInCircle />

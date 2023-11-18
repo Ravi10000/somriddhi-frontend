@@ -1,7 +1,6 @@
 import styles from "./checkout.module.scss";
 import NumInput from "../../components/num-input/num-input";
 import TextInput from "../../components/text-input/text-input";
-import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import Button from "../../components/button/button";
 import { setFlash } from "../../redux/flash/flash.actions";
@@ -10,8 +9,9 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { createStructuredSelector } from "reselect";
 import { useEffect, useState } from "react";
 import Backdrop from "../../components/backdrop/backdrop";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { initiateTransaction } from "../../api/transaction";
 import { getPincodeDetails } from "../../api";
 import { Link } from "react-router-dom";

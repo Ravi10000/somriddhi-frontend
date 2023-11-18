@@ -31,6 +31,7 @@ import { getUser } from "./api";
 import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 import LoadingPage from "./pages/loading/loading";
 import AdminLoginPage from "./pages/admin/login/login";
+import ResetPasswordPage from "./pages/reset-password/reset-password";
 const GiftCardPage = lazy(() =>
   import("./pages/gift-card-page/gift-card-page")
 );
@@ -82,12 +83,13 @@ function App({ setCurrentUser, setIsFetching, flash }) {
       {flash && <Flash type={flash.type} message={flash.message} />}
       <ScrollToTop />
       {modal.modalOpen && <LoginPopup closeModal={modal.closeModal} />}
-      {!pathname.includes("/admin") && (
-        <>
-          <Header openModal={modal.openModal} />
-          <Navbar />
-        </>
-      )}
+      {!pathname.includes("/admin") &&
+        !pathname.includes("/reset-password") && (
+          <>
+            <Header openModal={modal.openModal} />
+            <Navbar />
+          </>
+        )}
       <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
@@ -165,10 +167,15 @@ function App({ setCurrentUser, setIsFetching, flash }) {
             }
           />
           <Route path="/payment-status/:id" element={<PaymentStatusPage />} />
+          <Route
+            path="/reset-password/:requestId"
+            element={<ResetPasswordPage />}
+          />
           <Route path="/*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
-      {!pathname.includes("/admin") && <Footer />}
+      {!pathname.includes("/admin") &&
+        !pathname.includes("/reset-password") && <Footer />}
     </div>
   );
 }
