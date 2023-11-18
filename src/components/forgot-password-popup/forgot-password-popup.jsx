@@ -35,6 +35,12 @@ function ForgotPasswordPopup({ close, setFlash }) {
       close();
     } catch (err) {
       console.log({ err });
+      setFlash({
+        type: "error",
+        message:
+          err?.response?.data?.message ??
+          "Somthing went wrong please try again.",
+      });
     }
   };
 
