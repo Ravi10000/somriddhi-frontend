@@ -8,13 +8,14 @@
   z-index: 4000000;
   width: 100%;
   color: #0aa06e;
+  border: 1px solid #0aa06e48;
   display: flex;
   gap: 50px;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 2px 4px 4px 5px rgba(57, 57, 57, 0.25);
   transition: all 0.2s ease-in-out;
   animation: animateFlash 0.2s ease-in-out forwards;
+  // border: 1px solid rgba(211, 211, 211, 0.495);
   .main {
     display: flex;
     align-items: center;
@@ -32,11 +33,14 @@
 }
 
 .flash.error {
+  border-color: #fc476e38;
   color: #fc476e;
 }
 
 .flash.warning {
-  color: #ffc048;
+  border-color: #ffb80352;
+  // color: #ffc048;
+  color: #ffb703;
 }
 
 @media (min-width: 800px) {

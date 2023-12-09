@@ -18,6 +18,32 @@ import { Link } from "react-router-dom";
 import { fetchGiftcardDiscount } from "../../api/giftcard.req";
 import { BsCheck2 } from "react-icons/bs";
 import PaymentGatways from "../../components/payment-gateways/payment-gateways";
+import { BsEmojiSmile } from "react-icons/bs";
+
+const checkoutSchema = z.object({
+  mobile: z
+    .string()
+    .min(10, "Moblie Number Should be 10 digits")
+    .max(10, "Mobile Number Should be 10 digits"),
+  email: z.string().email("Invalid Email"),
+  // salutation: z.string().nonempty("Salutation is required"),
+  firstname: z.string().nonempty("First Name is required"),
+  lastname: z.string(),
+  line1: z.string().nonempty("Address Line 1 is required"),
+  line2: z.string(),
+  district: z.string().nonempty("District is required"),
+  // .nonempty("City is required"),
+  state: z.string().nonempty("State is required"),
+  // .nonempty("Region is required"),
+  postcode: z
+    .string()
+    .min(6, { message: "postcode have to be 6 digits" })
+    .max(6, { message: "postcode have to be 6 digits" })
+    .nonempty("Pincode is required"),
+  tos: z
+    .boolean()
+    .refine((val) => val, { message: "Please accept terms of services" }),
+});
 
 function CheckoutPage({ currentUser, setFlash }) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -25,30 +51,8 @@ function CheckoutPage({ currentUser, setFlash }) {
   const [showPaymentGateway, setShowPaymentGateway] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [giftcardDiscount, setGiftcardDiscount] = useState(0);
-  const checkoutSchema = z.object({
-    mobile: z
-      .string()
-      .min(10, "Moblie Number Should be 10 digits")
-      .max(10, "Mobile Number Should be 10 digits"),
-    email: z.string().email("Invalid Email"),
-    // salutation: z.string().nonempty("Salutation is required"),
-    firstname: z.string().nonempty("First Name is required"),
-    lastname: z.string(),
-    line1: z.string().nonempty("Address Line 1 is required"),
-    line2: z.string(),
-    district: z.string().nonempty("District is required"),
-    // .nonempty("City is required"),
-    state: z.string().nonempty("State is required"),
-    // .nonempty("Region is required"),
-    postcode: z
-      .string()
-      .min(6, { message: "postcode have to be 6 digits" })
-      .max(6, { message: "postcode have to be 6 digits" })
-      .nonempty("Pincode is required"),
-    tos: z
-      .boolean()
-      .refine((val) => val, { message: "Please accept terms of services" }),
-  });
+  const [sendToSomeone, setSendToSomeone] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -64,6 +68,32 @@ function CheckoutPage({ currentUser, setFlash }) {
       mobile: currentUser?.phone || "",
     },
   });
+
+  const receiverSchema = z.object({
+    mobile: !sendToSomeone
+      ? z.string().optional()
+      : z.string().min(10, "Mobile Number Should be 10 digits"),
+    email: !sendToSomeone
+      ? z.string().optional()
+      : z.string().email("Invalid Email Address"),
+    name: !sendToSomeone
+      ? z.string().optional()
+      : z.string().nonempty("Receiver Name is required"),
+  });
+
+  const {
+    register: registerReceiver,
+    handleSubmit: handleSubmitReceiver,
+    watch: watchReceiver,
+    trigger: triggerReceiver,
+    formState: { errors: receiverErrors, isValid: isValidReceiver },
+  } = useForm({ resolver: zodResolver(receiverSchema) });
+  console.log({ receiverErrors, isValidReceiver });
+
+  const receiverMobile = watchReceiver("mobile");
+  const receiverEmail = watchReceiver("email");
+  const receiverName = watchReceiver("name");
+
   const [postcodeError, setPostcodeError] = useState(null);
   const postcode = watch("postcode");
   const { state } = useLocation();
@@ -73,12 +103,18 @@ function CheckoutPage({ currentUser, setFlash }) {
   const orderTotal = state?.total - discountAmount;
   async function handleCheckout(data) {
     console.log({ data });
+    if (sendToSomeone) {
+      data.receiver = {
+        mobile: receiverMobile,
+        email: receiverEmail,
+        name: receiverName,
+      };
+    }
     if (postcodeError) {
       setError("postcode", { message: postcodeError });
       return;
     }
     setIsCheckingOut(true);
-
     try {
       data.discountedAmount = orderTotal;
       data.amount = state?.total;
@@ -93,12 +129,15 @@ function CheckoutPage({ currentUser, setFlash }) {
       if (transactionData?.redirectUrl) {
         window.open(transactionData?.redirectUrl, "_blank");
         return;
+      } else if (paymentMethod === "yespay") {
+        window.open(
+          `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${
+            data.mobile
+          }&email=${data.email}&amount=${data.amount}&request_id=${
+            transactionData.transaction._id
+          }`
+        );
       }
-      // window.open(
-      //   `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${data.mobile}&email=${
-      //     data.email
-      //   }&amount=${data.amount}&request_id=${transactionData.transaction._id}`
-      // );
     } catch (err) {
       console.log({ err });
       console.log({ data: err?.response?.data });
@@ -193,7 +232,11 @@ function CheckoutPage({ currentUser, setFlash }) {
             Order Total: <span className={styles.total}> ₹{orderTotal}</span>
           </p>
         </div>
-        <form onSubmit={handleSubmit(handleCheckout)} noValidate>
+        <form
+          className={styles.checkoutForm}
+          onSubmit={handleSubmit(handleCheckout)}
+          noValidate
+        >
           {showPaymentGateway && (
             <PaymentGatways
               isValid={isValid}
@@ -300,51 +343,99 @@ function CheckoutPage({ currentUser, setFlash }) {
             </div>
           )}
           <div className={styles.tosCheckbox}>
-            <div className={styles.checkbox}>
+            <label className={styles.checkbox} htmlFor="tos">
               <input type="checkbox" id="tos" {...register("tos")} />
-              <label htmlFor="tos">
+              <p>
                 I confirm that I have read and agree to Somriddhi's{" "}
                 <Link to="/terms-and-conditions" className={styles.tosLink}>
                   Terms of Services
                 </Link>
-              </label>
-            </div>
+              </p>
+            </label>
             {errors?.tos?.message && (
               <p className={styles.tosError}>{errors?.tos?.message}</p>
             )}
           </div>
+        </form>
+        <div className={styles.formBottomSection}>
+          <div className={styles.tosCheckbox}>
+            <label className={styles.checkbox} htmlFor="send-to-someone">
+              <input
+                type="checkbox"
+                id="send-to-someone"
+                onChange={(e) => {
+                  setSendToSomeone(e.target.checked);
+                }}
+              />
+              <p>Send this gift voucher to someone else</p>
+            </label>
+            {sendToSomeone && (
+              <form className={styles.sendToSomeoneForm}>
+                <h3>
+                  <BsEmojiSmile className={styles.icon} />
+                  <span>Receiver Details</span>
+                </h3>
+                <TextInput
+                  label="Receiver's Name"
+                  placeholder="Enter Name"
+                  register={{ ...registerReceiver("name") }}
+                  error={receiverErrors?.name?.message}
+                />
+                <TextInput
+                  label="Receiver's Email"
+                  placeholder="Enter Email"
+                  register={{
+                    ...registerReceiver("email"),
+                  }}
+                  error={receiverErrors?.email?.message}
+                />
+
+                <NumInput
+                  label="Receiver's Phone Number"
+                  placeholder="Enter Phone Number"
+                  maxLength="10"
+                  register={{
+                    ...registerReceiver("mobile"),
+                  }}
+                  error={receiverErrors?.mobile?.message}
+                />
+              </form>
+            )}
+          </div>
           <div className={styles.checkoutBtn}>
             <Button
+              style={{
+                width: "100vw",
+                maxWidth: "250px",
+                padding: "15px 20px",
+              }}
               onClick={(e) => {
                 trigger();
+                if (sendToSomeone) {
+                  const result = receiverSchema.safeParse({
+                    mobile: receiverMobile,
+                    email: receiverEmail,
+                    name: receiverName,
+                  });
+                  console.log({ result });
+                  if (!result.success) {
+                    setFlash({
+                      type: "warning",
+                      message: "Please fill the receiver details correctly",
+                    });
+                    return;
+                  }
+                }
                 if (!isValid) return;
-                // e.preventDefault();
                 setShowPaymentGateway(true);
               }}
               type="button"
             >
               Checkout
             </Button>
-            {/* <button
-              className={styles.phonepeBtn}
-              onClick={() => {
-                if (isValid) setPaymentMethod("phonepe");
-              }}
-            >
-              <p>Checkout</p>
-              <img src="/phonepe-icon-sm.svg" alt="phonepe" />
-            </button>
-            <button
-              className={styles.upiBtn}
-              onClick={() => {
-                if (isValid) setPaymentMethod("upigateway");
-              }}
-            >
-              <p>Checkout</p>
-              <img src="/upigateway-icon.svg" alt="" />
-            </button> */}
           </div>
-        </form>
+        </div>
+        {/* </form> */}
       </div>
       {isCheckingOut && (
         <Backdrop>

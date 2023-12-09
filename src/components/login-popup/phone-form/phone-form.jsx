@@ -77,7 +77,7 @@ function PhoneNumberForm({ phone, setPhone, nextStage, setFlash }) {
       encType="application/json"
       onSubmit={phoneFormSubmit}
     >
-      <h1>Login</h1>
+      <h1>Login or Signup</h1>
       <p>Enter your 10 digit phone number</p>
       <input
         className={styles["input"]}

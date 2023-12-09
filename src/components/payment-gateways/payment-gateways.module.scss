@@ -45,6 +45,22 @@
       width: fit-content;
     }
   }
+  .yespayBtn {
+    background: #fff;
+    border: 1px solid #5f259f;
+    color: #5f259f;
+    font-weight: 700;
+    padding: 20px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    img {
+      height: 20px;
+      width: fit-content;
+    }
+  }
   .close {
     width: fit-content;
     align-self: center;

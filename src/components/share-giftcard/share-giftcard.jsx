@@ -13,7 +13,13 @@ import { connect } from "react-redux";
 import { setFlash } from "../../redux/flash/flash.actions";
 import { useState } from "react";
 
-function ShareGiftcard({ setShowPopup, giftcard, setFlash, currentUser }) {
+function ShareGiftcard({
+  setShowPopup,
+  giftcard,
+  setFlash,
+  currentUser,
+  admin,
+}) {
   const formSchema = z.object({
     senderName: z.string().nonempty({ message: "Sender Name required" }),
     receiverName: z.string().nonempty({ message: "Receiver's Name required" }),
@@ -39,7 +45,9 @@ function ShareGiftcard({ setShowPopup, giftcard, setFlash, currentUser }) {
       // receiverName: "test name",
       // receiverPhone: "9560863067",
       // receiverEmail: "ravisince2k@gmail.com",
-      senderName: currentUser?.fname
+      senderName: admin
+        ? "Somriddhi Digital"
+        : currentUser?.fname
         ? currentUser?.fname + " " + currentUser?.lname
         : "",
     },
@@ -100,6 +108,15 @@ function ShareGiftcard({ setShowPopup, giftcard, setFlash, currentUser }) {
             placeholder="Receiver's Email Address"
             error={errors?.receiverEmail?.message}
           />
+          {admin && (
+            <div className={styles.adminSection}>
+              <NumInput
+                label="Denomination (per voucher)"
+                placeholder="e.g. 1000"
+              />
+              <NumInput label="No. Of Vouchers" placeholder="e.g. 100" />
+            </div>
+          )}
           <Button isLoading={isLoading}>Send</Button>
         </form>
       </div>

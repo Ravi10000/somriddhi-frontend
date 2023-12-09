@@ -47,7 +47,7 @@
   .container {
     width: 100%;
     max-width: 400px;
-    form {
+    .checkoutForm {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -93,6 +93,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    width: fit-content;
     input {
       height: 1.1rem;
       width: 1.1rem;
@@ -146,6 +147,44 @@
   img {
     height: 20px;
     width: fit-content;
+  }
+}
+
+.formBottomSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sendToSomeoneForm {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  animation: slide-in 0.25s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .icon {
+      height: 30px;
+      width: fit-content;
+    }
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0);
+    opacity: 1;
   }
 }
 

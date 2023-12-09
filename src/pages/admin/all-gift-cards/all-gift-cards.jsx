@@ -23,10 +23,14 @@ import { GoDownload } from "react-icons/go";
 import jsonToExcel from "../../../utils/jsonToExcel";
 import { MdDownloadDone } from "react-icons/md";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
+import ShareGiftcard from "../../../components/share-giftcard/share-giftcard";
 
 function AllGiftCards({ setFlash }) {
   const [isFetching, setIsFetching] = useState(false);
   const [giftCards, setGiftCards] = useState([]);
+
+  console.table(giftCards);
+
   const [skip, setSkip] = useState(0);
   const [totalGiftcards, setTotalGiftcards] = useState(0);
   console.table({ totalGiftcards, skip });
@@ -40,6 +44,7 @@ function AllGiftCards({ setFlash }) {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [isDownloaded, setIsDownloaded] = useState(false);
+  const [showSendGiftcardPopup, setShowSendGiftcardPopup] = useState(false);
 
   async function handleFetchGiftcardDiscount() {
     try {
@@ -233,6 +238,9 @@ function AllGiftCards({ setFlash }) {
 
   return (
     <div className={styles.allGiftCards}>
+      {showSendGiftcardPopup && (
+        <ShareGiftcard setShowPopup={setShowSendGiftcardPopup} admin={true} />
+      )}
       <form className={styles.head}>
         {/* {selectedGiftCard && (
           <img
@@ -323,6 +331,9 @@ function AllGiftCards({ setFlash }) {
               // style={{ height: "20px", width: "fit-content" }}
               />
             )}
+          </Button>
+          <Button onClick={() => setShowSendGiftcardPopup(true)}>
+            Send Giftcard
           </Button>
         </div>
       </div>
