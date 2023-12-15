@@ -33,7 +33,16 @@ function UserDetailsForm({
         .nonempty({ message: "Email is required" })
         .email("Invalid Email"),
       entity: z.string().nonempty({ message: "Entity is required" }),
-      panNo: z.string().optional(),
+      panNo:
+        entity === "business"
+          ? z
+              .string()
+              .min(10, { message: "PAN number length should be 10" })
+              .max(10, { message: "PAN number length should be 10" })
+              .regex(/^[a-zA-Z]{5}[0-9]{4}[a-zA-Z]$/, {
+                message: "invalid PAN No.",
+              })
+          : z.string().optional(),
       referredBy: z.string().optional(),
     })
     .refine(
@@ -166,11 +175,9 @@ function UserDetailsForm({
             inputStyle={{ textTransform: "uppercase" }}
             className={styles["user-details-input"]}
             placeholder="PAN No.*"
-            // maxLength="10"
-            // minLength="10"
+            maxLength="10"
             register={{ ...register("panNo") }}
             error={errors?.panNo?.message}
-            // pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
           />
         )}
         <input

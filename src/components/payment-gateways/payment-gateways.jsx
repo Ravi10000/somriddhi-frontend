@@ -29,13 +29,15 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
             {/* <p>Checkout With </p> */}
             <img src="/UPI.svg" alt="" />
           </button>
+          <p style={{ color: "orange", padding: "5px" }}>
+            Please don't use below payment method, it's in testing phase
+          </p>
           <button
             className={styles.yespayBtn}
             onClick={() => {
               setPaymentMethod("yespay");
             }}
           >
-            {/* <p>Checkout With </p> */}
             <img src="/yes-pay.png" alt="" />
           </button>
         </div>
