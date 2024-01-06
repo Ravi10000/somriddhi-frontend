@@ -11,7 +11,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
       >
         <h2>Select Payment Gateway</h2>
         <div className={styles.gatewayList}>
-          <button
+          {/* <button
             className={styles.phonepeBtn}
             onClick={() => {
               setPaymentMethod("phonepe");
@@ -19,7 +19,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
           >
             <p>Checkout With </p>
             <img src="/phonepe-icon-sm.svg" alt="phonepe" />
-          </button>
+          </button> */}
           <button
             className={styles.upiBtn}
             onClick={() => {
@@ -29,7 +29,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
             {/* <p>Checkout With </p> */}
             <img src="/UPI.svg" alt="" />
           </button>
-          <p style={{ color: "orange", padding: "5px" }}>
+          {/* <p style={{ color: "orange", padding: "5px" }}>
             Please don't use below payment method, it's in testing phase
           </p>
           <button
@@ -39,7 +39,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
             }}
           >
             <img src="/yes-pay.png" alt="" />
-          </button>
+          </button> */}
         </div>
         <button className={styles.close} onClick={() => close()}>
           Cancel

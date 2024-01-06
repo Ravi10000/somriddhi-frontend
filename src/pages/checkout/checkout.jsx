@@ -133,7 +133,7 @@ function CheckoutPage({ currentUser, setFlash }) {
         window.open(
           `${import.meta.env.VITE_PAYMENT_PAGE_URL}?mobile=${
             data.mobile
-          }&email=${data.email}&amount=${data.amount}&request_id=${
+          }&email=${data.email}&amount=${data.discountedAmount}&request_id=${
             transactionData.transaction._id
           }`
         );
