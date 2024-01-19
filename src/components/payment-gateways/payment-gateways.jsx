@@ -31,7 +31,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
           </button>
           {/* <p style={{ color: "orange", padding: "5px" }}>
             Please don't use below payment method, it's in testing phase
-          </p>
+          </p> */}
           <button
             className={styles.yespayBtn}
             onClick={() => {
@@ -39,7 +39,7 @@ function PaymentGatways({ close, setPaymentMethod, isValid }) {
             }}
           >
             <img src="/yes-pay.png" alt="" />
-          </button> */}
+          </button>
         </div>
         <button className={styles.close} onClick={() => close()}>
           Cancel
