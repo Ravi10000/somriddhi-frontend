@@ -158,29 +158,29 @@ function CheckoutPage({ currentUser, setFlash }) {
     }
   }
 
-  async function searchPincode() {
-    setIsSearching(true);
-    try {
-      const res = await getPincodeDetails(postcode);
-      const details = res?.data?.[0]?.PostOffice?.[0];
-      console.log({ details });
-      if (!details) {
-        setError("postcode", { message: "Invalid Pincode" });
-        setPostcodeError("Invalid Pincode");
-        setValue("district", "");
-        setValue("state", "");
-        return;
-      }
-      setError("postcode", null);
-      setPostcodeError(null);
-      setValue("district", details?.District);
-      setValue("state", details?.State);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsSearching(false);
-    }
-  }
+  // async function searchPincode() {
+  //   setIsSearching(true);
+  //   try {
+  //     const res = await getPincodeDetails(postcode);
+  //     const details = res?.data?.[0]?.PostOffice?.[0];
+  //     console.log({ details });
+  //     if (!details) {
+  //       setError("postcode", { message: "Invalid Pincode" });
+  //       setPostcodeError("Invalid Pincode");
+  //       setValue("district", "");
+  //       setValue("state", "");
+  //       return;
+  //     }
+  //     setError("postcode", null);
+  //     setPostcodeError(null);
+  //     setValue("district", details?.District);
+  //     setValue("state", details?.State);
+  //   } catch (err) {
+  //     console.log(err);
+  //   } finally {
+  //     setIsSearching(false);
+  //   }
+  // }
 
   async function handleFetchGiftcardDiscount() {
     try {
@@ -201,9 +201,9 @@ function CheckoutPage({ currentUser, setFlash }) {
     handleFetchGiftcardDiscount();
   }, []);
 
-  useEffect(() => {
-    if (postcode?.length === 6) searchPincode();
-  }, [postcode]);
+  // useEffect(() => {
+  //   if (postcode?.length === 6) searchPincode();
+  // }, [postcode]);
 
   return (
     <div className={styles.checkoutPage}>
@@ -318,7 +318,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                   ...register("district"),
                 }}
                 error={errors?.district?.message}
-                readOnly
+                // readOnly
               />
               <TextInput
                 label="State"
@@ -326,7 +326,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                   ...register("state"),
                 }}
                 error={errors?.state?.message}
-                readOnly
+                // readOnly
               />
             </div>
           </div>
