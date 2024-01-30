@@ -1,9 +1,3 @@
-import axios from "axios";
+import axios from "./index";
 
-export const verifyPan = async (pan) => {
-  const url = "https://api.cashfree.com/verification/pan",
-    data = {
-      pan: "OCBPS7657L",
-      name: "Ravi Sharma",
-    };
-};
+export const verifyPan = (pan) => axios.get(`/auth/verify-pan/${pan}`);

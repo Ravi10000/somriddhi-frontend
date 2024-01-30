@@ -13,6 +13,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextInput from "../../text-input/text-input";
+import { verifyPan } from "../../../api/verify-pan";
 
 function UserDetailsForm({
   nextStage,
@@ -70,12 +71,22 @@ function UserDetailsForm({
   console.log({ entity });
 
   async function udpateUserDetails(formData) {
-    console.table(formData);
+    console.table({ formData });
     // const formData = new FormData(e.target);
     // formData.append("entity", entity);
     // formData.append("usertype", "customer");
     try {
       setIsLoading(true);
+      if (entity === "business") {
+        const panRes = await verifyPan(formData.panNo);
+        if (panRes?.data?.status !== "success") {
+          setIsLoading(false);
+          return setFlash({
+            type: "error",
+            message: "Invalid PAN No.",
+          });
+        }
+      }
       const response = await createUser(formData);
       console.log({ response });
       setIsLoading(false);
