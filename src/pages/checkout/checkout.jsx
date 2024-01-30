@@ -66,6 +66,8 @@ function CheckoutPage({ currentUser, setFlash }) {
     defaultValues: {
       email: currentUser?.email || "",
       mobile: currentUser?.phone || "",
+      firstname: currentUser?.fname || "",
+      lastname: currentUser?.lname || "",
     },
   });
 
@@ -260,6 +262,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                     ...register("firstname"),
                   }}
                   error={errors?.firstname?.message}
+                  readOnly
                 />
                 <TextInput
                   inputStyle={{ width: "100%" }}
@@ -268,6 +271,7 @@ function CheckoutPage({ currentUser, setFlash }) {
                     ...register("lastname"),
                   }}
                   error={errors?.lastname?.message}
+                  readOnly
                 />
               </div>
               <TextInput
