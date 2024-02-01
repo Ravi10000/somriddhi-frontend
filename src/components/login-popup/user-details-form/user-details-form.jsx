@@ -78,12 +78,22 @@ function UserDetailsForm({
     try {
       setIsLoading(true);
       if (entity === "business") {
-        const panRes = await verifyPan(formData.panNo);
-        if (panRes?.data?.status !== "success") {
+        try {
+          const panRes = await verifyPan(formData.panNo);
+          if (panRes?.data?.status !== "success") {
+            setIsLoading(false);
+            return setFlash({
+              type: "error",
+              message: "Invalid PAN No.",
+            });
+          }
+        } catch (err) {
+          console.log({ panError: err });
           setIsLoading(false);
           return setFlash({
             type: "error",
-            message: "Invalid PAN No.",
+            message:
+              "PAN verification failed, please contact support at somriddhi.store",
           });
         }
       }
