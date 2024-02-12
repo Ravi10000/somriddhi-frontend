@@ -15,6 +15,7 @@ import CustomCategories from "../../components/custom-categories/custom-categori
 // import GiftCardList from "../../components/gift-card-list/gift-card-list";
 import { useState } from "react";
 import GiftCardList from "../../components/gift-card-list/gift-card-list";
+import VoucherList from "../../components/voucher-list/voucher-list";
 
 export default function HomePage() {
   const demoResponse = {
@@ -193,7 +194,8 @@ export default function HomePage() {
       {/* <GiftCardList /> */}
       {/* <GiftCardSlider denominations={giftCards?.denominations} /> */}
       {/* <CustomCategories /> */}
-      <GiftCardList />
+      <VoucherList title = "Store Vouchers" />
+      <GiftCardList title="Amazon Shopping Vouchers" />
       <Banner />
       <Coupons />
       <Offers />

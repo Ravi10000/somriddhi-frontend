@@ -32,6 +32,7 @@ import ProtectAdminRoute from "./pages/protect-admin-route/protect-admin-route";
 import LoadingPage from "./pages/loading/loading";
 import AdminLoginPage from "./pages/admin/login/login";
 import ResetPasswordPage from "./pages/reset-password/reset-password";
+import VoucherDetails from "./components/voucher-details.jsx/voucher-details";
 const GiftCardPage = lazy(() =>
   import("./pages/gift-card-page/gift-card-page")
 );
@@ -101,7 +102,12 @@ function App({ setCurrentUser, setIsFetching, flash }) {
               // </ProtectAdminRoute>
             }
           />
-
+      <Route
+            path="/:voucher"
+            element={
+                <VoucherDetails />
+            }
+          />
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route
             path="/admin/:tab"
