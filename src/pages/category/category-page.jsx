@@ -1,4 +1,4 @@
-import "./category-page.style.scss";
+import styles from "./category-page.styles.module.scss";
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -100,27 +100,27 @@ function CategoryPage({ currentUser }) {
   }, [selectedCategory]);
 
   return (
-    <div className="category-page">
-      <div className="heading">
+    <div className={styles["category-page"]}>
+      <div className={styles["heading"]}>
         <h1>{selectedCategory?.name || "Coupons"}</h1>
         <p>
           Home / <span>{selectedCategory?.name || "All"}</span>
         </p>
       </div>
-      <section className="category-section">
-        <div className="filter-container">
+      <section className={styles["category-section"]}>
+        <div className={styles["filter-container"]}>
           <FilterList
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />
         </div>
-        <div className="category-container">
-          <div className="category-heading-container">
+        <div className={styles["category-container"]}>
+          <div className={styles["category-heading-container"]}>
             <h4>{selectedCategory?.name || "All"} Coupons</h4>
             <p>showing {deals?.length || 0} results</p>
           </div>
           {deals?.length > 0 ? (
-            <div className="category-cards-container">
+            <div className={styles["category-cards-container"]}>
               {deals.map((offer) => (
                 <div
                   key={offer?._id}
@@ -133,7 +133,7 @@ function CategoryPage({ currentUser }) {
               ))}
             </div>
           ) : (
-            <p className="no-deals">
+            <p className={["no-deals"]}>
               We have no {selectedCategory?.name} coupons for now
             </p>
           )}
