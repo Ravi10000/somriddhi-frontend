@@ -20,7 +20,7 @@ const VoucherCard = ({ name, icon, offer, discount }) => {
         </div>
         <button
           onClick={() => {
-            navigate(`${name}`,{state:{icon,offer}});
+            navigate(`${name}`,{state:{icon,offer,icon}});
           }}
           className="bg-[#F01C21] outline-none hover:text-[#F01C21] hover:bg-red-200 rounded-lg text-white font-medium p-3  px-7  text-xl"
         >
