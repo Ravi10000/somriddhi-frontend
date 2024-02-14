@@ -1,8 +1,8 @@
-image: node:21.4.0
+image: node:18.17.0
 
 build:
     script:
-        - npm install
+        - npm install --legacy-peer-deps
         - npm run build
         - apt-get update -y
         - apt-get install -y rsync
