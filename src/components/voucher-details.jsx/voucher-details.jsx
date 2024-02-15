@@ -143,7 +143,10 @@ const VoucherDetails = () => {
       <div className="w-full p-10 ">
         <Slider {...settings}>
           {giftCards?.price?.denominations?.map((price, idx) => (
-            <VoucherOfCompany icon={data.icon} price={price} />
+            <VoucherOfCompany 
+            key={idx}
+            sku={giftCards.sku}
+            icon={data.icon} price={price} />
           ))}
         </Slider>
       </div>

@@ -33,6 +33,7 @@ import LoadingPage from "./pages/loading/loading";
 import AdminLoginPage from "./pages/admin/login/login";
 import ResetPasswordPage from "./pages/reset-password/reset-password";
 import VoucherDetails from "./components/voucher-details.jsx/voucher-details";
+import ErrorBoundary from "./components/Error-Boundary";
 const GiftCardPage = lazy(() =>
   import("./pages/gift-card-page/gift-card-page")
 );
@@ -92,93 +93,94 @@ function App({ setCurrentUser, setIsFetching, flash }) {
           </>
         )}
       <Suspense fallback={<LoadingPage />}>
-        <Routes>
-          <Route path="/" exact element={<HomePage />} />
-          <Route
-            path="/admin"
-            element={
-              // <ProtectAdminRoute>
-              <Navigate to="/admin/banners" replace />
-              // </ProtectAdminRoute>
-            }
-          />
-      <Route
-            path="/:voucher"
-            element={
-                <VoucherDetails />
-            }
-          />
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route
-            path="/admin/:tab"
-            element={
-              <ProtectAdminRoute>
-                <AdminPage />
-              </ProtectAdminRoute>
-            }
-          />
-          {/* <Route path="/admin/:tab" element={<AdminPage />} /> */}
-          <Route path="/coupon/:id" element={<CouponPage />} />
-          <Route path="/category/:categoryId" element={<CategoryPage />} />
-          <Route path="/category" element={<CategoryPage />} />
-          <Route
-            exact
-            path="/coupon-claimed/:id"
-            element={<CouponsClaimedPage />}
-          />
-          <Route
-            exact
-            path="/profile"
-            element={<Navigate to="/profile/my-earnings" replace />}
-          />
-          <Route
-            exact
-            path="/profile/:tab"
-            element={
-              <ProtectedRoute openModal={modal.openModal}>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            exact
-            path="/profile"
-            element={
-              <ProtectedRoute openModal={modal.openModal}>
-                <ProfilePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/about" exact element={<AboutPage />} />
-          <Route path="/terms-and-conditions" exact element={<TermsPage />} />
-          <Route path="/terms-of-use" exact element={<TermsOfUsePage />} />
-          <Route path="/refund-policy" exact element={<RefundPolicyPage />} />
-          <Route path="/privacy-policy" exact element={<PrivacyPolicyPage />} />
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/" exact element={<HomePage />} />
+            <Route
+              path="/admin"
+              element={
+                // <ProtectAdminRoute>
+                <Navigate to="/admin/banners" replace />
+                // </ProtectAdminRoute>
+              }
+            />
+            <Route path="/:voucher" element={<VoucherDetails />} />
+            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route
+              path="/admin/:tab"
+              element={
+                <ProtectAdminRoute>
+                  <AdminPage />
+                </ProtectAdminRoute>
+              }
+            />
+            {/* <Route path="/admin/:tab" element={<AdminPage />} /> */}
+            <Route path="/coupon/:id" element={<CouponPage />} />
+            <Route path="/category/:categoryId" element={<CategoryPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route
+              exact
+              path="/coupon-claimed/:id"
+              element={<CouponsClaimedPage />}
+            />
+            <Route
+              exact
+              path="/profile"
+              element={<Navigate to="/profile/my-earnings" replace />}
+            />
+            <Route
+              exact
+              path="/profile/:tab"
+              element={
+                <ProtectedRoute openModal={modal.openModal}>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              exact
+              path="/profile"
+              element={
+                <ProtectedRoute openModal={modal.openModal}>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/about" exact element={<AboutPage />} />
+            <Route path="/terms-and-conditions" exact element={<TermsPage />} />
+            <Route path="/terms-of-use" exact element={<TermsOfUsePage />} />
+            <Route path="/refund-policy" exact element={<RefundPolicyPage />} />
+            <Route
+              path="/privacy-policy"
+              exact
+              element={<PrivacyPolicyPage />}
+            />
 
-          <Route
-            path="/giftcard/:price"
-            element={
-              <ProtectedRoute openModal={modal.open}>
-                <GiftCardPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <ProtectedRoute openModal={modal.open}>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/payment-status/:id" element={<PaymentStatusPage />} />
-          <Route
-            path="/reset-password/:requestId"
-            element={<ResetPasswordPage />}
-          />
-          <Route path="/*" element={<Navigate to="/" replace />} />
-        </Routes>
+            <Route
+              path="/giftcard/:price"
+              element={
+                <ProtectedRoute openModal={modal.open}>
+                  <GiftCardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute openModal={modal.open}>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/payment-status/:id" element={<PaymentStatusPage />} />
+            <Route
+              path="/reset-password/:requestId"
+              element={<ResetPasswordPage />}
+            />
+            <Route path="/*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </ErrorBoundary>
       </Suspense>
       {!pathname.includes("/admin") &&
         !pathname.includes("/reset-password") && <Footer />}

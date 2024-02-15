@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user/user.reducer";
 import flashReducer from "./flash/flash.reducer";
 import logger from "redux-logger";
-
+import cartReducer from "../redux/cart/cart.slice"
 const store = configureStore({
-  reducer: { user: userReducer, flash: flashReducer },
+  reducer: { user: userReducer, flash: flashReducer, cart: cartReducer },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 // import { createStore, applyMiddleware } from "redux";
